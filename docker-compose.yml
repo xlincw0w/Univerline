@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+    front:
+        container_name: socialnetwork
+        build: ./
+        command: npm start
+        working_dir: /app
+        ports:
+            - '3000:3000'
+        volumes:
+            # - ./:/app
+            - ./src:/app/src

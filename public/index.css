@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url('../Assets/Font/OpenSans-SemiBold.ttf');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    *::-webkit-scrollbar {
+        display: none;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+}
