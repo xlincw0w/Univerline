@@ -7,32 +7,37 @@ import Messagerie from '../Messagerie/messagerie'
 import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
 import Dashbaord from '../Dashboard/dashbaord'
+import Erreur from '../Erreur/erreur'
+import Footer from '../Footer/footer'
 
 const Main = () => {
     return (
         <div className='font-openSans'>
             <Router>
                 <Header />
-                <Switch>
-                    <Route path='/dashboard'>
-                        <Dashbaord />
-                    </Route>
-                    <Route path='/messagerie'>
-                        <Messagerie />
-                    </Route>
-                    <Route path='/auth'>
-                        <Auth />
-                    </Route>
-                    <Route path='/inscription'>
-                        <Inscription />
-                    </Route>
-                    <Route exact path='/'>
-                        <Home />
-                    </Route>
-                    <Route>
-                        <p>Erreur page inéxistante</p>
-                    </Route>
-                </Switch>
+                <div style={{ minHeight: '2000px', height: 'auto' }}>
+                    <Switch>
+                        <Route path='/dashboard'>
+                            <Dashbaord />
+                        </Route>
+                        <Route path='/messagerie'>
+                            <Messagerie />
+                        </Route>
+                        <Route path='/auth'>
+                            <Auth />
+                        </Route>
+                        <Route path='/inscription'>
+                            <Inscription />
+                        </Route>
+                        <Route exact path='/'>
+                            <Home />
+                        </Route>
+                        <Route>
+                            <Erreur />
+                        </Route>
+                    </Switch>
+                </div>
+                <Footer />
             </Router>
         </div>
     )

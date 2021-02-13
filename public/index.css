@@ -13,4 +13,61 @@
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
+
+    .backgroundanimate {
+        animation: infinite;
+        animation-name: animationBackground;
+        animation-duration: 4s;
+        animation-direction: reverse;
+    }
+
+    .borderanimate {
+        animation: infinite;
+        animation-name: animationBorder;
+        animation-duration: 4s;
+        animation-direction: reverse;
+    }
+
+    .textanimate {
+        animation: infinite;
+        animation-name: animationText;
+        animation-duration: 4s;
+        animation-direction: reverse;
+    }
+
+    @keyframes animationBackground {
+        0% {
+            background-color: #ffffff;
+        }
+        50% {
+            background-color: #f87171;
+        }
+        100% {
+            background-color: #ffffff;
+        }
+    }
+
+    @keyframes animationBorder {
+        0% {
+            border-color: #ffffff;
+        }
+        50% {
+            border-color: #f87171;
+        }
+        100% {
+            border-color: #ffffff;
+        }
+    }
+
+    @keyframes animationText {
+        0% {
+            color: #ffffff;
+        }
+        50% {
+            color: #f87171;
+        }
+        100% {
+            color: #ffffff;
+        }
+    }
 }
