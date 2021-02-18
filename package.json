@@ -6,7 +6,7 @@
         "start": "tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack serve --config webpack.dev.js ",
         "build": "rm -rf dist && tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack --config webpack.prod.js",
         "test": "jest --watch /tests",
-        "server": "rm -rf dist && webpack --config webpack.prod.js && node server.js"
+        "server": "rm -rf dist && webpack --config webpack.prod.js && nodemon server.js"
     },
     "repository": {
         "type": "git",
