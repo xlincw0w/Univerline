@@ -3,9 +3,9 @@ import Particles from 'react-particles-js'
 import './Home.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import img1 from './img/img1.jpg'
-import img2 from './img/img2.jpg'
-import img3 from './img/img3.jpg'
+import img1 from './img/image1.png'
+import img2 from './img/image2.png'
+import img3 from './img/image3.png'
 
 AOS.init({
     // Global settings:
@@ -31,10 +31,10 @@ AOS.init({
 const params = {
     particles: {
         number: {
-            value: 200,
+            value: 80,
             density: {
                 enable: true,
-                value_area: 900,
+                value_area: 800,
             },
         },
         color: {
@@ -44,10 +44,10 @@ const params = {
             type: 'circle',
             stroke: {
                 width: 0,
-                color: '#ffffff',
+                color: '#fff000',
             },
             polygon: {
-                nb_sides: 20,
+                nb_sides: 5,
             },
             image: {
                 src: 'img/github.svg',
@@ -84,7 +84,7 @@ const params = {
         },
         move: {
             enable: true,
-            speed: 5,
+            speed: 2,
             direction: 'none',
             random: false,
             straight: false,
@@ -101,7 +101,7 @@ const params = {
         detect_on: 'canvas',
         events: {
             onhover: {
-                enable: true,
+                enable: false,
                 mode: 'repulse',
             },
         },
@@ -129,76 +129,90 @@ const params = {
 export default function Home() {
     return (
         <div>
-            <div className='bg'>
+            <div className='bg bg-gradient-to-r from-blue-600 to-blue-900'>
                 <Particles className='particleCanvas' params={params}></Particles>
-                <div className='flex flex-col text-gray-50'>
-                    <div className='mx-auto'>
+                <div className='flex flex-row-reverse  p-4'>
+                    <button className='bg-yellow-400 hover:bg-yellow-400 text-gray-100 font-semibold shadow-lg py-2 px-4 border border-yellow-400  rounded-full'>connexion</button>
+                    <div className='mx-auto text-gray-100 '>
                         <h1>UniverLine</h1>
                     </div>
-                    <div className='flex flex-col mt-32 ml-12'>
-                        <div>
-                            <h1>Rejoignez notre communauté estudiantine</h1>
-                        </div>
-                        <ul>
-                            <li>texte texte texte texte texte texte</li>
-                            <li>texte texte texte texte texte texte</li>
-                            <li>texte texte texte texte texte texte</li>
+                </div>
+                <div className='flex flex-col pt-12 '>
+                    <div className='flex flex-col ml-20 rounded-lg shadow-2xl border-current mx-auto p-8 bg-gray-1000 border text-gray-100'>
+                        {/* <div>
+                            <h1 className='text-2xl font-openSans'>La vie à la faculté</h1>
+                        </div> */}
+                        <ul className='font-medium font-openSans leading-loose text-center'>
+                            <li className='text-xl'>Rejognez dés maintenant notre communauté</li> <hr className='pb-4'></hr>
+                            <li>Restez connecter à votre communauté étudiante </li>
+                            <li>UniverLine est un réseau social où vous pouvez</li>
+                            <li> échanger et avoir accès à vos cours, vos travaux,</li>
+                            <li>votre vie, et bien plus encore !</li>
                         </ul>
-                        <div className=''>
-                            <button className='mt-52 ml-12 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
-                                inscription
-                            </button>
+
+                        <div className='pt-4 mx-auto'>
+                            <button className='bg-yellow-400 hover:bg-yellow-400 text-gray-100 font-semibold  py-4 px-6 border border-yellow-400  rounded-full'>inscription</button>
                         </div>
                     </div>
                 </div>
+                <div className='chevron mt-28'></div>
             </div>
-            <div className='grid grid-cols-2 gap-2'>
-                <div data-aos='fade-right'>
+            <div className='grid grid-cols-2 gap-2 font-openSans'>
+                <div data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img1} alt='img1' />
                 </div>
-                <div className='flex flex-col mt-40 mx-auto'>
-                    <div>
-                        <h1 className='ml-24'>Grand titre</h1>
+                <div className='flex flex-col mt-20  items-center justify-center'>
+                    <div className=' p-4 tracking-wider'>
+                        <h1>Découvrez le monde Universitaire</h1>
+                        <br />
+                    </div>
+                    <div className='tracking-wider leading-loose'>
+                        <p>gardez avec vos collegues de la faculté,</p>
+                        <p>ou ceux d'autres établissements, conversez </p>
+                        <p>en temps réel, c'est plus simple et plus rapide </p>
                     </div>
                     <div>
-                        <p>texte texte texte texte texte texte texte</p>
-                    </div>
-                    <div>
-                        <button className='mt-52 ml-12 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button className='mt-24 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full shadow-lg'>
                             inscription
                         </button>
                     </div>
                 </div>
 
-                <div className='flex flex-col mx-auto mt-40'>
-                    <div>
-                        <h1>Grand titre</h1>
+                <div className='flex flex-col  mt-24 items-center justify-center'>
+                    <div className=' p-4'>
+                        <h1 className='tracking-wider'>Ne ratez plus vos cours</h1> <br />
+                    </div>
+                    <div className='tracking-wider leading-loose'>
+                        <p>adherez aux classes où vous êtes </p>
+                        <p>inscris, vos enseignants s'occuperons </p>
+                        <p>de partager les ressources nécessaire</p>
+                        <p>pour votre formation </p>
                     </div>
                     <div>
-                        <p>texte texte texte texte texte texte texte</p>
-                    </div>
-                    <div>
-                        <button className='mt-52 ml-12 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button className='mt-24  bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
                             inscription
                         </button>
                     </div>
                 </div>
-                <div data-aos='fade-left'>
+                <div data-aos='fade-left' data-aos-duration='1500'>
                     <img src={img2} alt='img2' />
                 </div>
 
-                <div data-aos='fade-right'>
+                <div data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img3} alt='img3' />
                 </div>
-                <div className='flex flex-col mx-auto mt-40'>
-                    <div>
-                        <h1>Grand titre</h1>
+                <div className='flex flex-col mt-20 items-center justify-center'>
+                    <div className=' p-4'>
+                        <h1 className='tracking-wider'>Timeline</h1> <br />
+                    </div>
+                    <div className='tracking-wider leading-loose'>
+                        <p>UniverLine vous tient à la une ! accédez</p>
+                        <p> au fil d'actualité et aux dernières nouvelles </p>
+                        <p> partagées; par vos collegues ou aux ressources</p>
+                        <p> partagées par vos enseignants </p>
                     </div>
                     <div>
-                        <p>texte texte texte texte texte texte texte texte</p>
-                    </div>
-                    <div>
-                        <button className='mt-52 ml-12 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button className=' mt-24  bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
                             inscription
                         </button>
                     </div>
