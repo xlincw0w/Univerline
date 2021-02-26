@@ -1,0 +1,25 @@
+.fadein {
+    animation: chainReaction 5s;
+}
+
+@keyframes chainReaction {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.fadeout {
+    animation: chainReactionOut 5s;
+}
+
+@keyframes chainReactionOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
