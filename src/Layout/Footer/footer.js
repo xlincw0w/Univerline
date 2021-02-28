@@ -6,11 +6,11 @@ import { AiOutlineInstagram } from 'react-icons/ai'
 const Footer = () => {
     return (
         <React.Fragment>
-            <div className='bg-gray-50 h-96 text-black-400 shadow-2xl select-none shadow'>
+            <div className='bg-gray-50 h-52 text-black-400 shadow-2xl select-none shadow'>
                 <div className='grid grid-cols-1 h-full'>
                     <div className='border-t-4 borderanimate rounded'>
                         <div className='flex'>
-                            <p className='text-4xl mx-auto pt-10 textanimate'>Logo</p>
+                            <p className='text-2xl mx-auto pt-10 textanimate '>Logo</p>
                         </div>
                     </div>
                     <div className='h-full'></div>
@@ -18,7 +18,7 @@ const Footer = () => {
                         <div className='w-full'>
                             <div className='w-max mx-auto'>
                                 <div className='mb-2 sm:mb-10'>
-                                    <small className='hidden sm:block text-xl text-center'>
+                                    <small className='hidden sm:block text-lg text-center'>
                                         © 2020 <span className='textanimate'>Réseau social</span>
                                         <p className='inline'>. All Rights Reserved</p>
                                     </small>
