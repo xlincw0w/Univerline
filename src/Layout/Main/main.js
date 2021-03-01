@@ -9,6 +9,7 @@ import Home from '../Home/home'
 import Dashbaord from '../Dashboard/dashbaord'
 import Erreur from '../Erreur/erreur'
 import Footer from '../Footer/footer'
+import Profile from '../Profile/profile'
 
 const Main = () => {
     return (
@@ -19,6 +20,9 @@ const Main = () => {
                     <Switch>
                         <Route path='/dashboard'>
                             <Dashbaord />
+                        </Route>
+                        <Route path='/profile'>
+                            <Profile />
                         </Route>
                         <Route path='/messagerie'>
                             <Messagerie />

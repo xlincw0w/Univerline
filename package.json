@@ -5,8 +5,9 @@
     "scripts": {
         "start": "tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack serve --config webpack.dev.js ",
         "build": "rm -rf dist && tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack --config webpack.prod.js",
-        "test": "jest --watch /tests",
-        "server": "rm -rf dist && webpack --config webpack.prod.js && node server.js"
+        "server_dev": "concurrently \"npm start\" \"nodemon server.js\" ",
+        "server_build": "npm run build && nodemon server.js",
+        "test": "jest --watch /tests"
     },
     "repository": {
         "type": "git",
