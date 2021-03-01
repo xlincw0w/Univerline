@@ -1,0 +1,19 @@
+.contenaire > div {
+    height: 100vh;
+}
+.contenaire {
+    display: flex;
+}
+.div1 {
+    width: 100vh;
+}
+.div2 {
+    width: 200vh;
+}
+.div3 {
+    width: 100vh;
+    background-color: aqua;
+}
+.allo {
+    background-image: url(../Dashboard/téléchargement.jpg);
+}
