@@ -6,11 +6,9 @@
     background-size: cover;
     background-position: 50% 50%;
     opacity: 0.48;
-    /* background-color: blue; */
 }
 .bg {
-    /* background-color: #000bbe; */
-    height: 620px;
+    height: 630px;
 }
 
 .chevron {
