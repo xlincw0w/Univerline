@@ -47,7 +47,7 @@ export default function Home() {
                             <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
                             {/* <li className='text-2xl font-bold leading-loose mx-auto'>restez connecter à votre communauté étudiante </li> */}
                             <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
-                            <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore !</li>
+                            <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore</li>
                         </ul>
 
                         <div className='  flex justify-end mx-auto pt-12'>
@@ -92,20 +92,20 @@ export default function Home() {
                         <br />
                     </div>
                     <div className='tracking-wider text-xl leading-loose'>
-                        <p>gardez contact avec vos collegues de la faculté,</p>
+                        <p>gardez contact avec vos amis de la faculté,</p>
                         <p>ou ceux d'autres établissements, conversez </p>
                         <p>en temps réel, c'est plus simple et plus rapide </p>
                     </div>
                     <div>
-                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full shadow-lg'>
+                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
                             Rejoignez-nous
                         </button>
                     </div>
                 </div>
 
                 <div className='flex flex-col mt-18 items-center justify-center'>
-                    <div className=' p-4'>
-                        <h1 className='tracking-wider text-2xl font-semibold'>Ne ratez plus vos cours</h1> <br />
+                    <div>
+                        <h1 className='tracking-wider text-2xl font-semibold p-4'>Ne ratez plus vos cours</h1> <br />
                     </div>
                     <div className='tracking-wider text-xl leading-loose'>
                         <p>adherez aux classes où vous êtes </p>
@@ -114,7 +114,7 @@ export default function Home() {
                         <p className='text-center'>pour votre formation </p>
                     </div>
                     <div>
-                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button className='mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
@@ -127,8 +127,8 @@ export default function Home() {
                     <img src={img3} alt='img3' />
                 </div>
                 <div className='flex flex-col mt-18 items-center justify-center'>
-                    <div className=' p-4'>
-                        <h1 className='tracking-wider text-2xl font-semibold'>Timeline</h1> <br />
+                    <div>
+                        <h1 className='tracking-wider text-2xl font-semibold p-4'>Timeline</h1> <br />
                     </div>
                     <div className='tracking-wider text-xl leading-loose'>
                         <p>UniverLine vous tient à la une ! accédez</p>
