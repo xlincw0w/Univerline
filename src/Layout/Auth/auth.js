@@ -7,48 +7,75 @@ export default function Auth() {
 
 
     return (
+
+
+        <div className="font-mono bg-blue-500 rounded-lg">
+		
+		<div className="container mx-auto shadow-2xl ">
+			<div className="flex justify-center px-6 my-12">
+			
+				<div className="w-full xl:w-3/4 lg:w-11/12 flex">
+					
+					<div
+						className="w-full h-auto bg-white hidden lg:block lg:w-1/2 bg-cover rounded-l-lg">
+						<img className="mx-auto py-24"src={image} alt="image"/>
+					</div>
+					
+					<div className="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+						<div className="px-8 mb-4 text-center">
+							<h3 className="pt-4 mb-2 text-2xl">Connexion</h3>
+							
+						</div>
+						<div className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+							<div className="mb-4">
+								<label className="block mb-2 text-sm font-bold text-gray-700" for="email">
+									Email
+								</label>
+								<input
+									className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+									id="email"
+									type="email"
+									placeholder="Enter Email Address..."
+								/>   
+							</div>
+							<div className="mb-4">
+								<label className="block mb-2 text-sm font-bold text-gray-700" for="email">
+									Password
+								</label>
+								<input
+									className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+									id="email"
+									type="email"
+									placeholder=""
+								/>
+							</div>
+							<div className="mb-6 text-center">
+								<button
+									className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+									type="button"
+								>
+									Se connecter
+								</button>
+							</div>
+							<hr className="mb-12 border-t" />
+							<div className="text-center">
+								<a
+									className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+									href="./register.html"
+								>
+									Créer un compte!
+								</a>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
        
-        <div className="mt-40 ml-12  mr-12 bg-white h-screen p-6 shadow-2xl grid grid-cols-2">
-                
-                <div  >
-                <img className="w-full h-96 object-cover" src={image}  atl="iage" />
-                </div> 
-                <div className="my-8" >
-
-                    
-                            
-                                    <div className="flex content-center justify-center mb-10" >
-                                        <p className="no-underline hover:underline">Connexion</p>
-                                    </div>
-
-                                <div className="my-8 ml-10">
-                                        <div className="mb-8">
-                                            <label className="block text-gray-900 mb-2">Email</label>
-                                            <input type="text" placeholder="test@gmail.com" className="border border-gray-600 placeholder-gray-500 placeholder-opacity-50  bg-white focus:placeholder-gray-400 rounded-lg pl-3 text-grey-700 w-full" />
-                                        </div>
-
-                                        <div className="mb-8" >
-                                            <label className="block text-gray-900 mb-2">Password</label>
-                                            <input type="password"  className="border border-gray-600 shadow-inner bg-white focus:shadow-outline pl-3 text-grey-700 w-full rounded-lg " />
-                                        </div>
-                                
-                                        <div className="my-2">
-                                            <p className="hover:text-blue-700 text-sm">mot de passe oublié ?</p>
-                                        </div>
-
-                                        <div className="mt-5">
-                                        <button   type="submit" className=" bg-blue-500 text-white px-4 py-2 rounded hover: bg-blue-900 w-full ">Se connecter</button>
-                                        </div>
-                                    </div>
-
-
-                    
-                </div>  
-        
-   
-   
-
-       </div>
+     
     )
 
 }

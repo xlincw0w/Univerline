@@ -2,46 +2,89 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { constants } from '../../constants'
 import cx from 'classnames'
-import image2 from './imageCo.jpg';
+import image from './imageCo.jpg';
 
 
 const AuthInfo = ({ tools }) => {
     return (
-        <div className="fadein" style={{ 'display': tools.switchToAuthInfo ? 'block' : 'none' }}>
-              <div className="mt-10  ml-12  mr-12 bg-white h-full p-6 shadow-2xl">
-                  <div className="flex content-center justify-center">
-                  <p className="text-black disable-select" style={{ 'fontSize': '2rem' }}>Introduisez vos informations d'<span className="orange">authentification</span></p> 
-                  </div>
-                  <div className= "grid grid-cols-2">
-                       <div>
-                       <img className="h-full object-cover" src={image2}  atl="iage" />
-                       </div>
-                         <div className="mx-10 flex content-center justify-center">
-                             <div>
-                             <div className="mb-2">
-                                <label className="block text-gray-900 mb-2">Identifiant</label>
-                                <input type="text"  onChange={e => tools.setUsername(e.target.value)}   className="border border-gray-600 placeholder-gray-500 placeholder-opacity-50  bg-white focus:placeholder-gray-400 rounded-lg pl-2 text-grey-700 w-96" />
-                                <label style={{ width: '50px' }} className={cx('ml-3 text-red-600',{ 'invisible': tools.username.length === 0 || constants.username_rg.test(tools.username) })}>✘</label>
+        <div className="fadein h-full bg-blue-400 rounded-lg  p-6 shadow-2xl" style={{ 'display': tools.switchToAuthInfo ? 'block' : 'none' }}>
+            
+               
+        
+          {/* card white*/} 
+        <div className=" bg-white shadow-2xl  rounded-lg mb-1  lg:h-screen sm:h-full">
+
+                <div className="flex content-center justify-center mb-4 ">
+                            <p className="text-black">Introduisez vos informations </p>
+                </div>
+
+            {/* j'ai divisé la card blanche en deux grid*/} 
+                <div className="lg:grid grid-cols-2  sm:grid grid-rows-2">
+                      {/* premier grid*/} 
+                    <div className="lg:py-48 md:mx-auto lg:mx-auto ">
+                        <div class="flex flex-wrap justify-center">
+
+                            <div class="w-full sm:w-1/2 sm:pr-2 mb-3 sm:mb-0">
+                            <button
+                                class="w-full rounded-lg bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                                type="button"
+                            >Facebook</button>
                             </div>
 
-                            <div className="mb-2" >
-                                <label className="block text-gray-900 mb-2">Mot de passe</label>
-                                <input type="password" onChange={e => tools.setFirst(e.target.value)}  className="border border-gray-600 shadow-inner bg-white focus:shadow-outline pl-3 text-grey-700 w-96 rounded-lg " />
-                                <label style={{ width: '50px' }} className={cx('ml-3 f4 text-red-600',  { 'invisible': tools.passwd.length === 0 || tools.passwd.length >= 8 })}>✘</label>
+                            <div class="w-full mb-3 sm:w-1/2 sm:pl-2">
+                            <button
+                                class="w-full rounded-lg bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                                type="button"
+                            > Google</button>
                             </div>
-                            <div className="mb-2" >
-                                <label className="block text-gray-900 mb-2">Confirmer mot de passe</label>
-                                <input type="password" onChange={e => tools.setPasswdConfirm(e.target.value)}   className="border border-gray-600 shadow-inner bg-white focus:shadow-outline pl-3 text-grey-700 w-96 rounded-lg " />
-                                <label style={{ width: '50px' }} className={cx('ml-3 f4 text-red-600', { 'invisible': tools.passwd_confirm.length === 0 || tools.passwd === tools.passwd_confirm })}>✘</label>
-                            </div>
-                            <div className="mt-2">
-                                <button   type="submit" onClick={() => tools.AuthInfoHandler()} className=" bg-blue-500 text-white px-4 py-2 roundedtext-white hover:text-red-500 w-96 ">Adhérer</button>
-                            </div>
-                             </div>
-                           
                         </div>
-                    </div>    
-                </div>        
+                        <div className="flex justify-center items-center ">
+                        <img className="object-cover " src={image}  atl="iage" />
+                        </div>
+                        <hr className="mt-8 border-t" />
+                        <div className="text-center py-4">
+								<a
+									className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+									href="./register.html"
+								>
+									Avez-vous dèjà un compte ?
+								</a>
+							</div>
+                       </div>   
+                                        
+                
+                          {/* deuxième grid*/} 
+                    <div style={{'paddingTop':'9rem'}} className="flex content-center justify-center  ">
+                        <div>
+                               
+                            <div className="mb-2 ml-3 mr-4">
+                                <label className="block text-gray-900 mb-2">Identifiant</label>
+                                <input type="text" onChange={e => tools.setUsername(e.target.value)}   className="w-full px-2 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"/>
+                                <label style={{ width: '50px' }} className={cx('ml-3 text-red-600', { 'invisible': tools.username.length === 0 || constants.username_rg.test(tools.username) })}>Veuillez introduire que des caractéres </label>
+                            </div>
+
+                            <div className="mb-2 ml-3 mr-4" >
+                                <label className="block text-gray-900 mb-2">Mot de passe</label>
+                                <input type="text" onChange={e => tools.setPasswd(e.target.value)}className="w-full px-2 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" />
+                                <label style={{ width: '50px' }} className={cx('ml-3 f4 text-red-600', { 'invisible': tools.passwd.length === 0 || tools.passwd.length >= 8 })}>Veuillez introduire que Cractères</label>
+                            </div>
+                            <div className="mb-2 ml-3 mr-4" >
+                                <label className="block text-gray-900 mb-2">Confirmation</label>
+                                <input type="email"  onChange={e => tools.setPasswdConfirm(e.target.value)}   className="w-full px-2 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" />
+                                <label style={{ width: '50px' }} className={cx('ml-3 f4 text-red-600', { 'invisible': tools.email.length === 0 || constants.email_rg.test(tools.email) })}>test@....com</label>
+                            </div>
+                           
+
+                            <div className="mb-4 mt2 ml-3 mr-4">
+                            <button   type="submit" onClick={() => tools.AuthInfoHandler()} className=" w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">Continuer</button>
+                            </div>
+                        </div>    
+                    </div>
+              </div>
+        
+          </div> 
+            
+
         </div>
     )
 }
@@ -49,27 +92,3 @@ const AuthInfo = ({ tools }) => {
 export default AuthInfo
 
 
-/*
-
- <div>
-                                <div>
-                                    <label style={{ 'width': '250px', 'textAlign': 'start' }}><span className="disable-select mr2 orange">❖</span>Identifiant</label>
-                                    <input style={{ height: '42px' }} onChange={e => tools.setUsername(e.target.value)} className="ba b--black-20 pa2 mb2" type="text"></input>
-                                    <label style={{ width: '50px' }} className={cx('ml3 f4 red dib trans', { 'hide': tools.username.length === 0 || constants.username_rg.test(tools.username) })}>✘</label>
-                                </div>
-                                <div>
-                                    <label style={{ 'width': '250px', 'textAlign': 'start' }}><span className="disable-select mr2 orange">❖</span>Mot de passe</label>
-                                    <input style={{ height: '42px' }} onChange={e => tools.setPasswd(e.target.value)} className="ba b--black-20 pa2 mb2" type="password"></input>
-                                    <label style={{ width: '50px' }} className={cx('ml3 f4 red dib trans', { 'hide': tools.passwd.length === 0 || tools.passwd.length >= 8 })}>faible</label>
-                                </div>
-                                <div>
-                                    <label style={{ 'width': '250px', 'textAlign': 'start' }}><span className="disable-select mr2 orange">❖</span>Confirmer mot de passe</label>
-                                    <input style={{ height: '42px' }} onChange={e => tools.setPasswdConfirm(e.target.value)} className="ba b--black-20 pa2 mb2" type="password"></input>
-                                    <label style={{ width: '50px' }} className={cx('ml3 f4 red dib trans', { 'hide': tools.passwd_confirm.length === 0 || tools.passwd === tools.passwd_confirm })}>✘</label>
-                                </div>
-                            </div>
-                            <div className="mt5">
-                                <Link to="#" className="NaisesButton br3 shadow-4 disable-select" onClick={() => tools.AuthInfoHandler()}>Adhérer</Link>
-                            </div>
-
-*/

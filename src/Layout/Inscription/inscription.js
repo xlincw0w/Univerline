@@ -106,7 +106,7 @@ const Inscription = () => {
             setShowFormProf(false)
             setSwitchAuthInfo(true)
         } else {
-            alert('Assurez-vous de remplir le formulaire et ce avec des données correcte !')
+            alert('Assurez-vous de remplir le formulaire avec des données correcte !')
         }
     }
 
@@ -116,7 +116,7 @@ const Inscription = () => {
             setShowFormStud(false)
             setSwitchAuthInfo(true)
         } else {
-            alert('Assurez-vous de remplir le formulaire et ce avec des données correcte !')
+            alert('Assurez-vous de remplir le formulaire avec des données correcte !')
         }
     }
 
@@ -147,31 +147,37 @@ const Inscription = () => {
             })
 
         } else {
-            alert('Assurez-vous de remplir le formulaire et ce avec des données correcte !')
+            alert('Assurez-vous de remplir le formulaire avec des données correcte !')
         }
     }
 
     const WhoYouAre = () => {
 
         return (
-            <div className="fadein" style={{ 'display': showUserType ? 'default' : 'none' }}>
-              <div className="mt-10  ml-12  mr-12 bg-white h-full p-6 shadow-2xl"> 
-                      <div style={{'height': '50px'}}></div>
-                       <div className="grid grid-cols-2">
+            <div className="fadein  h-full  bg-blue-400  p-14 shadow-2xl" style={{ 'display': showUserType ? 'default' : 'none' }}>
+             
+             
+                
+                     <div className=" bg-white shadow-2xl rounded-lg lg:h-screen sm:h-full" >
 
-                           <div style={{'marginLeft':'auto','marginRight': 'auto'}} >
-                              <img src={image} />
+                       <div className="lg:grid grid-cols-2 sm:grid grid-rows-2 sm:mb-0">
+
+                           <div className="flex justify-center items-center ">
+                              <img className="sm:mx-auto"src={image} />
                            </div>
-                           <div>
-                               <div></div>
-                                <p style={{'marginRight': '50px'}} className="text-black disable-select" style={{ 'fontSize': '3rem' }}>Etes vous un enseignant ou un etudiant ?</p>
-                                <div className="mt-4 flex content-center justify-center" style={{'margin-right':'5rem'}}>
-                                    <Link to="#" className="border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white mr-2 px-10 " onClick={() => ProfHandler()}>Enseignant</Link>
+
+                           <div className="lg:mx-auto lg:py-36 sm:py-4 sm:mx-auto">
+                              
+                                <p className=" sm:mx-auto text-black disable-select md:text-5xl md:text-4xl sm:text-3xl" >Etes vous enseignant ou étudiant ?</p>
+                                <div className="mt-4 p-6 flex  space-x-4 content-center justify-start">
+                                    <Link to="#" className="  border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white mr-2 px-10 " onClick={() => ProfHandler()}>Enseignant</Link>
                                     <Link to="#" className="border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white  px-10" onClick={() => StudHandler()}>Etudiant</Link>
-                                </div>
+                                </div> 
                             </div>    
-                       </div>    
-               </div>  
+                       </div>  
+                    </div>     
+               
+             
             </div> 
         )
     }
