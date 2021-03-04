@@ -28,120 +28,45 @@ AOS.init({
     anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 })
 
-const params = {
-    particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800,
-            },
-        },
-        color: {
-            value: '#ffffff',
-        },
-        shape: {
-            type: 'circle',
-            stroke: {
-                width: 0,
-                color: '#fff000',
-            },
-            polygon: {
-                nb_sides: 5,
-            },
-            image: {
-                src: 'img/github.svg',
-                width: 100,
-                height: 100,
-            },
-        },
-        opacity: {
-            value: 0.8,
-            random: false,
-            anim: {
-                enable: false,
-                speed: 1,
-                opacity_min: 0.1,
-                sync: false,
-            },
-        },
-        size: {
-            value: 3,
-            random: true,
-            anim: {
-                enable: false,
-                speed: 40,
-                size_min: 0.1,
-                sync: false,
-            },
-        },
-        line_linked: {
-            enable: true,
-            distance: 150,
-            color: '#ffffff',
-            opacity: 0.4,
-            width: 1,
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: 'none',
-            random: false,
-            straight: false,
-            out_mode: 'out',
-            bounce: false,
-            attract: {
-                enable: false,
-                rotateX: 600,
-                rotateY: 1200,
-            },
-        },
-    },
-    interactivity: {
-        detect_on: 'canvas',
-        events: {
-            onhover: {
-                enable: false,
-                mode: 'repulse',
-            },
-        },
-        modes: {
-            grab: {
-                distance: 400,
-                line_linked: {
-                    opacity: 1,
-                },
-            },
-            bubble: {
-                distance: 400,
-                size: 40,
-                duration: 2,
-                opacity: 1,
-                // speed: 0.3,
-            },
-            repulse: {
-                distance: 200,
-            },
-        },
-    },
-}
-
 export default function Home() {
     return (
         <div>
-            <div className='bg bg-gradient-to-r from-blue-600 to-blue-900'>
-                <Particles className='particleCanvas' params={params}></Particles>
+            <div className=' bg-image h-screen bg-cover bg-center  bg-fixed'>
+                {/* <div className='grid grid-cols-2  space-x-96'> */}
+                <div className='flex justify-end p-4'>
+                    <button className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
+                        Connexion
+                    </button>
+                </div>
+                <div className='p-2 pt-20'>
+                    <div className='  border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-2/5'>
+                        <ul className='font-medium font-openSans  text-center'>
+                            <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
+                                <span className='text-5xl'>R</span>EJOINEZ UNIVERLINE
+                            </li>
+                            <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
+                            {/* <li className='text-2xl font-bold leading-loose mx-auto'>restez connecter à votre communauté étudiante </li> */}
+                            <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
+                            <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore !</li>
+                        </ul>
+
+                        <div className='  flex justify-end mx-auto pt-12'>
+                            <button className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-xl rounded-full mx-auto '>
+                                Rejoignez-nous !
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* </div> */}
+            </div>
+            {/* <div className='bg bg-image bg-repeat-round'>
                 <div className='flex flex-row-reverse  p-4'>
                     <button className='bg-yellow-400 hover:bg-yellow-400 text-gray-100 font-semibold shadow-lg py-2 px-4 border border-yellow-400  rounded-full'>connexion</button>
-                    <div className='mx-auto text-gray-100 '>
-                        <h1>UniverLine</h1>
-                    </div>
                 </div>
                 <div className='flex flex-col pt-12 '>
                     <div className='flex flex-col ml-20 rounded-lg shadow-2xl border-current mx-auto p-8 bg-gray-1000 border text-gray-100'>
-                        {/* <div>
-                            <h1 className='text-2xl font-openSans'>La vie à la faculté</h1>
-                        </div> */}
+                
                         <ul className='font-medium font-openSans leading-loose text-center'>
                             <li className='text-xl'>Rejognez dés maintenant notre communauté</li> <hr className='pb-4'></hr>
                             <li>Restez connecter à votre communauté étudiante </li>
@@ -156,41 +81,41 @@ export default function Home() {
                     </div>
                 </div>
                 <div className='chevron mt-28'></div>
-            </div>
+            </div> */}
             <div className='grid grid-cols-2 gap-2 font-openSans'>
                 <div data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img1} alt='img1' />
                 </div>
                 <div className='flex flex-col mt-20  items-center justify-center'>
-                    <div className=' p-4 tracking-wider'>
+                    <div className=' p-4 text-2xl tracking-wider font-semibold'>
                         <h1>Découvrez le monde Universitaire</h1>
                         <br />
                     </div>
-                    <div className='tracking-wider leading-loose'>
-                        <p>gardez avec vos collegues de la faculté,</p>
+                    <div className='tracking-wider text-xl leading-loose'>
+                        <p>gardez contact avec vos collegues de la faculté,</p>
                         <p>ou ceux d'autres établissements, conversez </p>
                         <p>en temps réel, c'est plus simple et plus rapide </p>
                     </div>
                     <div>
-                        <button className='mt-24 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full shadow-lg'>
-                            inscription
+                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full shadow-lg'>
+                            Rejoignez-nous
                         </button>
                     </div>
                 </div>
 
-                <div className='flex flex-col  mt-24 items-center justify-center'>
+                <div className='flex flex-col mt-18 items-center justify-center'>
                     <div className=' p-4'>
-                        <h1 className='tracking-wider'>Ne ratez plus vos cours</h1> <br />
+                        <h1 className='tracking-wider text-2xl font-semibold'>Ne ratez plus vos cours</h1> <br />
                     </div>
-                    <div className='tracking-wider leading-loose'>
+                    <div className='tracking-wider text-xl leading-loose'>
                         <p>adherez aux classes où vous êtes </p>
                         <p>inscris, vos enseignants s'occuperons </p>
                         <p>de partager les ressources nécessaire</p>
-                        <p>pour votre formation </p>
+                        <p className='text-center'>pour votre formation </p>
                     </div>
                     <div>
-                        <button className='mt-24  bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
-                            inscription
+                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                            Rejoignez-nous
                         </button>
                     </div>
                 </div>
@@ -201,19 +126,19 @@ export default function Home() {
                 <div data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img3} alt='img3' />
                 </div>
-                <div className='flex flex-col mt-20 items-center justify-center'>
+                <div className='flex flex-col mt-18 items-center justify-center'>
                     <div className=' p-4'>
-                        <h1 className='tracking-wider'>Timeline</h1> <br />
+                        <h1 className='tracking-wider text-2xl font-semibold'>Timeline</h1> <br />
                     </div>
-                    <div className='tracking-wider leading-loose'>
+                    <div className='tracking-wider text-xl leading-loose'>
                         <p>UniverLine vous tient à la une ! accédez</p>
                         <p> au fil d'actualité et aux dernières nouvelles </p>
                         <p> partagées; par vos collegues ou aux ressources</p>
-                        <p> partagées par vos enseignants </p>
+                        <p className='text-center'> partagées par vos enseignants </p>
                     </div>
                     <div>
-                        <button className=' mt-24  bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-2 px-4 border border-yellow-400 hover:border-transparent rounded-full'>
-                            inscription
+                        <button className=' mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                            Rejoignez-nous
                         </button>
                     </div>
                 </div>
