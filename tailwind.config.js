@@ -1,4 +1,5 @@
 require('dotenv').config()
+console.log(process.cwd())
 module.exports = {
     purge: {
         enabled: process.env.NODE_ENV === 'DEVELOPMENT' ? false : true,
@@ -7,6 +8,9 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
+            backgroundImage: (theme) => ({
+                image: "url('../Layout/Home/img/bg.png')",
+            }),
             fontFamily: {
                 openSans: ['OpenSans'],
             },
@@ -20,5 +24,5 @@ module.exports = {
     variants: {
         extend: {},
     },
-    plugins: [],
+    plugins: [require('@tailwindcss/forms')],
 }

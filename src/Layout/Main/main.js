@@ -16,22 +16,24 @@ const Main = () => {
     return (
         <div className='font-openSans'>
             <Router>
-                <Header />
                 <div style={{ minHeight: '2000px', height: 'auto' }}>
                     <Switch>
                         <Route path='/dashboard'>
                             <Dashbaord />
                         </Route>
                         <Route path='/profile'>
+                            <Header />
                             <Profile />
                         </Route>
                         <Route path='/messagerie'>
                             <Messagerie/>
                         </Route>
                         <Route path='/auth'>
+                            <Header />
                             <Auth />
                         </Route>
                         <Route path='/inscription'>
+                            <Header />
                             <Inscription />
                         </Route>
                         <Route exact path='/'>
