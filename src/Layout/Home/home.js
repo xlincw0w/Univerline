@@ -6,6 +6,7 @@ import 'aos/dist/aos.css'
 import img1 from './img/image1.png'
 import img2 from './img/image2.png'
 import img3 from './img/image3.png'
+import { useHistory } from 'react-router-dom'
 
 AOS.init({
     // Global settings:
@@ -29,6 +30,7 @@ AOS.init({
 })
 
 export default function Home() {
+    const history = useHistory()
     return (
         <div>
             <div className=' bg-image h-screen bg-cover bg-center  bg-fixed'>
@@ -51,7 +53,11 @@ export default function Home() {
                         </ul>
 
                         <div className='  flex justify-end mx-auto pt-12'>
-                            <button className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-xl rounded-full mx-auto '>
+                            <button
+                                onClick={() => {
+                                    history.push('/inscription')
+                                }}
+                                className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-xl rounded-full mx-auto '>
                                 Rejoignez-nous !
                             </button>
                         </div>

@@ -10,6 +10,7 @@ module.exports = {
         extend: {
             backgroundImage: (theme) => ({
                 image: "url('../Layout/Home/img/bg.png')",
+                feather: "url('../Assets/Images/bgfeather1.jpg')",
             }),
             fontFamily: {
                 openSans: ['OpenSans'],
