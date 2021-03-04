@@ -9,7 +9,7 @@ import Home from '../Home/home'
 import Dashbaord from '../Dashboard/dashbaord'
 import Erreur from '../Erreur/erreur'
 import Footer from '../Footer/footer'
-import Profile from '../Profile/profile'
+import Profile from '../Profile/IndexProfile'
 
 const Main = () => {
     return (
