@@ -8,6 +8,6 @@ import './Tailwind/index.css'
 reactDOM.render(
     // <Provider store={store}>
     <Main />,
-    // </Provider>,
+    // </Provider>, ediiit ediiit ediiit
     document.getElementById('root')
 )
