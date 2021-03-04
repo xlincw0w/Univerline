@@ -42,3 +42,12 @@
     top: 0.4rem;
       left: 0;
 }
+
+.bg-insc{
+
+  background-color: #101940;
+}
+
+.h-insc{
+   height: 660px;
+}

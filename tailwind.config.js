@@ -1,5 +1,5 @@
 require('dotenv').config()
-console.log(process.cwd())
+
 module.exports = {
     purge: {
         enabled: process.env.NODE_ENV === 'DEVELOPMENT' ? false : true,
