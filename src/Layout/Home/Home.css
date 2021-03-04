@@ -1,41 +1,21 @@
-/* .particleCanvas {
+.custom-shape-divider-bottom-1614867478 {
     position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-    opacity: 0.48;
-} */
-/* .bg {
-    height: 630px;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
 }
 
-.chevron {
+.custom-shape-divider-bottom-1614867478 svg {
     position: relative;
-    text-align: center;
-    padding: 12px;
-    margin-bottom: 6px;
-    height: 140px;
-    width: auto;
+    display: block;
+    width: calc(107% + 1.3px);
+    height: 95px;
+    transform: rotateY(180deg);
 }
-.chevron:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 50%;
-    background: white;
-    transform: skew(0deg, 6deg);
+
+.custom-shape-divider-bottom-1614867478 .shape-fill {
+    fill: #ffffff;
 }
-.chevron:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 50%;
-    background: white;
-    transform: skew(0deg, -6deg);
-} */
