@@ -54,14 +54,29 @@ div {
 .a:hover {
     text-decoration-line: underline;
 }
+.form {
+    display: flex;
+    margin: 30px;
+}
+.form > input {
+    border-top-left-radius: 20px;
+    text-align: center;
+    width: 100%;
+    border-bottom-left-radius: 20px;
 
+    height: 40px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+}
 .form > button {
-    border-top-right-radius: 0.2cm;
-    border-bottom-right-radius: 0.2cm;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    height: 6.9vh;
-    cursor: pointer;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 40px;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    padding-right: 5px;
 }
 
 @media (max-width: 1100px) {
@@ -83,9 +98,6 @@ div {
         font-size: 13px;
     }
     .form1 {
-        margin-left: 0;
-    }
-    .entetinformation {
-        margin: 0;
+        margin-top: 20px;
     }
 }
