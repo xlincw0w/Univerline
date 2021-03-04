@@ -1,49 +1,14 @@
-.contenaire > div {
-    height: 90vh;
-}
-.contenaire {
-    display: flex;
-    /* text-align: center; */
-}
-h1 {
-    font-size: 1000px;
-    font-weight: bold;
+div {
+    overflow-y: hidden;
 }
 
-/* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-div gauche
-*/
-.div1 {
-    text-align: center;
-    width: 100vh;
-    display: block;
-    border-right: 1px solid rgb(214, 214, 214);
-}
-.haut {
-    height: 25vh;
-}
-.haut > div {
-    height: 10vh;
+.bordure {
+    border: 1px solid rgb(214, 214, 214);
 }
 .myAvatar {
+    display: flex;
     margin: 25px;
+    text-align: center;
 }
 .maPhoto {
     padding: 25px;
@@ -54,78 +19,19 @@ div gauche
     font-size: 20px;
 }
 .btncntct {
-    margin-top: 20px;
-    height: 1.3cm;
-    width: 3cm;
+    height: 0.9cm;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
-.bas {
-    height: 50vh;
+.form1 {
+    margin-left: 20px;
 }
-/* 
-
-
-
-
-
-
-
-
-
-div milieu
-*/
-
-.div2 {
-    width: 200vh;
-    display: block;
-    border-right: 1px solid rgb(214, 214, 214);
-    text-align: center;
-}
-
-.entete {
-    height: 15vh;
-}
-.enteteInformation {
-    width: 50%;
-    margin: 10px;
+.entetinformation {
+    margin: 5px;
 }
 .infpersonel {
     text-align: left;
     margin: 12px;
-}
-.enteteButton {
-    width: 50%;
-    text-align: right;
-    margin-top: 0.7cm;
-}
-
-/* 
-
-
-
-
-
-
-
-*/
-
-.message {
-    height: 60vh;
-}
-/*
-
-
-
-
-
-
-*/
-.envoie {
-    height: 20vh;
-    border-top: 1px solid rgb(209, 209, 209);
-}
-.form {
-    padding-top: 10px;
-    margin-top: 20px;
 }
 .input {
     border: 1px solid gray;
@@ -134,36 +40,6 @@ div milieu
     width: 80vh;
     height: 7vh;
     background-color: azure;
-}
-.form > button {
-    border-top-right-radius: 0.2cm;
-    border-bottom-right-radius: 0.2cm;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    width: 20vh;
-    height: 6.9vh;
-    cursor: pointer;
-}
-/* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-.div3 {
-    width: 100vh;
-    display: block;
 }
 .entete3 > h1 {
     font-size: 20px;
@@ -174,6 +50,54 @@ div milieu
     padding-top: 30px;
     padding-left: 110px;
 }
-.bas3 {
-    margin-top: 20px;
+
+.a:hover {
+    text-decoration-line: underline;
+}
+.form {
+    display: flex;
+    margin: 30px;
+}
+.form > input {
+    border-top-left-radius: 20px;
+    text-align: center;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+
+    height: 40px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+}
+.form > button {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 40px;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    padding-right: 5px;
+}
+
+@media (max-width: 1100px) {
+    .entete3 > h1 {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .entete3 {
+        padding: 0;
+    }
+}
+@media (max-width: 1200px) {
+    .myAvatar {
+        margin: 0;
+    }
+    .myAvatar > h1 {
+        margin: 0;
+        font-weight: lighter;
+        font-size: 13px;
+    }
+    .form1 {
+        margin-top: 20px;
+    }
 }
