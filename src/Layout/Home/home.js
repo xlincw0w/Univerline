@@ -43,7 +43,10 @@ export default function Home() {
                 </div>
 
                 <div className='flex justify-end p-4'>
-                    <button className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
+                    <button onClick={ ()=>{
+                        history.push('/auth')
+                    }}
+                        className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
                         Connexion
                     </button>
                 </div>

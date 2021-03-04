@@ -29,7 +29,7 @@ const Main = () => {
                             <Messagerie />
                         </Route>
                         <Route path='/auth'>
-                            <Header />
+                            
                             <Auth />
                         </Route>
                         <Route path='/inscription'>
