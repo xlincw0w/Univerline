@@ -35,7 +35,7 @@ const Inscription = () => {
                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
                         <p
-                            className='pt-14 text-6xl text-gray-100 text-center cursor-pointer duration-300 hover:text-gray-400'
+                            className='pt-14 text-6xl text-gray-100 text-center cursor-pointer'
                             onClick={() => {
                                 history.push('/')
                             }}>
