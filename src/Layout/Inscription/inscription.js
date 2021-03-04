@@ -154,22 +154,43 @@ const Inscription = () => {
     const WhoYouAre = () => {
 
         return (
-            <div className="fadein  h-full  bg-blue-400  p-14 shadow-2xl" style={{ 'display': showUserType ? 'default' : 'none' }}>
+       
+        <div className="fadein bg-insc h-full  p-14 shadow-2xl" style={{ 'display': showUserType ? 'default' : 'none' }}>
              
-             
+                       
                 
                      <div className=" bg-white shadow-2xl rounded-lg lg:h-screen sm:h-full" >
 
-                       <div className="lg:grid grid-cols-2 sm:grid grid-rows-2 sm:mb-0">
+                     <div className="flex content-center justify-center  ">
+                                <p className=" mt-12 text-black text-4xl "> Rejoignez-nous !</p>
+                        </div>
+                       < div className="lg:grid grid-cols-2 sm:grid grid-rows-2 sm:mb-0">
+                          
+                         
 
-                           <div className="flex justify-center items-center ">
-                              <img className="sm:mx-auto"src={image} />
-                           </div>
+                       <div className="lg:py-28 md:mx-auto lg:mx-auto ">
+                        
+                        <div className="flex justify-center items-center ">
+                        <img className="object-cover " src={image}  atl="iage" />
+                        </div>
+                        <hr className="mt-8 border-t" />
+                        <div className="text-center py-4">
+								<a
+									className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+									href="./register.html"
+								>
+									Avez-vous dèjà un compte ?
+								</a>
+							</div>
+                       </div>   
+                           
+                                
+
 
                            <div className="lg:mx-auto lg:py-36 sm:py-4 sm:mx-auto">
                               
-                                <p className=" sm:mx-auto text-black disable-select md:text-5xl md:text-4xl sm:text-3xl" >Etes vous enseignant ou étudiant ?</p>
-                                <div className="mt-4 p-6 flex  space-x-4 content-center justify-start">
+                                <p className="flex content-center justify-center text-black disable-select md:text-5xl " >Etes vous enseignant ou étudiant ?</p>
+                                <div className="mt-4 p-6 flex  space-x-4 flex content-center justify-start">
                                     <Link to="#" className="  border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white mr-2 px-10 " onClick={() => ProfHandler()}>Enseignant</Link>
                                     <Link to="#" className="border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white  px-10" onClick={() => StudHandler()}>Etudiant</Link>
                                 </div> 
@@ -179,6 +200,8 @@ const Inscription = () => {
                
              
             </div> 
+         
+        
         )
     }
 
