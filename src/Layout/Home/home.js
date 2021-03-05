@@ -76,7 +76,7 @@ export default function Home() {
                 </div>
             </div>
             <div className='grid grid-cols-2 gap-2 font-openSans'>
-                <div data-aos='fade-right' data-aos-duration='1500'>
+                <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img1} alt='img1' />
                 </div>
                 <div className='flex flex-col mt-20  items-center justify-center'>
@@ -119,11 +119,11 @@ export default function Home() {
                         </button>
                     </div>
                 </div>
-                <div data-aos='fade-left' data-aos-duration='1500' className='flex justify-end'>
+                <div className='flex justify-center' data-aos='fade-left' data-aos-duration='1500'>
                     <img src={img2} alt='img2' />
                 </div>
 
-                <div data-aos='fade-right' data-aos-duration='1500'>
+                <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img3} alt='img3' />
                 </div>
                 <div className='flex flex-col mt-18 items-center justify-center'>
