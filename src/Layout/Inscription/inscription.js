@@ -41,7 +41,7 @@ const Inscription = () => {
                             }}>
                             UNIVERLINE
                         </p>
-                        <p className='pt-10 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Restez connecté avec vos collégues et vos cammarade a tout instant.</p>
+                        <p className='pt-10 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Restez connecté avec vos collégues et vos camarade a tout instant.</p>
                         {step === 'auth' && (
                             <div>
                                 <p className='pt-40 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Vous possedez déja un compte ?</p>

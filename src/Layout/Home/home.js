@@ -86,7 +86,11 @@ export default function Home() {
                         <p className='text-center'>simple et plus rapide </p>
                     </div>
                     <div>
-                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
+                        <button
+                            onClick={() => {
+                                history.push('/inscription')
+                            }}
+                            className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
                             Rejoignez-nous
                         </button>
                     </div>
@@ -102,7 +106,11 @@ export default function Home() {
                         <p className='text-center'> de vos enseignant</p>
                     </div>
                     <div>
-                        <button className='mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button
+                            onClick={() => {
+                                history.push('/inscription')
+                            }}
+                            className='mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
@@ -124,7 +132,11 @@ export default function Home() {
                         <p className='text-center'> dont vous avez besoin</p>
                     </div>
                     <div>
-                        <button className=' mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button
+                            onClick={() => {
+                                history.push('/inscription')
+                            }}
+                            className=' mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
