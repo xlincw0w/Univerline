@@ -9,13 +9,14 @@ import Home from '../Home/home'
 import Dashbaord from '../Dashboard/dashbaord'
 import Erreur from '../Erreur/erreur'
 import Footer from '../Footer/footer'
-import Profile from '../Profile/profile'
+import Profile from '../Profile/IndexProfile'
+
 
 const Main = () => {
     return (
         <div className='font-openSans'>
             <Router>
-                <div style={{ minHeight: '2000px', height: 'auto' }}>
+                <div style={{ height: 'auto' }}>
                     <Switch>
                         <Route path='/dashboard'>
                             <Dashbaord />
@@ -25,15 +26,13 @@ const Main = () => {
                             <Profile />
                         </Route>
                         <Route path='/messagerie'>
-                            <Header />
                             <Messagerie />
                         </Route>
                         <Route path='/auth'>
-                            <Header />
+                            
                             <Auth />
                         </Route>
                         <Route path='/inscription'>
-                            <Header />
                             <Inscription />
                         </Route>
                         <Route exact path='/'>
@@ -44,7 +43,6 @@ const Main = () => {
                         </Route>
                     </Switch>
                 </div>
-                <Footer />
             </Router>
         </div>
     )

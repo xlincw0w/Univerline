@@ -1,236 +1,246 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { constants } from '../../constants'
-import image from './imageCo.jpg';
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 
-import StudForm from './studForm'
-import ProfForm from './profForm'
-import AuthInfo from './authInfo'
+import { useHistory } from 'react-router-dom'
 
+import { FaFacebookSquare } from 'react-icons/fa'
+import { FaGooglePlusSquare } from 'react-icons/fa'
+import { FaTwitterSquare } from 'react-icons/fa'
 
-//import Axios from 'axios'
-//import bcrypt from 'bcryptjs'
-
-import './inscription.css'
-
+import { FaFeatherAlt } from 'react-icons/fa'
 
 const Inscription = () => {
-
-    useEffect(() => {
-
-    }, [])
-
-    const [userType, setUserType] = useState('')
-
-    // User 
-    const [username, setUsername] = useState('')
-    const [second, setSecond] = useState('')
-    const [first, setFirst] = useState('')
-    const [university, setUniversity] = useState('')
-    const [email, setEmail] = useState('')
-    const [domain, setDomain] = useState('')
-
-    // Auth
-    const [passwd, setPasswd] = useState('')
-    const [passwd_confirm, setPasswdConfirm] = useState('')
-
-    // Utilities
-    const [showUserType, setShowUserType] = useState(true)
-    const [showFormProf, setShowFormProf] = useState(false)
-    const [showFormStud, setShowFormStud] = useState(false)
-    const [switchToAuthInfo, setSwitchAuthInfo] = useState(false)
-    const [switchToCon, setSwitchToCon] = useState(false)
-
-    const FormTest = (type) => {
-        if (type === 'enseignant') {
-            if (second.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (first.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (email.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (university.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (domain.length === 0) return { passed: false, error: 'length', target: 'second' }
-
-            if (!constants.alph_rg.test(second)) return { passed: false, error: 'invalid', target: 'second' }
-            if (!constants.alph_rg.test(first)) return { passed: false, error: 'invalid', target: 'first' }
-            if (!constants.email_rg.test(email)) return { passed: false, error: 'invalid', target: 'email' }
-            if (!constants.alphanum_rg.test(university)) return { passed: false, error: 'invalid', target: 'university' }
-            if (!constants.alph_rg.test(domain)) return { passed: false, error: 'invalid', target: 'domain' }
-        }
-
-        if (type === 'etudiant') {
-            if (second.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (first.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (email.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (university.length === 0) return { passed: false, error: 'length', target: 'second' }
-            if (domain.length === 0) return { passed: false, error: 'length', target: 'second' }
-
-            if (!constants.alph_rg.test(second)) return { passed: false, error: 'invalid', target: 'second' }
-            if (!constants.alph_rg.test(first)) return { passed: false, error: 'invalid', target: 'first' }
-            if (!constants.email_rg.test(email)) return { passed: false, error: 'invalid', target: 'email' }
-            if (!constants.alphanum_rg.test(university)) return { passed: false, error: 'invalid', target: 'university' }
-            if (!constants.alph_rg.test(domain)) return { passed: false, error: 'invalid', target: 'domain' }
-        }
-
-        return { passed: true }
-    }
-
-    const AuthTest = () => {
-        if (username.length === 0) return { passed: false, error: 'length', target: 'username' }
-        if (passwd.length === 0) return { passed: false, error: 'length', target: 'passwd' }
-        if (passwd_confirm.length === 0) return { passed: false, error: 'length', target: 'passwd_confirm' }
-
-        if (!constants.username_rg.test(username)) return { passed: false, error: 'invalid', target: 'username' }
-
-        if (passwd.length < 8) return { passed: false, error: 'weak', target: 'passwd' }
-        if (passwd_confirm.length < 8) return { passed: false, error: 'weak', target: 'passwd_confirm' }
-
-        if (passwd !== passwd_confirm) return { passed: false, error: 'unmatched', target: 'passwd' }
-
-        return { passed: true }
-    }
-
-    const ProfHandler = () => {
-        setUserType('enseignant')
-        setShowUserType(false)
-        setShowFormProf(true)
-    }
-
-    const StudHandler = () => {
-        setUserType('etudiant')
-        setShowUserType(false)
-        setShowFormStud(true)
-    }
-
-    const FormProfHandler = () => {
-        const test = FormTest(userType)
-        if (test.passed) {
-            setShowFormProf(false)
-            setSwitchAuthInfo(true)
-        } else {
-            alert('Assurez-vous de remplir le formulaire avec des données correcte !')
-        }
-    }
-
-    const FormStudHandler = () => {
-        const test = FormTest(userType)
-        if (test.passed) {
-            setShowFormStud(false)
-            setSwitchAuthInfo(true)
-        } else {
-            alert('Assurez-vous de remplir le formulaire avec des données correcte !')
-        }
-    }
-
-    const AuthInfoHandler = () => {
-        const test = AuthTest()
-
-        if (test.passed) {
-
-            let salt = bcrypt.genSaltSync(3);
-            let hashed_passwd = bcrypt.hashSync(passwd, salt);
-            
-            Axios.post(constants.url + '/signup/user', {
-                first_user: first,
-                second_user: second,
-                username: username,
-                email_user: email,
-                university_user: university,
-                domain_user: domain,
-                type_user: userType,
-                hashed_passwd: hashed_passwd,
-            }).then(res => {
-                if (!res.data.added) {
-                    alert('Erreur')
-                } else {
-                    setSwitchAuthInfo(false)
-                    setSwitchToCon(true)
-                }
-            })
-
-        } else {
-            alert('Assurez-vous de remplir le formulaire avec des données correcte !')
-        }
-    }
-
-    const WhoYouAre = () => {
-
-        return (
-            <div className="fadein  h-full  bg-blue-400  p-14 shadow-2xl" style={{ 'display': showUserType ? 'default' : 'none' }}>
-             
-             
-                
-                     <div className=" bg-white shadow-2xl rounded-lg lg:h-screen sm:h-full" >
-
-                       <div className="lg:grid grid-cols-2 sm:grid grid-rows-2 sm:mb-0">
-
-                           <div className="flex justify-center items-center ">
-                              <img className="sm:mx-auto"src={image} />
-                           </div>
-
-                           <div className="lg:mx-auto lg:py-36 sm:py-4 sm:mx-auto">
-                              
-                                <p className=" sm:mx-auto text-black disable-select md:text-5xl md:text-4xl sm:text-3xl" >Etes vous enseignant ou étudiant ?</p>
-                                <div className="mt-4 p-6 flex  space-x-4 content-center justify-start">
-                                    <Link to="#" className="  border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white mr-2 px-10 " onClick={() => ProfHandler()}>Enseignant</Link>
-                                    <Link to="#" className="border .border-gray-300 bg-blue-500 hover:bg-blue-700 rounded-full py-2 px-4 text-white  px-10" onClick={() => StudHandler()}>Etudiant</Link>
-                                </div> 
-                            </div>    
-                       </div>  
-                    </div>     
-               
-             
-            </div> 
-        )
-    }
-
-    const AccountCreated = () => {
-        return (
-            <div className="fadein" style={{ 'display': switchToCon ? 'default' : 'none' }}>
-                <div style={{ 'height': '200px' }}></div>
-                <p className="black-70 disable-select" style={{ 'fontSize': '2rem' }}>Votre compte Naises a été crée avec succés !</p>
-                <span className="disable-select mr2 orange" style={{ 'fontSize': '10rem' }}>❖</span>
-                <div className="mt6">
-                    <Link to="/connexion" className="NaisesButton br3 shadow-4 disable-select mh3">Connectez-vous</Link>
-                </div>
-            </div>
-        )
-    }
-
-    const tools = {
-        showFormStud,
-        showFormProf,
-        first,
-        second,
-        email,
-        university,
-        domain,
-        username,
-        passwd,
-        passwd_confirm,
-        setFirst,
-        setSecond,
-        setEmail,
-        setUniversity,
-        setDomain,
-        setUsername,
-        setPasswd,
-        setPasswdConfirm,
-        switchToAuthInfo,
-        FormStudHandler,
-        FormProfHandler,
-        AuthInfoHandler,
-    }
+    const history = useHistory()
+    const NIVEAU_ENSEIGNEMENT = [
+        {
+            id: 0,
+            libelle: 'Collége',
+        },
+        {
+            id: 1,
+            libelle: 'Lycée',
+        },
+        {
+            id: 2,
+            libelle: 'Université',
+        },
+    ]
+    const [step, setStep] = React.useState('auth')
 
     return (
-        <div className="tc" >
-
-            <WhoYouAre />
-            <StudForm tools={tools} />
-            <ProfForm tools={tools} />
-            <AuthInfo tools={tools} />
-            <AccountCreated />
-
+        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl'>
+            <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
+                <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
+                    <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
+                        <p
+                            className='pt-14 text-6xl text-gray-100 text-center cursor-pointer'
+                            onClick={() => {
+                                history.push('/')
+                            }}>
+                            UNIVERLINE
+                        </p>
+                        <p className='pt-10 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Restez connecté avec vos collégues et vos cammarade a tout instant.</p>
+                        {step === 'auth' && (
+                            <div>
+                                <p className='pt-40 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Vous possedez déja un compte ?</p>
+                                <div className='mx-auto table mt-5'>
+                                    <Button variant='contained' color='secondary'>
+                                        Se connecter
+                                    </Button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                {step === 'auth' && (
+                    <div className='bg-gray-50 h-full rounded-xl'>
+                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Créer un compte.</p>
+                        <div className='mt-10 xl:mt-20 flex'>
+                            <div className='mx-auto'>
+                                <FaGooglePlusSquare className='inline mx-5 cursor-pointer duration-300 hover:text-green-700' size={60} />
+                                <FaFacebookSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700' size={60} />
+                                <FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={60} />
+                            </div>
+                        </div>
+                        <div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
+                            <div className='my-4'>
+                                <TextField className='w-3/6 shadow' label='Nom complet' variant='outlined' />
+                            </div>
+                            <div className='my-5'>
+                                <TextField className='w-3/6 shadow' label='E-mail' variant='outlined' />
+                            </div>
+                            <div className='my-5'>
+                                <TextField className='w-3/6 shadow' label='Mot de passe' variant='outlined' />
+                            </div>
+                            <div className='my-5'>
+                                <TextField className='w-3/6 shadow' label='Confirmer mot de passe' variant='outlined' />
+                            </div>
+                        </div>
+                        <div className='mx-auto table mt-10'>
+                            <Button
+                                onClick={() => {
+                                    setStep('whoyouare')
+                                }}
+                                className='shadow'
+                                variant='contained'
+                                color='secondary'>
+                                Suivant
+                            </Button>
+                        </div>
+                    </div>
+                )}
+                {step === 'whoyouare' && (
+                    <div className='bg-gray-50 h-full rounded-xl'>
+                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
+                            Etes vous <span className='text-purple-800'>Enseignant</span> ou <span className='text-green-600'>Etudiant </span>?
+                        </p>
+                        <div className='mt-40 text-center h-40'>
+                            <div className='mx-10 my-5 inline-block'>
+                                <Button
+                                    className='h-12 w-48 shadow'
+                                    onClick={() => {
+                                        setStep('formEns')
+                                    }}
+                                    variant='contained'
+                                    color='secondary'>
+                                    Enseignant
+                                </Button>
+                            </div>
+                            <div className='mx-10 my-5 inline-block'>
+                                <Button
+                                    className='h-12 w-48 shadow'
+                                    onClick={() => {
+                                        setStep('formEtu')
+                                    }}
+                                    variant='contained'
+                                    color='secondary'>
+                                    Etudiant
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {step === 'formEns' && (
+                    <div className='bg-gray-50 h-full rounded-xl'>
+                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
+                            Bienvenue cher <span className='text-purple-800'>Enseignant</span>!
+                        </p>
+                        <div className='mt-32 text-center'>
+                            <div className='my-5'>
+                                <Autocomplete
+                                    id='combo-box-demo'
+                                    className='w-3/6 mx-auto shadow'
+                                    options={NIVEAU_ENSEIGNEMENT}
+                                    getOptionLabel={(option) => option.libelle}
+                                    renderInput={(params) => <TextField {...params} label="Niveau d'enseignement" variant='outlined' />}
+                                />
+                            </div>
+                            <div className='my-5'>
+                                <TextField className='w-3/6 shadow' label="Domaine d'enseignement" variant='outlined' />
+                            </div>
+                        </div>
+                        <div className='mx-auto table mt-10'>
+                            <div className='mx-5 inline-block'>
+                                <Button
+                                    onClick={() => {
+                                        setStep('whoyouare')
+                                    }}
+                                    className='shadow'
+                                    variant='contained'
+                                    color='primary'>
+                                    Précédent
+                                </Button>
+                            </div>
+                            <div className='mx-5 inline-block'>
+                                <Button
+                                    onClick={() => {
+                                        setStep('ending')
+                                    }}
+                                    className='shadow'
+                                    variant='contained'
+                                    color='secondary'>
+                                    Finaliser
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {step === 'formEtu' && (
+                    <div className='bg-gray-50 h-full rounded-xl'>
+                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
+                            Bienvenue cher <span className='text-green-600'>Etudiant</span> !
+                        </p>
+                        <div className='mt-32 text-center'>
+                            <div className='my-5'>
+                                <TextField className='w-3/6 shadow' label="Etablissement d'etude" variant='outlined' />
+                            </div>
+                            <div className='my-5'>
+                                <Autocomplete
+                                    id='combo-box-demo'
+                                    className='w-3/6 mx-auto shadow'
+                                    options={NIVEAU_ENSEIGNEMENT}
+                                    getOptionLabel={(option) => option.libelle}
+                                    renderInput={(params) => <TextField {...params} label='Niveau educatif' variant='outlined' />}
+                                />
+                            </div>
+                            <div className='my-5'>
+                                <TextField className='w-3/6 shadow' label='Domaine educatif' variant='outlined' />
+                            </div>
+                        </div>
+                        <div className='mx-auto table mt-10'>
+                            <div className='mx-5 inline-block'>
+                                <Button
+                                    onClick={() => {
+                                        setStep('whoyouare')
+                                    }}
+                                    className='shadow'
+                                    variant='contained'
+                                    color='primary'>
+                                    Précédent
+                                </Button>
+                            </div>
+                            <div className='mx-5 inline-block'>
+                                <Button
+                                    onClick={() => {
+                                        setStep('ending')
+                                    }}
+                                    className='shadow'
+                                    variant='contained'
+                                    color='secondary'>
+                                    Finaliser
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {step === 'ending' && (
+                    <div className='bg-gray-50 h-full rounded-xl'>
+                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
+                            <div className='text-gray-900 flex justify-center'>
+                                <FaFeatherAlt size={200} />
+                            </div>
+                            <div className='mt-12'>
+                                <span className='text-purple-800'>Féliciation </span>votre compte a été créé avec succés.
+                            </div>
+                        </p>
+                        <div className='mx-auto table mt-60'>
+                            <Button
+                                onClick={() => {
+                                    console.log('oulach')
+                                }}
+                                className='shadow'
+                                variant='contained'
+                                color='secondary'>
+                                Se connecter
+                            </Button>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
 
-export default Inscription;
+export default Inscription
