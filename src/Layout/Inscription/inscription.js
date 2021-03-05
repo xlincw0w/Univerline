@@ -65,7 +65,7 @@ const Inscription = () => {
                             </div>
                         </div>
                         <div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
-                            <div className='my-5'>
+                            <div className='my-4'>
                                 <TextField className='w-3/6 shadow' label='Nom complet' variant='outlined' />
                             </div>
                             <div className='my-5'>
