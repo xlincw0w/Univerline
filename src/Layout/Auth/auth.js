@@ -15,6 +15,7 @@ import { FaFeatherAlt } from 'react-icons/fa'
 export default function Auth() {
 
 	const history = useHistory();
+	const [forget, setForget] = React.useState(false)
 
     return (
 
@@ -49,34 +50,82 @@ export default function Auth() {
 					
 				</div>
 			</div>
-                        <div className='bg-gray-50 h-full rounded-xl'>
-                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Connexion</p>
-                        <div className='mt-10 xl:mt-20 flex'>
-                            <div className='mx-auto'>
-                                <FaGooglePlusSquare className='inline mx-5 cursor-pointer duration-300 hover:text-green-700' size={60} />
-                                <FaFacebookSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700' size={60} />
-                                <FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={60} />
-                            </div>
-                        </div>
-                        <div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
-                           
-                            <div className='my-5'>
-                                <TextField className='w-3/6 shadow' label='E-mail' variant='outlined' />
-                            </div>
-                            <div className='my-5'>
-                                <TextField className='w-3/6 shadow' label='Mot de passe' variant='outlined' />
-                            </div>
-                           
-                        </div>
-                        <div className='mx-auto table mt-10'>
-                            <Button
-                                className='shadow'
-                                variant='contained'
-                                color='secondary'>
-                                Se connecter
-                            </Button>
-                        </div>
-                    </div>
+			{!forget && (
+
+<div className='bg-gray-50 h-full rounded-xl'>
+<p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Connexion</p>
+<div className='mt-10 xl:mt-20 flex'>
+	<div className='mx-auto'>
+		<FaGooglePlusSquare className='inline mx-5 cursor-pointer duration-300 hover:text-green-700' size={60} />
+		<FaFacebookSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700' size={60} />
+		<FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={60} />
+	</div>
+</div>
+<div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
+   
+	<div className='my-5'>
+		<TextField className='w-3/6 shadow' label='E-mail' variant='outlined' />
+	</div>
+	<div className='my-5'>
+		<TextField className='w-3/6 shadow' label='Mot de passe' variant='outlined' />
+	</div>
+	
+</div>
+<div className="text-center">
+	<p
+	 onClick={() =>{
+		setForget('true')
+	}}
+	className="hover:text-purple-700 text-xl text-gray-800 cursor-pointer">mot de passe oublié ?</p>
+</div>
+<div className='mx-auto table mt-10'>
+	<Button
+		className='shadow'
+		variant='contained'
+		color='secondary'>
+		Se connecter
+	</Button>
+</div>
+</div>
+
+			)}
+  {/* forget pasword*/}		
+  {forget && (
+
+<div className='bg-gray-50 h-full rounded-xl'>
+<p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Demander un nouveau mot de passe</p>
+<div className='mt-10 xl:mt-20 flex'>
+	<div className='mx-auto'>
+		<FaGooglePlusSquare className='inline mx-5 cursor-pointer duration-300 hover:text-green-700' size={60} />
+		<FaFacebookSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700' size={60} />
+		<FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={60} />
+	</div>
+</div>
+<div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
+   
+	<div className='my-5'>
+		<TextField className='w-3/6 shadow' label='E-mail' variant='outlined' />
+	</div>
+	
+	
+</div>
+
+<div className='mx-auto table mt-10'>
+	<Button
+	    onClick={() =>{
+			setForget('true')
+		}}
+		className='shadow'
+		variant='contained'
+		color='secondary'>
+		Envoyer
+	</Button>
+</div>
+</div>
+
+			)}
+                
+                     
 
 				
        				 
