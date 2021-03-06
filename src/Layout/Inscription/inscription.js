@@ -19,7 +19,6 @@ import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signu
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { FormControl } from '@material-ui/core'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
