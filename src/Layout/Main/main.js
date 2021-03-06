@@ -28,6 +28,7 @@ const Main = () => {
                                                 <Profile />
                                             </Route>
                                             <Route path='/messagerie'>
+                                                <Header />
                                                 <Messagerie />
                                             </Route>
                                             <Route path='/inscription'>

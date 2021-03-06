@@ -4,7 +4,7 @@ const db = require('../database')
 
 router.route('/save_user').post((req, res) => {
     const data = req.body.data
-
+    console.log(data)
     if (data.user_type === 'enseignant') {
         db('enseignant')
             .insert({
@@ -12,7 +12,8 @@ router.route('/save_user').post((req, res) => {
                 nom: data.nom_complet,
                 email: data.email,
                 niveau_enseignement: data.niveau_ens,
-                domaine_enseignement: data.domaine_enseignement,
+                domaine_enseignement: data.domaine_ens,
+                date_inscription: new Date(),
             })
             .then((resp) => {
                 console.log('Added')
@@ -28,9 +29,10 @@ router.route('/save_user').post((req, res) => {
                 id_etu: data.id_etu,
                 nom: data.nom_complet,
                 email: data.email,
-                niveau_educatif: data.niveau_ens,
-                domaine_educatif: data.domaine_enseignement,
+                niveau_educatif: data.niveau_edu,
+                domaine_educatif: data.domaine_edu,
                 etablissement: data.etablissement,
+                date_inscription: new Date(),
             })
             .then((resp) => {
                 console.log('Added')
