@@ -1,9 +1,12 @@
 div {
     overflow-y: hidden;
 }
-
 .bordure {
     border: 1px solid rgb(214, 214, 214);
+}
+
+.over {
+    overflow-y: auto;
 }
 .myAvatar {
     display: flex;
@@ -79,6 +82,26 @@ div {
     padding-right: 5px;
 }
 
+.usersInput {
+    border-top-left-radius: 20px;
+    text-align: center;
+    width: 80%;
+    border-bottom-left-radius: 20px;
+
+    height: 40px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+}
+.usersButton {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 40px;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    padding-right: 5px;
+}
 @media (max-width: 1100px) {
     .entete3 > h1 {
         font-size: 15px;

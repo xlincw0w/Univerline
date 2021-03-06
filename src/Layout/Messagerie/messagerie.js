@@ -4,11 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import SendIcon from '@material-ui/icons/Send';
 import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
 import Switch from '@material-ui/core/Switch'
-import img from './1.jpg'
-import img4 from './4.jpg'
+import img from './img/1.jpg'
+import img2 from './img/2.jpg'
+import img3 from './img/3.jpg'
+import img4 from './img/4.jpg'
 import Grid from '@material-ui/core/Grid';
+import Users from './users'
+
 
 import "./messagerie.css"
 
@@ -31,10 +34,54 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Messagerie() {
+
+
+  const users = {
+    utilisateurs: [
+      {
+        FirstName: 'Naim',
+        LastName: 'Bessaha',
+        Image: img4,
+        Statu: 'Etudiant',
+
+      }, {
+        FirstName: 'Malik',
+        LastName: 'Si-Mohamed',
+        Image: img3,
+        Statu: 'Professeur',
+      }, {
+        FirstName: 'Franck',
+        LastName: 'Lampard',
+        Image: img2,
+        Statu: 'Etudiant',
+      }
+
+    ]
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const classes = useStyles();
   const [switch1, setswitch1] = useState(true);
   const [alo, setalo] = useState(6);
- 
+  const [FirstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
+  const [Statu, setStatu] = useState('')
+  const [Image, setImage] = useState();
 
 
 
@@ -52,7 +99,12 @@ export default function Messagerie() {
 
 
   }
-
+  const vava = (user) => {
+    setFirstName(user.FirstName)
+    setLastName(user.LastName)
+    setImage(user.Image)
+    setStatu(user.Statu)
+  }
 
 
   return (
@@ -66,15 +118,16 @@ export default function Messagerie() {
 
         <Grid container className="bordure" xs={3} style={{ height: "90vh" }}>
           <Grid container xs={12} className="bordure" style={{ height: "30%" }}>
-            <Grid container className="" xs={12} >
+            <Grid container xs={12} >
               <Grid className='myAvatar shadow-lg'>
                 <Avatar alt="Reseau social" src={img} className={classes.large} />
                 <h1> Ma Messagerie</h1>
               </Grid>
               <Grid xs={12} className="form1" >
-                <form>
+                <form style={{ display: 'flex' }}>
 
-                  <input style={{ textAlign: "center", width: "90%", height: "40px", borderRadius: "50px", border: "1px solid grey", }} placeholder="Recherche contact..." />
+                  <input className='usersInput' placeholder="Recherche contact..." />
+                  <button className='usersButton' > <SearchIcon /></button>
 
                 </form>
               </Grid>
@@ -84,14 +137,16 @@ export default function Messagerie() {
 
 
           </Grid>
-          <Grid container xs={12} className="bordure" style={{ height: "70%" }}>
-            <Grid className="flex" xs={12} style={{ margin: "10px", background: "rgb(209, 209, 209)", padding: "5px", borderRadius: "10px", height: "10vh" }}>
-              <Avatar alt="Reseau social" src={img4} className={classes.large} />
-              <Grid style={{ marginLeft: "10px" }} >
-                <p>Bessaha Naim</p>
-                <p>Professeur ou etudiant</p>
-              </Grid>
-            </Grid>
+          <Grid xs={12} className="bordure over" style={{ height: "70%" }}>
+
+
+            {
+              users.utilisateurs.map(user => (
+
+                <Users user={user} onclick={vava} />
+
+              ))
+            }
 
           </Grid>
 
@@ -110,13 +165,20 @@ export default function Messagerie() {
            entete
            */}
           <Grid className="flex shadow-lg" style={{ height: "15%" }} xs={12}>
+
+
             <Grid xs={9} className="entetinformation flex">
-              <Avatar alt="Neseau social" src={img4} className={classes.xlarge} />
+
+              <Avatar alt="Neseau social" src={Image} className={classes.xlarge} />
               <div className='block infpersonel'>
-                <p>Bessaha</p>
-                <p>Naim</p>
+                <p> {FirstName} </p>
+                <p>{LastName}</p>
               </div>
+
+
             </Grid>
+
+
             <Grid xs={3} style={{ textAlign: "right", marginTop: "20px" }}>
               <Switch inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
 
@@ -130,7 +192,8 @@ export default function Messagerie() {
 
 
              */}
-          <Grid className="shadow-lg" xs={12} style={{ height: "70%" }}>
+          <Grid xs={12} className="shadow-lg" style={{ height: "70%" }}>
+
 
 
           </Grid>
@@ -167,9 +230,12 @@ export default function Messagerie() {
 
         <Grid container className="bordure" xs={3}>
           <Grid className="shadow-lg entete3" xs={12} style={{ height: "40%" }}>
-            <Avatar alt="Neseau social" src={img4} className={classes.xxlarge} />
-            <h1> <a href="#" className="a"> Bessaha Naim</a></h1>
-            <p>Etudiant ou Professeur</p>
+            {
+
+            }
+            <Avatar alt="Neseau social" src={Image} className={classes.xxlarge} />
+            <h1> <a href="#" className="a">{FirstName} {LastName}</a></h1>
+            <p>{Statu}</p>
           </Grid>
           <Grid className="" xs={12} style={{ height: "60%" }}>
 
