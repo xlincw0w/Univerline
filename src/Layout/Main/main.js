@@ -18,31 +18,49 @@ const Main = () => {
             <Router>
                 <div style={{ height: 'auto' }}>
                     <Switch>
-                        <Route path='/dashboard'>
-                            <Dashbaord />
-                        </Route>
-                        <Route path='/profile'>
-                            <Header />
-                            <Profile />
-                        </Route>
-                        <Route path='/messagerie'>
-                            <Header />
-                            <Messagerie/>
-                        </Route>
-                        <Route path='/auth'>
-                            <Header />
-                            <Auth />
-                        </Route>
-                        <Route path='/inscription'>
-                            <Header />
-                            <Inscription />
-                        </Route>
-                        <Route exact path='/'>
-                            <Home />
-                        </Route>
-                        <Route>
-                            <Erreur />
-                        </Route>
+                        <FirebaseAuthConsumer>
+                            {({ isSignedIn, user, providerId }) => {
+                                if (isSignedIn) {
+                                    return (
+                                        <React.Fragment>
+                                            <Route path='/profile'>
+                                                <Header />
+                                                <Profile />
+                                            </Route>
+                                            <Route path='/messagerie'>
+                                                <Header />
+                                                <Messagerie />
+                                            </Route>
+                                            <Route path='/inscription'>
+                                                <Inscription />
+                                            </Route>
+                                            <Route exact path='/'>
+                                                <Header />
+                                                <Dashboard />
+                                                {/* <Footer /> */}
+                                            </Route>
+                                        </React.Fragment>
+                                    )
+                                } else {
+                                    return (
+                                        <React.Fragment>
+                                            <Route path='/auth'>
+                                                <Auth />
+                                            </Route>
+                                            <Route path='/inscription'>
+                                                <Inscription />
+                                            </Route>
+                                            <Route exact path='/'>
+                                                <Home />
+                                            </Route>
+                                            {/* <Route>
+                                                <Erreur />
+                                            </Route> */}
+                                        </React.Fragment>
+                                    )
+                                }
+                            }}
+                        </FirebaseAuthConsumer>
                     </Switch>
                 </div>
             </Router>
