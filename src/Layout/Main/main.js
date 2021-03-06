@@ -6,17 +6,17 @@ import Auth from '../Auth/auth'
 import Messagerie from '../Messagerie/messagerie'
 import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
-import Dashbaord from '../Dashboard/dashbaord'
+import Dashboard from '../Dashboard/dashboard'
 import Erreur from '../Erreur/erreur'
 import Footer from '../Footer/footer'
-import Profile from '../Profile/profile'
-
+import Profile from '../Profile/IndexProfile'
+import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
 
 const Main = () => {
     return (
         <div className='font-openSans'>
             <Router>
-                <div style={{ minHeight: '2000px', height: 'auto' }}>
+                <div style={{ height: 'auto' }}>
                     <Switch>
                         <Route path='/dashboard'>
                             <Dashbaord />
@@ -45,7 +45,6 @@ const Main = () => {
                         </Route>
                     </Switch>
                 </div>
-                <Footer />
             </Router>
         </div>
     )
