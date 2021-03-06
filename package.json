@@ -54,6 +54,7 @@
         "@types/classnames": "^2.2.11",
         "autoprefixer": "^10.1.0",
         "babel-loader": "^8.2.2",
+        "babel-polyfill": "^6.26.0",
         "concurrently": "^5.3.0",
         "cors": "^2.8.5",
         "css-loader": "^5.0.1",
