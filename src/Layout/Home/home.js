@@ -1,5 +1,4 @@
-import React from 'react'
-import Particles from 'react-particles-js'
+import React, { useEffect } from 'react'
 import './Home.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -7,6 +6,8 @@ import img1 from './img/image1.png'
 import img2 from './img/image2.png'
 import img3 from './img/image3.png'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { ResetStateSignup } from '../../store/signup/signupReducer'
 
 AOS.init({
     // Global settings:
@@ -31,6 +32,12 @@ AOS.init({
 
 export default function Home() {
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(ResetStateSignup())
+    }, [])
+
     return (
         <div>
             <div className=' bg-image h-screen bg-cover bg-center  bg-fixed'>
@@ -43,7 +50,11 @@ export default function Home() {
                 </div>
 
                 <div className='flex justify-end p-4'>
-                    <button className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
+                    <button
+                        onClick={() => {
+                            history.push('/auth')
+                        }}
+                        className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
                         Connexion
                     </button>
                 </div>
@@ -72,7 +83,7 @@ export default function Home() {
                 </div>
             </div>
             <div className='grid grid-cols-2 gap-2 font-openSans'>
-                <div data-aos='fade-right' data-aos-duration='1500'>
+                <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img1} alt='img1' />
                 </div>
                 <div className='flex flex-col mt-20  items-center justify-center'>
@@ -86,7 +97,11 @@ export default function Home() {
                         <p className='text-center'>simple et plus rapide </p>
                     </div>
                     <div>
-                        <button className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
+                        <button
+                            onClick={() => {
+                                history.push('/inscription')
+                            }}
+                            className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
                             Rejoignez-nous
                         </button>
                     </div>
@@ -102,16 +117,20 @@ export default function Home() {
                         <p className='text-center'> de vos enseignant</p>
                     </div>
                     <div>
-                        <button className='mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button
+                            onClick={() => {
+                                history.push('/inscription')
+                            }}
+                            className='mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
                 </div>
-                <div data-aos='fade-left' data-aos-duration='1500' className='flex justify-end'>
+                <div className='flex justify-center' data-aos='fade-left' data-aos-duration='1500'>
                     <img src={img2} alt='img2' />
                 </div>
 
-                <div data-aos='fade-right' data-aos-duration='1500'>
+                <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                     <img src={img3} alt='img3' />
                 </div>
                 <div className='flex flex-col mt-18 items-center justify-center'>
@@ -124,7 +143,11 @@ export default function Home() {
                         <p className='text-center'> dont vous avez besoin</p>
                     </div>
                     <div>
-                        <button className=' mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                        <button
+                            onClick={() => {
+                                history.push('/inscription')
+                            }}
+                            className=' mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
