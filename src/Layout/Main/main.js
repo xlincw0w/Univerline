@@ -35,7 +35,7 @@ const Main = () => {
                                                 <Inscription />
                                             </Route>
                                             <Route exact path='/'>
-                                                <Header />
+                                                {/* <Header /> */}
                                                 <Dashboard />
                                                 {/* <Footer /> */}
                                             </Route>
