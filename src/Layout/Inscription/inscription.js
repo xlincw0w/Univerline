@@ -41,7 +41,7 @@ const Inscription = (props) => {
                 UpdateSignupUser({
                     ...user,
                     id: userCred.uid,
-                    nom_complet: userCred.displayName,
+                    nom_complet: userCred.displayName || user.nom_complet,
                     email: userCred.email,
                     isNewUser: false,
                 })
