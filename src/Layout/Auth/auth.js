@@ -4,18 +4,56 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 
 import { useHistory } from 'react-router-dom'
+import firebase from 'firebase/app'
 
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FaGooglePlusSquare } from 'react-icons/fa'
 import { FaTwitterSquare } from 'react-icons/fa'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { Backdrop } from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 import { FaFeatherAlt } from 'react-icons/fa'
+import { SetLoader } from '../../store/auth/auth'
 
 export default function Auth() {
     const history = useHistory()
+    const dispatch = useDispatch()
+    const loader = useSelector((state) => state.AuthReducer.loader)
+
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
+
+    const handleAuth = (e) => {
+        e.preventDefault()
+        dispatch(SetLoader(true))
+
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((userCred) => {
+                console.log(userCred)
+                // firebase.auth().currentUser.sendEmailVerification()
+                // dispatch(
+                //     UpdateSignupUser({
+                //         ...user,
+                //         id: userCred.user.uid,
+                //         nom_complet: user.nom_complet,
+                //         email: userCred.user.email,
+                //         isNewUser: userCred.additionalUserInfo.isNewUser,
+                //     })
+                // )
+                dispatch(SetLoader(false))
+                history.push('/')
+            })
+            .catch((err) => {
+                dispatch(SetLoader(false))
+            })
+    }
 
     return (
-        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl'>
+        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -44,7 +82,10 @@ export default function Auth() {
                     </div>
                 </div>
                 <div className='bg-gray-50 h-full rounded-xl'>
-                    <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Connexion</p>
+                    <Backdrop open={loader} style={{ zIndex: 10 }}>
+                        <CircularProgress color='inherit' />
+                    </Backdrop>
+                    <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Authentifiez-vous</p>
                     <div className='mt-10 xl:mt-20 flex'>
                         <div className='mx-auto'>
                             <FaGooglePlusSquare
@@ -53,28 +94,65 @@ export default function Auth() {
                                     firebase
                                         .auth()
                                         .signInWithPopup(googleAuthProvider)
-                                        .then((userCred) => {})
+                                        .then((userCred) => {
+                                            history.push('/')
+                                        })
+                                        .catch((err) => {})
                                 }}
                                 className='inline mx-5 cursor-pointer duration-300 hover:text-green-700'
                                 size={60}
                             />
-                            <FaFacebookSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700' size={60} />
+                            <FaFacebookSquare
+                                onClick={() => {
+                                    dispatch(SetLoader(true))
+                                    const facebookAuthProvider = new firebase.auth.FacebookAuthProvider()
+                                    firebase
+                                        .auth()
+                                        .signInWithPopup(facebookAuthProvider)
+                                        .then((userCred) => {
+                                            history.push('/')
+                                        })
+                                        .catch((err) => {})
+                                }}
+                                className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700'
+                                size={60}
+                            />
                             <FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={60} />
                         </div>
                     </div>
-                    <div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
-                        <div className='my-5'>
-                            <TextField className='w-3/6 shadow' label='E-mail' variant='outlined' />
+                    <form className='w-full' onSubmit={handleAuth}>
+                        <div className='mt-5 2xl:mt-10 text-center'>
+                            <div className='my-5'>
+                                <TextField
+                                    required
+                                    onChange={(e) => {
+                                        setEmail(e.target.value)
+                                    }}
+                                    type='email'
+                                    className='w-3/6 shadow'
+                                    label='E-mail'
+                                    variant='outlined'
+                                />
+                            </div>
+                            <div className='my-5'>
+                                <TextField
+                                    required
+                                    onChange={(e) => {
+                                        setPassword(e.target.value)
+                                    }}
+                                    className='w-3/6 shadow'
+                                    type='password'
+                                    label='Mot de passe'
+                                    variant='outlined'
+                                />
+                            </div>
                         </div>
-                        <div className='my-5'>
-                            <TextField className='w-3/6 shadow' label='Mot de passe' variant='outlined' />
+                        <div className='mx-auto table mt-5 2xl:mt-10'>
+                            <Button type='submit' className='shadow' variant='contained' color='secondary'>
+                                Se connecter
+                            </Button>
                         </div>
-                    </div>
-                    <div className='mx-auto table mt-10'>
-                        <Button className='shadow' variant='contained' color='secondary'>
-                            Se connecter
-                        </Button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

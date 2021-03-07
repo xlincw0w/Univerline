@@ -32,6 +32,7 @@ const Main = () => {
                                                 <Messagerie />
                                             </Route>
                                             <Route path='/inscription'>
+                                                <Header />
                                                 <Inscription />
                                             </Route>
                                             <Route exact path='/'>
@@ -45,10 +46,18 @@ const Main = () => {
                                     return (
                                         <React.Fragment>
                                             <Route path='/auth'>
+                                                <Header />
                                                 <Auth />
                                             </Route>
                                             <Route path='/inscription'>
+                                                <Header />
                                                 <Inscription />
+                                            </Route>
+                                            <Route path='/profile'>
+                                                <Profile />
+                                            </Route>
+                                            <Route path='/messagerie'>
+                                                <Messagerie />
                                             </Route>
                                             <Route exact path='/'>
                                                 <Home />
