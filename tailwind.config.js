@@ -17,6 +17,9 @@ module.exports = {
             8: '8px',
         },
         extend: {
+            colors: {
+                'regal-blue': '#101940',
+            },
             backgroundImage: (theme) => ({
                 image: "url('../Layout/Home/img/bg.png')",
                 feather: "url('../Assets/Images/bgfeather1.jpg')",

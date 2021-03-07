@@ -6,7 +6,7 @@ import Auth from '../Auth/auth'
 import Messagerie from '../Messagerie/messagerie'
 import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
-import Dashboard from '../Dashboard/dashboard'
+import Dashboard from '../Dashboard/Dashboard'
 import Erreur from '../Erreur/erreur'
 import Footer from '../Footer/footer'
 import Profile from '../Profile/IndexProfile'
@@ -51,8 +51,9 @@ const Main = () => {
                                                 <Inscription />
                                             </Route>
                                             <Route exact path='/'>
-                                                <Header />
+                                                {/* <Header /> */}
                                                 <Dashboard />
+
                                                 {/* <Footer /> */}
                                             </Route>
                                         </React.Fragment>
