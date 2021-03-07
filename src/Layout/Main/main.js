@@ -49,6 +49,12 @@ const Main = () => {
                                             <Route path='/inscription'>
                                                 <Inscription />
                                             </Route>
+                                            <Route path='/profile'>
+                                                <Profile />
+                                            </Route>
+                                            <Route path='/messagerie'>
+                                                <Messagerie />
+                                            </Route>
                                             <Route exact path='/'>
                                                 <Home />
                                             </Route>
