@@ -149,7 +149,7 @@ export default function Messagerie() {
              */}
                     <Grid className='shadow-lg' xs={12} style={{ height: '15%' }}>
                         <form className='form'>
-                            <input placeholder='Recherche contacjjjt...' />
+                            <input placeholder='Votre réponse' />
 
                             <button type='submit'>
                                 <SendIcon />

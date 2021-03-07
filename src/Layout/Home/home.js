@@ -40,8 +40,8 @@ export default function Home() {
 
     return (
         <div>
-            <div className=' bg-image h-screen bg-cover bg-center  bg-fixed'>
-                <div class='custom-shape-divider-bottom-1614867478'>
+            <div className='lg:bg-image h-screen bg-cover bg-center bg-fixed sm:bg-regal-blue '>
+                <div class='custom-shape-divider-bottom-1614867478 '>
                     <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
                         <path
                             d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
@@ -54,15 +54,15 @@ export default function Home() {
                         onClick={() => {
                             history.push('/auth')
                         }}
-                        className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
+                        className=' focus:outline-none transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110  text-xl rounded-full p-4 px-8 py-2 '>
                         Connexion
                     </button>
                 </div>
-                <div className='p-2 pt-20'>
-                    <div className='  border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-2/5'>
-                        <ul className='font-medium font-openSans  text-center'>
+                <div className='p-2 pt-20 '>
+                    <div className=' border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-2/5  '>
+                        <ul className='font-medium font-openSans text-center '>
                             <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
-                                <span className='text-5xl font-bebasNeue'>R</span>EJOINEZ UNIVERLINE
+                                <span className='text-5xl font-bebasNeue'>R</span>EJOIGNEZ UNIVERLINE
                             </li>
                             <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
 
@@ -75,7 +75,7 @@ export default function Home() {
                                 onClick={() => {
                                     history.push('/inscription')
                                 }}
-                                className='transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-xl rounded-full mx-auto '>
+                                className=' focus:outline-none transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-xl rounded-full mx-auto '>
                                 Rejoignez-nous !
                             </button>
                         </div>
@@ -101,7 +101,7 @@ export default function Home() {
                             onClick={() => {
                                 history.push('/inscription')
                             }}
-                            className='mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
+                            className='focus:outline-none mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full '>
                             Rejoignez-nous
                         </button>
                     </div>
@@ -121,7 +121,7 @@ export default function Home() {
                             onClick={() => {
                                 history.push('/inscription')
                             }}
-                            className='mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                            className=' focus:outline-none mt-16 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
@@ -147,7 +147,7 @@ export default function Home() {
                             onClick={() => {
                                 history.push('/inscription')
                             }}
-                            className=' mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                            className=' focus:outline-none mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                             Rejoignez-nous
                         </button>
                     </div>
