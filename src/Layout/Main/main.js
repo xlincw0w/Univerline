@@ -20,7 +20,22 @@ const Main = () => {
                     <Switch>
                         <FirebaseAuthConsumer>
                             {({ isSignedIn, user, providerId }) => {
+                                let emailVerified = false
+
+                                if (user !== null) {
+                                    emailVerified = user.emailVerified
+                                }
+
                                 if (isSignedIn) {
+                                    return (
+                                        <React.Fragment>
+                                            <Route path='/*'>
+                                                <Header />
+                                                <Inscription step={'confirmemail'} />
+                                            </Route>
+                                        </React.Fragment>
+                                    )
+                                } else if (isSignedIn && emailVerified) {
                                     return (
                                         <React.Fragment>
                                             <Route path='/profile'>

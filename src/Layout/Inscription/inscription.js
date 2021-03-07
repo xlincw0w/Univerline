@@ -26,12 +26,29 @@ import Axios from 'axios'
 
 import cx from 'classnames'
 
-const Inscription = () => {
+const Inscription = (props) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.SignUpReducer.user)
     const step = useSelector((state) => state.SignUpReducer.step)
     const loader = useSelector((state) => state.SignUpReducer.loader)
+
+    React.useEffect(() => {
+        if (props.step === 'confirmemail') {
+            dispatch(UpdateSignupStep('confirmemail'))
+            let userCred = firebase.auth().currentUser
+            console.log(userCred.email)
+            dispatch(
+                UpdateSignupUser({
+                    ...user,
+                    id: userCred.uid,
+                    nom_complet: userCred.displayName,
+                    email: userCred.email,
+                    isNewUser: false,
+                })
+            )
+        }
+    }, [])
 
     const NIVEAU_ENSEIGNEMENT = [
         {
@@ -48,7 +65,7 @@ const Inscription = () => {
         },
     ]
 
-    const handleAuth = (e) => {
+    const handleAuth = async (e) => {
         e.preventDefault()
         dispatch(SetLoader(true))
         let valid_data = { valid: true, reason: null }
@@ -144,8 +161,8 @@ const Inscription = () => {
 
     return (
         <FirebaseAuthConsumer>
-            {({ isSignedIn, userData, providerId }) => {
-                if (isSignedIn && !user.isNewUser) {
+            {(userCred) => {
+                if (userCred.isSignedIn && !user.isNewUser && userCred.emailVerified) {
                     return (
                         <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
