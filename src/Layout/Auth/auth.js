@@ -53,7 +53,7 @@ export default function Auth() {
     }
 
     return (
-        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl'>
+        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -85,7 +85,7 @@ export default function Auth() {
                     <Backdrop open={loader} style={{ zIndex: 10 }}>
                         <CircularProgress color='inherit' />
                     </Backdrop>
-                    <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Connexion</p>
+                    <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Authentifiez-vous</p>
                     <div className='mt-10 xl:mt-20 flex'>
                         <div className='mx-auto'>
                             <FaGooglePlusSquare
@@ -121,7 +121,7 @@ export default function Auth() {
                         </div>
                     </div>
                     <form className='w-full' onSubmit={handleAuth}>
-                        <div className='mt-4 lg:mt-10 xl:mt-20 text-center'>
+                        <div className='mt-5 2xl:mt-10 text-center'>
                             <div className='my-5'>
                                 <TextField
                                     required
@@ -147,7 +147,7 @@ export default function Auth() {
                                 />
                             </div>
                         </div>
-                        <div className='mx-auto table mt-10'>
+                        <div className='mx-auto table mt-5 2xl:mt-10'>
                             <Button type='submit' className='shadow' variant='contained' color='secondary'>
                                 Se connecter
                             </Button>
