@@ -37,7 +37,6 @@ const Inscription = (props) => {
         if (props.step === 'confirmemail') {
             dispatch(UpdateSignupStep('confirmemail'))
             let userCred = firebase.auth().currentUser
-            console.log(userCred.email)
             dispatch(
                 UpdateSignupUser({
                     ...user,
@@ -145,18 +144,23 @@ const Inscription = (props) => {
             })
     }
 
-    const checkVerification = async () => {
+    const checkVerification = () => {
         dispatch(SetLoader(true))
 
-        await firebase.auth().signOut()
-        await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-
-        if (firebase.auth().currentUser.emailVerified) {
-            dispatch(UpdateSignupStep('whoyouare'))
-            dispatch(SetLoader(false))
-        } else {
-            dispatch(SetLoader(false))
-        }
+        firebase
+            .auth()
+            .currentUser.reload()
+            .then(() => {
+                if (firebase.auth().currentUser.emailVerified) {
+                    dispatch(UpdateSignupStep('whoyouare'))
+                    dispatch(SetLoader(false))
+                } else {
+                    dispatch(SetLoader(false))
+                }
+            })
+            .catch((err) => {
+                dispatch(SetLoader(false))
+            })
     }
 
     return (
@@ -404,10 +408,17 @@ const Inscription = (props) => {
                                         <div className='mx-auto table mt-3 2xl:mt-10'>
                                             <div className='mx-5 my-5 inline-block'>
                                                 <Button
-                                                    onClick={async () => {
+                                                    onClick={() => {
                                                         dispatch(SetLoader(true))
-                                                        await firebase.auth().currentUser.sendEmailVerification()
-                                                        dispatch(SetLoader(false))
+                                                        firebase
+                                                            .auth()
+                                                            .currentUser.sendEmailVerification()
+                                                            .then(() => {
+                                                                dispatch(SetLoader(false))
+                                                            })
+                                                            .catch((err) => {
+                                                                dispatch(SetLoader(false))
+                                                            })
                                                     }}
                                                     className='shadow'
                                                     variant='contained'
