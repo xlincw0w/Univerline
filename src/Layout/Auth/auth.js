@@ -15,12 +15,14 @@ import { Backdrop } from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { FaFeatherAlt } from 'react-icons/fa'
-import { SetLoader } from '../../store/auth/auth'
+import { SetLoader, SetFailedAuth } from '../../store/auth/auth'
+import cx from 'classnames'
 
 export default function Auth() {
     const history = useHistory()
     const dispatch = useDispatch()
     const loader = useSelector((state) => state.AuthReducer.loader)
+    const failedAuth = useSelector((state) => state.AuthReducer.failedAuth)
 
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
@@ -49,6 +51,10 @@ export default function Auth() {
             })
             .catch((err) => {
                 dispatch(SetLoader(false))
+                dispatch(SetFailedAuth(true))
+                setTimeout(() => {
+                    dispatch(SetFailedAuth(false))
+                }, 3000)
             })
     }
 
@@ -86,7 +92,7 @@ export default function Auth() {
                         <CircularProgress color='inherit' />
                     </Backdrop>
                     <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Authentifiez-vous</p>
-                    <div className='mt-10 xl:mt-20 flex'>
+                    <div className='mt-5 2xl:mt-20 flex'>
                         <div className='mx-auto'>
                             <FaGooglePlusSquare
                                 onClick={() => {
@@ -145,6 +151,9 @@ export default function Auth() {
                                     label='Mot de passe'
                                     variant='outlined'
                                 />
+                            </div>
+                            <div>
+                                <p className={cx('text-red-400 text-xl', { hidden: !failedAuth })}>Authentification echouée</p>
                             </div>
                         </div>
                         <div className='mx-auto table mt-5 2xl:mt-10'>

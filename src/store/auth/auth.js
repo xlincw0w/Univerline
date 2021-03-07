@@ -14,12 +14,14 @@ const initState = {
         isNewUser: false,
     },
 
+    failedAuth: false,
     loader: false,
 }
 
 const UPDATE_SIGNUP_USER = 'UPDATE_SIGNUP_USER'
 const RESET_STATE = 'RESET_STATE'
 const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
+const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
 
 // export const UpdateSignupUser = (payload) => ({
 //     type: UPDATE_SIGNUP_USER,
@@ -37,6 +39,11 @@ const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
 
 export const SetLoader = (payload) => ({
     type: SET_LOADER_AUTH,
+    payload,
+})
+
+export const SetFailedAuth = (payload) => ({
+    type: SET_FAILED_AUTH,
     payload,
 })
 
@@ -65,6 +72,12 @@ const AuthReducer = (state = initState, action) => {
             return {
                 ...state,
                 loader: action.payload,
+            }
+
+        case SET_FAILED_AUTH:
+            return {
+                ...state,
+                failedAuth: action.payload,
             }
     }
 
