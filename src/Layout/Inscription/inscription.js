@@ -24,6 +24,8 @@ import Icon from '@material-ui/core/Icon'
 import { constants } from '../../constants'
 import Axios from 'axios'
 
+import cx from 'classnames'
+
 const Inscription = () => {
     const history = useHistory()
     const dispatch = useDispatch()
@@ -52,6 +54,7 @@ const Inscription = () => {
         let valid_data = { valid: true, reason: null }
 
         if (!constants.email_rg.test(user.email)) valid_data = { valid: false, reason: 'email' }
+        if (user.password.length < 6) valid_data = { valid: false, reason: 'weak_password' }
         if (user.password !== user.confirmed_password) valid_data = { valid: false, reason: 'password_not_equal' }
 
         if (valid_data.valid) {
@@ -333,6 +336,8 @@ const Inscription = () => {
                                                         label='Mot de passe'
                                                         type='password'
                                                         variant='outlined'
+                                                        error={user.password.length < 6 && user.password.length > 0}
+                                                        helperText={user.password.length < 6 && user.password.length > 0 ? 'Très faible' : ''}
                                                         required
                                                     />
                                                 </div>
@@ -345,6 +350,12 @@ const Inscription = () => {
                                                         label='Confirmer mot de passe'
                                                         type='password'
                                                         variant='outlined'
+                                                        error={user.password !== user.confirmed_password && user.confirmed_password.length > 0 && user.password.length > 0}
+                                                        helperText={
+                                                            user.password !== user.confirmed_password && user.confirmed_password.length > 0 && user.password.length > 0
+                                                                ? 'Non identique'
+                                                                : ''
+                                                        }
                                                         required
                                                     />
                                                 </div>
