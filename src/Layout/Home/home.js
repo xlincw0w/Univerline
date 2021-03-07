@@ -1,5 +1,4 @@
-import React from 'react'
-import Particles from 'react-particles-js'
+import React, { useEffect } from 'react'
 import './Home.css'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -7,6 +6,8 @@ import img1 from './img/image1.png'
 import img2 from './img/image2.png'
 import img3 from './img/image3.png'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { ResetStateSignup } from '../../store/signup/signupReducer'
 
 AOS.init({
     // Global settings:
@@ -31,6 +32,12 @@ AOS.init({
 
 export default function Home() {
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(ResetStateSignup())
+    }, [])
+
     return (
         <div>
             <div className=' bg-image h-screen bg-cover bg-center  bg-fixed'>

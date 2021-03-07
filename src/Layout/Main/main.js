@@ -20,7 +20,6 @@ const Main = () => {
                     <Switch>
                         <FirebaseAuthConsumer>
                             {({ isSignedIn, user, providerId }) => {
-                                console.log(user)
                                 if (isSignedIn) {
                                     return (
                                         <React.Fragment>
@@ -29,6 +28,7 @@ const Main = () => {
                                                 <Profile />
                                             </Route>
                                             <Route path='/messagerie'>
+                                                <Header />
                                                 <Messagerie />
                                             </Route>
                                             <Route path='/inscription'>
@@ -45,7 +45,6 @@ const Main = () => {
                                     return (
                                         <React.Fragment>
                                             <Route path='/auth'>
-                                                <Header />
                                                 <Auth />
                                             </Route>
                                             <Route path='/inscription'>

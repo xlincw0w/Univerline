@@ -3,9 +3,7 @@ const path = require('path')
 
 module.exports = {
     mode: 'production',
-    entry: {
-        index: './src/index.js',
-    },
+    entry: ['babel-polyfill', './src/index.js'],
 
     output: {
         filename: './js/[contenthash].[name].bundle.js',

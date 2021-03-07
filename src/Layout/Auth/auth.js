@@ -47,7 +47,17 @@ export default function Auth() {
                     <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Connexion</p>
                     <div className='mt-10 xl:mt-20 flex'>
                         <div className='mx-auto'>
-                            <FaGooglePlusSquare className='inline mx-5 cursor-pointer duration-300 hover:text-green-700' size={60} />
+                            <FaGooglePlusSquare
+                                onClick={() => {
+                                    const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+                                    firebase
+                                        .auth()
+                                        .signInWithPopup(googleAuthProvider)
+                                        .then((userCred) => {})
+                                }}
+                                className='inline mx-5 cursor-pointer duration-300 hover:text-green-700'
+                                size={60}
+                            />
                             <FaFacebookSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700' size={60} />
                             <FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={60} />
                         </div>
