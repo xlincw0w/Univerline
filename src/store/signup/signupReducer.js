@@ -14,11 +14,13 @@ const initState = {
         isNewUser: false,
     },
     step: 'auth',
+    loader: false,
 }
 
 const UPDATE_SIGNUP_USER = 'UPDATE_SIGNUP_USER'
 const UPDATE_SIGNUP_STEP = 'UPDATE_SIGNUP_STEP'
 const RESET_STATE = 'RESET_STATE'
+const SET_LOADER = 'SET_LOADER'
 
 export const UpdateSignupUser = (payload) => ({
     type: UPDATE_SIGNUP_USER,
@@ -32,6 +34,11 @@ export const UpdateSignupStep = (payload) => ({
 
 export const ResetStateSignup = () => ({
     type: RESET_STATE,
+})
+
+export const SetLoader = (payload) => ({
+    type: SET_LOADER,
+    payload,
 })
 
 const SignUpReducer = (state = initState, action) => {
@@ -53,6 +60,12 @@ const SignUpReducer = (state = initState, action) => {
                 ...state,
                 step: 'auth',
                 user: initState.user,
+            }
+
+        case SET_LOADER:
+            return {
+                ...state,
+                loader: action.payload,
             }
     }
 
