@@ -26,7 +26,7 @@ const Main = () => {
                                     emailVerified = user.emailVerified
                                 }
 
-                                if (isSignedIn) {
+                                if (isSignedIn && !emailVerified) {
                                     return (
                                         <React.Fragment>
                                             <Route path='/*'>
@@ -51,9 +51,8 @@ const Main = () => {
                                                 <Inscription />
                                             </Route>
                                             <Route exact path='/'>
-                                                {/* <Header /> */}
+                                                <Header />
                                                 <Dashboard />
-
                                                 {/* <Footer /> */}
                                             </Route>
                                         </React.Fragment>
