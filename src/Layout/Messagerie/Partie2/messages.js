@@ -1,6 +1,6 @@
 import React from 'react'
-import me from './img/1.jpg'
-import rcv from './img/2.jpg'
+import me from '../img/1.jpg'
+import rcv from '../img/2.jpg'
 export default function messages() {
     return (
         <div className='flex flex-col space-y-4 p-3 '>

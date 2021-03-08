@@ -34,8 +34,8 @@ export default function Users(props) {
         
         
         
-        <Grid  className="flex" xs={12} style={{ margin: "10px", background: "rgb(209, 209, 209)", padding: "5px", borderRadius: "10px", height: "15%" }}>
-            <button style={{width:"100%"}} onClick={() => onclick(user)}>    
+        <Grid  className="flex" xs={12} className='util'>
+            <button style={{width:"100%"}} onClick={() => onclick(user)} className='outline-none focus:outline-none'>    
         
             <Grid className="flex" >
         
