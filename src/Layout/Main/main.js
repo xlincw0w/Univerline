@@ -11,6 +11,7 @@ import Erreur from '../Erreur/erreur'
 import Footer from '../Footer/footer'
 import Profile from '../Profile/profile'
 
+
 const Main = () => {
     return (
         <div className='font-openSans'>

@@ -1,0 +1,188 @@
+.contenaire > div {
+    height: 90vh;
+}
+.contenaire {
+    display: flex;
+    border: 1px solid;
+    /* text-align: center; */
+}
+h1 {
+    font-size: 1000px;
+    font-weight: bold;
+}
+
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+div gauche
+*/
+.div1 {
+    width: 100vh;
+    display: block;
+    border-right: 1px solid rgb(214, 214, 214);
+}
+.haut {
+    height: 25vh;
+    text-align: center;
+}
+.haut > div {
+    height: 10vh;
+}
+.myAvatar {
+    margin: 25px;
+}
+.maPhoto {
+    padding: 25px;
+}
+.myAvatar > h1 {
+    margin: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.btncntct {
+    height: 1.3cm;
+}
+.bas {
+    height: 50vh;
+}
+/* 
+
+
+
+
+
+
+
+
+
+div milieu
+*/
+
+.div2 {
+    width: 200vh;
+    display: block;
+    border-right: 1px solid rgb(214, 214, 214);
+    text-align: center;
+}
+
+.entete {
+    height: 15vh;
+}
+.enteteInformation {
+    width: 50%;
+    margin: 10px;
+}
+.infpersonel {
+    text-align: left;
+    margin: 12px;
+}
+.enteteButton {
+    width: 50%;
+    text-align: right;
+    margin-top: 0.7cm;
+}
+
+/* 
+
+
+
+
+
+
+
+*/
+
+.message {
+    height: 60vh;
+}
+/*
+
+
+
+
+
+
+*/
+.envoie {
+    height: 20vh;
+    border-top: 1px solid rgb(209, 209, 209);
+}
+.form {
+    padding-top: 10px;
+    margin-top: 20px;
+}
+.input {
+    border: 1px solid gray;
+    border-top-left-radius: 0.2cm;
+    border-bottom-left-radius: 0.2cm;
+    width: 80vh;
+    height: 7vh;
+    background-color: azure;
+}
+.form > button {
+    border-top-right-radius: 0.2cm;
+    border-bottom-right-radius: 0.2cm;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 6.9vh;
+    cursor: pointer;
+}
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+.div3 {
+    width: 100vh;
+    display: block;
+}
+.entete3 > h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+.entete3 {
+    padding-bottom: 40px;
+    padding-top: 30px;
+    padding-left: 110px;
+}
+.bas3 {
+    margin-top: 20px;
+}
+
+@media (max-width: 775px) {
+    .myAvatar {
+        margin: 0;
+    }
+    .myAvatar > h1 {
+        margin: 0;
+        font-weight: lighter;
+        font-size: 13px;
+    }
+}
