@@ -4,15 +4,13 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-const options = ['Modifier', 'Supprimer']
-
 const ITEM_HEIGHT = 48
 
-export default function ModifierSupprimerPublication() {
+export default function MenuPublication() {
     const [anchorEl, setAnchorEl] = React.useState(null)
     const open = Boolean(anchorEl)
 
-    const handleClick = (event) => {
+    const handleClick = event => {
         setAnchorEl(event.currentTarget)
     }
 
@@ -37,11 +35,8 @@ export default function ModifierSupprimerPublication() {
                         width: '20ch',
                     },
                 }}>
-                {options.map((option) => (
-                    <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                        {option}
-                    </MenuItem>
-                ))}
+                <MenuItem onClick={handleClose}>Modifier</MenuItem>
+                <MenuItem onClick={handleClose}>Supprimer</MenuItem>
             </Menu>
         </div>
     )

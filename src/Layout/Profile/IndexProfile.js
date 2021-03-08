@@ -22,18 +22,18 @@ class IndexProfile extends Component {
 
   render() {
 
-    {/*const choixFait = this.state.choix == "Profile Etudiant" ? (
+    const choixFait = this.state.choix == "Profile Etudiant" ? (
       <ProfileEtudiant />
     ) : (
       this.state.choix == "Profile Enseignant" ? (
         <Profile />
       ) : ("")
-      )*/}
+      )
     
     return (
       <div>
 
-        {/*<p>
+        <p>
           <label for="choix">Choisir le profile à afficher : </label>
           <select id="choix" value={this.state.choix} onChange={this.choisir} >
             {
@@ -42,11 +42,11 @@ class IndexProfile extends Component {
               } ) 
             }
           </select>
-          </p>*/}
+          </p>
 
-        {/*choixFait*/}
+        {choixFait}
         <br />
-        <ProfileEtudiant />
+        {/* <ProfileEtudiant /> */}
         {/*<Menu />
         
 
