@@ -11,7 +11,7 @@ import img4 from './img/4.jpg'
 import Grid from '@material-ui/core/Grid'
 import Users from './users'
 import Message from './messages'
-import MenuIcon from '@material-ui/icons/Menu'
+import ListIcon from '@material-ui/icons/List'
 import './messagerie.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +32,42 @@ const useStyles = makeStyles((theme) => ({
 export default function Messagerie() {
     const users = {
         utilisateurs: [
+            {
+                FirstName: 'Naim',
+                LastName: 'Bessaha',
+                Image: img4,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Malik',
+                LastName: 'Si-Mohamed',
+                Image: img3,
+                Statu: 'Professeur',
+            },
+            {
+                FirstName: 'Franck',
+                LastName: 'Lampard',
+                Image: img2,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Naim',
+                LastName: 'Bessaha',
+                Image: img4,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Malik',
+                LastName: 'Si-Mohamed',
+                Image: img3,
+                Statu: 'Professeur',
+            },
+            {
+                FirstName: 'Franck',
+                LastName: 'Lampard',
+                Image: img2,
+                Statu: 'Etudiant',
+            },
             {
                 FirstName: 'Naim',
                 LastName: 'Bessaha',
@@ -84,11 +120,11 @@ export default function Messagerie() {
         1eme partie
         
         */}
-            <Grid container style={{ height: '90vh' }} className='principale'>
-                <Grid container className='bordure' xs={3} style={{ height: '90vh' }}>
+            <Grid container style={{ height: '89vh' }}>
+                <Grid container className='bordure' xs={3} style={{ height: '89vh' }}>
                     <Grid container xs={12} className='bordure' style={{ height: '30%' }}>
                         <Grid container xs={12}>
-                            <Grid className='myAvatar shadow-lg'>
+                            <Grid className='myAvatar '>
                                 <Avatar alt='Reseau social' src={img} className={classes.large} />
                                 <h1> Ma Messagerie</h1>
                             </Grid>
@@ -116,11 +152,11 @@ export default function Messagerie() {
            
            */}
 
-                <Grid container className='bordure' xs={alo}>
+                <Grid container className='bordure grid-flow-row auto-rows-max ' xs={alo}>
                     {/* 
            entete
            */}
-                    <Grid className='flex shadow-lg' style={{ height: '10%' }} xs={12}>
+                    <Grid container className='flex shadow-lg' style={{ height: '15%' }} xs={12}>
                         <Grid xs={9} className='entetinformation flex'>
                             <Avatar alt='Neseau social' src={Image} className={classes.xlarge} />
                             <div className='block infpersonel'>
@@ -129,8 +165,8 @@ export default function Messagerie() {
                             </div>
                         </Grid>
 
-                        <Grid xs={3} style={{ textAlign: 'right', marginTop: '20px' }}>
-                            <MenuIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
+                        <Grid xs={2} style={{ textAlign: 'right', marginTop: '20px' }}>
+                            <ListIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
                         </Grid>
                     </Grid>
                     {/* 
@@ -139,7 +175,7 @@ export default function Messagerie() {
 
              */}
 
-                    <Grid xs={12} className='shadow-lg' style={{ height: '70%' }}>
+                    <Grid xs={12} className='shadow-lg over' style={{ height: '65%' }}>
                         <Message />
                     </Grid>
 
@@ -147,11 +183,11 @@ export default function Messagerie() {
              formulaire
              
              */}
-                    <Grid className='shadow-lg' xs={12} style={{ height: '15%' }}>
+                    <Grid className=' grid-flow-row auto-rows-max' xs={12} style={{ height: '15%' }}>
                         <form className='form'>
-                            <input placeholder='Votre réponse' />
+                            <input type='textArea' className='focus:outline' multiline='2' placeholder='Votre réponse' />
 
-                            <button type='submit'>
+                            <button className='bg-blue-600 active:bg-green-700' type='submit'>
                                 <SendIcon />
                             </button>
                         </form>
