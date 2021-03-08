@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 import SendIcon from '@material-ui/icons/Send'
 import SearchIcon from '@material-ui/icons/Search'
-import TextField from '@material-ui/core/TextField'
+import Tield from '@material-ui/core/TextField'
 import Switch from '@material-ui/core/Switch'
-import img from './1.jpg'
+import img from './img/1.jpg'
 import img2 from './2.jpg'
 import img3 from './3.jpg'
 import img4 from './4.jpg'
@@ -70,27 +70,29 @@ export default function messagerie() {
         1eme partie
         
         */}
-
             <Grid container style={{ height: '90vh' }} className='principale'>
                 <Grid container className='bordure' xs={3} style={{ height: '90vh' }}>
                     <Grid container xs={12} className='bordure' style={{ height: '30%' }}>
-                        <Grid container className='' xs={12}>
+                        <Grid container xs={12}>
                             <Grid className='myAvatar shadow-lg'>
                                 <Avatar alt='Reseau social' src={img} className={classes.large} />
                                 <h1> Ma Messagerie</h1>
                             </Grid>
-                            <Grid className='form1'>
-                                <form>
-                                    <TextField placeholder='Recherche contact' />
-                                    <Button className='btncntct' type='submit' variant='contained' color='primary' endIcon={<SearchIcon />}></Button>
+                            <Grid xs={12} className='form1'>
+                                <form style={{ display: 'flex' }}>
+                                    <input className='usersInput' placeholder='Recherche contact...' />
+                                    <button className='usersButton'>
+                                        {' '}
+                                        <SearchIcon />
+                                    </button>
                                 </form>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid container xs={12} className='bordure' style={{ height: '70%' }}>
-                        <Grid xs={12} style={{ margin: '10px', background: 'rgb(209, 209, 209)', padding: '5px', borderRadius: '10px', height: '20%' }}>
-                            <Avatar alt='Reseau social' src={img3} className={classes.large} />
-                        </Grid>
+                    <Grid xs={12} className='bordure over' style={{ height: '70%' }}>
+                        {users.utilisateurs.map((user) => (
+                            <Users user={user} onclick={vava} />
+                        ))}
                     </Grid>
                 </Grid>
                 {/* 
@@ -101,24 +103,43 @@ export default function messagerie() {
            */}
 
                 <Grid container className='bordure' xs={alo}>
-                    <Grid className='flex shadow-lg' style={{ height: '15%' }} xs={12}>
+                    {/* 
+           entete
+           */}
+                    <Grid className='flex shadow-lg' style={{ height: '10%' }} xs={12}>
                         <Grid xs={9} className='entetinformation flex'>
-                            <Avatar alt='Neseau social' src={img2} className={classes.xlarge} />
+                            <Avatar alt='Neseau social' src={Image} className={classes.xlarge} />
                             <div className='block infpersonel'>
-                                <p>Bessaha</p>
-                                <p>Naim</p>
+                                <p> {FirstName} </p>
+                                <p>{LastName}</p>
                             </div>
                         </Grid>
-                        <Grid xs={3} style={{ textAlign: 'right' }}>
-                            <Switch inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
+
+                        <Grid xs={3} style={{ textAlign: 'right', marginTop: '20px' }}>
+                            <MenuIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
                         </Grid>
                     </Grid>
-                    <Grid className='shadow-lg' xs={12} style={{ height: '70%' }}></Grid>
+                    {/* 
+             messages
+
+
+             */}
+
+                    <Grid xs={12} className='shadow-lg' style={{ height: '70%' }}>
+                        <Message />
+                    </Grid>
+
+                    {/* 
+             formulaire
+             
+             */}
                     <Grid className='shadow-lg' xs={12} style={{ height: '15%' }}>
                         <form className='form'>
-                            <input className='input' placeholder='Type Message...' />
+                            <input placeholder='Votre réponse' />
 
-                            <Button type='submit' variant='contained' color='primary' endIcon={<SendIcon />}></Button>
+                            <button type='submit'>
+                                <SendIcon />
+                            </button>
                         </form>
                     </Grid>
                 </Grid>
