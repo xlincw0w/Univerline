@@ -20,7 +20,22 @@ const Main = () => {
                     <Switch>
                         <FirebaseAuthConsumer>
                             {({ isSignedIn, user, providerId }) => {
-                                if (isSignedIn) {
+                                let emailVerified = false
+
+                                if (user !== null) {
+                                    emailVerified = user.emailVerified
+                                }
+
+                                if (isSignedIn && !emailVerified) {
+                                    return (
+                                        <React.Fragment>
+                                            <Route path='/*'>
+                                                <Header />
+                                                <Inscription step={'confirmemail'} />
+                                            </Route>
+                                        </React.Fragment>
+                                    )
+                                } else if (isSignedIn && emailVerified) {
                                     return (
                                         <React.Fragment>
                                             <Route path='/profile'>
@@ -32,6 +47,7 @@ const Main = () => {
                                                 <Messagerie />
                                             </Route>
                                             <Route path='/inscription'>
+                                                <Header />
                                                 <Inscription />
                                             </Route>
                                             <Route exact path='/'>
@@ -45,9 +61,11 @@ const Main = () => {
                                     return (
                                         <React.Fragment>
                                             <Route path='/auth'>
+                                                <Header />
                                                 <Auth />
                                             </Route>
                                             <Route path='/inscription'>
+                                                <Header />
                                                 <Inscription />
                                             </Route>
                                             <Route path='/profile'>

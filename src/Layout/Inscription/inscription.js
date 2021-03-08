@@ -19,16 +19,35 @@ import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signu
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Icon from '@material-ui/core/Icon'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
 
-const Inscription = () => {
+import cx from 'classnames'
+
+const Inscription = (props) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.SignUpReducer.user)
     const step = useSelector((state) => state.SignUpReducer.step)
     const loader = useSelector((state) => state.SignUpReducer.loader)
+
+    React.useEffect(() => {
+        if (props.step === 'confirmemail') {
+            dispatch(UpdateSignupStep('confirmemail'))
+            let userCred = firebase.auth().currentUser
+            dispatch(
+                UpdateSignupUser({
+                    ...user,
+                    id: userCred.uid,
+                    nom_complet: userCred.displayName || user.nom_complet,
+                    email: userCred.email,
+                    isNewUser: false,
+                })
+            )
+        }
+    }, [])
 
     const NIVEAU_ENSEIGNEMENT = [
         {
@@ -45,12 +64,13 @@ const Inscription = () => {
         },
     ]
 
-    const handleAuth = (e) => {
+    const handleAuth = async (e) => {
         e.preventDefault()
         dispatch(SetLoader(true))
         let valid_data = { valid: true, reason: null }
 
         if (!constants.email_rg.test(user.email)) valid_data = { valid: false, reason: 'email' }
+        if (user.password.length < 6) valid_data = { valid: false, reason: 'weak_password' }
         if (user.password !== user.confirmed_password) valid_data = { valid: false, reason: 'password_not_equal' }
 
         if (valid_data.valid) {
@@ -124,26 +144,31 @@ const Inscription = () => {
             })
     }
 
-    const checkVerification = async () => {
+    const checkVerification = () => {
         dispatch(SetLoader(true))
 
-        await firebase.auth().signOut()
-        await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-
-        if (firebase.auth().currentUser.emailVerified) {
-            dispatch(UpdateSignupStep('whoyouare'))
-            dispatch(SetLoader(false))
-        } else {
-            dispatch(SetLoader(false))
-        }
+        firebase
+            .auth()
+            .currentUser.reload()
+            .then(() => {
+                if (firebase.auth().currentUser.emailVerified) {
+                    dispatch(UpdateSignupStep('whoyouare'))
+                    dispatch(SetLoader(false))
+                } else {
+                    dispatch(SetLoader(false))
+                }
+            })
+            .catch((err) => {
+                dispatch(SetLoader(false))
+            })
     }
 
     return (
         <FirebaseAuthConsumer>
-            {({ isSignedIn, userData, providerId }) => {
-                if (isSignedIn && !user.isNewUser) {
+            {(userCred) => {
+                if (userCred.isSignedIn && !user.isNewUser && userCred.emailVerified) {
                     return (
-                        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl'>
+                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -190,7 +215,7 @@ const Inscription = () => {
                     )
                 } else {
                     return (
-                        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl'>
+                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -298,7 +323,7 @@ const Inscription = () => {
                                             </div>
                                         </div>
                                         <form className='w-full' onSubmit={handleAuth}>
-                                            <div className='mt-10 2xl:mt-20 text-center'>
+                                            <div className='mt-5 2xl:mt-20 text-center'>
                                                 <div className='my-5'>
                                                     <TextField
                                                         onChange={(e) => {
@@ -332,6 +357,8 @@ const Inscription = () => {
                                                         label='Mot de passe'
                                                         type='password'
                                                         variant='outlined'
+                                                        error={user.password.length < 6 && user.password.length > 0}
+                                                        helperText={user.password.length < 6 && user.password.length > 0 ? 'Très faible' : ''}
                                                         required
                                                     />
                                                 </div>
@@ -344,11 +371,17 @@ const Inscription = () => {
                                                         label='Confirmer mot de passe'
                                                         type='password'
                                                         variant='outlined'
+                                                        error={user.password !== user.confirmed_password && user.confirmed_password.length > 0 && user.password.length > 0}
+                                                        helperText={
+                                                            user.password !== user.confirmed_password && user.confirmed_password.length > 0 && user.password.length > 0
+                                                                ? 'Non identique'
+                                                                : ''
+                                                        }
                                                         required
                                                     />
                                                 </div>
                                             </div>
-                                            <div className='mx-auto table mt-10'>
+                                            <div className='mx-auto table mt-5 2xl:mt-10'>
                                                 <Button type='submit' className='shadow' variant='contained' color='secondary'>
                                                     Suivant
                                                 </Button>
@@ -363,26 +396,33 @@ const Inscription = () => {
                                         </Backdrop>
                                         <div className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             <div className='text-gray-900 flex justify-center'>
-                                                <FaFeatherAlt size={200} />
+                                                <FaFeatherAlt size={100} />
                                             </div>
-                                            <div className='mt-12'>
-                                                Un e-mail de vérification a été envoyé a <span className='text-purple-800'> {user.email} </span>
+                                            <div className='mt-12 px-5'>
+                                                Un e-mail de vérification a été envoyé a <span className='text-purple-800 text-xl'> {user.email} </span>
                                             </div>
                                         </div>
-                                        <div className='mt-40 text-2xl text-gray-500 text-center'>
+                                        <div className='mt-20 2xl:mt-40 text-xl text-gray-500 text-center'>
                                             <p>Vous n'avez pas recu de mail ? </p>
                                         </div>
-                                        <div className='mx-auto table mt-10'>
+                                        <div className='mx-auto table mt-3 2xl:mt-10'>
                                             <div className='mx-5 my-5 inline-block'>
                                                 <Button
-                                                    onClick={async () => {
+                                                    onClick={() => {
                                                         dispatch(SetLoader(true))
-                                                        await firebase.auth().currentUser.sendEmailVerification()
-                                                        dispatch(SetLoader(false))
+                                                        firebase
+                                                            .auth()
+                                                            .currentUser.sendEmailVerification()
+                                                            .then(() => {
+                                                                dispatch(SetLoader(false))
+                                                            })
+                                                            .catch((err) => {
+                                                                dispatch(SetLoader(false))
+                                                            })
                                                     }}
                                                     className='shadow'
                                                     variant='contained'
-                                                    color='secondary'>
+                                                    color='primary'>
                                                     Reenvoyer
                                                 </Button>
                                             </div>
@@ -521,7 +561,7 @@ const Inscription = () => {
                                             Bienvenue cher <span className='text-green-600'>Etudiant</span> !
                                         </p>
                                         <form onSubmit={handleForm}>
-                                            <div className='mt-32 text-center'>
+                                            <div className='mt-10 2xl:mt-32 text-center'>
                                                 <div className='my-5'>
                                                     <TextField
                                                         onChange={(e) => {
@@ -595,12 +635,12 @@ const Inscription = () => {
                                 )}
                                 {step === 'ending' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
-                                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
+                                        <p className='text-gray-800 text-center mt-16 font-sans font-black'>
                                             <div className='text-gray-900 flex justify-center'>
-                                                <FaFeatherAlt size={200} />
+                                                <FaFeatherAlt size={100} />
                                             </div>
-                                            <div className='mt-12'>
-                                                <span className='text-purple-800'>Féliciation </span>votre compte a été créé avec succés.
+                                            <div className='mt-12 px-10'>
+                                                <span className='text-purple-800 text-3xl 2xl:text-4xl block'>Félicitation </span>votre compte a été créé avec succés.
                                             </div>
                                         </p>
                                         <div className='mx-auto table mt-32 2xl:mt-60'>
@@ -618,11 +658,11 @@ const Inscription = () => {
                                 )}
                                 {step === 'error' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
-                                        <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
+                                        <p className='text-gray-800 text-center mt-16 font-sans font-black'>
                                             <div className='text-gray-900 flex justify-center'>
-                                                <FaFeatherAlt size={200} />
+                                                <FaFeatherAlt size={100} />
                                             </div>
-                                            <div className='mt-12'>
+                                            <div className='mt-20 text-xl 2xl:text-3xl px-10'>
                                                 <span className='text-red-800'>Oups </span>Un problème est survenu lors de la création de votre compte veuillez réssayer
                                                 ultérieurment.
                                             </div>
