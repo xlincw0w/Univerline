@@ -6,6 +6,7 @@ import SendIcon from '@material-ui/icons/Send'
 import SearchIcon from '@material-ui/icons/Search'
 import Tield from '@material-ui/core/TextField'
 import Switch from '@material-ui/core/Switch'
+// import MenuIcon from '@material-ui/icons/MenuIcon'
 import img from './img/1.jpg'
 import img2 from './2.jpg'
 import img3 from './3.jpg'
@@ -19,6 +20,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Users from './users'
+import Message from './messages'
 import { BorderStyle, CenterFocusStrong, SlowMotionVideoOutlined } from '@material-ui/icons'
 import { green, red, yellow } from '@material-ui/core/colors'
 
@@ -49,9 +52,73 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function messagerie() {
+    const users = {
+        utilisateurs: [
+            {
+                FirstName: 'Naim',
+                LastName: 'Bessaha',
+                Image: img4,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Malik',
+                LastName: 'Si-Mohamed',
+                Image: img3,
+                Statu: 'Professeur',
+            },
+            {
+                FirstName: 'Franck',
+                LastName: 'Lampard',
+                Image: img2,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Naim',
+                LastName: 'Bessaha',
+                Image: img4,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Malik',
+                LastName: 'Si-Mohamed',
+                Image: img3,
+                Statu: 'Professeur',
+            },
+            {
+                FirstName: 'Franck',
+                LastName: 'Lampard',
+                Image: img2,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Naim',
+                LastName: 'Bessaha',
+                Image: img4,
+                Statu: 'Etudiant',
+            },
+            {
+                FirstName: 'Malik',
+                LastName: 'Si-Mohamed',
+                Image: img3,
+                Statu: 'Professeur',
+            },
+            {
+                FirstName: 'Franck',
+                LastName: 'Lampard',
+                Image: img2,
+                Statu: 'Etudiant',
+            },
+        ],
+    }
+
     const classes = useStyles()
     const [switch1, setswitch1] = useState(true)
     const [alo, setalo] = useState(6)
+
+    const [FirstName, setFirstName] = useState('')
+    const [LastName, setLastName] = useState('')
+    const [Statu, setStatu] = useState('')
+    const [Image, setImage] = useState()
 
     const div = () => {
         if (alo === 9) {
@@ -63,6 +130,13 @@ export default function messagerie() {
         }
     }
 
+    const vava = (user) => {
+        setFirstName(user.FirstName)
+        setLastName(user.LastName)
+        setImage(user.Image)
+        setStatu(user.Statu)
+    }
+
     return (
         <div>
             {/* 
@@ -70,8 +144,8 @@ export default function messagerie() {
         1eme partie
         
         */}
-            <Grid container style={{ height: '90vh' }} className='principale'>
-                <Grid container className='bordure' xs={3} style={{ height: '90vh' }}>
+            <Grid container style={{ height: '87vh' }} className='principale'>
+                <Grid container className='bordure' xs={3} style={{ height: '87vh' }}>
                     <Grid container xs={12} className='bordure' style={{ height: '30%' }}>
                         <Grid container xs={12}>
                             <Grid className='myAvatar shadow-lg'>
@@ -115,8 +189,8 @@ export default function messagerie() {
                             </div>
                         </Grid>
 
-                        <Grid xs={3} style={{ textAlign: 'right', marginTop: '20px' }}>
-                            <MenuIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
+                        <Grid xs={2} style={{ textAlign: 'right', marginTop: '20px' }}>
+                            {/* <MenuIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} /> */}
                         </Grid>
                     </Grid>
                     {/* 
@@ -125,7 +199,7 @@ export default function messagerie() {
 
              */}
 
-                    <Grid xs={12} className='shadow-lg' style={{ height: '70%' }}>
+                    <Grid xs={12} className='shadow-lg' style={{ height: '65%' }}>
                         <Message />
                     </Grid>
 
@@ -157,9 +231,12 @@ export default function messagerie() {
                     <Grid container>
                         <Grid xs={2}></Grid>
                         <Grid xs={8}>
-                            <Avatar alt='Neseau social' src={img2} style={{ marginLeft: '29%' }} className={classes.xxlarge} />
+                            <Avatar alt='Neseau social' src={Image} style={{ marginLeft: '29%' }} className={classes.xxlarge} />
                             <h1>
-                                <a style={{ marginLeft: '24%', fontFamily: 'inherit', fontStyle: 'underline' }}>Merabet Lounis</a>
+                                <a className='a' style={{ marginLeft: '24%', fontFamily: 'inherit', fontStyle: 'underline' }}>
+                                    {' '}
+                                    {FirstName} {LastName}{' '}
+                                </a>
                             </h1>
                         </Grid>
                         <Grid xs={2}></Grid>
