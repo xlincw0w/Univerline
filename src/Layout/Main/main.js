@@ -12,6 +12,7 @@ import Footer from '../Footer/footer'
 import Profile from '../Profile/IndexProfile'
 import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
 
+
 const Main = () => {
     return (
         <div className='font-openSans'>

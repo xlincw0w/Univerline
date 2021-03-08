@@ -4,17 +4,41 @@ import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 import SendIcon from '@material-ui/icons/Send'
 import SearchIcon from '@material-ui/icons/Search'
+import Tield from '@material-ui/core/TextField'
+import Switch from '@material-ui/core/Switch'
+// import MenuIcon from '@material-ui/icons/MenuIcon'
 import img from './img/1.jpg'
-import img2 from './img/2.jpg'
-import img3 from './img/3.jpg'
-import img4 from './img/4.jpg'
+import img2 from './2.jpg'
+import img3 from './3.jpg'
+import img4 from './4.jpg'
+import img5 from './5.jpg'
+import DeleteIcon from '@material-ui/icons/Delete'
 import Grid from '@material-ui/core/Grid'
+import './messagerie.css'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Users from './users'
 import Message from './messages'
+import { BorderStyle, CenterFocusStrong, SlowMotionVideoOutlined } from '@material-ui/icons'
+import { green, red, yellow } from '@material-ui/core/colors'
+
+const newLocal = '100px'
+// le menu deroulan
 import ListIcon from '@material-ui/icons/List'
 import './messagerie.css'
 
 const useStyles = makeStyles((theme) => ({
+    h1: {
+        color: 'red',
+    },
+
+    input: {
+        display: 'none',
+    },
+
     large: {
         width: theme.spacing(6),
         height: theme.spacing(6),
@@ -24,12 +48,12 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(9),
     },
     xxlarge: {
-        width: theme.spacing(15),
-        height: theme.spacing(15),
+        width: theme.spacing(13),
+        height: theme.spacing(13),
     },
 }))
 
-export default function Messagerie() {
+export default function messagerie() {
     const users = {
         utilisateurs: [
             {
@@ -92,6 +116,7 @@ export default function Messagerie() {
     const classes = useStyles()
     const [switch1, setswitch1] = useState(true)
     const [alo, setalo] = useState(6)
+
     const [FirstName, setFirstName] = useState('')
     const [LastName, setLastName] = useState('')
     const [Statu, setStatu] = useState('')
@@ -106,6 +131,7 @@ export default function Messagerie() {
             setswitch1(false)
         }
     }
+
     const vava = (user) => {
         setFirstName(user.FirstName)
         setLastName(user.LastName)
@@ -204,18 +230,105 @@ export default function Messagerie() {
           */}
 
                 <Grid container className='bordure' xs={3}>
-                    <Grid className='shadow-lg entete3' xs={12} style={{ height: '40%' }}>
-                        {}
-                        <Avatar alt='Neseau social' src={Image} className={classes.xxlarge} />
-                        <h1>
-                            {' '}
-                            <a href='#' className='a'>
-                                {FirstName} {LastName}
-                            </a>
-                        </h1>
-                        <p>{Statu}</p>
+                    <Grid container>
+                        <Grid xs={2}></Grid>
+                        <Grid xs={8}>
+                            <Avatar alt='Neseau social' src={Image} style={{ marginLeft: '29%' }} className={classes.xxlarge} />
+                            <h1>
+                                <a className='a' style={{ marginLeft: '24%', fontFamily: 'inherit', fontStyle: 'underline' }}>
+                                    {' '}
+                                    {FirstName} {LastName}{' '}
+                                </a>
+                            </h1>
+                        </Grid>
+                        <Grid xs={2}></Grid>
                     </Grid>
-                    <Grid className='' xs={12} style={{ height: '60%' }}></Grid>
+                    {/*pour boutob Ajouter un fichier*/}
+                    <Grid className='' xs={12} style={{ height: '60%' }}>
+                        {/* bouton pour discusion personalisée */}
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id='panel1a-header'>
+                                <Typography className={classes.heading}>Discussion personalisée</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div style={{}}>
+                                    <Button
+                                        variant='contained'
+                                        color='secondary'
+                                        className={classes.button}
+                                        startIcon={<DeleteIcon />}
+                                        style={{ fontSize: '13px', fontWeight: 'bold', width: '100%' }}>
+                                        Supprimer discussion{' '}
+                                    </Button>
+                                    <Button style={{ fontSize: '13px', fontWeight: 'bold', width: '100%' }}>Rechercher dans discussion </Button>
+                                </div>
+                            </AccordionDetails>
+                        </Accordion>
+                        {/* bouton de fichiers partagées  */}
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />} s aria-controls='panel1a-content' id='panel1a-header'>
+                                <Typography className={classes.heading}>Fichiers partagées</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container spacing={30}>
+                                    <Grid xs={4}>
+                                        <a href='pdf' /> <a />
+                                    </Grid>
+                                    <Grid xs={4}></Grid>
+                                    <Grid xs={4}>
+                                        <p>
+                                            {' '}
+                                            <img src={img4} />
+                                        </p>
+                                    </Grid>
+                                    <Grid xs={4}>
+                                        <p>
+                                            {' '}
+                                            <img src={img5} />
+                                        </p>
+                                    </Grid>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+
+                        {/* bouton de Photos partagées  */}
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2a-content' id='panel2a-header'>
+                                <Typography className={classes.heading}>Photos Partagéess</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container spacing={30}>
+                                    <Grid xs={4}>
+                                        <p>
+                                            {' '}
+                                            <img src={img2} />
+                                        </p>
+                                    </Grid>
+                                    <Grid xs={4}>
+                                        <p>
+                                            {' '}
+                                            <img src={img3} />
+                                        </p>
+                                    </Grid>
+                                    <Grid xs={4}>
+                                        <p>
+                                            {' '}
+                                            <img src={img4} />
+                                        </p>
+                                    </Grid>
+                                    <Grid xs={4}>
+                                        <p>
+                                            {' '}
+                                            <img src={img2} />
+                                        </p>
+                                    </Grid>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Button style={{ width: '100%', fontSize: '15px', border: 'light' }} variant='outlined' color='secondary'>
+                            <h1 style={{ fontWeight: 'bold' }}>Bloquer</h1>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </div>
