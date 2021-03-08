@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import InfoPerso from './infoPerso'
-import Formulaire from './Formulaire'
+import FormulaireClasse from './FormulaireClasse'
 
 const styles = theme => ({
     root: {
@@ -51,7 +51,7 @@ const DialogActions = withStyles(theme => ({
     },
 }))(MuiDialogActions)
 
-export default function ModifierProfil() {
+export default function AjouterClasse() {
     const [open, setOpen] = React.useState(false)
 
     const handleClickOpen = () => {
@@ -64,14 +64,14 @@ export default function ModifierProfil() {
     return (
         <div>
             <Button variant='outlined' color='primary' onClick={handleClickOpen}>
-                Modifier le profil
+                Ajouter une classe
             </Button>
             <Dialog onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
                 <DialogTitle id='customized-dialog-title' onClose={handleClose}>
-                    Modifier le profil
+                    ajouter une classe
                 </DialogTitle>
                 <DialogContent dividers>
-                    <Formulaire />
+                    <FormulaireClasse />
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color='primary'>
