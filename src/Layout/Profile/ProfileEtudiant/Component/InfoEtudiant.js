@@ -5,11 +5,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Paper } from '@material-ui/core';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 100,
+    width: '95%',
+    margin: 'auto',
   },
 });
 
@@ -29,7 +30,7 @@ export default function InfoEtudiant() {
   const classes = useStyles();
 
   return (
-    <TableContainer  component={Paper}>
+    <TableContainer component={Paper} >
       <Table className={classes.table}  aria-label="a dense table">
         <TableBody>
           {rows.map((row) => (

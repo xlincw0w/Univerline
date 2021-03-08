@@ -20,8 +20,8 @@ export default function ImageAvatars() {
   const classes = useStyles();
 
   return (
-    <span className={classes.root}>
-      <Avatar alt="Remy Sharp" src={moi} className={classes.large} style={{marginRight:"10px"}}/>
+    <span className={classes.root} style={{marginLeft:"5px"}}>
+      <Avatar alt="Remy Sharp" src={moi} className={classes.large}/>
     </span>
   );
 }

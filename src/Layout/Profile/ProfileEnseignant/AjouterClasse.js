@@ -8,12 +8,13 @@ import MuiDialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
-import Formulaire from './ValidationFormulaire/Formulaire'
+import InfoPerso from './infoPerso'
+import FormulaireClasse from './FormulaireClasse'
 
-const styles = (theme) => ({
+const styles = theme => ({
     root: {
         margin: 0,
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
     },
     closeButton: {
         position: 'absolute',
@@ -23,7 +24,7 @@ const styles = (theme) => ({
     },
 })
 
-const DialogTitle = withStyles(styles)((props) => {
+const DialogTitle = withStyles(styles)(props => {
     const { children, classes, onClose, ...other } = props
     return (
         <MuiDialogTitle disableTypography className={classes.root} {...other}>
@@ -37,20 +38,20 @@ const DialogTitle = withStyles(styles)((props) => {
     )
 })
 
-const DialogContent = withStyles((theme) => ({
+const DialogContent = withStyles(theme => ({
     root: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
     },
 }))(MuiDialogContent)
 
-const DialogActions = withStyles((theme) => ({
+const DialogActions = withStyles(theme => ({
     root: {
         margin: 0,
         padding: theme.spacing(1),
     },
 }))(MuiDialogActions)
 
-export default function BoutonModifierProfile() {
+export default function AjouterClasse() {
     const [open, setOpen] = React.useState(false)
 
     const handleClickOpen = () => {
@@ -63,23 +64,21 @@ export default function BoutonModifierProfile() {
     return (
         <div>
             <Button variant='outlined' color='primary' onClick={handleClickOpen}>
-                Modifier le profil
+                Ajouter une classe
             </Button>
             <Dialog onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
                 <DialogTitle id='customized-dialog-title' onClose={handleClose}>
-                    Modifier le profil
+                    ajouter une classe
                 </DialogTitle>
                 <DialogContent dividers>
-                    <Typography gutterBottom>
-                        <Formulaire />
-                    </Typography>
+                    <FormulaireClasse />
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus color='primary' type='submit'>
-                        Enregistrer
+                    <Button autoFocus onClick={handleClose} color='primary'>
+                        enregistrer
                     </Button>
                     <Button autoFocus onClick={handleClose} color='primary'>
-                        Annnuler
+                        annuler
                     </Button>
                 </DialogActions>
             </Dialog>

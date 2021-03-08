@@ -27,6 +27,8 @@ import { green, red, yellow } from '@material-ui/core/colors'
 
 const newLocal = '100px'
 // le menu deroulan
+import ListIcon from '@material-ui/icons/List'
+import './messagerie.css'
 
 const useStyles = makeStyles((theme) => ({
     h1: {
@@ -144,11 +146,11 @@ export default function messagerie() {
         1eme partie
         
         */}
-            <Grid container style={{ height: '87vh' }} className='principale'>
-                <Grid container className='bordure' xs={3} style={{ height: '87vh' }}>
+            <Grid container style={{ height: '89vh' }}>
+                <Grid container className='bordure' xs={3} style={{ height: '89vh' }}>
                     <Grid container xs={12} className='bordure' style={{ height: '30%' }}>
                         <Grid container xs={12}>
-                            <Grid className='myAvatar shadow-lg'>
+                            <Grid className='myAvatar '>
                                 <Avatar alt='Reseau social' src={img} className={classes.large} />
                                 <h1> Ma Messagerie</h1>
                             </Grid>
@@ -176,11 +178,11 @@ export default function messagerie() {
            
            */}
 
-                <Grid container className='bordure' xs={alo}>
+                <Grid container className='bordure grid-flow-row auto-rows-max ' xs={alo}>
                     {/* 
            entete
            */}
-                    <Grid className='flex shadow-lg' style={{ height: '10%' }} xs={12}>
+                    <Grid container className='flex shadow-lg' style={{ height: '15%' }} xs={12}>
                         <Grid xs={9} className='entetinformation flex'>
                             <Avatar alt='Neseau social' src={Image} className={classes.xlarge} />
                             <div className='block infpersonel'>
@@ -190,7 +192,7 @@ export default function messagerie() {
                         </Grid>
 
                         <Grid xs={2} style={{ textAlign: 'right', marginTop: '20px' }}>
-                            {/* <MenuIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} /> */}
+                            <ListIcon inputProps={{ 'aria-label': 'primary checkbox' }} onClick={div} color='primary' checked={switch1} />
                         </Grid>
                     </Grid>
                     {/* 
@@ -199,7 +201,7 @@ export default function messagerie() {
 
              */}
 
-                    <Grid xs={12} className='shadow-lg' style={{ height: '65%' }}>
+                    <Grid xs={12} className='shadow-lg over' style={{ height: '65%' }}>
                         <Message />
                     </Grid>
 
@@ -207,11 +209,11 @@ export default function messagerie() {
              formulaire
              
              */}
-                    <Grid className='shadow-lg' xs={12} style={{ height: '15%' }}>
+                    <Grid className=' grid-flow-row auto-rows-max' xs={12} style={{ height: '15%' }}>
                         <form className='form'>
-                            <input placeholder='Votre réponse' />
+                            <input type='textArea' className='focus:outline' multiline='2' placeholder='Votre réponse' />
 
-                            <button type='submit'>
+                            <button className='bg-blue-600 active:bg-green-700' type='submit'>
                                 <SendIcon />
                             </button>
                         </form>
