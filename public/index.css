@@ -8,12 +8,6 @@
 @tailwind utilities;
 
 @layer utilities {
-    *::-webkit-scrollbar {
-        display: none;
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-    }
-
     .backgroundanimate {
         animation: infinite;
         animation-name: animationBackground;
