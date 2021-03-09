@@ -1,0 +1,60 @@
+.myAvatar {
+    display: flex;
+    margin: 25px;
+    text-align: center;
+}
+.myAvatar > h1 {
+    margin: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.form1 {
+    margin-left: 20px;
+}
+.usersInput {
+    border-top-left-radius: 20px;
+    text-align: center;
+    width: 80%;
+    border-bottom-left-radius: 20px;
+
+    height: 40px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+}
+.usersButton {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 40px;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    padding-right: 5px;
+}
+.over {
+    overflow-y: auto;
+}
+.util {
+    margin: 10px;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    padding: 5px;
+    border-radius: 10px;
+    height: 15%;
+    background-color: azure;
+}
+.util:hover {
+    background-color: rgb(202, 202, 202);
+}
+@media (max-width: 1200px) {
+    .myAvatar {
+        margin: 0;
+    }
+    .myAvatar > h1 {
+        margin: 0;
+        font-weight: lighter;
+        font-size: 13px;
+    }
+    .form1 {
+        margin-top: 20px;
+    }
+}
