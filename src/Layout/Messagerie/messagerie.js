@@ -3,7 +3,6 @@ import Partie1 from './Partie1/partie1'
 import Partie2 from './Partie2/partie2'
 import Partie3 from './Partie3/partie3'
 import Grid from '@material-ui/core/Grid'
-import './messagerie.css'
 
 
 export default function messagerie() {
