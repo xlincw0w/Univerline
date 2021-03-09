@@ -64,6 +64,17 @@ const Inscription = (props) => {
         },
     ]
 
+    var error_message = [
+        <p>
+            <span className='text-red-800'>Oups </span>Un problème est survenu lors de la création de votre compte veuillez réssayer ultérieurment.
+        </p>,
+        <p>
+            Vous avez déja crée un <span className='text-red-800'>Compte </span>avec cet email.
+        </p>,
+    ]
+
+    const [error_index, setErrorIndex] = React.useState(0)
+
     const handleAuth = async (e) => {
         e.preventDefault()
         dispatch(SetLoader(true))
@@ -92,6 +103,8 @@ const Inscription = (props) => {
                     dispatch(SetLoader(false))
                 })
                 .catch((err) => {
+                    if (err.code === 'auth/email-already-in-use') setErrorIndex(1)
+
                     dispatch(UpdateSignupStep('error'))
                     dispatch(SetLoader(false))
                 })
@@ -658,15 +671,12 @@ const Inscription = (props) => {
                                 )}
                                 {step === 'error' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
-                                        <p className='text-gray-800 text-center mt-16 font-sans font-black'>
+                                        <div className='text-gray-800 text-center mt-16 font-sans font-black'>
                                             <div className='text-gray-900 flex justify-center'>
                                                 <FaFeatherAlt size={100} />
                                             </div>
-                                            <div className='mt-20 text-xl 2xl:text-3xl px-10'>
-                                                <span className='text-red-800'>Oups </span>Un problème est survenu lors de la création de votre compte veuillez réssayer
-                                                ultérieurment.
-                                            </div>
-                                        </p>
+                                            <div className='mt-20 text-xl 2xl:text-3xl px-10'>{error_message[error_index]}</div>
+                                        </div>
                                     </div>
                                 )}
                             </div>
