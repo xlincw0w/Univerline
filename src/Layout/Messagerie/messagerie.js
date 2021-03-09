@@ -25,7 +25,7 @@ export default function messagerie() {
     }
 
     return (
-        <div>
+        <div style={{overflow:'hidden'}}>
          
             <Grid container style={{ height: '89vh' }}>
 
