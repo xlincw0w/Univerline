@@ -10,9 +10,13 @@ export default function Dashboard() {
                 <div className='col-span-4'>
                     <Content />
                 </div>
-                <div className='h-full'>
-                    <Feature1 />
-                    <Feature2 />
+                <div className='h-screen h-full'>
+                    <div className='fixed h-full w-full'>
+                        <div className='h-full'>
+                            <Feature1 />
+                            <Feature2 />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -29,6 +29,7 @@ module.exports = {
                 bebasNeue: ['BebasNeue'],
             },
             spacing: {
+                120: '29rem',
                 128: '32rem',
                 144: '36rem',
                 192: '48rem',
