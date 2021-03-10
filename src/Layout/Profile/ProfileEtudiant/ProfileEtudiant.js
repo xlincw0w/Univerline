@@ -9,7 +9,6 @@ import Onglets from './Component/Onglets'
 import ModifierImage from './Component/ModifierImage'
 import ImageRonde from './Component/ImageRonde'
 import './Component/modifierImage.css'
-//import ListProfs from './Component/ListProfs'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +28,7 @@ export default function Profile() {
         <Container maxWidth='md' className={classes.root}>
             <Paper className={classes.paper}>
                 <Grid container spacing={1}>
-                    <Grid item xs={2}>
+                    <Grid item md={2} xs={12}>
                         <p className='centrer'>
                             <span className='centrerImage'>
                                 <ImageRonde />
@@ -37,12 +36,12 @@ export default function Profile() {
                             {/**
                              * importaion de l'icone pour modifier la photo de profil
                              */}
-                            <span>
+                            <span >
                                 <ModifierImage />
                             </span>
                         </p>
                     </Grid>
-                    <Grid item xs={10}>
+                    <Grid item md={10} xs={12}>
                         <>
                             <InfoEtudiant />
                             <br />
