@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
     
 
     large: {
-        width: theme.spacing(6),
-        height: theme.spacing(6),
+        width: theme.spacing(7),
+        height: theme.spacing(7),
     }
 }))
 
@@ -30,7 +30,7 @@ export default function partie1(props) {
                 FirstName: 'Naim',
                 LastName: 'Bessaha',
                 Image: img4,
-                Statu: 'Etudiant',
+                Statu: 'Etudiant(e)',
             },
             {
                 FirstName: 'Malik',
@@ -42,13 +42,13 @@ export default function partie1(props) {
                 FirstName: 'Franck',
                 LastName: 'Lampard',
                 Image: img2,
-                Statu: 'Etudiant',
+                Statu: 'Etudiant(e)',
             },
             {
                 FirstName: 'Naim',
                 LastName: 'Bessaha',
                 Image: img4,
-                Statu: 'Etudiant',
+                Statu: 'Etudiant(e)',
             },
             {
                 FirstName: 'Malik',
@@ -60,13 +60,13 @@ export default function partie1(props) {
                 FirstName: 'Franck',
                 LastName: 'Lampard',
                 Image: img2,
-                Statu: 'Etudiant',
+                Statu: 'Etudiant(e)',
             },
             {
                 FirstName: 'Naim',
                 LastName: 'Bessaha',
                 Image: img4,
-                Statu: 'Etudiant',
+                Statu: 'Etudiant(e)',
             },
             {
                 FirstName: 'Malik',
@@ -78,7 +78,7 @@ export default function partie1(props) {
                 FirstName: 'Franck',
                 LastName: 'Lampard',
                 Image: img2,
-                Statu: 'Etudiant',
+                Statu: 'Etudiant(e)',
             },
         ],
     }
@@ -90,9 +90,9 @@ export default function partie1(props) {
 
     return (
         <Grid container  xs={3} style={{ height: '89vh' ,borderRight:'1px solid rgb(202, 202, 202)'}}>
-        <Grid container className='shadow-lg' xs={12}  style={{ height: '30%' }}>
+        <Grid container className='' xs={12}  style={{ height: '30%',borderBottom:'1px solid rgb(202, 202, 202)', borderRadius:'10px' }}>
             <Grid container xs={12}>
-                <Grid className='myAvatar shadow-lg'>
+                <Grid className='myAvatar'>
                     <Avatar alt='Reseau social' src={img} className={classes.large} />
                     <h1>Ma Messagerie</h1>
                 </Grid>

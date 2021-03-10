@@ -40,7 +40,7 @@ export default function Users(props) {
             <Grid className="flex" >
         
               <Avatar alt="Reseau social" src={user.Image} className={classes.large} />
-              <Grid  style={{ marginLeft: "10px" }} >
+              <Grid className='userdata' style={{ marginLeft: "10px" }} >
                 <p>{user.FirstName} {user.LastName}</p>
                 <p>{user.Statu}</p>
               </Grid>
