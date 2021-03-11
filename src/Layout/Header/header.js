@@ -45,21 +45,6 @@ export default function Header() {
                                         <p></p>
                                     </div>
                                     <div className='flex flex-row-reverse'>
-                                        {/* <p
-                                            onClick={() => {
-                                                firebase
-                                                    .auth()
-                                                    .signOut()
-                                                    .then(() => {
-                                                        history.push('/')
-                                                    })
-                                                    .catch((error) => {
-                                                        history.push('/')
-                                                    })
-                                            }}
-                                            className='text-md text-gray-500 my-auto mr-8 cursor-pointer'>
-                                            Se déconnecter
-                                        </p> */}
                                         <div className='mr-10 mt-3 flex flex-cols'>
                                             <div className='mr-2 cursor-pointer'>
                                                 <Dropdown item='messagerie' />
