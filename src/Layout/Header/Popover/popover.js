@@ -48,8 +48,11 @@ const UserProfile = ({ func }) => {
     return (
         <div className='cursor-pointer duration-300 hover:bg-gray-100'>
             <div className='mx-auto flex flex-cols' onClick={func}>
-                <div className='inline-block mr-5'>
-                    <p className='text-sm text-gray-500'>Khazem Khaled</p>
+                <div className='block mr-5'>
+                    <div className='text-sm text-gray-500'>
+                        <p className='inline mr-2'>Khazem</p>
+                        <p className='inline'>Khaled</p>
+                    </div>
                     <p className='text-sm text-purple-700 text-center'>Enseignant</p>
                 </div>
                 <div>
