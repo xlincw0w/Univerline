@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import GererFormulaire from './GererFormulaire'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,18 +28,16 @@ export default function Formulaire() {
         setNiveauEtude(event.target.value)
     }
 
+    const { handleChanger, values, handleSubmit } = GererFormulaire()
+
     return (
-        <form className={classes.root} noValidate autoComplete='off'>
+        <form className={classes.root} noValidate onSubmit={handleSubmit}>
             <FormControl className={classes.formControl}>
-                <TextField id='standard-basic' label='Nom' error={false} />
+                <TextField id='standard-basic' label='Nom' required error={false} name='username' defaultValue={values.username} onChange={handleChanger} />
             </FormControl>
             <FormControl className={classes.formControl}>
-                <TextField id='standard-basic' label='Prénom' error={false} />
+                <TextField id='standard-basic' label='Email' type='email' error={false} name='email' defaultValue={values.email} onChange={handleChanger}/>
             </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField id='standard-basic' label='Age' error={false} type='number' />
-            </FormControl>{' '}
-            <br />
             <FormControl className={classes.formControl}>
                 <InputLabel id='demo-simple-select-label'>Niveau Etude</InputLabel>
                 <Select labelId='demo-simple-select-label' id='demo-simple-select' value={niveauEtude} error={false} onChange={handleChange}>
@@ -49,9 +48,15 @@ export default function Formulaire() {
                     <MenuItem value='M2'>M2</MenuItem>
                 </Select>
             </FormControl>
+            <br />
             <FormControl className={classes.formControl}>
-                <TextField id='standard-basic' label='Domaine Etude(Spécialité)' error={false} />
+                <TextField id='standard-basic' label='Domaine Etude(Spécialité)' error={false} name='specialite' defaultValue={values.specialite} onChange={handleChanger}/>
             </FormControl>
+            <FormControl className={classes.formControl}>
+                <TextField id='standard-basic' label='Etablissement' error={false} name='etablissement' defaultValue={values.etablissement} onChange={handleChanger}/>
+            </FormControl>
+
+            <button>valider</button>
         </form>
     )
 }
