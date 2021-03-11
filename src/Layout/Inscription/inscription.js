@@ -275,7 +275,8 @@ const Inscription = (props) => {
                                                                     UpdateSignupUser({
                                                                         ...user,
                                                                         id: userCred.user.uid,
-                                                                        nom: userCred.user.displayName,
+                                                                        nom: userCred.user.displayName.split(' ')[0],
+                                                                        prenom: userCred.user.displayName.length > 1 ? userCred.user.displayName.split(' ')[1] : '',
                                                                         email: userCred.user.email,
                                                                         isNewUser: userCred.additionalUserInfo.isNewUser,
                                                                     })
@@ -284,6 +285,7 @@ const Inscription = (props) => {
                                                                 dispatch(SetLoader(false))
                                                             })
                                                             .catch((err) => {
+                                                                console.log(err)
                                                                 dispatch(UpdateSignupStep('error'))
                                                                 dispatch(SetLoader(false))
                                                             })
