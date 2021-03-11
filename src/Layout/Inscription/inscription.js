@@ -118,6 +118,8 @@ const Inscription = (props) => {
         e.preventDefault()
         dispatch(SetLoader(true))
 
+        let background = ['f18973', 'fefbd8', '20B2AA', 'C71585', '800080', '808080', 'DAA520', '000000', 'DEB887', 'DC143C', '8FBC8F']
+
         let data = {
             id_user: user.id,
             nom: user.nom,
@@ -130,7 +132,7 @@ const Inscription = (props) => {
             domaine_ens: user.domaine_ens,
             user_type: user.user_type,
             etablissement: user.etablissement,
-            avatar: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.nom}+${user.prenom}`,
+            avatar: `https://ui-avatars.com/api/?background=${background[Math.floor(Math.random() * 10)]}&color=fff&name=${user.nom}+${user.prenom}`,
         }
 
         Axios.post(constants.url + '/api/inscription/save_user', {

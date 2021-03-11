@@ -54,8 +54,7 @@ const Main = () => {
                                         })
                                             .then((res) => {})
                                             .catch((err) => {})
-                                        // }, 300000)
-                                    }, 5000)
+                                    }, 300000)
                                     return (
                                         <React.Fragment>
                                             <Route path='/profile'>
