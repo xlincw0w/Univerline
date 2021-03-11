@@ -1,8 +1,6 @@
 import React, { useRef } from 'react'
 import Popover from '@material-ui/core/Popover'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import { CgProfile } from 'react-icons/cg'
 import Avatar from '@material-ui/core/Avatar'
 import Badge from '@material-ui/core/Badge'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
@@ -10,8 +8,6 @@ import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BiMessage } from 'react-icons/bi'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
 import cx from 'classnames'
 
 const useStyles = makeStyles((theme) => ({
@@ -83,7 +79,6 @@ const UserProfile = ({ func }) => {
 export default function Dropdown(props) {
     const history = useHistory()
     const classes = useStyles()
-    const profileSearch = useRef(null)
     const [anchorEl, setAnchorEl] = React.useState(null)
 
     const handleClick = (event) => {
