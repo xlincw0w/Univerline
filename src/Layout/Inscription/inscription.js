@@ -41,7 +41,7 @@ const Inscription = (props) => {
                 UpdateSignupUser({
                     ...user,
                     id: userCred.uid,
-                    nom_complet: userCred.displayName || user.nom_complet,
+                    nom: userCred.displayName || user.nom,
                     email: userCred.email,
                     isNewUser: false,
                 })
@@ -94,7 +94,7 @@ const Inscription = (props) => {
                         UpdateSignupUser({
                             ...user,
                             id: userCred.user.uid,
-                            nom_complet: user.nom_complet,
+                            nom: user.nom,
                             email: userCred.user.email,
                             isNewUser: userCred.additionalUserInfo.isNewUser,
                         })
@@ -117,26 +117,20 @@ const Inscription = (props) => {
     const handleForm = (e) => {
         e.preventDefault()
         dispatch(SetLoader(true))
-        let data
-        if (user.user_type === 'enseignant') {
-            data = {
-                id_ens: user.id,
-                nom_complet: user.nom_complet,
-                email: user.email,
-                user_type: user.user_type,
-                niveau_ens: user.niveau_ens,
-                domaine_ens: user.domaine_ens,
-            }
-        } else {
-            data = {
-                id_etu: user.id,
-                nom_complet: user.nom_complet,
-                email: user.email,
-                user_type: user.user_type,
-                niveau_edu: user.niveau_edu,
-                domaine_edu: user.domaine_edu,
-                etablissement: user.etablissement,
-            }
+
+        let data = {
+            id_user: user.id,
+            nom: user.nom,
+            prenom: user.prenom,
+            email: user.email,
+            user_type: user.user_type,
+            niveau_edu: user.niveau_edu,
+            domaine_edu: user.domaine_edu,
+            niveau_ens: user.niveau_ens,
+            domaine_ens: user.domaine_ens,
+            user_type: user.user_type,
+            etablissement: user.etablissement,
+            avatar: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.nom}+${user.prenom}`,
         }
 
         Axios.post(constants.url + '/api/inscription/save_user', {
@@ -281,7 +275,7 @@ const Inscription = (props) => {
                                                                     UpdateSignupUser({
                                                                         ...user,
                                                                         id: userCred.user.uid,
-                                                                        nom_complet: userCred.user.displayName,
+                                                                        nom: userCred.user.displayName,
                                                                         email: userCred.user.email,
                                                                         isNewUser: userCred.additionalUserInfo.isNewUser,
                                                                     })
@@ -309,7 +303,7 @@ const Inscription = (props) => {
                                                                     UpdateSignupUser({
                                                                         ...user,
                                                                         id: userCred.user.uid,
-                                                                        nom_complet: userCred.user.displayName,
+                                                                        nom: userCred.user.displayName,
                                                                         email: userCred.user.email,
                                                                         isNewUser: userCred.additionalUserInfo.isNewUser,
                                                                     })
@@ -340,10 +334,22 @@ const Inscription = (props) => {
                                                 <div className='my-5'>
                                                     <TextField
                                                         onChange={(e) => {
-                                                            dispatch(UpdateSignupUser({ ...user, nom_complet: e.target.value }))
+                                                            dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
                                                         }}
                                                         className='w-3/6 shadow'
-                                                        label='Nom complet'
+                                                        label='Nom'
+                                                        variant='outlined'
+                                                        type='text'
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className='my-5'>
+                                                    <TextField
+                                                        onChange={(e) => {
+                                                            dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
+                                                        }}
+                                                        className='w-3/6 shadow'
+                                                        label='Prénom'
                                                         variant='outlined'
                                                         type='text'
                                                         required

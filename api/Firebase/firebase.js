@@ -7,6 +7,8 @@ require('firebase/firestore')
 firebase.initializeApp(firebaseConfig)
 firebase.auth().languageCode = 'fr'
 
+module.exports = firebase
+
 // const provider = new firebase.auth.GoogleAuthProvider()
 // firebase
 //     .auth()
@@ -26,15 +28,15 @@ firebase.auth().languageCode = 'fr'
 //         console.log(err)
 //     })
 
-firebase
-    .auth()
-    .signInWithEmailAndPassword('khaled.khazem@yahoo.com', 'Azerty123')
-    .then((userCred) => {
-        console.log(userCred)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+// firebase
+//     .auth()
+//     .signInWithEmailAndPassword('khaled.khazem@yahoo.com', 'Azerty123')
+//     .then((userCred) => {
+//         console.log(userCred)
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//     })
 
 // firebase.auth().onAuthStateChanged((user) => {
 //     if (user) {

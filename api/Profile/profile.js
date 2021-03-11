@@ -50,57 +50,19 @@ router.route('/get/etudiant/:id').get((req, res) => {
             res.json({ err: true })
         })
 })
-//modifications enseignants
-router.route('/update/enseignant/:id?').post((req, res) => {
+
+router.route('/:id').get((req, res) => {
     const id = req.params.id
-    const { nom, prenom, email, avatar, niveau_enseignement, domaine_enseignement } = req.body
-    if (id.substr(0, 3) === 'ens') {
-        db('enseignant')
-            .where('id_ens', id)
-            .update({
-                nom,
-                prenom,
-                email,
-                avatar,
-                niveau_enseignement,
-                domaine_enseignement,
-            })
-            .then((resp) => {
-                console.log(resp)
-                res.json({ updated: true })
-            })
-            .catch((err) => {
-                console.log(err)
-                res.json({ updated: false })
-            })
-    }
-})
-//modifications etudiants
-router.route('/update/etudiants/:id?').post((req, res) => {
-    const id = req.params.id
-    const { nom, prenom, email, avatar, niveau_enseignement, domaine_enseignement } = req.body
-    if (id.substr(0, 3) === 'etud') {
-        db('etudiant')
-            .where('id_etud', id)
-            .update({
-                nom,
-                prenom,
-                age,
-                email,
-                avatar,
-                date_inscription,
-                niveau_educatif,
-                domaine_educatif,
-            })
-            .then((resp) => {
-                console.log(resp)
-                res.json({ updated: true })
-            })
-            .catch((err) => {
-                console.log(err)
-                res.json({ updated: false })
-            })
-    }
+
+    db('users')
+        .select('*')
+        .where('id_user', id)
+        .then((row) => {
+            res.json(row[0])
+        })
+        .catch((err) => {
+            res.json([])
+        })
 })
 
 module.exports = router

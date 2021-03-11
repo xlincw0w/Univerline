@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, './dist')))
 
 app.use('/api/profile', require('./api/Profile/profile'))
 app.use('/api/inscription', require('./api/Inscription/inscription'))
+app.use('/api/online', require('./api/online'))
 
 app.get('/api/connected', (req, res) => {
     res.json({ connected_to_api: true })

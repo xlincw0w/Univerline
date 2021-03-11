@@ -1,7 +1,8 @@
 const initState = {
     user: {
         id: '',
-        nom_complet: '',
+        nom: '',
+        prenom: '',
         email: '',
         password: '',
         confirmed_password: '',
@@ -11,6 +12,7 @@ const initState = {
         niveau_edu: '',
         domaine_edu: '',
         etablissement: '',
+        avatar: '',
         isNewUser: false,
     },
 
@@ -18,24 +20,15 @@ const initState = {
     loader: false,
 }
 
-const UPDATE_SIGNUP_USER = 'UPDATE_SIGNUP_USER'
+const SET_USER = 'SET_USER'
 const RESET_STATE = 'RESET_STATE'
 const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
 const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
 
-// export const UpdateSignupUser = (payload) => ({
-//     type: UPDATE_SIGNUP_USER,
-//     payload,
-// })
-
-// export const UpdateSignupStep = (payload) => ({
-//     type: UPDATE_SIGNUP_STEP,
-//     payload,
-// })
-
-// export const ResetStateSignup = () => ({
-//     type: RESET_STATE,
-// })
+export const SetUser = (payload) => ({
+    type: SET_USER,
+    payload,
+})
 
 export const SetLoader = (payload) => ({
     type: SET_LOADER_AUTH,
@@ -49,24 +42,11 @@ export const SetFailedAuth = (payload) => ({
 
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
-        // case UPDATE_SIGNUP_USER:
-        //     return {
-        //         ...state,
-        //         user: action.payload,
-        //     }
-
-        // case UPDATE_SIGNUP_STEP:
-        //     return {
-        //         ...state,
-        //         step: action.payload,
-        //     }
-
-        // case RESET_STATE:
-        //     return {
-        //         ...state,
-        //         step: 'auth',
-        //         user: initState.user,
-        //     }
+        case SET_USER:
+            return {
+                ...state,
+                user: action.payload,
+            }
 
         case SET_LOADER_AUTH:
             return {
