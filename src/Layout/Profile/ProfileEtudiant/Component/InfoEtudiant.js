@@ -19,11 +19,12 @@ function createData(name, value) {
 }
 
 const rows = [
-  createData('Nom : ', 'Diabate'),
-  createData('Prenom : ', 'Cheick Oumar'),
-  createData('Age : ', 'XXIII ans'),
+  createData('Nom : ', 'Diabate Cheick Oumar'),
+  createData('Email : ', 'cheick@gmail.com'),
   createData('Niveau Etude: ', 'M2'),
   createData('Domaine Etude : ', 'ISI'),
+  createData('Etablissement : ', 'UMMTO'),
+  createData('Date Inscription : ', '11/03/2021'),
 ];
 
 export default function InfoEtudiant() {

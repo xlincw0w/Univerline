@@ -75,10 +75,10 @@ export default function BoutonModifierProfile() {
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus color='primary' type='submit'>
+                    <Button  onClick={handleClose} color='primary' >
                         Enregistrer
                     </Button>
-                    <Button autoFocus onClick={handleClose} color='primary'>
+                    <Button  onClick={handleClose} color='primary'>
                         Annnuler
                     </Button>
                 </DialogActions>

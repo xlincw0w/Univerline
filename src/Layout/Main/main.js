@@ -14,7 +14,7 @@ import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebas
 
 const Main = () => {
     return (
-        <div className='font-openSans'>
+        <div className='font-openSans overflow-x-hidden'>
             <Router>
                 <div style={{ height: 'auto' }}>
                     <Switch>

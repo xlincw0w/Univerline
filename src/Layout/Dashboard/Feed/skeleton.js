@@ -5,7 +5,7 @@ import { FaComments } from 'react-icons/fa'
 
 const Skeleton = () => {
     const ProfSkeleton = () => (
-        <div className='w-144 h-96 bg-gray-100 shadow-2xl mx-auto rounded-lg my-10 mr-20 '>
+        <div className='w-120 2xl:w-144 h-96 bg-gray-100 shadow-2xl mx-auto rounded-lg my-20'>
             <div className='h-1/4 bg-gradient-to-r from-purple-400 to-purple-600 shadow-xl rounded-xl'>
                 <div className='grid grid-cols-5'>
                     <div className='mx-auto mt-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -49,7 +49,7 @@ const Skeleton = () => {
     )
 
     const StudSkeleton = () => (
-        <div className='w-144 h-96 bg-gray-100 shadow-2xl mx-auto rounded-lg my-10 ml-20'>
+        <div className='w-120 2xl:w-144 h-96 bg-gray-100 shadow-2xl mx-auto rounded-lg my-20'>
             <div className='h-1/4 bg-gradient-to-r from-green-600 to-green-400 shadow-xl rounded-xl'>
                 <div className='grid grid-cols-5'>
                     <div className='mx-auto mt-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -93,16 +93,20 @@ const Skeleton = () => {
     )
 
     return (
-        <div>
-            <StudSkeleton />
-            <ProfSkeleton />
-            <ProfSkeleton />
-            <StudSkeleton />
-            <StudSkeleton />
-            <ProfSkeleton />
-            <StudSkeleton />
-            <ProfSkeleton />
-            <StudSkeleton />
+        <div className='pt-5 grid grid-cols-2'>
+            <div className='mt-32'>
+                <StudSkeleton />
+                <StudSkeleton />
+                <StudSkeleton />
+                <StudSkeleton />
+                <StudSkeleton />
+            </div>
+            <div>
+                <ProfSkeleton />
+                <ProfSkeleton />
+                <ProfSkeleton />
+                <ProfSkeleton />
+            </div>
         </div>
     )
 }
