@@ -33,6 +33,7 @@
         "axios": "^0.21.0",
         "classnames": "^2.2.6",
         "firebase": "^8.2.9",
+        "moment": "^2.29.1",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-icons": "^4.1.0",
