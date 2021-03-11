@@ -55,11 +55,11 @@ const UserProfile = ({ func }) => {
             <div className='mx-auto flex flex-cols' onClick={func}>
                 <div className='block mr-5'>
                     <div className='text-sm text-gray-500'>
-                        <p className='inline mr-2'>{user.nom.capitalize()}</p>
-                        <p className='inline mr-2'>{user.prenom.capitalize()}</p>
+                        <p className='inline mr-2'>{user.nom ? user.nom.capitalize() : ''}</p>
+                        <p className='inline mr-2'>{user.prenom ? user.prenom.capitalize() : ''}</p>
                     </div>
                     <p className={cx('text-sm text-center', { 'text-purple-700': user.user_type === 'enseignant', 'text-green-600': user.user_type === 'etudiant' })}>
-                        {user.user_type.capitalize()}
+                        {user.user_type ? user.user_type.capitalize() : ''}
                     </p>
                 </div>
                 <div>
