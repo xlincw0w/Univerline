@@ -9,7 +9,7 @@ router.route('/:id').get((req, res) => {
         .select('*')
         .where('id_user', id)
         .then((row) => {
-            res.json(row[0])
+            row[0] ? res.json(row[0]) : res.json([])
         })
         .catch((err) => {
             res.json([])
