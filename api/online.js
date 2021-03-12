@@ -3,7 +3,7 @@ const router = express.Router()
 
 const moment = require('moment')
 
-const fire = require('./Firebase/firebase').firestore()
+const fire = require('./firebase/firebase').firestore()
 const db = require('./database')
 
 router.route('/get').get(async (req, res) => {
