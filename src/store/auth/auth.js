@@ -16,17 +16,32 @@ const initState = {
         isNewUser: false,
     },
 
+    classes: [],
+    friends: [],
+
     failedAuth: false,
     loader: false,
 }
 
 const SET_USER = 'SET_USER'
-const RESET_STATE = 'RESET_STATE'
+const SET_FRIENDS = 'SET_FRIENDS'
+const SET_CLASSES = 'SET_CLASSES'
+const RESET_AUTH = 'RESET_STATE'
 const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
 const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
 
 export const SetUser = (payload) => ({
     type: SET_USER,
+    payload,
+})
+
+export const SetFriends = (payload) => ({
+    type: SET_FRIENDS,
+    payload,
+})
+
+export const SetClasses = (payload) => ({
+    type: SET_CLASSES,
     payload,
 })
 
@@ -40,12 +55,22 @@ export const SetFailedAuth = (payload) => ({
     payload,
 })
 
+export const ResetAuthState = () => ({
+    type: RESET_AUTH,
+})
+
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_USER:
             return {
                 ...state,
                 user: action.payload,
+            }
+
+        case SET_FRIENDS:
+            return {
+                ...state,
+                friends: action.payload,
             }
 
         case SET_LOADER_AUTH:
@@ -59,6 +84,15 @@ const AuthReducer = (state = initState, action) => {
                 ...state,
                 failedAuth: action.payload,
             }
+
+        case SET_CLASSES:
+            return {
+                ...state,
+                classes: action.payload,
+            }
+
+        case RESET_AUTH:
+            return initState
     }
 
     return state

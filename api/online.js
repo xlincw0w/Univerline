@@ -1,36 +1,13 @@
 const express = require('express')
 const router = express.Router()
-
 const moment = require('moment')
-
 const fire = require('./Firebase/firebase').firestore()
-const db = require('./database')
 
-router.route('/get').get(async (req, res) => {
-    // fire.collection('online')
-    //     .get()
-    //     .then((resp) => {
-    //         let result = []
-    //         resp.docs.map((doc) => {
-    //             result.push(doc.data())
-    //         })
-    //         res.json(result)
-    //     })
-    //     .catch((err) => {
-    //         result = []
-    //     })
+router.route('/get/:id').get(async (req, res) => {
+    const id = req.params.id
+    const doc = await fire.collection('online').doc(id).get()
 
-    const online = await fire.collection('online').get()
-    const users = await db('users').select('*')
-
-    let result = []
-    online.docs.map((doc) => {
-        result.push(doc.data())
-    })
-
-    online.map()
-
-    console.log(users)
+    res.send(doc.data())
 })
 
 router.route('/update').post((req, res) => {

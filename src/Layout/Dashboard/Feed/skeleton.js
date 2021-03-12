@@ -1,10 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
 import { HiShare } from 'react-icons/hi'
 import { FaComments } from 'react-icons/fa'
 import Comments from './comments'
+import Axios from 'axios'
+import { constants } from '../../../constants'
+import { SetFeed } from '../../../store/feed/feed'
+import moment from 'moment'
 
 const Skeleton = () => {
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.AuthReducer.user)
+    const feed_friends = useSelector((state) => state.FeedReducer.feed_friends)
+
+    useEffect(() => {
+        if (user.user_type === 'etudiant') {
+            Axios.get(constants.url + '/api/post/get/post/' + user.id)
+                .then((res) => {
+                    dispatch(SetFeed(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFeed([]))
+                })
+        }
+    }, [user.id])
+
     const ProfSkeleton = ({ id }) => {
         const [loadComment, setLoadComment] = useState(false)
         return (
@@ -78,22 +99,18 @@ const Skeleton = () => {
         )
     }
 
-    const StudSkeleton = ({ id }) => {
+    const StudSkeleton = ({ elem }) => {
         const [loadComment, setLoadComment] = useState(false)
         return (
-            <div id={id} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div className='h-1/4 bg-gradient-to-r from-green-600 to-green-400 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-4 border-2 border-gray-100 rounded-full shadow-xl'>
-                            <Avatar
-                                alt='Remy Sharp'
-                                src='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                                style={{ width: '4rem', height: '4rem' }}
-                            />
+                            <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '4rem', height: '4rem' }} />
                         </div>
                         <div className='col-span-4 flex'>
                             <div className='mt-5'>
-                                <p className='text-gray-200 text-base'>Khaled Khazem</p>
+                                <p className='text-gray-200 text-base'>{elem.nom + ' ' + elem.prenom}</p>
                                 <p className='text-gray-100 text-sm'>Etudiant</p>
                             </div>
                         </div>
@@ -102,13 +119,10 @@ const Skeleton = () => {
                 <div className='h-auto'>
                     <div className='h-auto'>
                         <div className='mt-2'>
-                            <p className='text-gray-500 text-sm'>06 - 11 - 2020 11:23 h</p>
+                            <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-lg'>Bonjour a tous, le cours de demain sera reporté a la semaine prochaine a l'amphi a1 de b3 b5</p>
-                            <p className='text-gray-600 text-lg'>Bonjour a tous, le cours de demain sera reporté a la semaine prochaine a l'amphi a1 de b3 b5</p>
-                            <p className='text-gray-600 text-lg'>Bonjour a tous, le cours de demain sera reporté a la semaine prochaine a l'amphi a1 de b3 b5</p>
-                            <p className='text-gray-600 text-lg'>Bonjour a tous, le cours de demain sera reporté a la semaine prochaine a l'amphi a1 de b3 b5</p>
+                            <p className='text-gray-600 text-lg'>{elem.payload}</p>
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -147,11 +161,9 @@ const Skeleton = () => {
     return (
         <div className='pt-5 grid grid-cols-2'>
             <div>
-                <StudSkeleton id={0} />
-                <StudSkeleton id={1} />
-                <StudSkeleton id={2} />
-                <StudSkeleton id={3} />
-                <StudSkeleton id={4} />
+                {feed_friends.map((elem) => {
+                    return <StudSkeleton elem={elem} />
+                })}
             </div>
             <div>
                 <ProfSkeleton id={1} />

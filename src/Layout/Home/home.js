@@ -8,6 +8,7 @@ import img3 from './img/image3.png'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { ResetStateSignup } from '../../store/signup/signupReducer'
+import { ResetAuthState } from '../../store/auth/auth'
 
 AOS.init({
     // Global settings:
@@ -36,6 +37,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(ResetStateSignup())
+        dispatch(ResetAuthState())
     }, [])
 
     return (
