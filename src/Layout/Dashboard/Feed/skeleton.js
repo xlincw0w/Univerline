@@ -39,6 +39,41 @@ const Skeleton = () => {
 
     const ProfSkeleton = ({ elem }) => {
         const [loadComment, setLoadComment] = useState(false)
+        const [comments, setComments] = useState([])
+        const [payload, setPayload] = useState('')
+        const [refresh, setRefresh] = useState(0)
+
+        const Reload = () => {
+            setRefresh(refresh + 1)
+        }
+
+        useEffect(() => {
+            if (loadComment) {
+                Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
+                    .then((res) => {
+                        setComments(res.data)
+                    })
+                    .catch((err) => {
+                        setComments([])
+                    })
+            }
+        }, [loadComment, refresh])
+
+        const handleComment = (e) => {
+            e.preventDefault()
+            Axios.post(constants.url + '/api/commentaire/add/comments/', {
+                id_user: user.id,
+                id_poste: elem.id_poste,
+                payload,
+            })
+                .then((res) => {
+                    Reload()
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div className='h-1/4 bg-gradient-to-r from-purple-400 to-purple-600 shadow-xl rounded-xl'>
@@ -82,16 +117,21 @@ const Skeleton = () => {
                     </div>
                     {loadComment && (
                         <div className='w-full h-auto bg-gray-100 shadow rounded'>
-                            <input
-                                type='text'
-                                className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                placeholder='Ecrivez un commentaire !'
-                            />
+                            <form className='w-full' onSubmit={handleComment}>
+                                <input
+                                    type='text'
+                                    required={true}
+                                    onChange={(e) => setPayload(e.target.value)}
+                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    placeholder='Ecrivez un commentaire !'
+                                />
+                                <button type='submit' className='hidden'></button>
+                            </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <div className='w-full h-auto'>
-                                    <Comments id={0} />
-                                    <Comments id={1} />
-                                    <Comments id={2} />
+                                    {comments.map((elem) => {
+                                        return <Comments elem={elem} Reload={Reload} />
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -103,6 +143,41 @@ const Skeleton = () => {
 
     const StudSkeleton = ({ elem }) => {
         const [loadComment, setLoadComment] = useState(false)
+        const [comments, setComments] = useState([])
+        const [payload, setPayload] = useState('')
+        const [refresh, setRefresh] = useState(0)
+
+        const Reload = () => {
+            setRefresh(refresh + 1)
+        }
+
+        useEffect(() => {
+            if (loadComment) {
+                Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
+                    .then((res) => {
+                        setComments(res.data)
+                    })
+                    .catch((err) => {
+                        setComments([])
+                    })
+            }
+        }, [loadComment, refresh])
+
+        const handleComment = (e) => {
+            e.preventDefault()
+            Axios.post(constants.url + '/api/commentaire/add/comments/', {
+                id_user: user.id,
+                id_poste: elem.id_poste,
+                payload,
+            })
+                .then((res) => {
+                    Reload()
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
@@ -152,16 +227,21 @@ const Skeleton = () => {
                     </div>
                     {loadComment && (
                         <div className='w-full h-auto bg-gray-100 shadow rounded'>
-                            <input
-                                type='text'
-                                className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                placeholder='Ecrivez un commentaire !'
-                            />
+                            <form className='w-full' onSubmit={handleComment}>
+                                <input
+                                    type='text'
+                                    required={true}
+                                    onChange={(e) => setPayload(e.target.value)}
+                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    placeholder='Ecrivez un commentaire !'
+                                />
+                                <button type='submit' className='hidden'></button>
+                            </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <div className='w-full h-auto'>
-                                    <Comments id={0} />
-                                    <Comments id={1} />
-                                    <Comments id={2} />
+                                    {comments.map((elem) => {
+                                        return <Comments elem={elem} Reload={Reload} />
+                                    })}
                                 </div>
                             </div>
                         </div>
