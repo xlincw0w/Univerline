@@ -7,7 +7,7 @@ import { FiFolderPlus } from 'react-icons/fi'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../../constants'
-import { RefreshFeed } from '../../../store/feed/feed'
+import { FeedLoading, RefreshFeed } from '../../../store/feed/feed'
 
 const Post = () => {
     const dispatch = useDispatch()
@@ -37,12 +37,14 @@ const Post = () => {
 
     const handlePost = () => {
         if (user.user_type === 'etudiant') {
+            dispatch(FeedLoading(true))
             Axios.post(constants.url + '/api/post/add/post/', {
                 id_classe: '#####',
                 id_user: user.id,
                 payload,
             })
                 .then((res) => {
+                    dispatch(FeedLoading(false))
                     if (res.data.AJOUT) {
                         dispatch(RefreshFeed())
                         console.log('Added')
@@ -51,6 +53,7 @@ const Post = () => {
                     }
                 })
                 .catch((err) => {
+                    dispatch(FeedLoading(false))
                     console.log(err)
                 })
         }
