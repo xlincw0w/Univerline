@@ -47,7 +47,6 @@ const Post = () => {
                     dispatch(FeedLoading(false))
                     if (res.data.AJOUT) {
                         dispatch(RefreshFeed())
-                        console.log('Added')
                     } else {
                         console.log('not added')
                     }
@@ -61,8 +60,16 @@ const Post = () => {
 
     return (
         <div className='w-full mx-auto shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
-            <div className='border-b-2 border-gray-200'>
-                <TextField
+            <div className=''>
+                <textarea
+                    type='text'
+                    className='focus:ring-indigo-500 focus:border-indigo-500 block w-full h-28 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                    placeholder='Exprimez vous !'
+                    onChange={(e) => {
+                        setPayload(e.target.value)
+                    }}
+                />
+                {/* <TextField
                     onChange={(e) => {
                         setPayload(e.target.value)
                     }}
@@ -71,7 +78,7 @@ const Post = () => {
                     multiline
                     rows={4}
                     variant='outlined'
-                />
+                /> */}
             </div>
             <div className=''>
                 <div className='grid grid-cols-4 rounded-xl shadow-xl mx-auto'>
