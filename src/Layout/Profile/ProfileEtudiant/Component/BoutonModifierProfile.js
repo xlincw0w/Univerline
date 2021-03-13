@@ -62,7 +62,7 @@ export default function BoutonModifierProfile() {
 
     return (
         <div>
-            <Button variant='outlined' color='primary' onClick={handleClickOpen}>
+            <Button className='focus:outline-none' variant='outlined' color='primary' onClick={handleClickOpen}>
                 Modifier le profil
             </Button>
             <Dialog onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>
@@ -75,10 +75,10 @@ export default function BoutonModifierProfile() {
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus color='primary' type='submit'>
+                    <Button  onClick={handleClose} color='primary' >
                         Enregistrer
                     </Button>
-                    <Button autoFocus onClick={handleClose} color='primary'>
+                    <Button  onClick={handleClose} color='primary'>
                         Annnuler
                     </Button>
                 </DialogActions>

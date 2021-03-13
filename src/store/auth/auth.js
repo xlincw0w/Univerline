@@ -1,7 +1,8 @@
 const initState = {
     user: {
         id: '',
-        nom_complet: '',
+        nom: '',
+        prenom: '',
         email: '',
         password: '',
         confirmed_password: '',
@@ -11,31 +12,38 @@ const initState = {
         niveau_edu: '',
         domaine_edu: '',
         etablissement: '',
+        avatar: '',
         isNewUser: false,
     },
+
+    classes: [],
+    friends: [],
 
     failedAuth: false,
     loader: false,
 }
 
-const UPDATE_SIGNUP_USER = 'UPDATE_SIGNUP_USER'
-const RESET_STATE = 'RESET_STATE'
+const SET_USER = 'SET_USER'
+const SET_FRIENDS = 'SET_FRIENDS'
+const SET_CLASSES = 'SET_CLASSES'
+const RESET_AUTH = 'RESET_STATE'
 const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
 const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
 
-// export const UpdateSignupUser = (payload) => ({
-//     type: UPDATE_SIGNUP_USER,
-//     payload,
-// })
+export const SetUser = (payload) => ({
+    type: SET_USER,
+    payload,
+})
 
-// export const UpdateSignupStep = (payload) => ({
-//     type: UPDATE_SIGNUP_STEP,
-//     payload,
-// })
+export const SetFriends = (payload) => ({
+    type: SET_FRIENDS,
+    payload,
+})
 
-// export const ResetStateSignup = () => ({
-//     type: RESET_STATE,
-// })
+export const SetClasses = (payload) => ({
+    type: SET_CLASSES,
+    payload,
+})
 
 export const SetLoader = (payload) => ({
     type: SET_LOADER_AUTH,
@@ -47,26 +55,23 @@ export const SetFailedAuth = (payload) => ({
     payload,
 })
 
+export const ResetAuthState = () => ({
+    type: RESET_AUTH,
+})
+
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
-        // case UPDATE_SIGNUP_USER:
-        //     return {
-        //         ...state,
-        //         user: action.payload,
-        //     }
+        case SET_USER:
+            return {
+                ...state,
+                user: action.payload,
+            }
 
-        // case UPDATE_SIGNUP_STEP:
-        //     return {
-        //         ...state,
-        //         step: action.payload,
-        //     }
-
-        // case RESET_STATE:
-        //     return {
-        //         ...state,
-        //         step: 'auth',
-        //         user: initState.user,
-        //     }
+        case SET_FRIENDS:
+            return {
+                ...state,
+                friends: action.payload,
+            }
 
         case SET_LOADER_AUTH:
             return {
@@ -79,6 +84,15 @@ const AuthReducer = (state = initState, action) => {
                 ...state,
                 failedAuth: action.payload,
             }
+
+        case SET_CLASSES:
+            return {
+                ...state,
+                classes: action.payload,
+            }
+
+        case RESET_AUTH:
+            return initState
     }
 
     return state

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
@@ -22,12 +21,6 @@ function TabPanel(props) {
             )}
         </div>
     )
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
 }
 
 function a11yProps(index) {
@@ -63,10 +56,11 @@ export default function Onglets() {
                     textColor='primary'
                     variant='scrollable'
                     scrollButtons='auto'
+
                     aria-label='scrollable auto tabs example'>
-                    <Tab label='SUPPORTS DE COURS' {...a11yProps(0)} />
-                    <Tab label='PROFS' {...a11yProps(1)} />
-                    <Tab label='AMIS' {...a11yProps(2)} />
+                    <Tab label='SUPPORTS DE COURS' {...a11yProps(0)} className='focus:outline-none' />
+                    <Tab label='PROFS' {...a11yProps(1)} className='focus:outline-none' />
+                    <Tab label='AMIS' {...a11yProps(2)} className='focus:outline-none' />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>

@@ -1,9 +1,6 @@
 @media(max-width:960px){
-    .centrer{
-        text-align: center;
-    }
     .centrerImage{
-        margin: 50%;
+        display: inline-block;
     }
 }
 
