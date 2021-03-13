@@ -3,6 +3,7 @@ const router = express.Router()
 const db = require('../database')
 const moment = require('moment')
 const { concat, orderBy } = require('lodash')
+const { v4 } = require('uuid')
 
 //recuperer la table post
 router.route('/get/post').get((req, res) => {
@@ -18,19 +19,51 @@ router.route('/get/post').get((req, res) => {
 })
 
 //les poste d un etudiant X
-
 router.route('/get/post/:id?').get(async (req, res) => {
     const id = req.params.id
 
-    const friends = await db('users')
+    const user = await db('users').select('*').where({ id_user: id })
+    var friends = await db('users')
         .whereIn('id_user', db('amis').where({ id_user: id, confirm: true }).select('id_ami'))
         .select('*')
+
+    friends = concat(friends, user)
 
     var postes = []
 
     await Promise.all(
         friends.map(async (elem) => {
-            let data = await db('poste').select('*').leftJoin('users', 'users.id_user', 'poste.id_poste').where('id_poste', elem.id_user).orderBy('date_poste', 'desc').limit(10)
+            let data = await db('poste')
+                .select('*')
+                .leftJoin('users', 'users.id_user', 'poste.id_user')
+                .where('poste.id_user', elem.id_user)
+                .orderBy('date_poste', 'desc')
+                .limit(10)
+            postes = concat(postes, data)
+        })
+    )
+
+    postes = orderBy(postes, 'date_poste', 'desc')
+
+    res.json(postes)
+})
+
+router.route('/get/post_ens/:id?').get(async (req, res) => {
+    const id = req.params.id
+
+    const classes = await db('classe').select('*').leftJoin('adherant', 'classe.id_classe', 'adherant.id_classe').where({ id_etu: id, confirm: true })
+
+    var postes = []
+
+    await Promise.all(
+        classes.map(async (elem) => {
+            let data = await db('poste')
+                .select('*')
+                .leftJoin('classe', 'poste.id_classe', 'classe.id_classe')
+                .leftJoin('users', 'users.id_user', 'classe.id_ens')
+                .where('poste.id_classe', elem.id_classe)
+                .orderBy('date_poste', 'desc')
+                .limit(10)
             postes = concat(postes, data)
         })
     )
@@ -46,8 +79,9 @@ router.route('/add/post/').post((req, res) => {
 
     db('poste')
         .insert({
-            id_poste: data.id_poste,
-            id_classe: data.id_classe,
+            id_poste: v4().split('-').join(''),
+            id_user: data.id_classe === '#####' ? data.id_user : '&&&&&',
+            id_classe: data.id_user === '&&&&&' ? data.id_classe : '#####',
             payload: data.payload,
             date_poste: moment().format(),
         })
