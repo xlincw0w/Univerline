@@ -34,7 +34,7 @@ const rows = [
     createData('Mr Kerbiche', 'Architecture logicielle'),
 ]
 
-export default function ListProfs() {
+export default function ListsProfs() {
     const classes = useStyles()
 
     return (
@@ -53,7 +53,7 @@ export default function ListProfs() {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.name}>
-                            <TableCell component='th' scope='row' >
+                            <TableCell component='th' scope='row'>
                                 <Link to={`/profile/${row.name}/${row.module}`}> {row.name} </Link>
                             </TableCell>
                             <TableCell align='right'>{row.module}</TableCell>

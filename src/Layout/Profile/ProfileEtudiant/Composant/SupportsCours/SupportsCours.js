@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export default function ControlledAccordions() {
+export default function SupportsCours() {
     const classes = useStyles()
     const [expanded, setExpanded] = React.useState(false)
 
@@ -35,12 +35,6 @@ export default function ControlledAccordions() {
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1bh-content' id='panel1bh-header'>
                     <Typography className={classes.heading}>Data Mining</Typography>
-                    <Typography className={classes.secondaryHeading}>
-                        <label htmlFor='ok'>
-                            <input type='file' id='ok' style={{ display: 'none' }} />
-                            Ajout de cours
-                        </label>
-                    </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>Support de cours de Data Mining</Typography>
@@ -49,12 +43,6 @@ export default function ControlledAccordions() {
             <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2bh-content' id='panel2bh-header'>
                     <Typography className={classes.heading}>CPI</Typography>
-                    <Typography className={classes.secondaryHeading}>
-                        <label htmlFor='ok'>
-                            <input type='file' id='ok' style={{ display: 'none' }} />
-                            Ajout de cours
-                        </label>
-                    </Typography>{' '}
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>Support de cours de CPI</Typography>
@@ -63,12 +51,6 @@ export default function ControlledAccordions() {
             <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel3bh-content' id='panel3bh-header'>
                     <Typography className={classes.heading}>Architecture Logicielle</Typography>
-                    <Typography className={classes.secondaryHeading}>
-                        <label htmlFor='ok'>
-                            <input type='file' id='ok' style={{ display: 'none' }} />
-                            Ajout de cours
-                        </label>
-                    </Typography>{' '}
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>Support de cours de Architecture Logicielle</Typography>
@@ -77,12 +59,6 @@ export default function ControlledAccordions() {
             <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel4bh-content' id='panel4bh-header'>
                     <Typography className={classes.heading}>Recherche d'Information</Typography>
-                    <Typography className={classes.secondaryHeading}>
-                        <label htmlFor='ok'>
-                            <input type='file' id='ok' style={{ display: 'none' }} />
-                            Ajout de cours
-                        </label>
-                    </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>Support de cours de Recherche d'Information</Typography>

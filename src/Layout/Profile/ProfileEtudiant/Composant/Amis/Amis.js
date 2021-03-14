@@ -1,11 +1,11 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import AffichageAmis from './Amis/AffichageAmis'
 import { Paper } from '@material-ui/core'
 
 import InputBase from '@material-ui/core/InputBase'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import SearchIcon from '@material-ui/icons/Search'
+import AffichageAmis from './Composant/AffichageAmis'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1),
         textAlign: 'left',
         color: theme.palette.text.primary,
-        marginLeft: '9px'
+        marginLeft: '9px',
     },
     search: {
         position: 'relative',
@@ -53,13 +53,13 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: '33ch',
             '&:focus': {
-                width: '77ch',
+                width: '56ch',
             },
         },
     },
 }))
 
-export default function CenteredGrid() {
+export default function Amis() {
     const classes = useStyles()
 
     return (
@@ -86,16 +86,7 @@ export default function CenteredGrid() {
             </Grid>
             <br />
             <Grid container spacing={2}>
-                <Grid item md={6} xs={12}>
-                    <AffichageAmis />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                    <AffichageAmis />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                    <AffichageAmis />
-                </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item xs={12}>
                     <AffichageAmis />
                 </Grid>
             </Grid>
