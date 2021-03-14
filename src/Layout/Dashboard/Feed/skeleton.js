@@ -56,7 +56,7 @@ const Skeleton = () => {
                 </div>
                 <div className='h-auto'>
                     <div className='h-auto'>
-                        <div className='mt-2'>
+                        <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
                         </div>
@@ -131,7 +131,7 @@ const Skeleton = () => {
                 </div>
                 <div className='h-auto'>
                     <div className='h-auto'>
-                        <div className='mt-2'>
+                        <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>

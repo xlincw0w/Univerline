@@ -16,9 +16,7 @@ import firebase from 'firebase/app'
 import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
 import Axios from 'axios'
 import { constants } from '../../constants'
-
-import { useSelector, useDispatch } from 'react-redux'
-import { SetUser } from '../../store/auth/auth'
+import PendingList from '../Profile/PendingList'
 
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1)
@@ -57,9 +55,13 @@ const Main = () => {
                                     }, 60000)
                                     return (
                                         <React.Fragment>
-                                            <Route path='/profile'>
+                                            <Route path='/profile/:id'>
                                                 <Header />
                                                 <Profile />
+                                            </Route>
+                                            <Route path='/pending'>
+                                                <Header />
+                                                <PendingList />
                                             </Route>
                                             <Route path='/messagerie'>
                                                 <Header />
@@ -86,9 +88,6 @@ const Main = () => {
                                             <Route path='/inscription'>
                                                 <Header />
                                                 <Inscription />
-                                            </Route>
-                                            <Route path='/profile'>
-                                                <Profile />
                                             </Route>
                                             <Route path='/messagerie'>
                                                 <Header />
