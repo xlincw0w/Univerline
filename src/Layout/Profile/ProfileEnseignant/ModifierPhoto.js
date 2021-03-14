@@ -7,7 +7,7 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera'
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(0),
         },
     },
     input: {
@@ -22,7 +22,7 @@ export default function ModifierPhoto() {
         <div className={classes.root}>
             <input accept='image/*' className={classes.input} id='contained-button-file' multiple type='file' />
             <label htmlFor='contained-button-file'>
-                <Button variant='contained' color='primary' component='span' size='small'>
+                <Button variant='contained' color='primary' component='span' style={{ margin: '5px' }}>
                     Modifier
                 </Button>
             </label>

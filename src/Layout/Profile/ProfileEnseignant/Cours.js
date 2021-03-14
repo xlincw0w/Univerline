@@ -13,7 +13,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import StarBorder from '@material-ui/icons/StarBorder'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import PictureInPictureIcon from '@material-ui/icons/PictureInPicture';
+import PictureInPictureIcon from '@material-ui/icons/PictureInPicture'
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf'
 
 const useStyles = makeStyles(theme => ({
@@ -36,15 +36,7 @@ export default function Cours() {
     }
 
     return (
-        <List
-            component='nav'
-            aria-labelledby='nested-list-subheader'
-            subheader={
-                <ListSubheader component='div' id='nested-list-subheader'>
-                    Mes cours
-                </ListSubheader>
-            }
-            className={classes.root}>
+        <List component='nav' aria-labelledby='nested-list-subheader' className={classes.root}>
             <ListItem button>
                 <ListItemIcon>
                     <PictureAsPdfIcon />
@@ -59,7 +51,7 @@ export default function Cours() {
             </ListItem>
             <ListItem button onClick={handleClick}>
                 <ListItemIcon>
-                    < PictureInPictureIcon/>
+                    <PictureInPictureIcon />
                 </ListItemIcon>
                 <ListItemText primary='Présentation cours 1' />
             </ListItem>

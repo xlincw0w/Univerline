@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { FiUsers } from 'react-icons/fi'
 import Button from '@material-ui/core/Button'
+import Axios from 'axios'
+import { constants } from '../../constants'
+import { SetClasses } from '../../store/auth/auth'
 
 export default function Feature1() {
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.AuthReducer.user)
+    const classes = useSelector((state) => state.AuthReducer.classes)
+
+    useEffect(() => {
+        if (user.user_type === 'enseignant') {
+            Axios.get(constants.url + '/api/classe/get/classe/' + user.id)
+                .then((res) => {
+                    dispatch(SetClasses(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetClasses([]))
+                })
+        } else if (user.user_type === 'etudiant') {
+            Axios.get(constants.url + '/api/classe/get/classe/etu/' + user.id)
+                .then((res) => {
+                    dispatch(SetClasses(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetClasses([]))
+                })
+        }
+    }, [user.id])
+
     return (
         <div className='bg-gray-50 h-2/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll'>
             <div className='text-gray-700 text-base'>
@@ -12,20 +40,14 @@ export default function Feature1() {
                 </div>
             </div>
             <div className='border-b-2 mt-3 border-green-400 w-48'></div>
-            {/* <hr></hr> */}
             <div className='mt-5 ml-5'>
-                <div className='my-2'>
-                    <Button className='block'>Conduite de projet informatique</Button>
-                </div>
-                <div className='my-2'>
-                    <Button className='block'>Ingénieurie systeme d'information</Button>
-                </div>
-                <div className='my-2'>
-                    <Button className='block'>Droit informatique</Button>
-                </div>
-                <div className='my-2'>
-                    <Button className='block'>Rédaction scientifique</Button>
-                </div>
+                {classes.map((elem) => {
+                    return (
+                        <div id={elem.id_classe} className='my-2'>
+                            <Button className='block'>{elem.libelle_classe}</Button>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )

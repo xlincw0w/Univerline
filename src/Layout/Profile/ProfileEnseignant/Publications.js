@@ -64,13 +64,13 @@ export default function Publications() {
                     </IconButton>
                 }
                 align='left'
-                title='John Doe'
+                title='Jane Doe'
                 subheader='September 17, 2021'
             />
 
             <CardContent>
                 <Typography Align='left' variant='body2' color='textSecondary' component='p'>
-                    Celle ci est une publication test, qui vas etre publiée par l'esnseignant John Doe le 17/09/2021. John Doe vas pouvoir supprimer,ou modifier sa publication.
+                    Celle ci est une publication test, qui vas etre publiée par l'esnseignante Jane Doe le 17/09/2021. John Doe vas pouvoir supprimer,ou modifier sa publication.
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

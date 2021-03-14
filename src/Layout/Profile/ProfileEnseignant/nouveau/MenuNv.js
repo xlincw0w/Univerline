@@ -6,14 +6,10 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import Publications from './Publications'
-import PhotoProfil from './PhotoProfil'
-import VisiterProfil from './VisiterProfil'
-import Support from './Support'
-import AjouterModule from './AjouterClasse'
-import Classes from './Classes'
-import Freinds from './Freinds'
-import ProfileNv from './nouveau/ProfileNv'
+import Publications from '../Publications'
+import Freinds from '../Freinds'
+import Classes from '../Classes'
+import Support from '../Support'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -50,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function Menu() {
+export default function MenuNv() {
     const classes = useStyles()
     const [value, setValue] = React.useState(0)
 
@@ -72,8 +68,7 @@ export default function Menu() {
                     <Tab label='Publications' {...a11yProps(0)} />
                     <Tab label='Amis' {...a11yProps(1)} />
                     <Tab label='Classes' {...a11yProps(2)} />
-                    <Tab label='Support' {...a11yProps(3)} />
-                    <Tab label='Profile' {...a11yProps(4)} />
+                    <Tab label='Supports' {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -87,9 +82,6 @@ export default function Menu() {
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <Support />
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                <ProfileNv />
             </TabPanel>
         </div>
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Users from './users'
 import { makeStyles } from '@material-ui/core/styles'
 import img from '../img/1.jpg'
@@ -6,7 +6,6 @@ import img2 from '../img/2.jpg'
 import img3 from '../img/3.jpg'
 import img4 from '../img/4.jpg'
 import Grid from '@material-ui/core/Grid'
-import SearchIcon from '@material-ui/icons/Search'
 import Avatar from '@material-ui/core/Avatar'
 import './partie1.css'
 
@@ -22,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function partie1(props) {
     const {onclick2}=props;
+    const [searchUser, setsearchUser]= useState('')
 
 
     const users = {
@@ -61,24 +61,28 @@ export default function partie1(props) {
                 LastName: 'Lampard',
                 Image: img2,
                 Statu: 'Etudiant(e)',
+     
             },
             {
                 FirstName: 'Naim',
                 LastName: 'Bessaha',
                 Image: img4,
                 Statu: 'Etudiant(e)',
+
             },
             {
                 FirstName: 'Malik',
                 LastName: 'Si-Mohamed',
                 Image: img3,
                 Statu: 'Professeur',
+             
             },
             {
                 FirstName: 'Franck',
                 LastName: 'Lampard',
                 Image: img2,
                 Statu: 'Etudiant(e)',
+                
             },
         ],
     }
@@ -97,17 +101,24 @@ export default function partie1(props) {
                     <h1>Ma Messagerie</h1>
                 </Grid>
                 <Grid xs={12} className='form1'>
-                    <form style={{ display: 'flex' }}>
-                        <input className='usersInput outline-none focus:outline-none' placeholder='Recherche contact...' />
-                        <button className='usersButton outline-none focus:outline-none'>
-                            <SearchIcon />
-                        </button>
-                    </form>
+                   
+                        <input className='usersInput outline-none focus:outline-none' placeholder="Recherche Contacts..." onChange={(event) => {
+                            setsearchUser(event.target.value);
+                        } }  />
+                       
                 </Grid>
             </Grid>
         </Grid>
         <Grid xs={12} className='over' style={{ height: '70%' }}>
-            {users.utilisateurs.map((user) => (
+            {users.utilisateurs.filter((user) => {
+                if (searchUser === ''){
+                    return user
+                }else if (user.FirstName.toLowerCase().includes(searchUser.toLowerCase()) || user.LastName.toLowerCase().includes(searchUser.toLowerCase())){
+                    return user
+                }
+            }
+
+            ).map((user) => (
                 <Users user={user} onclick={onclick2} />
             ))}
         </Grid>

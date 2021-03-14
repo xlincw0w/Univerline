@@ -6,17 +6,17 @@ const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
-            width: '60ch',
+            width: '24ch',
         },
     },
 }))
 
-export default function RechercherAmis() {
+export default function AjouterAmi() {
     const classes = useStyles()
 
     return (
         <form className={classes.root} noValidate autoComplete='off'>
-            <TextField id='outlined-basic' label='Rechercher parmis les amis' variant='outlined' />
+            <TextField id='outlined-basic' label='Ajouter des amis' variant='outlined' />
         </form>
     )
 }
