@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Badge from '@material-ui/core/Badge'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
+import Axios from 'axios'
+import { constants } from '../../../constants'
+import cx from 'classnames'
+import moment from 'moment'
 
-const Online = () => {
+const Online = ({ id, nom, prenom, avatar, user_type }) => {
     const StyledBadge = withStyles((theme) => ({
         badge: {
             backgroundColor: '#44b700',
@@ -32,8 +36,24 @@ const Online = () => {
             },
         },
     }))(Badge)
+
+    const [userData, setUserData] = useState(null)
+
+    useEffect(() => {
+        Axios.get(constants.url + '/api/online/get/' + id)
+            .then((res) => {
+                setUserData(res.data.last_seen)
+            })
+            .catch((err) => {
+                setUserData(null)
+            })
+    }, [])
+
+    const diff = moment.duration(moment().diff(moment(userData))).asSeconds()
+    console.log(nom, prenom, diff)
+
     return (
-        <div className='my-2 cursor-pointer duration-300 hover:bg-gray-100'>
+        <div id={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff === 0 || diff > 300 ? true : false })}>
             <div className='mx-auto mt-3 flex flex-cols'>
                 <div>
                     <StyledBadge
@@ -44,12 +64,12 @@ const Online = () => {
                         }}
                         style={{ width: '3rem', height: '3rem' }}
                         variant='dot'>
-                        <Avatar alt='Remy Sharp' src='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' />
+                        <Avatar alt='Remy Sharp' src={avatar} />
                     </StyledBadge>
                 </div>
                 <div className='inline-block ml-4'>
-                    <p className='text-sm text-gray-500'>Khazem Khaled</p>
-                    <p className='text-sm text-gray-500'>Enseignant</p>
+                    <p className='text-sm text-gray-500'>{nom.capitalize() + ' ' + prenom.capitalize()}</p>
+                    <p className={cx('text-sm', { 'text-green-600': user_type === 'etudiant', 'text-purple-700': user_type === 'enseignant' })}>{user_type.capitalize()}</p>
                 </div>
             </div>
         </div>

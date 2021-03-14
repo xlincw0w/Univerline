@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import firebase from 'firebase/app'
 import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
 import plume1 from '../../Assets/Images/plume1.jpg'
 import Dropdown from './Popover/popover'
-import Online from '../Dashboard/Online/online'
+import Axios from 'axios'
+import { constants } from '../../constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { SetUser } from '../../store/auth/auth'
 
 export default function Header() {
+    const dispatch = useDispatch()
     const history = useHistory()
+
     const disconnect = () => {
         firebase
             .auth()
@@ -19,6 +24,34 @@ export default function Header() {
                 history.push('/')
             })
     }
+
+    useEffect(() => {
+        const user = firebase.auth().currentUser
+
+        if (user) {
+            Axios.get(constants.url + '/api/profile/' + user.uid)
+                .then((res) => {
+                    dispatch(
+                        SetUser({
+                            id: res.data.id_user,
+                            nom: res.data.nom,
+                            prenom: res.data.prenom,
+                            email: res.data.email,
+                            user_type: res.data.user_type,
+                            niveau_ens: res.data.niveau_ens,
+                            domaine_ens: res.data.domaine_ens,
+                            niveau_edu: res.data.niveau_edu,
+                            domaine_edu: res.data.domaine_edu,
+                            etablissement: res.data.etablissement,
+                            avatar: res.data.avatar,
+                        })
+                    )
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+    }, [])
 
     return (
         <FirebaseAuthConsumer>
@@ -46,6 +79,9 @@ export default function Header() {
                                     </div>
                                     <div className='flex flex-row-reverse'>
                                         <div className='mr-10 mt-3 flex flex-cols'>
+                                            <div className='mr-8'>
+                                                <Dropdown item='profilesearch' />
+                                            </div>
                                             <div className='mr-2 cursor-pointer'>
                                                 <Dropdown item='messagerie' />
                                             </div>

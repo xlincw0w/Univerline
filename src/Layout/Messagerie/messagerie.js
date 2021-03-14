@@ -17,6 +17,7 @@ export default function messagerie() {
     
 
     const vava = (user) => {
+ 
         setFirstName(user.FirstName)
         setLastName(user.LastName)
         setImage(user.Image)
@@ -28,7 +29,7 @@ export default function messagerie() {
          
             <Grid container style={{ height: '89vh' }}>
 
-                <Partie1 onclick2={vava}/>
+                <Partie1 onclick2={vava} />
                 
                 <Partie2 FirstName={FirstName} LastName={LastName} Image={Image}/>
 

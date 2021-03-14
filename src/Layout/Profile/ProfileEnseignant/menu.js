@@ -7,13 +7,13 @@ import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import Publications from './Publications'
-import AfficherAmis from './AfficherAmis'
 import PhotoProfil from './PhotoProfil'
 import VisiterProfil from './VisiterProfil'
 import Support from './Support'
 import AjouterModule from './AjouterClasse'
 import Classes from './Classes'
 import Freinds from './Freinds'
+import ProfileNv from './nouveau/ProfileNv'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -73,6 +73,7 @@ export default function Menu() {
                     <Tab label='Amis' {...a11yProps(1)} />
                     <Tab label='Classes' {...a11yProps(2)} />
                     <Tab label='Support' {...a11yProps(3)} />
+                    <Tab label='Profile' {...a11yProps(4)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -86,6 +87,9 @@ export default function Menu() {
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <Support />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <ProfileNv />
             </TabPanel>
         </div>
     )

@@ -1,0 +1,537 @@
+
+{
+  "header": {
+    "reportVersion": 2,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210312.193819.1692.0.001.json",
+    "dumpEventTime": "2021-03-12T19:38:19Z",
+    "dumpEventTimeStamp": "1615577899075",
+    "processId": 1692,
+    "threadId": null,
+    "cwd": "C:\\Users\\pc\\Desktop\\socialnetwork",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\pc\\Desktop\\socialnetwork\\node_modules\\.bin\\\\..\\webpack\\bin\\webpack.js",
+      "serve",
+      "--config",
+      "webpack.dev.js"
+    ],
+    "nodejsVersion": "v12.16.3",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.3",
+      "v8": "7.8.279.23-node.35",
+      "uv": "1.34.2",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.16.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1g",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.3/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.17134",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 19351187,
+        "nice": 0,
+        "sys": 14713843,
+        "idle": 78842046,
+        "irq": 1934390
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 19109890,
+        "nice": 0,
+        "sys": 11502265,
+        "idle": 82294656,
+        "irq": 818468
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 20549765,
+        "nice": 0,
+        "sys": 11730828,
+        "idle": 80626234,
+        "irq": 379203
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-6200U CPU @ 2.30GHz",
+        "speed": 2400,
+        "user": 19273265,
+        "nice": 0,
+        "sys": 10753156,
+        "idle": 82880390,
+        "irq": 378609
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "VMware Network Adapter VMnet1",
+        "internal": false,
+        "mac": "00:50:56:c0:00:01",
+        "address": "fe80::cdf2:1099:3bfa:c053",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 28
+      },
+      {
+        "name": "VMware Network Adapter VMnet1",
+        "internal": false,
+        "mac": "00:50:56:c0:00:01",
+        "address": "192.168.2.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VMware Network Adapter VMnet8",
+        "internal": false,
+        "mac": "00:50:56:c0:00:08",
+        "address": "fe80::d9d8:7f22:b3ed:7011",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 15
+      },
+      {
+        "name": "VMware Network Adapter VMnet8",
+        "internal": false,
+        "mac": "00:50:56:c0:00:08",
+        "address": "192.168.230.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VMware Network Adapter VMnet2",
+        "internal": false,
+        "mac": "00:50:56:c0:00:02",
+        "address": "fe80::e0fa:4cd6:e076:b5c3",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 13
+      },
+      {
+        "name": "VMware Network Adapter VMnet2",
+        "internal": false,
+        "mac": "00:50:56:c0:00:02",
+        "address": "192.168.1.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "30:f7:72:0e:c4:49",
+        "address": "fe80::5d3d:6118:199f:d9b5",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 10
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "30:f7:72:0e:c4:49",
+        "address": "192.168.0.142",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "Cylia"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff6ac4b2449",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+11577"
+    },
+    {
+      "pc": "0x00007ff6ac4b69a9",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+29337"
+    },
+    {
+      "pc": "0x00007ff6ac4b5828",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24856"
+    },
+    {
+      "pc": "0x00007ff6ac5ed8c2",
+      "symbol": "v8::base::CPU::has_sse+68658"
+    },
+    {
+      "pc": "0x00007ff6ace09bbe",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff6acdf1c91",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff6accbe1ec",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff6accc9420",
+      "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
+    },
+    {
+      "pc": "0x00007ff6accc5f44",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
+    },
+    {
+      "pc": "0x00007ff6accbb743",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff6accb9db4",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2452"
+    },
+    {
+      "pc": "0x00007ff6accdafbd",
+      "symbol": "v8::internal::Factory::NewFillerObject+61"
+    },
+    {
+      "pc": "0x00007ff6aca41871",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+1665"
+    },
+    {
+      "pc": "0x00007ff6ad256c4d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+546637"
+    },
+    {
+      "pc": "0x0000011e74ae3286",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2177130496,
+    "totalCommittedMemory": 2177130496,
+    "usedMemory": 2152970000,
+    "availableMemory": 40631520,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 22020096,
+        "committedMemory": 22020096,
+        "capacity": 10998288,
+        "used": 2634760,
+        "available": 8363528
+      },
+      "old_space": {
+        "memorySize": 438972416,
+        "committedMemory": 438972416,
+        "capacity": 437395080,
+        "used": 436810176,
+        "available": 584904
+      },
+      "code_space": {
+        "memorySize": 3313664,
+        "committedMemory": 3313664,
+        "capacity": 2685312,
+        "used": 2685312,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 4460544,
+        "committedMemory": 4460544,
+        "capacity": 3535760,
+        "used": 3535760,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 1707479040,
+        "committedMemory": 1707479040,
+        "capacity": 1706726896,
+        "used": 1706726896,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 544288,
+        "used": 544288,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 10998288,
+        "used": 0,
+        "available": 10998288
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 696.968,
+    "kernelCpuSeconds": 66.781,
+    "cpuConsumptionPercent": 2.60799,
+    "maxRss": 1696796672,
+    "pageFaults": {
+      "IORequired": 12453827,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 8752,
+      "writes": 6
+    }
+  },
+  "libuv": [
+  ],
+  "workers": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\Users\\pc\\Desktop\\socialnetwork",
+    "aliases": "C:\\laragon\\bin\\cmder\\config\\user-aliases.cmd",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\pc\\AppData\\Roaming",
+    "architecture": "64",
+    "asl.log": "Destination=file",
+    "CMDER_ROOT": "C:\\laragon\\bin\\cmder",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "CYLIA",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "DB_DATABASE": "df3138n0ms56eg",
+    "DB_HOST": "ec2-54-228-174-49.eu-west-1.compute.amazonaws.com",
+    "DB_PASSWORD": "6a32aa7534dd4f5f398e3265ae4a9e465dfcc7838d24dc6406abe16f760c4910",
+    "DB_USER": "evdpzvacfvzatb",
+    "DOCUMENT_ROOT": "C:",
+    "dp0": "C:\\Users\\pc\\AppData\\Roaming\\npm\\",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "ESET_OPTIONS": "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "FULL_TITLE": "\"C:\\Users\\pc\\Desktop\\socialnetwork\"",
+    "GIT_INSTALL_ROOT": "C:\\Program Files\\Git",
+    "HOME": "C:\\Users\\pc",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\pc",
+    "INIT_CWD": "C:\\Users\\pc\\Desktop\\socialnetwork",
+    "LARAGON_ROOT": "C:\\laragon\\",
+    "LOCALAPPDATA": "C:\\Users\\pc\\AppData\\Local",
+    "LOGONSERVER": "\\\\CYLIA",
+    "NODE": "C:\\Program Files\\nodejs\\node.exe",
+    "NODE_ENV": "DEVELOPMENT",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"start\"],\"original\":[\"start\"]}",
+    "npm_config_bin_links": "true",
+    "npm_config_ignore_optional": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_init_license": "MIT",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "npm_config_save_prefix": "^",
+    "npm_config_strict_ssl": "true",
+    "npm_config_user_agent": "yarn/1.22.10 npm/? node/v12.16.3 win32 x64",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_version_git_message": "v%s",
+    "npm_config_version_git_sign": "",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_tag_prefix": "v",
+    "npm_execpath": "C:\\Users\\pc\\AppData\\Roaming\\npm\\node_modules\\yarn\\bin\\yarn.js",
+    "npm_lifecycle_event": "start",
+    "npm_lifecycle_script": "tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack serve --config webpack.dev.js ",
+    "npm_node_execpath": "C:\\Program Files\\nodejs\\node.exe",
+    "npm_package_author_name": "xlincw0w",
+    "npm_package_dependencies_aos": "^2.3.4",
+    "npm_package_dependencies_axios": "^0.21.0",
+    "npm_package_dependencies_classnames": "^2.2.6",
+    "npm_package_dependencies_firebase": "^8.2.9",
+    "npm_package_dependencies_react": "^17.0.1",
+    "npm_package_dependencies_react_dom": "^17.0.1",
+    "npm_package_dependencies_react_icons": "^4.1.0",
+    "npm_package_dependencies_react_particles_js": "^3.4.1",
+    "npm_package_dependencies_react_redux": "^7.2.2",
+    "npm_package_dependencies_react_router_dom": "^5.2.0",
+    "npm_package_dependencies_react_scroll_to_bottom": "^4.1.0",
+    "npm_package_dependencies_react_scroll_to_top": "^1.0.5",
+    "npm_package_dependencies_redux": "^4.0.5",
+    "npm_package_dependencies_redux_logger": "^3.0.6",
+    "npm_package_dependencies_redux_thunk": "^2.3.0",
+    "npm_package_dependencies_socket_io": "^3.1.1",
+    "npm_package_dependencies_socket_io_client": "^3.1.1",
+    "npm_package_dependencies__material_ui_core": "^4.11.3",
+    "npm_package_dependencies__material_ui_icons": "^4.11.2",
+    "npm_package_dependencies__material_ui_lab": "^4.0.0-alpha.57",
+    "npm_package_dependencies__react_firebase_auth": "^0.2.10",
+    "npm_package_dependencies__tailwindcss_forms": "^0.2.1",
+    "npm_package_dependencies__testing_library_jest_dom": "^5.11.4",
+    "npm_package_dependencies__testing_library_react": "^11.1.0",
+    "npm_package_dependencies__testing_library_user_event": "^12.1.10",
+    "npm_package_description": "socialnetwork",
+    "npm_package_devDependencies_autoprefixer": "^10.1.0",
+    "npm_package_devDependencies_babel_loader": "^8.2.2",
+    "npm_package_devDependencies_babel_polyfill": "^6.26.0",
+    "npm_package_devDependencies_concurrently": "^5.3.0",
+    "npm_package_devDependencies_cors": "^2.8.5",
+    "npm_package_devDependencies_css_loader": "^5.0.1",
+    "npm_package_devDependencies_dotenv": "^8.2.0",
+    "npm_package_devDependencies_express": "^4.17.1",
+    "npm_package_devDependencies_file_loader": "^6.2.0",
+    "npm_package_devDependencies_html_webpack_plugin": "^5.0.0",
+    "npm_package_devDependencies_husky": "^5.0.9",
+    "npm_package_devDependencies_knex": "^0.21.13",
+    "npm_package_devDependencies_pg": "^8.5.1",
+    "npm_package_devDependencies_postcss_loader": "^4.1.0",
+    "npm_package_devDependencies_pretty_quick": "^3.1.0",
+    "npm_package_devDependencies_style_loader": "^2.0.0",
+    "npm_package_devDependencies_tailwindcss": "^2.0.2",
+    "npm_package_devDependencies_ts_loader": "^8.0.12",
+    "npm_package_devDependencies_webpack": "^5.10.3",
+    "npm_package_devDependencies_webpack_cli": "^4.2.0",
+    "npm_package_devDependencies_webpack_dev_middleware": "^4.0.2",
+    "npm_package_devDependencies_webpack_dev_server": "^3.11.0",
+    "npm_package_devDependencies__babel_core": "^7.12.10",
+    "npm_package_devDependencies__babel_plugin_proposal_class_properties": "^7.12.1",
+    "npm_package_devDependencies__babel_preset_env": "^7.12.11",
+    "npm_package_devDependencies__babel_preset_react": "^7.12.10",
+    "npm_package_devDependencies__tailwindcss_custom_forms": "^0.2.1",
+    "npm_package_devDependencies__types_classnames": "^2.2.11",
+    "npm_package_husky_hooks_pre_commit": "pretty-quick --staged",
+    "npm_package_license": "GPL",
+    "npm_package_name": "socialnetwork",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_repository_type": "git",
+    "npm_package_repository_url": "git+https://github.com/xlincw0w/socialnetwork.git",
+    "npm_package_scripts_build": "rm -rf dist && tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack --config webpack.prod.js",
+    "npm_package_scripts_server_build": "npm run build && nodemon server.js",
+    "npm_package_scripts_server_dev": "concurrently \"npm start\" \"nodemon server.js\" ",
+    "npm_package_scripts_start": "tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack serve --config webpack.dev.js ",
+    "npm_package_scripts_test": "jest --watch /tests",
+    "npm_package_version": "1.0.0",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\pc\\OneDrive",
+    "OPENSSL_CONF": "C:\\laragon\\bin\\apache\\httpd-2.4.35-win64-VC15\\conf\\openssl.cnf",
+    "OS": "Windows_NT",
+    "Path": "C:\\Users\\pc\\AppData\\Local\\Temp\\yarn--1615548597729-0.7715730107726013;C:\\Users\\pc\\Desktop\\socialnetwork\\node_modules\\.bin;C:\\Users\\pc\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;C:\\Users\\pc\\AppData\\Local\\Yarn\\bin;C:\\Program Files\\libexec\\lib\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files\\lib\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Users\\pc\\AppData\\Local\\Yarn\\config\\global\\node_modules\\.bin;C:\\Users\\pc\\AppData\\Roaming\\npm;C:\\Users\\pc\\AppData\\Roaming\\Composer\\vendor\\bin;;C:\\laragon\\bin\\laragon\\utils;C:\\laragon\\bin\\mysql\\mysql-5.7.24-winx64\\bin;C:\\laragon\\bin\\php\\php-7.2.11-Win32-VC15-x64;C:\\laragon\\bin\\composer;C:\\laragon\\bin\\apache\\httpd-2.4.35-win64-VC15\\bin;C:\\laragon\\bin\\redis\\redis-x64-3.2.100;C:\\laragon\\bin\\nginx\\nginx-1.14.0;C:\\laragon\\bin\\notepad++;C:\\laragon\\bin\\telnet;C:\\laragon\\bin\\ngrok;C:\\laragon\\bin;C:\\laragon\\usr\\bin;C:\\laragon\\bin\\putty;C:\\laragon\\bin\\cmder\\bin;C:\\app\\pc\\product\\11.2.0\\dbhome_1\\bin;C:\\oraclexe\\app\\oracle\\product\\10.2.0\\server\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\bin;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\MySQL\\MySQL Utilities 1.6\\;C:\\laragon\\bin\\php\\php-7.2.11-Win32-VC15-x64;C:\\composer;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\Program Files\\dotnet\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft VS Code\\bin;C:\\Program Files (x86)\\java\\jdk1.8.0_144\\bin;path;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\usr\\share\\vim\\vim74;C:\\laragon\\bin\\cmder\\;",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PLINK_PROTOCOL": "ssh",
+    "PORT": "3000",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 78 Stepping 3, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "4e03",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "C\bL\bI\bN\bK\b \b$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "QT_DEVICE_PIXEL_RATIO": "auto",
+    "SESSIONNAME": "Console",
+    "SVN_SSH": "C:\\\\Program Files\\\\Git\\\\bin\\\\ssh.exe",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\pc\\AppData\\Local\\Temp",
+    "TERM": "cygwin",
+    "TER_TITLE": "socialnetwork",
+    "TMP": "C:\\Users\\pc\\AppData\\Local\\Temp",
+    "user-aliases": "C:\\laragon\\bin\\cmder\\config\\user-aliases.cmd",
+    "USERDOMAIN": "CYLIA",
+    "USERDOMAIN_ROAMINGPROFILE": "CYLIA",
+    "USERNAME": "pc",
+    "USERPROFILE": "C:\\Users\\pc",
+    "USER_DIR": "C:\\laragon\\usr",
+    "USR_DIR": "C:\\laragon\\usr",
+    "verbose-output": "0 ",
+    "WEBPACK_DEV_SERVER": "true",
+    "windir": "C:\\WINDOWS",
+    "YARN_WRAP_OUTPUT": "false",
+    "_prog": "node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\System32\\profapi.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\MSASN1.dll",
+    "C:\\WINDOWS\\SYSTEM32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\System32\\powrprof.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll",
+    "C:\\WINDOWS\\System32\\wshbth.dll"
+  ]
+}

@@ -18,14 +18,7 @@ function createData(name, values) {
     return { name, values }
 }
 
-const rows = [
-    createData('Nom :', 'John'),
-    createData('Prénom :', 'Doe'),
-    createData('Age :', 25),
-    createData('Grade :', 'maitre assistant'),
-    createData('Domaine:', 'Informatique_Bases de données'),
-    createData('Adresse e-mail:', 'johndoe@gmail.com'),
-]
+const rows = [createData('Nom :', 'Doe'), createData('Prénom :', 'Jane'), createData('Grade :', 'Docteur'), createData('Domaine:', 'Informatique')]
 
 export default function InfoPerso() {
     const classes = useStyles()
