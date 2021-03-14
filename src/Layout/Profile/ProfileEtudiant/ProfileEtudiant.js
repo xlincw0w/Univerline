@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { AppBar, Avatar, Box, Button, Container, Divider, Grid, List, ListItem, ListItemText, Paper, Tab, Tabs, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined'
-import EditIcon from '@material-ui/icons/Edit'
 import TodayIcon from '@material-ui/icons/Today'
 import PersonIcon from '@material-ui/icons/Person'
 import me from './Media/moi.png'
@@ -11,6 +10,7 @@ import Amis from './Composant/Amis/Amis'
 import ListsProfs from './Composant/ListsProfs/ListsProfs'
 import ListsPublications from './Composant/Publications/ListsPublications'
 import SupportsCours from './Composant/SupportsCours/SupportsCours'
+import BoutonModifierProfile from './Composant/BoutonModifierProfile'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props
@@ -112,13 +112,13 @@ export default function ProfileEtudiant() {
             <Grid container spacing={2}>
                 <Grid item xs={3} className={classes.positionFixed}>
                     <Grid container spacing={2} style={{ width: '85%' }}>
-                        <Paper className={classes.paper1} style={{ width: '94%', textAlign: 'center', marginLeft: '10px' }} elevation={2}>
+                        <Paper style={{ width: '94%', textAlign: 'center', marginLeft: '10px' }} elevation={2}>
                             <Grid item xs={12}>
-                                <span style={{ display: 'inline-block' }}>
+                                <span style={{ display: 'inline-block', marginTop: '10px' }}>
                                     <Avatar alt='Photo de cheick oumar diabate' src={me} className={classes.large} variant='square' />
                                 </span>
                                 <br />
-                                <span>
+                                <span style={{ display: 'inline-block', marginBottom: '10px' }}>
                                     <input accept='image/*' className={classes.input} id='contained-button-file' multiple type='file' />
                                     <label htmlFor='contained-button-file'>
                                         <Button variant='contained' color='primary' component='span' size='small'>
@@ -179,12 +179,13 @@ export default function ProfileEtudiant() {
                                 <Typography variant='h6' display='block' style={{ fontWeight: 'bold', textDecoration: 'underLine', marginTop: '5px' }}>
                                     Description
                                 </Typography>
-                                <>{infos.nom} est un etudiant de {infos.niveau_etude} qui étudie {infos.domaine_etude} à {infos.etablissement}.</>
+                                <>
+                                    {infos.nom} est un etudiant de {infos.niveau_etude} qui étudie {infos.domaine_etude} à {infos.etablissement}.
+                                </>
                                 <p style={{ marginTop: '53px' }}>
-                                    <Button size='large' color='primary' variant='text' style={{ textTransform: 'inherit' }}>
-                                        <EditIcon />
-                                        Modifier le profile
-                                    </Button>
+                                    <button>
+                                        <BoutonModifierProfile />
+                                    </button>
                                     <Button size='large' href='/messagerie' color='primary' variant='text' style={{ textTransform: 'inherit' }}>
                                         <ChatBubbleOutlineOutlinedIcon />
                                         Messagerie
@@ -239,7 +240,7 @@ export default function ProfileEtudiant() {
                 <Grid item xs={2} className={classes.positionEnBas}>
                     <Paper className={classes.paper1} elevation={3}>
                         <Typography variant='h6' display='block' style={{ color: 'black', fontWeight: 'bold', fontSize: '18px', fontWeight: 'bold' }}>
-                            Informations connexion
+                            Information connexion
                         </Typography>
                         <Typography variant='body1' display='block' style={{ color: 'black', fontWeight: 'bold', fontSize: '14px' }}>
                             Premier accès au site
