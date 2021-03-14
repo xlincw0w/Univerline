@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import InfoPerso from './infoPerso'
 import Formulaire from './Formulaire'
+import EditIcon from '@material-ui/icons/Edit'
 
 const styles = theme => ({
     root: {
@@ -63,7 +64,7 @@ export default function ModifierProfil() {
 
     return (
         <div>
-            <Button variant='outlined' color='primary' onClick={handleClickOpen}>
+            <Button startIcon={<EditIcon />} variant='text' color='primary' onClick={handleClickOpen}>
                 Modifier le profil
             </Button>
             <Dialog onClose={handleClose} aria-labelledby='customized-dialog-title' open={open}>

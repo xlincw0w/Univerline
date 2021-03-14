@@ -3,13 +3,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import { Container, Modal } from '@material-ui/core'
-import m from './Media/m.jpg'
 import InfoPerso from './infoPerso'
 import Menu from './menu'
-
 import ModifierProfil from './ModifierProfil'
 import ModifierPhoto from './ModifierPhoto'
 import PhotoProfil from './PhotoProfil'
+
 import './Profile.css'
 
 const useStyles = makeStyles(theme => ({
@@ -58,10 +57,8 @@ export default function CenteredGrid() {
 
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        
                         <Paper>
-
-                        <Menu />
+                            <Menu />
                         </Paper>
                     </Grid>
                 </Grid>
