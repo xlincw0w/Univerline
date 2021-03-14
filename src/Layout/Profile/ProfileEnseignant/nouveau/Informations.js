@@ -30,7 +30,7 @@ export default function Infos() {
                 </ListItem>
                 <ListItem button>
                     <ListItemText>
-                        <span className={classes.gras}>Niveau Etude : </span> Universitaire
+                        <span className={classes.gras}>Niveau Enseignement : </span> Université
                     </ListItemText>
                 </ListItem>
                 <ListItem button>
