@@ -21,11 +21,7 @@ export default function Publications() {
         }
     }, [user_info.id_user])
 
-    return (
-        <div>
-            {publications.map((elem) => {
+    return <div>{/* {publications.map((elem) => {
                 return <StudSkeleton elem={elem} />
-            })}
-        </div>
-    )
+            })} */}</div>
 }
