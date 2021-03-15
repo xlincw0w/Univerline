@@ -15,7 +15,7 @@ router.route('/save_user').post((req, res) => {
             email: data.email,
             niveau_ens: data.niveau_ens,
             domaine_ens: data.domaine_ens,
-            niveau_edu: data.domaine_edu,
+            niveau_edu: data.niveau_edu,
             domaine_edu: data.domaine_edu,
             etablissement: data.etablissement,
             user_type: data.user_type,

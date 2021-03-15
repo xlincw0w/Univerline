@@ -44,7 +44,9 @@ export default function Feature1() {
                 {classes.map((elem) => {
                     return (
                         <div id={elem.id_classe} className='my-2'>
-                            <Button className='block'>{elem.libelle_classe}</Button>
+                            <Button className='block' variant='outlined'>
+                                {elem.libelle_classe}
+                            </Button>
                         </div>
                     )
                 })}
