@@ -18,7 +18,16 @@ router.route('/get/post').get((req, res) => {
         })
 })
 
-//les poste d un etudiant X
+// les potes d'un etudiant X
+router.route('/get/post/oneuser/:id').get(async (req, res) => {
+    const id = req.params.id
+
+    let data = await db('poste').select('*').leftJoin('users', 'users.id_user', 'poste.id_user').where('poste.id_user', id).orderBy('date_poste', 'desc')
+
+    res.json(data)
+})
+
+//les poste destiné a un etudiant X
 router.route('/get/post/:id?').get(async (req, res) => {
     const id = req.params.id
 

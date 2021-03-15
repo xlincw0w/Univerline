@@ -5,6 +5,7 @@ import { HiShare } from 'react-icons/hi'
 import { FaComments } from 'react-icons/fa'
 import Comments from './comments'
 import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 import { constants } from '../../../constants'
 import { SetFeed, SetFeedProf } from '../../../store/feed/feed'
 import moment from 'moment'
@@ -41,6 +42,7 @@ const Skeleton = () => {
 
     const ProfSkeleton = ({ elem }) => {
         const [loadComment, setLoadComment] = useState(false)
+
         const [comments, setComments] = useState([])
         const [payload, setPayload] = useState('')
         const [refresh, setRefresh] = useState(0)
@@ -93,7 +95,7 @@ const Skeleton = () => {
                 </div>
                 <div className='h-auto'>
                     <div className='h-auto'>
-                        <div className='mt-2'>
+                        <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
                         </div>
@@ -183,7 +185,11 @@ const Skeleton = () => {
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    className={cx('h-1/4 shadow-xl rounded-xl', {
+                    onClick={() => {
+                        console.log('kifach')
+                        history.push('/profile/' + elem.id_user)
+                    }}
+                    className={cx('h-1/4 shadow-xl rounded-xl cursor-pointer', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
                         'bg-gradient-to-r from-green-600 to-green-400': elem.id_user !== user.id,
                     })}>
@@ -208,7 +214,7 @@ const Skeleton = () => {
                 </div>
                 <div className='h-auto'>
                     <div className='h-auto'>
-                        <div className='mt-2'>
+                        <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
