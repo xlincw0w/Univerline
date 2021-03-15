@@ -111,7 +111,9 @@ export default function Dropdown(props) {
                     return {
                         id_user: elem.id_user,
                         user_type: elem.user_type,
-                        nom_complet: elem.nom + ' ' + elem.prenom,
+                        nom: elem.nom,
+                        prenom: elem.prenom,
+                        searchIn: elem.nom + ' ' + elem.prenom + ' ' + elem.nom,
                     }
                 })
                 setUser(result)
@@ -192,7 +194,7 @@ export default function Dropdown(props) {
                     <Autocomplete
                         options={users}
                         onInputChange={(e) => handleInputChange(e.target.value)}
-                        getOptionLabel={(option) => option.nom_complet}
+                        getOptionLabel={(option) => option.searchIn}
                         renderInput={(params) => (
                             <div ref={params.InputProps.ref}>
                                 <input
@@ -203,10 +205,10 @@ export default function Dropdown(props) {
                                 />
                             </div>
                         )}
-                        renderOption={({ nom_complet, id_user, user_type }) => {
+                        renderOption={({ nom, prenom, id_user, user_type }) => {
                             return (
                                 <div onClick={() => history.push('/profile/' + id_user)}>
-                                    <p className='text-sm text-gray-500'>{nom_complet}</p>
+                                    <p className='text-sm text-gray-500'>{nom + ' ' + prenom}</p>
                                     <p className={cx('text-sm', { 'text-green-500': user_type === 'etudiant', 'text-purple-600': user_type === 'enseignant' })}>{user_type}</p>
                                 </div>
                             )
