@@ -8,7 +8,7 @@ import { HiOutlineTrash } from 'react-icons/hi'
 import Axios from 'axios'
 import { constants } from '../../../../constants'
 import { useDispatch } from 'react-redux'
-import { RefreshFeed } from '../../../../store/feed/feed'
+import { FeedLoading, RefreshFeed } from '../../../../store/feed/feed'
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -22,13 +22,16 @@ export default function Options({ elem }) {
     const [anchorEl, setAnchorEl] = React.useState(null)
 
     const handleClick = () => {
+        dispatch(FeedLoading(true))
         Axios.delete(constants.url + '/api/post/delete/post/' + elem.id_poste)
             .then((res) => {
                 if (res.data.delete) {
+                    dispatch(FeedLoading(false))
                     dispatch(RefreshFeed())
                 }
             })
             .catch((err) => {
+                dispatch(FeedLoading(false))
                 console.log(err)
             })
     }
