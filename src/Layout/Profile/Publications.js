@@ -25,7 +25,7 @@ export default function Publications() {
                 id_friend: user_info.id_user,
             })
 
-            if (res.data.friend) {
+            if (res.data.friend || user_info.id_user === user.id) {
                 Axios.get(constants.url + '/api/post/get/post/oneuser/' + user_info.id_user)
                     .then((res) => {
                         dispatch(SetPublications(res.data))
