@@ -146,6 +146,7 @@ const Skeleton = () => {
     }
 
     const StudSkeleton = ({ elem }) => {
+        const history = useHistory()
         const [loadComment, setLoadComment] = useState(false)
         const [comments, setComments] = useState([])
         const [payload, setPayload] = useState('')

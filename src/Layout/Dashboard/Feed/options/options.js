@@ -36,10 +36,6 @@ export default function Options({ elem }) {
             })
     }
 
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
-
     const open = Boolean(anchorEl)
     const id = open ? 'simple-popover' : undefined
 

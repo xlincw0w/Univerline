@@ -81,7 +81,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
     }
 
     return (
-        <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-2/3 mx-auto mt-8 '>
+        <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-2/3 mx-auto mt-8'>
             <div className='border-2 rounded-xl bg-white shadow-xl'>
                 <div className=' grid grid-cols-2 gap-2 place-items-end'>
                     <div className='w-24 place-self-start mt-2 ml-3'>
