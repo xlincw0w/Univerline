@@ -154,7 +154,7 @@ const users = {
                 
                  <Users user={user} onclick={onclick2} />
                 
-                 )) : <h1 style={{textAlign:'center'}}>aucun ami disponible</h1>}
+                 )) : <h1 style={{textAlign:'center'}}>Aucun ami disponible</h1>}
         </Grid>
     </Grid>
     )
