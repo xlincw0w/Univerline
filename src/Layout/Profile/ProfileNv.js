@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SetFriend, SetPending, SetUserInfo } from '../../store/profile/profile'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import cx from 'classnames'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,64 +59,76 @@ export default function ProfileNv() {
     }, [reset, user])
 
     return (
-        <div className='mt-4'>
-            <Backdrop open={loader} style={{ zIndex: 10 }}>
-                <CircularProgress color='inherit' />
-            </Backdrop>
-            <Container maxWidth='Lg' className={classes.root}>
-                {user.id === profile.id_user && (
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <div className='mt-5'>
-                                <Grid container spacing={3}>
-                                    <Grid item xs={3}>
+        <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>
+            <div className='w-full h-full bg-gray-200 bg-opacity-60'>
+                <div className='' style={{ minHeight: '100vh' }}>
+                    <Backdrop open={loader} style={{ zIndex: 10 }}>
+                        <CircularProgress color='inherit' />
+                    </Backdrop>
+                    <Container maxWidth='Lg' className={classes.root}>
+                        {user.id === profile.id_user && (
+                            <Grid container spacing={3}>
+                                <Grid item xs={12}>
+                                    <div className='mt-5 bg-gray-50'>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={3}>
+                                                <div className='w-full ml-3 mt-3'>
+                                                    <Paper className={classes.paper}>
+                                                        <Paper className={classes.paper}>
+                                                            <PhotoSquare avatar={profile.avatar} />
+                                                        </Paper>
+                                                    </Paper>
+                                                </div>
+                                            </Grid>
+                                            <Grid item xs={9}>
+                                                <div className='mb-3'>
+                                                    <Paper className={classes.paper}>
+                                                        <CarteHaut profile={profile} user={user} />
+                                                        <MenuModif />
+                                                    </Paper>
+                                                </div>
+                                            </Grid>
+                                        </Grid>
                                         <Paper className={classes.paper}>
-                                            <Paper className={classes.paper}>
-                                                <PhotoSquare avatar={profile.avatar} />
-                                            </Paper>
+                                            <MenuNv />
                                         </Paper>
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                        <CarteHaut profile={profile} user={user} />
-                                        <MenuModif />
-                                    </Grid>
+                                    </div>
                                 </Grid>
-                                <Paper className={classes.paper}>
-                                    <br />
-                                    <br />
-                                    <MenuNv />
-                                </Paper>
-                            </div>
-                        </Grid>
-                    </Grid>
-                )}
-                {user.id !== profile.id_user && (
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <div className='mt-5'>
-                                <Grid container spacing={3}>
-                                    <Grid item xs={3}>
+                            </Grid>
+                        )}
+                        {user.id !== profile.id_user && (
+                            <Grid container spacing={3}>
+                                <Grid item xs={12}>
+                                    <div className='mt-5 bg-gray-50'>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={3}>
+                                                <div className='w-full ml-3 mt-3'>
+                                                    <Paper className={classes.paper}>
+                                                        <Paper className={classes.paper}>
+                                                            <PhotoSquare avatar={profile.avatar} />
+                                                        </Paper>
+                                                    </Paper>
+                                                </div>
+                                            </Grid>
+                                            <Grid item xs={9}>
+                                                <div className='mb-3'>
+                                                    <Paper className={classes.paper}>
+                                                        <CarteHaut profile={profile} user={user} />
+                                                        <MenuModif />
+                                                    </Paper>
+                                                </div>
+                                            </Grid>
+                                        </Grid>
                                         <Paper className={classes.paper}>
-                                            <Paper className={classes.paper}>
-                                                <PhotoSquare avatar={profile.avatar} />
-                                            </Paper>
+                                            <MenuNv />
                                         </Paper>
-                                    </Grid>
-                                    <Grid item xs={9}>
-                                        <CarteHaut profile={profile} user={user} />
-                                        <MenuModif profile={profile} user={user} />
-                                    </Grid>
+                                    </div>
                                 </Grid>
-                                <Paper className={classes.paper}>
-                                    <br />
-                                    <br />
-                                    <MenuNv profile={profile} user={user} />
-                                </Paper>
-                            </div>
-                        </Grid>
-                    </Grid>
-                )}
-            </Container>
+                            </Grid>
+                        )}
+                    </Container>
+                </div>
+            </div>
         </div>
     )
 }

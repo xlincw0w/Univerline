@@ -5,13 +5,10 @@ const db = require('../database')
 router.route('/update/').post((req, res) => {
     const data = req.body
 
-    console.log(data)
-
     db('users')
         .update({ ...data })
         .where({ id_user: data.id_user })
         .then((resp) => {
-            console.log(resp)
             res.json(resp)
         })
         .catch((err) => {

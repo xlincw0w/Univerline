@@ -36,6 +36,7 @@ router.route('/add/amis/').post((req, res) => {
             id_user: data.id_user,
             id_ami: data.id_ami,
             confirm: data.confirm,
+            receiver: data.receiver,
         })
         .then((rows) => {
             res.json(rows)
@@ -57,6 +58,36 @@ router.route('/get/amis/:id?').get((req, res) => {
         })
         .catch((err) => {
             res.json([])
+        })
+})
+
+router.route('/get/pending/:id?').get((req, res) => {
+    const id_u = req.params.id
+
+    db('users')
+        .whereIn('id_user', db('amis').where({ id_user: id_u, confirm: false, receiver: true }).select('id_ami'))
+        .select('*')
+        .then((rows) => {
+            res.json(rows)
+        })
+        .catch((err) => {
+            res.json([])
+        })
+})
+
+router.route('/confirm/amis/').post((req, res) => {
+    const id_user = req.body.id_user
+    const id_friend = req.body.id_friend
+
+    db('amis')
+        .where({ id_user: id_user, id_ami: id_friend })
+        .update({ confirm: true })
+        .then((resp) => {
+            res.json({ added: true })
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json({ added: false })
         })
 })
 

@@ -5,6 +5,7 @@ import { HiShare } from 'react-icons/hi'
 import { FaComments } from 'react-icons/fa'
 import Comments from './comments'
 import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 import { constants } from '../../../constants'
 import { SetFeed, SetFeedProf } from '../../../store/feed/feed'
 import moment from 'moment'
@@ -39,9 +40,15 @@ const Skeleton = () => {
 
     const ProfSkeleton = ({ elem }) => {
         const [loadComment, setLoadComment] = useState(false)
+        const history = useHistory()
+
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
-                <div className='h-1/4 bg-gradient-to-r from-purple-400 to-purple-600 shadow-xl rounded-xl'>
+                <div
+                    onClick={() => {
+                        history.push('/profile/' + elem.id_user)
+                    }}
+                    className='h-1/4 bg-gradient-to-r from-purple-400 to-purple-600 shadow-xl rounded-xl cursor-pointer'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-4 border-2 border-gray-100 rounded-full shadow-xl'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
@@ -103,10 +110,16 @@ const Skeleton = () => {
 
     const StudSkeleton = ({ elem }) => {
         const [loadComment, setLoadComment] = useState(false)
+        const history = useHistory()
+
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    className={cx('h-1/4 shadow-xl rounded-xl', {
+                    onClick={() => {
+                        console.log('kifach')
+                        history.push('/profile/' + elem.id_user)
+                    }}
+                    className={cx('h-1/4 shadow-xl rounded-xl cursor-pointer', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
                         'bg-gradient-to-r from-green-600 to-green-400': elem.id_user !== user.id,
                     })}>

@@ -37,12 +37,14 @@ export default function MenuModif() {
                 id_user: user.id,
                 id_ami: user_info.id_user,
                 confirm: false,
+                receiver: false,
             }),
 
             Axios.post(constants.url + '/api/amis/add/amis', {
                 id_user: user_info.id_user,
                 id_ami: user.id,
                 confirm: false,
+                receiver: true,
             }),
         ])
             .then(
