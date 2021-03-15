@@ -27,15 +27,15 @@ export default function Users(props) {
         
         
         
-        <Grid  className="flex" xs={12}  className="util outline-none focus:outline-none select-text" onClick={() => onclick(user)}>
+        <Grid  className="flex" xs={12}  className="util outline-none focus:outline-none select-text bg-gray-200 text-gray-800" onClick={() => onclick(user)}>
              
            
             <Grid className="flex" >
         
-              <Avatar alt="Reseau social" src={user.Image} className={classes.large} />
+              <Avatar alt={user.prenom} src={user.avatar} className={classes.large} />
               <Grid className='userdata' style={{ marginLeft: "10px" }} >
-                <p>{user.FirstName} {user.LastName}</p>
-                <p>{user.Statu}</p>
+                <p>{user.prenom} {user.nom}</p>
+                <p>{user.user_type}</p>
               </Grid>
               </Grid>
         </Grid>
