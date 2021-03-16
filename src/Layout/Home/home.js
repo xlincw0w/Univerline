@@ -40,7 +40,7 @@ export default function Home() {
 
     return (
         <div>
-            <div className='lg:bg-image h-screen bg-cover bg-center bg-fixed sm:bg-regal-blue '>
+            <div className='bg-font md:bg-image  h-screen bg-cover bg-center bg-fixed'>
                 <div class='custom-shape-divider-bottom-1614867478 '>
                     <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
                         <path
@@ -49,7 +49,7 @@ export default function Home() {
                     </svg>
                 </div>
 
-                <div className='flex justify-end p-4'>
+                <div className='flex justify-center md:flex md:justify-end p-4'>
                     <button
                         onClick={() => {
                             history.push('/auth')
@@ -58,24 +58,29 @@ export default function Home() {
                         Connexion
                     </button>
                 </div>
-                <div className='p-2 pt-20 '>
-                    <div className=' border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-2/5  '>
+                <div className='p-2 py-10 '>
+                    
+                    <div className=' border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-full md:w-2/5  '>
+                       
                         <ul className='font-medium font-openSans text-center '>
                             <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
+                                <div className="md:hidden">
                                 <span className='text-5xl font-bebasNeue'>R</span>EJOIGNEZ UNIVERLINE
+                                </div>
                             </li>
                             <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
 
                             <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
                             <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore</li>
                         </ul>
+                        
 
-                        <div className='  flex justify-end mx-auto pt-12'>
+                        <div className='  flex justify-end mx-auto md:pt-12'>
                             <button
                                 onClick={() => {
                                     history.push('/inscription')
                                 }}
-                                className=' focus:outline-none transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-xl rounded-full mx-auto '>
+                                className=' focus:outline-none transition duration-300 ease-in-out bg-yellow-400 hover:bg-blue-300 transform hover:-translate-y-1 hover:scale-110 p-4 text-base md:text-xl rounded-full mx-auto '>
                                 Rejoignez-nous !
                             </button>
                         </div>
@@ -87,14 +92,16 @@ export default function Home() {
                     <img src={img1} alt='img1' />
                 </div>
                 <div className='flex flex-col mt-20  items-center justify-center'>
-                    <div className=' p-4 text-3xl tracking-wider font-semibold font-bebasNeue'>
+                    <div className=' p-4  text-xl md:text-3xl tracking-wider font-semibold font-bebasNeue'>
                         <h1>Découvrez le monde Universitaire</h1>
                         <br />
                     </div>
-                    <div className='tracking-wider text-xl leading-loose'>
-                        <p>gardez contact avec vos amis de la faculté,</p>
+                    <div className='tracking-wider text-base md:text-xl leading-loose'>
+                        
+                        <p className="pl-8 md:pl-0">gardez contact avec vos amis de la faculté,</p>
                         <p className='pl-8'>conversez en temps réel, c'est plus </p>
                         <p className='text-center'>simple et plus rapide </p>
+                        
                     </div>
                     <div>
                         <button
@@ -108,13 +115,15 @@ export default function Home() {
                 </div>
 
                 <div className='flex flex-col mt-18 items-center justify-center'>
+                    <div className="pl-10">
                     <div>
-                        <h1 className='tracking-wider text-3xl font-semibold font-bebasNeue p-4'>Ne ratez plus vos cours</h1> <br />
+                        <h1 className='tracking-wider text-xl md:text-2xl md:text-3xl font-semibold font-bebasNeue p-4'>Ne ratez plus vos cours</h1> <br />
                     </div>
-                    <div className='tracking-wider text-xl leading-loose'>
+                    <div className='tracking-wider text-base md:text-xl leading-loose'>
                         <p>adherez aux classes où vous êtes inscris </p>
                         <p> ainsi vous aurez accès aux publications </p>
-                        <p className='text-center'> de vos enseignant</p>
+                        <p className='md:text-center'> de vos enseignant</p>
+                    </div>
                     </div>
                     <div>
                         <button
@@ -135,10 +144,10 @@ export default function Home() {
                 </div>
                 <div className='flex flex-col mt-18 items-center justify-center'>
                     <div>
-                        <h1 className='tracking-wider text-3xl font-semibold font-bebasNeue p-4'>Timeline</h1> <br />
+                        <h1 className='tracking-wider text-xl md:text-3xl font-semibold font-bebasNeue p-4'>Timeline</h1> <br />
                     </div>
-                    <div className='tracking-wider text-xl leading-loose'>
-                        <p>UniverLine vous tient à la une ! accédez</p>
+                    <div className='tracking-wider text-base md:text-xl leading-loose'>
+                        <p className="pl-8 md:pl-0">UniverLine vous tient à la une ! accédez</p>
                         <p className='pl-8'> au fil d'actualité et aux ressources</p>
                         <p className='text-center'> dont vous avez besoin</p>
                     </div>
