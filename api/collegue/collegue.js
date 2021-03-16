@@ -1,5 +1,4 @@
 const express = require('express')
-const { ids } = require('webpack')
 const router = express.Router()
 const db = require('../database')
 

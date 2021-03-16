@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -17,23 +17,10 @@ const Post = () => {
     const [image, setImage] = useState(null)
     const [file, setFile] = useState(null)
     const [payload, setPayload] = useState('')
-
     const user = useSelector((state) => state.AuthReducer.user)
+    const classes = useSelector((state) => state.AuthReducer.classes)
 
-    const classes = [
-        {
-            value: 0,
-            label: "Ingénieurie system d'information",
-        },
-        {
-            value: 1,
-            label: 'Conduite de projet informatique',
-        },
-        {
-            value: 2,
-            label: 'Droit informatique',
-        },
-    ]
+    const [classvalue, setClass] = useState({ id_classe: 'collegue', libelle_classe: 'Collégues' })
 
     const handlePost = () => {
         if (user.user_type === 'etudiant') {
@@ -58,6 +45,8 @@ const Post = () => {
         }
     }
 
+    console.log(classvalue)
+
     return (
         <div className='w-full mx-auto shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
             <div className=''>
@@ -69,16 +58,6 @@ const Post = () => {
                         setPayload(e.target.value)
                     }}
                 />
-                {/* <TextField
-                    onChange={(e) => {
-                        setPayload(e.target.value)
-                    }}
-                    className='w-full h-full'
-                    label='Exprimez-vous !'
-                    multiline
-                    rows={4}
-                    variant='outlined'
-                /> */}
             </div>
             <div className=''>
                 <div className='grid grid-cols-4 rounded-xl shadow-xl mx-auto'>
@@ -109,10 +88,18 @@ const Post = () => {
                         <div className='my-auto w-full flex justify-end'>
                             <div className='h-14'>
                                 {user.user_type === 'enseignant' && (
-                                    <TextField select className='inline-block w-32' label='Classe' value={classes} onChange={() => {}} style={{ marginTop: '0.3rem' }}>
+                                    <TextField select className='inline-block w-32' label='Classe' value={classvalue.libelle_classe} style={{ marginTop: '0.3rem' }}>
+                                        <MenuItem key={'collegue'} value={'Collégues'} onClick={() => setClass({ id_classe: 'collegue', libelle_classe: 'Collégues' })}>
+                                            <p className='text-base text-purple-800'>Collégues</p>
+                                        </MenuItem>
                                         {classes.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
+                                            <MenuItem
+                                                key={option.id_classe}
+                                                value={option.libelle_classe}
+                                                onClick={() => {
+                                                    setClass({ id_classe: option.id_classe, libelle_classe: option.libelle_classe })
+                                                }}>
+                                                {option.libelle_classe}
                                             </MenuItem>
                                         ))}
                                     </TextField>

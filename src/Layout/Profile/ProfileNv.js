@@ -56,7 +56,7 @@ export default function ProfileNv() {
             .catch((err) => {
                 dispatch(SetFriend(false))
             })
-    }, [reset, user])
+    }, [reset, user, routeParams.id])
 
     return (
         <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>

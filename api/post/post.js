@@ -27,6 +27,33 @@ router.route('/get/post/oneuser/:id').get(async (req, res) => {
     res.json(data)
 })
 
+// les postes d'un enseignant ( toute classe confondu )
+router.route('/get/post/ens/:id?').get(async (req, res) => {
+    const id = req.params.id
+
+    const classes = await db('classe').select('*').where('id_ens', id)
+
+    var postes = []
+
+    await Promise.all(
+        classes.map(async (elem) => {
+            let data = await db('poste')
+                .select('*')
+                .leftJoin('classe', 'poste.id_classe', 'classe.id_classe')
+                .leftJoin('users', 'users.id_user', 'classe.id_ens')
+                .where('poste.id_classe', elem.id_classe)
+                .orderBy('date_poste', 'desc')
+                .limit(10)
+
+            postes = concat(postes, data)
+        })
+    )
+
+    postes = orderBy(postes, 'date_poste', 'desc')
+
+    res.json(postes)
+})
+
 //les poste destiné a un etudiant X
 router.route('/get/post/:id?').get(async (req, res) => {
     const id = req.params.id
@@ -103,7 +130,7 @@ router.route('/add/post/').post((req, res) => {
         })
 })
 
-//modifier une classe
+//modifier un poste
 router.route('/update/post/:id?').post((req, res) => {
     const id_poste = req.params.id
     const payload = req.body.payload
@@ -122,7 +149,7 @@ router.route('/update/post/:id?').post((req, res) => {
         })
 })
 
-//supprimer une classe
+//supprimer un poste
 router.route('/delete/post/:id?').delete((req, res) => {
     const id_poste = req.params.id
     db('poste')

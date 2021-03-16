@@ -82,6 +82,7 @@ router.route('/get/classe/etu/:id?').get((req, res) => {
     db('adherant')
         .select('*')
         .leftJoin('classe', 'classe.id_classe', 'adherant.id_classe')
+        .leftJoin('users', 'users.id_user', 'classe.id_ens')
         .where('id_etu', id)
         .then((rows) => {
             res.json(rows)

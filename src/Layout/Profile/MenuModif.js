@@ -137,7 +137,7 @@ export default function MenuModif() {
                     )}
                 </div>
             )}
-            {user_info.id_user !== user.id && (
+            {user_info.id_user !== user.id && user_info.user_type === user.user_type && (
                 <div>
                     <div>
                         {friend && (
@@ -205,6 +205,28 @@ export default function MenuModif() {
                                 )}
                             </div>
                         )}
+                    </div>
+                </div>
+            )}
+            {user_info.id_user !== user.id && user_info.user_type !== user.user_type && (
+                <div>
+                    <div>
+                        <div>
+                            <div className='inline mr-3'>
+                                <Button
+                                    onClick={() => {
+                                        // dispatch(SetModify(false))
+                                        // dispatch(RefreshProfile())
+                                    }}
+                                    variant='outlined'
+                                    color='default'>
+                                    <div className='w-32'>
+                                        <p className='inline text-sm text-gray-600'>Contacter</p>
+                                        <BiMailSend size={20} className='inline ml-2 mb-1' />
+                                    </div>
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

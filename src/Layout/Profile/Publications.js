@@ -10,6 +10,7 @@ import Options from '../Dashboard/Feed/options/options'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import cx from 'classnames'
+import { useParams } from 'react-router-dom'
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -17,22 +18,53 @@ export default function Publications() {
     const publications = useSelector((state) => state.ProfileReducer.publications)
     const refresh = useSelector((state) => state.FeedReducer.refresh)
     const user = useSelector((state) => state.AuthReducer.user)
+    const routeParams = useParams()
 
     useEffect(async () => {
         if (user_info.id_user && user.id) {
-            const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
-                id_user: user.id,
-                id_friend: user_info.id_user,
-            })
+            if (user_info.user_type === 'etudiant') {
+                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                    id_user: user.id,
+                    id_friend: user_info.id_user,
+                })
 
-            if (res.data.friend || user_info.id_user === user.id) {
-                Axios.get(constants.url + '/api/post/get/post/oneuser/' + user_info.id_user)
-                    .then((res) => {
-                        dispatch(SetPublications(res.data))
-                    })
-                    .catch((err) => {
-                        dispatch(SetPublications([]))
-                    })
+                console.log('kifach2')
+
+                if (res.data.friend || user_info.id_user === user.id) {
+                    Axios.get(constants.url + '/api/post/get/post/oneuser/' + user_info.id_user)
+                        .then((res) => {
+                            dispatch(SetPublications(res.data))
+                        })
+                        .catch((err) => {
+                            dispatch(SetPublications([]))
+                        })
+                } else {
+                    console.log('kifach12')
+                    dispatch(SetPublications([]))
+                }
+            } else if (user_info.user_type === 'enseignant') {
+                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                    id_user: user.id,
+                    id_friend: user_info.id_user,
+                })
+
+                console.log('kifach')
+
+                if (res.data.friend || user_info.id_user === user.id) {
+                    Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
+                        .then((res) => {
+                            dispatch(SetPublications(res.data))
+                        })
+                        .catch((err) => {
+                            dispatch(SetPublications([]))
+                        })
+                } else {
+                    console.log('kifach3')
+                    dispatch(SetPublications([]))
+                }
+            } else {
+                console.log('kifach4')
+                dispatch(SetPublications([]))
             }
         }
     }, [user_info.id_user, user.id, refresh])
@@ -256,9 +288,14 @@ export default function Publications() {
 
     return (
         <div>
-            {publications.map((elem) => {
-                return <StudSkeleton elem={elem} />
-            })}
+            {user_info.user_type === 'etudiant' &&
+                publications.map((elem) => {
+                    return <StudSkeleton elem={elem} />
+                })}
+            {user_info.user_type === 'enseignant' &&
+                publications.map((elem) => {
+                    return <ProfSkeleton elem={elem} />
+                })}
         </div>
     )
 }

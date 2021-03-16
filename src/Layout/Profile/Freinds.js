@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import RechercherAmis from './RechercherAmis'
 import { useSelector, useDispatch } from 'react-redux'
+import Axios from 'axios'
+import { constants } from '../../constants'
+import { SetProfileFriends } from '../../store/profile/profile'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import Avatar from '@material-ui/core/Avatar'
+import { useHistory } from 'react-router-dom'
+import { filter } from 'lodash'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -24,91 +31,100 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function Freinds() {
+    const history = useHistory()
+    const dispatch = useDispatch()
     const classes = useStyles()
     const friends = useSelector((state) => state.AuthReducer.friends)
     const user = useSelector((state) => state.AuthReducer.user)
+    const user_info = useSelector((state) => state.ProfileReducer.user_info)
+    const profile_friends = useSelector((state) => state.ProfileReducer.friends)
 
-    useEffect(() => {})
+    const [filterWord, updateFilter] = useState('')
+
+    useEffect(async () => {
+        if (user_info.user_type === 'etudiant') {
+            if (user_info.id_user === user.id) {
+                Axios.get(constants.url + '/api/amis/get/amis/' + user_info.id_user)
+                    .then((res) => {
+                        dispatch(SetProfileFriends(res.data))
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        dispatch(SetProfileFriends([]))
+                    })
+            } else {
+                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                    id_user: user.id,
+                    id_friend: user_info.id_user,
+                })
+
+                if (res.data.friend) {
+                    Axios.get(constants.url + '/api/amis/get/amis/' + user_info.id_user)
+                        .then((res) => {
+                            dispatch(SetProfileFriends(res.data))
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                            dispatch(SetProfileFriends([]))
+                        })
+                } else {
+                    dispatch(SetProfileFriends([]))
+                }
+            }
+        } else {
+            dispatch(SetProfileFriends([]))
+        }
+    }, [user_info.id_user, user.id])
 
     return (
         <div>
-            <Grid container spacing={3}>
-                <Grid item xs={8}>
-                    <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <RechercherAmis />
-                        </Paper>
-                    </Grid>
-                    <br />
+            <div className='mx-auto'>
+                <div>
+                    {user_info.user_type === 'etudiant' && (
+                        <Grid container xs={12}>
+                            <div className='mx-auto w-144'>
+                                <Grid item xs={12}>
+                                    <Grid item xs={12}>
+                                        <Paper className={classes.paper}>
+                                            <input
+                                                type='text'
+                                                required={true}
+                                                onChange={(e) => updateFilter(e.target.value)}
+                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                placeholder='Rechercher parmis les camarades.'
+                                            />
+                                        </Paper>
+                                    </Grid>
 
-                    {/* <Grid item xs={8.5}>
-                        <Card className={classes.root}>
-                            <CardHeader
-                                avatar={<Avatar src={B} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
-                                action={
-                                    <IconButton aria-label='settings'>
-                                        <MenuAmi />
-                                    </IconButton>
-                                }
-                                align='left'
-                                title='John Doe'
-                                subheader=' Professeur —Computer Science_Cyber Security'
-                            />
-                        </Card>
-                    </Grid>
-                    <br />
-
-                    <Grid item xs={8.5}>
-                        <Card className={classes.root}>
-                            <CardHeader
-                                avatar={<Avatar src={A} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
-                                action={
-                                    <IconButton aria-label='settings'>
-                                        <MenuAmi />
-                                    </IconButton>
-                                }
-                                align='left'
-                                title='Jane Doe'
-                                subheader=' Doctorante —Mécanique'
-                            />
-                        </Card>
-                    </Grid>
-                    <br />
-
-                    <Grid item xs={8.5}>
-                        <Card className={classes.root}>
-                            <CardHeader
-                                avatar={<Avatar src={C} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
-                                action={
-                                    <IconButton aria-label='settings'>
-                                        <MenuAmi />
-                                    </IconButton>
-                                }
-                                align='left'
-                                title='John Doe'
-                                subheader=' maitre assistant —Mécanique'
-                            />
-                        </Card>
-                    </Grid>
-                    <br />
-                    <Grid item xs={8.5}>
-                        <Card className={classes.root}>
-                            <CardHeader
-                                avatar={<Avatar src={D} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
-                                action={
-                                    <IconButton aria-label='settings'>
-                                        <MenuAmi />
-                                    </IconButton>
-                                }
-                                align='left'
-                                title='John Doe'
-                                subheader='Professeur chercheur  — Histoire et antiquitée'
-                            />
-                        </Card>
-                    </Grid> */}
-                </Grid>
-            </Grid>
-            <div className={classes.container}></div>
+                                    {filter(profile_friends, (o) => {
+                                        let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
+                                        return searchIn.includes(filterWord)
+                                    }).map((elem) => {
+                                        return (
+                                            <Grid item xs={12}>
+                                                <div
+                                                    className='cursor-pointer'
+                                                    onClick={() => {
+                                                        history.push('/profile/' + elem.id_user)
+                                                    }}>
+                                                    <Card className={classes.root}>
+                                                        <CardHeader
+                                                            avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
+                                                            align='left'
+                                                            title={elem.nom + ' ' + elem.prenom}
+                                                            subheader={elem.niveau_edu + ' ' + elem.domaine_edu}
+                                                        />
+                                                    </Card>
+                                                </div>
+                                            </Grid>
+                                        )
+                                    })}
+                                </Grid>
+                            </div>
+                        </Grid>
+                    )}
+                </div>
+            </div>
         </div>
     )
 }
