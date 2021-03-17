@@ -1,19 +1,25 @@
 .myAvatar {
     display: flex;
-    margin: 20px;
+    height: 47%;
+    margin-top: 5px;
+    margin-bottom: 5px;
     margin-left: 50px;
     text-align: center;
     border-bottom: 1px solid rgb(202, 202, 202);
     border-radius: 10px;
-    padding: 10px;
+    padding-top: 1px;
+    padding-left: 2px;
 }
 .myAvatar > h1 {
     margin: 10px;
     font-weight: bold;
     font-size: 20px;
+    /* color: white; */
+    /* color: rgb(104, 104, 104); */
 }
 .form1 {
     margin-left: 20px;
+    height: 53%;
 }
 .usersInput {
     border-radius: 20px;
@@ -38,7 +44,7 @@
     padding: 5px;
     border-radius: 10px;
     height: 15%;
-    background-color: rgb(245, 243, 243);
+    /* background-color: rgb(245, 243, 243); */
 }
 .util:hover {
     background-color: rgb(202, 202, 202);
@@ -56,6 +62,7 @@
 }
 @media (max-width: 1200px) {
     .myAvatar {
+        margin-left: 20px;
         padding: 0;
     }
     .myAvatar > h1 {
@@ -83,7 +90,6 @@
     }
     .form1 {
         margin: 0;
-        margin-top: 5px;
     }
     .userdata {
         font-weight: bolder;
@@ -92,7 +98,8 @@
 }
 @media (max-width: 700px) {
     .myAvatar {
-        margin: 10px;
+        margin: 0;
+        margin-left: 10px;
         padding: 0;
     }
     .myAvatar > h1 {
@@ -108,7 +115,7 @@
 }
 @media (max-width: 600px) {
     .myAvatar {
-        margin: 20px;
+        /* margin: 20px; */
         margin-left: 35px;
         padding: 0;
         border: 0;

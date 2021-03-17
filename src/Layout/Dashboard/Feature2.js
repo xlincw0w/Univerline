@@ -15,7 +15,6 @@ export default function Feature2() {
         if (user.user_type === 'etudiant') {
             Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
                 .then((res) => {
-                    console.log(res.data)
                     dispatch(SetFriends(res.data))
                 })
                 .catch((err) => {
