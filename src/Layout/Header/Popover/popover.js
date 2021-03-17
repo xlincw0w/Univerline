@@ -9,6 +9,8 @@ import { BiMessage } from 'react-icons/bi'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import cx from 'classnames'
+import { RefreshProfile } from '../../../store/profile/profile'
+import { AiOutlineUsergroupAdd } from 'react-icons/ai'
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -77,7 +79,9 @@ const UserProfile = ({ func }) => {
 }
 
 export default function Dropdown(props) {
+    const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector((state) => state.AuthReducer.user)
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -112,7 +116,8 @@ export default function Dropdown(props) {
                         }}>
                         <Typography
                             onClick={() => {
-                                history.push('/profile')
+                                history.push('/profile/' + user.id)
+                                dispatch(RefreshProfile())
                             }}
                             className={classes.typography}>
                             <p className='cursor-pointer'>Profile</p>
@@ -156,11 +161,21 @@ export default function Dropdown(props) {
                 </div>
             )}
             {props.item === 'profilesearch' && (
-                <div className='mt'>
+                <div className='mt-1'>
                     <input
                         type='text'
                         className='focus:ring-indigo-500focus:border-indigo-500 block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
                         placeholder='Rechercher profile'
+                    />
+                </div>
+            )}
+            {props.item === 'pendinglist' && (
+                <div className='mt-1 cursor-pointer'>
+                    <AiOutlineUsergroupAdd
+                        onClick={() => {
+                            history.push('/pending')
+                        }}
+                        size={30}
                     />
                 </div>
             )}

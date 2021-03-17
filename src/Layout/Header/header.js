@@ -82,6 +82,9 @@ export default function Header() {
                                             <div className='mr-8'>
                                                 <Dropdown item='profilesearch' />
                                             </div>
+                                            <div className='mr-2'>
+                                                <Dropdown item='pendinglist' />
+                                            </div>
                                             <div className='mr-2 cursor-pointer'>
                                                 <Dropdown item='messagerie' />
                                             </div>

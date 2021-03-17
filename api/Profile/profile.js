@@ -2,6 +2,20 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database')
 
+router.route('/update/').post((req, res) => {
+    const data = req.body
+
+    db('users')
+        .update({ ...data })
+        .where({ id_user: data.id_user })
+        .then((resp) => {
+            res.json(resp)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+})
+
 router.route('/:id').get((req, res) => {
     const id = req.params.id
 
