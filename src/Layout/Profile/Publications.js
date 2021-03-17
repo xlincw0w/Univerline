@@ -9,6 +9,8 @@ import Comments from '../Dashboard/Feed/comments'
 import Options from '../Dashboard/Feed/options/options'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import cx from 'classnames'
 import { useParams } from 'react-router-dom'
 
@@ -28,8 +30,6 @@ export default function Publications() {
                     id_friend: user_info.id_user,
                 })
 
-                console.log('kifach2')
-
                 if (res.data.friend || user_info.id_user === user.id) {
                     Axios.get(constants.url + '/api/post/get/post/oneuser/' + user_info.id_user)
                         .then((res) => {
@@ -39,7 +39,6 @@ export default function Publications() {
                             dispatch(SetPublications([]))
                         })
                 } else {
-                    console.log('kifach12')
                     dispatch(SetPublications([]))
                 }
             } else if (user_info.user_type === 'enseignant') {
@@ -47,8 +46,6 @@ export default function Publications() {
                     id_user: user.id,
                     id_friend: user_info.id_user,
                 })
-
-                console.log('kifach')
 
                 if (res.data.friend || user_info.id_user === user.id) {
                     Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
@@ -59,11 +56,9 @@ export default function Publications() {
                             dispatch(SetPublications([]))
                         })
                 } else {
-                    console.log('kifach3')
                     dispatch(SetPublications([]))
                 }
             } else {
-                console.log('kifach4')
                 dispatch(SetPublications([]))
             }
         }
@@ -75,20 +70,26 @@ export default function Publications() {
         const [comments, setComments] = useState([])
         const [payload, setPayload] = useState('')
         const [refresh, setRefresh] = useState(0)
+        const [backdrop, setBackdrop] = useState(false)
 
         const Reload = () => {
             setRefresh(refresh + 1)
         }
 
         useEffect(() => {
+            setBackdrop(true)
             if (loadComment) {
                 Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
                     .then((res) => {
                         setComments(res.data)
+                        setBackdrop(false)
                     })
                     .catch((err) => {
                         setComments([])
+                        setBackdrop(false)
                     })
+            } else {
+                setBackdrop(false)
             }
         }, [loadComment, refresh])
 
@@ -101,8 +102,10 @@ export default function Publications() {
             })
                 .then((res) => {
                     Reload()
+                    setBackdrop(false)
                 })
                 .catch((err) => {
+                    setBackdrop(false)
                     console.log(err)
                 })
         }
@@ -161,6 +164,15 @@ export default function Publications() {
                                 <button type='submit' className='hidden'></button>
                             </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                                <Backdrop open={backdrop} style={{ display: 'contents' }}>
+                                    {backdrop && (
+                                        <div className='h-32 flex justify-center'>
+                                            <div className='mt-10'>
+                                                <CircularProgress color='inherit' />
+                                            </div>
+                                        </div>
+                                    )}
+                                </Backdrop>
                                 <div className='w-full h-auto'>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
@@ -179,6 +191,7 @@ export default function Publications() {
         const [comments, setComments] = useState([])
         const [payload, setPayload] = useState('')
         const [refresh, setRefresh] = useState(0)
+        const [backdrop, setBackdrop] = useState(false)
         const user = useSelector((state) => state.AuthReducer.user)
 
         const Reload = () => {
@@ -186,12 +199,15 @@ export default function Publications() {
         }
 
         useEffect(() => {
+            setBackdrop(true)
             if (loadComment) {
                 Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
                     .then((res) => {
+                        setBackdrop(false)
                         setComments(res.data)
                     })
                     .catch((err) => {
+                        setBackdrop(true)
                         setComments([])
                     })
             }
@@ -199,6 +215,7 @@ export default function Publications() {
 
         const handleComment = (e) => {
             e.preventDefault()
+            setBackdrop(true)
             Axios.post(constants.url + '/api/commentaire/add/comments/', {
                 id_user: user.id,
                 id_poste: elem.id_poste,
@@ -206,9 +223,11 @@ export default function Publications() {
             })
                 .then((res) => {
                     Reload()
+                    setBackdrop(false)
                 })
                 .catch((err) => {
                     console.log(err)
+                    setBackdrop(false)
                 })
         }
 
@@ -273,6 +292,15 @@ export default function Publications() {
                                 <button type='submit' className='hidden'></button>
                             </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                                <Backdrop open={backdrop} style={{ display: 'contents' }}>
+                                    {backdrop && (
+                                        <div className='h-32 flex justify-center'>
+                                            <div className='mt-10'>
+                                                <CircularProgress color='inherit' />
+                                            </div>
+                                        </div>
+                                    )}
+                                </Backdrop>
                                 <div className='w-full h-auto'>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />

@@ -49,7 +49,6 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((res) => {
-                    console.log(res)
                     dispatch(SetLoader(false))
                     dispatch(RefreshProfile())
                 })
@@ -76,7 +75,62 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((...res) => {
-                    console.log(res)
+                    dispatch(SetLoader(false))
+                    dispatch(RefreshProfile())
+                    dispatch(SetPending(false))
+                })
+            )
+            .catch((err) => {
+                console.log(err)
+                dispatch(SetLoader(false))
+                dispatch(RefreshProfile())
+            })
+    }
+
+    const handleAddEns = () => {
+        dispatch(SetLoader(true))
+        Axios.all([
+            Axios.post(constants.url + '/api/collegue/add/collegue', {
+                id_user: user.id,
+                id_collegue: user_info.id_user,
+                confirm: false,
+                receiver: false,
+            }),
+
+            Axios.post(constants.url + '/api/collegue/add/collegue', {
+                id_user: user_info.id_user,
+                id_collegue: user.id,
+                confirm: false,
+                receiver: true,
+            }),
+        ])
+            .then(
+                Axios.spread((res) => {
+                    dispatch(SetLoader(false))
+                    dispatch(RefreshProfile())
+                })
+            )
+            .catch((err) => {
+                console.log(err)
+                dispatch(SetLoader(false))
+                dispatch(RefreshProfile())
+            })
+    }
+
+    const handleRemoveEns = () => {
+        dispatch(SetLoader(true))
+        Axios.all([
+            Axios.post(constants.url + '/api/collegue/delete/collegue', {
+                id_user: user.id,
+                id_collegue: user_info.id_user,
+            }),
+            Axios.post(constants.url + '/api/collegue/delete/collegue', {
+                id_user: user_info.id_user,
+                id_collegue: user.id,
+            }),
+        ])
+            .then(
+                Axios.spread((...res) => {
                     dispatch(SetLoader(false))
                     dispatch(RefreshProfile())
                     dispatch(SetPending(false))
@@ -139,73 +193,144 @@ export default function MenuModif() {
             )}
             {user_info.id_user !== user.id && user_info.user_type === user.user_type && (
                 <div>
-                    <div>
-                        {friend && (
-                            <div>
-                                <div className='inline mr-3'>
-                                    <Button
-                                        onClick={() => {
-                                            // dispatch(SetModify(false))
-                                            // dispatch(RefreshProfile())
-                                        }}
-                                        variant='outlined'
-                                        color='default'>
-                                        <div className='w-32'>
-                                            <p className='inline text-sm text-gray-600'>Contacter</p>
-                                            <BiMailSend size={20} className='inline ml-2 mb-1' />
-                                        </div>
-                                    </Button>
-                                </div>
-                                <div className='inline'>
-                                    <Button
-                                        onClick={() => {
-                                            handleRemove()
-                                        }}
-                                        variant='contained'
-                                        color='secondary'>
-                                        <div className='w-32'>
-                                            <p className='inline text-sm text-gray-200'>Supprimer</p>
-                                            <AiOutlineUserDelete size={20} className='inline ml-2 mb-1' />
-                                        </div>
-                                    </Button>
-                                </div>
-                            </div>
-                        )}
-                        {!friend && (
-                            <div>
-                                {pending && (
+                    {user_info.user_type === 'etudiant' && (
+                        <div>
+                            {friend && (
+                                <div>
+                                    <div className='inline mr-3'>
+                                        <Button
+                                            onClick={() => {
+                                                // dispatch(SetModify(false))
+                                                // dispatch(RefreshProfile())
+                                            }}
+                                            variant='outlined'
+                                            color='default'>
+                                            <div className='w-32'>
+                                                <p className='inline text-sm text-gray-600'>Contacter</p>
+                                                <BiMailSend size={20} className='inline ml-2 mb-1' />
+                                            </div>
+                                        </Button>
+                                    </div>
                                     <div className='inline'>
                                         <Button
                                             onClick={() => {
                                                 handleRemove()
                                             }}
-                                            variant='outlined'
+                                            variant='contained'
                                             color='secondary'>
-                                            <div className='w-40'>
-                                                <p className='inline text-sm text-gray-600'>Annuler</p>
+                                            <div className='w-32'>
+                                                <p className='inline text-sm text-gray-200'>Supprimer</p>
                                                 <AiOutlineUserDelete size={20} className='inline ml-2 mb-1' />
                                             </div>
                                         </Button>
                                     </div>
-                                )}
-                                {!pending && (
+                                </div>
+                            )}
+                            {!friend && (
+                                <div>
+                                    {pending && (
+                                        <div className='inline'>
+                                            <Button
+                                                onClick={() => {
+                                                    handleRemove()
+                                                }}
+                                                variant='outlined'
+                                                color='secondary'>
+                                                <div className='w-40'>
+                                                    <p className='inline text-sm text-gray-600'>Annuler</p>
+                                                    <AiOutlineUserDelete size={20} className='inline ml-2 mb-1' />
+                                                </div>
+                                            </Button>
+                                        </div>
+                                    )}
+                                    {!pending && (
+                                        <div className='inline'>
+                                            <Button
+                                                onClick={() => {
+                                                    handleAdd()
+                                                }}
+                                                variant='contained'
+                                                color='secondary'>
+                                                <div className='w-32'>
+                                                    <p className='inline text-sm text-gray-200'>Ajouter</p>
+                                                    <AiOutlineUserAdd size={20} className='inline ml-2 mb-1' />
+                                                </div>
+                                            </Button>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    {user_info.user_type === 'enseignant' && (
+                        <div>
+                            {friend && (
+                                <div>
+                                    <div className='inline mr-3'>
+                                        <Button
+                                            onClick={() => {
+                                                // dispatch(SetModify(false))
+                                                // dispatch(RefreshProfile())
+                                            }}
+                                            variant='outlined'
+                                            color='default'>
+                                            <div className='w-32'>
+                                                <p className='inline text-sm text-gray-600'>Contacter</p>
+                                                <BiMailSend size={20} className='inline ml-2 mb-1' />
+                                            </div>
+                                        </Button>
+                                    </div>
                                     <div className='inline'>
                                         <Button
                                             onClick={() => {
-                                                handleAdd()
+                                                handleRemoveEns()
                                             }}
                                             variant='contained'
                                             color='secondary'>
                                             <div className='w-32'>
-                                                <p className='inline text-sm text-gray-200'>Ajouter</p>
-                                                <AiOutlineUserAdd size={20} className='inline ml-2 mb-1' />
+                                                <p className='inline text-sm text-gray-200'>Supprimer</p>
+                                                <AiOutlineUserDelete size={20} className='inline ml-2 mb-1' />
                                             </div>
                                         </Button>
                                     </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
+                                </div>
+                            )}
+                            {!friend && (
+                                <div>
+                                    {pending && (
+                                        <div className='inline'>
+                                            <Button
+                                                onClick={() => {
+                                                    handleRemoveEns()
+                                                }}
+                                                variant='outlined'
+                                                color='secondary'>
+                                                <div className='w-40'>
+                                                    <p className='inline text-sm text-gray-600'>Annuler</p>
+                                                    <AiOutlineUserDelete size={20} className='inline ml-2 mb-1' />
+                                                </div>
+                                            </Button>
+                                        </div>
+                                    )}
+                                    {!pending && (
+                                        <div className='inline'>
+                                            <Button
+                                                onClick={() => {
+                                                    handleAddEns()
+                                                }}
+                                                variant='contained'
+                                                color='secondary'>
+                                                <div className='w-32'>
+                                                    <p className='inline text-sm text-gray-200'>Ajouter</p>
+                                                    <AiOutlineUserAdd size={20} className='inline ml-2 mb-1' />
+                                                </div>
+                                            </Button>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
             {user_info.id_user !== user.id && user_info.user_type !== user.user_type && (

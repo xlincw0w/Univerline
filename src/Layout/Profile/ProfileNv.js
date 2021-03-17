@@ -45,17 +45,33 @@ export default function ProfileNv() {
                 dispatch(SetUserInfo([]))
             })
 
-        Axios.post(constants.url + '/api/amis/isFriend', {
-            id_user: user.id,
-            id_friend: routeParams.id,
-        })
-            .then((res) => {
-                dispatch(SetFriend(res.data.friend))
-                if (res.data.pending) dispatch(SetPending(res.data.pending))
-            })
-            .catch((err) => {
-                dispatch(SetFriend(false))
-            })
+        if (user.id !== routeParams.id) {
+            if (user.user_type === 'etudiant') {
+                Axios.post(constants.url + '/api/amis/isFriend', {
+                    id_user: user.id,
+                    id_friend: routeParams.id,
+                })
+                    .then((res) => {
+                        dispatch(SetFriend(res.data.friend))
+                        if (res.data.pending) dispatch(SetPending(res.data.pending))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFriend(false))
+                    })
+            } else {
+                Axios.post(constants.url + '/api/collegue/isFriend/ens', {
+                    id_user: user.id,
+                    id_friend: routeParams.id,
+                })
+                    .then((res) => {
+                        dispatch(SetFriend(res.data.friend))
+                        if (res.data.pending) dispatch(SetPending(res.data.pending))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFriend(false))
+                    })
+            }
+        }
     }, [reset, user, routeParams.id])
 
     return (

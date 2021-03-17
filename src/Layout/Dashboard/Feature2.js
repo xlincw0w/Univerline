@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { HiStatusOnline } from 'react-icons/hi'
 import { SetFriends } from '../../store/auth/auth'

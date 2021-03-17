@@ -3,16 +3,16 @@ const router = express.Router()
 const db = require('../database')
 const moment = require('moment')
 const { leftJoin } = require('../database')
+const { v4 } = require('uuid')
 
 //ajouter une classe avec id d'un enseignant
-router.route('/add/classe/:id?').post((req, res) => {
-    const id_ens = req.params.id
+router.route('/add/classe/').post((req, res) => {
     const data = req.body
 
     db('classe')
         .insert({
-            id_classe: data.id_classe,
-            id_ens: id_ens,
+            id_classe: v4().split('-').join(''),
+            id_ens: data.id_ens,
             libelle_classe: data.libelle_classe,
             date_creation: moment().format(),
         })
@@ -67,6 +67,7 @@ router.route('/get/classe/:id?').get((req, res) => {
     db('classe')
         .where({ id_ens: id })
         .select('*')
+        .leftJoin('users', 'users.id_user', 'classe.id_ens')
         .then((resp) => {
             res.json(resp)
         })
@@ -83,7 +84,24 @@ router.route('/get/classe/etu/:id?').get((req, res) => {
         .select('*')
         .leftJoin('classe', 'classe.id_classe', 'adherant.id_classe')
         .leftJoin('users', 'users.id_user', 'classe.id_ens')
-        .where('id_etu', id)
+        .where({ id_etu: id, confirm: true })
+        .then((rows) => {
+            res.json(rows)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json([])
+        })
+})
+
+router.route('/get/classe/etu/adh/').post((req, res) => {
+    const data = req.body
+
+    db('adherant')
+        .select('*')
+        .leftJoin('classe', 'classe.id_classe', 'adherant.id_classe')
+        .leftJoin('users', 'users.id_user', 'classe.id_ens')
+        .where({ id_etu: data.id, id_ens: data.id_ens })
         .then((rows) => {
             res.json(rows)
         })
@@ -96,6 +114,7 @@ router.route('/get/classe/etu/:id?').get((req, res) => {
 //supprimer  une classe
 router.route('/delete/classe/:id?').delete((req, res) => {
     const id = req.params.id
+
     db('classe')
         .where({ id_classe: id })
         .delete('*')

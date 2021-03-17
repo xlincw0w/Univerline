@@ -27,7 +27,7 @@ String.prototype.capitalize = function () {
 
 const Main = () => {
     return (
-        <div className='font-openSans overflow-x-hidden'>
+        <div className='font-openSans overflow-x-hidden overflow-y-hidden'>
             <Router>
                 <div style={{ height: 'auto' }}>
                     <Switch>

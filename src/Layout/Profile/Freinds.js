@@ -72,7 +72,34 @@ export default function Freinds() {
                 }
             }
         } else {
-            dispatch(SetProfileFriends([]))
+            if (user_info.id_user === user.id) {
+                Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user_info.id_user)
+                    .then((res) => {
+                        dispatch(SetProfileFriends(res.data))
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        dispatch(SetProfileFriends([]))
+                    })
+            } else {
+                const res = await Axios.post(constants.url + '/api/collegue/isFriend/ens', {
+                    id_user: user.id,
+                    id_collegue: user_info.id_user,
+                })
+
+                if (res.data.friend) {
+                    Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user_info.id_user)
+                        .then((res) => {
+                            dispatch(SetProfileFriends(res.data))
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                            dispatch(SetProfileFriends([]))
+                        })
+                } else {
+                    dispatch(SetProfileFriends([]))
+                }
+            }
         }
     }, [user_info.id_user, user.id])
 
@@ -113,6 +140,49 @@ export default function Freinds() {
                                                             align='left'
                                                             title={elem.nom + ' ' + elem.prenom}
                                                             subheader={elem.niveau_edu + ' ' + elem.domaine_edu}
+                                                        />
+                                                    </Card>
+                                                </div>
+                                            </Grid>
+                                        )
+                                    })}
+                                </Grid>
+                            </div>
+                        </Grid>
+                    )}
+                    {user_info.user_type === 'enseignant' && (
+                        <Grid container xs={12}>
+                            <div className='mx-auto w-144'>
+                                <Grid item xs={12}>
+                                    <Grid item xs={12}>
+                                        <Paper className={classes.paper}>
+                                            <input
+                                                type='text'
+                                                required={true}
+                                                onChange={(e) => updateFilter(e.target.value)}
+                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                placeholder={`Rechercher parmis les ${user.user_type === 'etudiant' ? 'camarades' : 'collégues'}.`}
+                                            />
+                                        </Paper>
+                                    </Grid>
+
+                                    {filter(profile_friends, (o) => {
+                                        let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
+                                        return searchIn.includes(filterWord)
+                                    }).map((elem) => {
+                                        return (
+                                            <Grid item xs={12}>
+                                                <div
+                                                    className='cursor-pointer'
+                                                    onClick={() => {
+                                                        history.push('/profile/' + elem.id_user)
+                                                    }}>
+                                                    <Card className={classes.root}>
+                                                        <CardHeader
+                                                            avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
+                                                            align='left'
+                                                            title={elem.nom + ' ' + elem.prenom}
+                                                            subheader={elem.niveau_ens + ' ' + elem.domaine_ens}
                                                         />
                                                     </Card>
                                                 </div>

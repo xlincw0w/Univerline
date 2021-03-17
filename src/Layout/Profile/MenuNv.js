@@ -90,7 +90,11 @@ export default function CustomizedTabs() {
                             <Publications />
                         </div>
                     )}
-                    {value === 1 && <div className='mt-4'>{user_info.user_type === 'etudiant' && <Freinds />}</div>}
+                    {value === 1 && (
+                        <div className='mt-4'>
+                            <Freinds />
+                        </div>
+                    )}
                     {value === 2 && (
                         <div className='mt-4'>
                             <Classes />

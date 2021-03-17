@@ -39,13 +39,30 @@ const Post = () => {
                     }
                 })
                 .catch((err) => {
+                    console.log(err)
+                    dispatch(FeedLoading(false))
+                })
+        } else if (user.user_type === 'enseignant') {
+            dispatch(FeedLoading(true))
+            Axios.post(constants.url + '/api/post/add/post/', {
+                id_classe: classvalue.id_classe === 'collegue' ? '#####' : classvalue.id_classe,
+                id_user: classvalue.id_classe === 'collegue' ? user.id : '&&&&&',
+                payload,
+            })
+                .then((res) => {
+                    dispatch(FeedLoading(false))
+                    if (res.data.AJOUT) {
+                        dispatch(RefreshFeed())
+                    } else {
+                        console.log('not added')
+                    }
+                })
+                .catch((err) => {
                     dispatch(FeedLoading(false))
                     console.log(err)
                 })
         }
     }
-
-    console.log(classvalue)
 
     return (
         <div className='w-full mx-auto shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
