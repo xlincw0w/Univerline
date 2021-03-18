@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
-import Message from './msg'
+import Message from './messages'
 import Grid from '@material-ui/core/Grid'
 import SendIcon from '@material-ui/icons/Send'
 import ListIcon from '@material-ui/icons/List'
