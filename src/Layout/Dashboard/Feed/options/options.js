@@ -41,7 +41,7 @@ export default function Options({ elem }) {
 
     return (
         <div>
-            <HiOutlineTrash className='text-gray-200 cursor-pointer' size={30} onClick={(e) => handleClick(e)} />
+            <HiOutlineTrash className='text-gray-200 cursor-pointer duration-300 hover:text-red-500' size={30} onClick={(e) => handleClick(e)} />
             {/* <Popover
                 id={id}
                 open={open}

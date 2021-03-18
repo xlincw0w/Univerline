@@ -39,7 +39,7 @@ const Skeleton = () => {
                     dispatch(SetFeedProf([]))
                 })
         } else if (user.user_type === 'enseignant') {
-            Axios.get(constants.url + '/api/post/get/post_ens/all/' + user.id)
+            Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
                 .then((res) => {
                     dispatch(SetFeedProf(res.data))
                 })
@@ -101,12 +101,12 @@ const Skeleton = () => {
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    className={cx('h-1/4 shadow-xl rounded-xl cursor-pointer', {
+                    className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
                         'bg-gradient-to-r from-purple-400 to-purple-600': elem.id_user !== user.id,
                     })}>
                     <div className='grid grid-cols-5'>
-                        <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
+                        <div onClick={() => history.push('/profile/' + elem.id_user)} className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl cursor-pointer'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
                         </div>
                         <div className='col-span-3 flex'>
@@ -230,12 +230,12 @@ const Skeleton = () => {
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    className={cx('h-1/4 shadow-xl rounded-xl cursor-pointer', {
+                    className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
                         'bg-gradient-to-r from-green-600 to-green-400': elem.id_user !== user.id,
                     })}>
                     <div className='grid grid-cols-5'>
-                        <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
+                        <div onClick={() => history.push('/profile/' + elem.id_user)} className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl cursor-pointer'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
                         </div>
                         <div className='col-span-3 flex'>

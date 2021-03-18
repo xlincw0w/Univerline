@@ -116,9 +116,9 @@ router.route('/get/post_ens/all/:id?').get(async (req, res) => {
     const classes = await db('classe').select('*').where({ id_ens: id })
     const collegue = await db('poste')
         .select('*')
+        .where({ 'users.id_user': id })
         .leftJoin('users', 'users.id_user', 'poste.id_user')
         .leftJoin('classe', 'classe.id_classe', 'poste.id_classe')
-        .where({ 'users.id_user': id })
 
     var postes = []
 
@@ -126,9 +126,9 @@ router.route('/get/post_ens/all/:id?').get(async (req, res) => {
         classes.map(async (elem) => {
             let data = await db('poste')
                 .select('*')
+                .where('poste.id_classe', elem.id_classe)
                 .leftJoin('classe', 'poste.id_classe', 'classe.id_classe')
                 .leftJoin('users', 'users.id_user', 'classe.id_ens')
-                .where('poste.id_classe', elem.id_classe)
                 .orderBy('date_poste', 'desc')
                 .limit(10)
             postes = concat(postes, data)
@@ -145,12 +145,13 @@ router.route('/get/post_ens/all/:id?').get(async (req, res) => {
 router.route('/get/post_ens/allfriends/:id?').get(async (req, res) => {
     const id = req.params.id
 
+    const friends = await db('collegue').select('id_user').where({ id_collegue: id })
     const classes = await db('classe').select('*').where({ id_ens: id })
     const collegue = await db('poste')
         .select('*')
+        .where({ 'users.id_user': id })
         .leftJoin('users', 'users.id_user', 'poste.id_user')
         .leftJoin('classe', 'classe.id_classe', 'poste.id_classe')
-        .where({ 'users.id_user': id })
 
     var postes = []
 
@@ -158,11 +159,18 @@ router.route('/get/post_ens/allfriends/:id?').get(async (req, res) => {
         classes.map(async (elem) => {
             let data = await db('poste')
                 .select('*')
+                .where('poste.id_classe', elem.id_classe)
                 .leftJoin('classe', 'poste.id_classe', 'classe.id_classe')
                 .leftJoin('users', 'users.id_user', 'classe.id_ens')
-                .where('poste.id_classe', elem.id_classe)
-                .orderBy('date_poste', 'desc')
                 .limit(10)
+            postes = concat(postes, data)
+        })
+    )
+
+    await Promise.all(
+        friends.map(async (elem) => {
+            let data = await db('poste').select('*').where('poste.id_user', elem.id_user).leftJoin('users', 'users.id_user', 'poste.id_user').limit(10)
+
             postes = concat(postes, data)
         })
     )

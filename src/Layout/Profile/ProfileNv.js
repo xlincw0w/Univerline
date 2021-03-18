@@ -61,7 +61,7 @@ export default function ProfileNv() {
             } else {
                 Axios.post(constants.url + '/api/collegue/isFriend/ens', {
                     id_user: user.id,
-                    id_friend: routeParams.id,
+                    id_collegue: routeParams.id,
                 })
                     .then((res) => {
                         dispatch(SetFriend(res.data.friend))
