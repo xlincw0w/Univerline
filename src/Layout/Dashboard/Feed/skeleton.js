@@ -12,7 +12,8 @@ import moment from 'moment'
 import cx from 'classnames'
 import Options from './options/options'
 import Button from '@material-ui/core/Button'
-import Badge from '@material-ui/core/Badge'
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const Skeleton = () => {
     const dispatch = useDispatch()
@@ -37,34 +38,51 @@ const Skeleton = () => {
                 .catch((err) => {
                     dispatch(SetFeedProf([]))
                 })
+        } else if (user.user_type === 'enseignant') {
+            Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
+                .then((res) => {
+                    dispatch(SetFeedProf(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFeedProf([]))
+                })
         }
     }, [user.id, refresh])
 
     const ProfSkeleton = ({ elem }) => {
+        const history = useHistory()
         const [loadComment, setLoadComment] = useState(false)
 
         const [comments, setComments] = useState([])
         const [payload, setPayload] = useState('')
         const [refresh, setRefresh] = useState(0)
+        const [backdrop, setBackdrop] = useState(false)
 
         const Reload = () => {
             setRefresh(refresh + 1)
         }
 
         useEffect(() => {
+            setBackdrop(true)
             if (loadComment) {
                 Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
                     .then((res) => {
+                        setBackdrop(false)
                         setComments(res.data)
                     })
                     .catch((err) => {
+                        setBackdrop(false)
                         setComments([])
                     })
+            } else {
+                setBackdrop(false)
+                setComments([])
             }
         }, [loadComment, refresh])
 
         const handleComment = (e) => {
             e.preventDefault()
+            setBackdrop(true)
             Axios.post(constants.url + '/api/commentaire/add/comments/', {
                 id_user: user.id,
                 id_poste: elem.id_poste,
@@ -72,32 +90,45 @@ const Skeleton = () => {
             })
                 .then((res) => {
                     Reload()
+                    setBackdrop(false)
                 })
                 .catch((err) => {
                     console.log(err)
+                    setBackdrop(false)
                 })
         }
 
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
-                <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
+                <div
+                    className={cx('h-1/4 shadow-xl rounded-xl', {
+                        'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
+                        'bg-gradient-to-r from-purple-400 to-purple-600': elem.id_user !== user.id,
+                    })}>
                     <div className='grid grid-cols-5'>
-                        <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
+                        <div onClick={() => history.push('/profile/' + elem.id_user)} className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl cursor-pointer'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
                         </div>
-                        <div className='col-span-4 flex'>
+                        <div className='col-span-3 flex'>
                             <div className='mt-3'>
                                 <p className='text-gray-200 text-sm'>{elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}</p>
                                 <p className='text-gray-100 text-sm'>Enseignant</p>
                             </div>
                         </div>
+                        {elem.id_user === user.id && (
+                            <div className='flex flex-row-reverse'>
+                                <div className='mt-5 mr-4'>
+                                    <Options elem={elem} />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className='h-auto'>
                     <div className='h-auto'>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
-                            <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
+                            <p className='text-gray-500 text-sm'>{elem.libelle_classe || 'Collégues'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base'>{elem.payload}</p>
@@ -132,6 +163,15 @@ const Skeleton = () => {
                                 <button type='submit' className='hidden'></button>
                             </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                                <Backdrop open={backdrop} style={{ display: 'contents' }}>
+                                    {backdrop && (
+                                        <div className='h-32 flex justify-center'>
+                                            <div className='mt-10'>
+                                                <CircularProgress color='inherit' />
+                                            </div>
+                                        </div>
+                                    )}
+                                </Backdrop>
                                 <div className='w-full h-auto'>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
@@ -146,23 +186,28 @@ const Skeleton = () => {
     }
 
     const StudSkeleton = ({ elem }) => {
+        const history = useHistory()
         const [loadComment, setLoadComment] = useState(false)
         const [comments, setComments] = useState([])
         const [payload, setPayload] = useState('')
         const [refresh, setRefresh] = useState(0)
+        const [backdrop, setBackdrop] = useState(false)
 
         const Reload = () => {
             setRefresh(refresh + 1)
         }
 
         useEffect(() => {
+            setBackdrop(true)
             if (loadComment) {
                 Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
                     .then((res) => {
                         setComments(res.data)
+                        setBackdrop(false)
                     })
                     .catch((err) => {
                         setComments([])
+                        setBackdrop(false)
                     })
             }
         }, [loadComment, refresh])
@@ -185,16 +230,12 @@ const Skeleton = () => {
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    onClick={() => {
-                        console.log('kifach')
-                        history.push('/profile/' + elem.id_user)
-                    }}
-                    className={cx('h-1/4 shadow-xl rounded-xl cursor-pointer', {
+                    className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
                         'bg-gradient-to-r from-green-600 to-green-400': elem.id_user !== user.id,
                     })}>
                     <div className='grid grid-cols-5'>
-                        <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
+                        <div onClick={() => history.push('/profile/' + elem.id_user)} className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl cursor-pointer'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
                         </div>
                         <div className='col-span-3 flex'>
@@ -246,6 +287,15 @@ const Skeleton = () => {
                                 <button type='submit' className='hidden'></button>
                             </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                                <Backdrop open={backdrop} style={{ display: 'contents' }}>
+                                    {backdrop && (
+                                        <div className='h-32 flex justify-center'>
+                                            <div className='mt-10'>
+                                                <CircularProgress color='inherit' />
+                                            </div>
+                                        </div>
+                                    )}
+                                </Backdrop>
                                 <div className='w-full h-auto'>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
@@ -262,7 +312,7 @@ const Skeleton = () => {
     const [feed_mobile, setFeedMobile] = useState('all')
 
     return (
-        <div className='pt-5 grid grid-cols-1 xl:grid-cols-2'>
+        <div className='pt-5'>
             <div className='block xl:hidden'>
                 <div className='mb-4'>
                     <div className='mx-2 inline-block'>
@@ -277,15 +327,25 @@ const Skeleton = () => {
                     </div>
                 </div>
             </div>
-            {(feed_mobile === 'all' || feed_mobile === 'etudiant') && (
-                <div>
-                    {feed_friends.map((elem) => {
-                        return <StudSkeleton elem={elem} />
-                    })}
+            {user.user_type === 'etudiant' && (
+                <div className='grid grid-cols-1 xl:grid-cols-2'>
+                    {(feed_mobile === 'all' || feed_mobile === 'etudiant') && (
+                        <div>
+                            {feed_friends.map((elem) => {
+                                return <StudSkeleton elem={elem} />
+                            })}
+                        </div>
+                    )}
+                    <div>
+                        {(feed_mobile === 'all' || feed_mobile === 'enseignant') &&
+                            feed_prof.map((elem) => {
+                                return <ProfSkeleton elem={elem} />
+                            })}
+                    </div>
                 </div>
             )}
-            <div>
-                {(feed_mobile === 'all' || feed_mobile === 'enseignant') &&
+            <div className='grid grid-cols-1 xl:grid-cols-2'>
+                {user.user_type === 'enseignant' &&
                     feed_prof.map((elem) => {
                         return <ProfSkeleton elem={elem} />
                     })}

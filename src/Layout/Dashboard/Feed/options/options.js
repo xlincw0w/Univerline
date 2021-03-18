@@ -21,7 +21,7 @@ export default function Options({ elem }) {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         dispatch(FeedLoading(true))
         Axios.delete(constants.url + '/api/post/delete/post/' + elem.id_poste)
             .then((res) => {
@@ -36,16 +36,12 @@ export default function Options({ elem }) {
             })
     }
 
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
-
     const open = Boolean(anchorEl)
     const id = open ? 'simple-popover' : undefined
 
     return (
         <div>
-            <HiOutlineTrash className='text-gray-200 cursor-pointer' size={30} onClick={() => handleClick()} />
+            <HiOutlineTrash className='text-gray-200 cursor-pointer duration-300 hover:text-red-500' size={30} onClick={(e) => handleClick(e)} />
             {/* <Popover
                 id={id}
                 open={open}

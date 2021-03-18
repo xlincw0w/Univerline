@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { HiStatusOnline } from 'react-icons/hi'
 import { SetFriends } from '../../store/auth/auth'
@@ -20,6 +20,16 @@ export default function Feature2() {
                 .catch((err) => {
                     dispatch(SetFriends([]))
                 })
+        } else if (user.user_type === 'enseignant') {
+            Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        } else {
+            dispatch(SetFriends([]))
         }
     }, [user.id])
 
@@ -34,6 +44,10 @@ export default function Feature2() {
             <div className='border-b-2 mt-3 border-green-400 w-48'></div>
             <div className='mt-5 ml-5'>
                 {user.user_type === 'etudiant' &&
+                    friends.map((elem) => {
+                        return <Online id={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />
+                    })}
+                {user.user_type === 'enseignant' &&
                     friends.map((elem) => {
                         return <Online id={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />
                     })}

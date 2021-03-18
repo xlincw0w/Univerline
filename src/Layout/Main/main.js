@@ -18,13 +18,16 @@ import Axios from 'axios'
 import { constants } from '../../constants'
 import PendingList from '../Profile/PendingList'
 
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
 const Main = () => {
     return (
-        <div className='font-openSans overflow-x-hidden'>
+        <div className='font-openSans overflow-x-hidden overflow-y-hidden'>
             <Router>
                 <div style={{ height: 'auto' }}>
                     <Switch>
@@ -78,7 +81,7 @@ const Main = () => {
                                             </Route>
                                         </React.Fragment>
                                     )
-                                } else {
+                                } else if (providerId === 'none') {
                                     return (
                                         <React.Fragment>
                                             <Route path='/auth'>
@@ -100,6 +103,12 @@ const Main = () => {
                                                 <Erreur />
                                             </Route> */}
                                         </React.Fragment>
+                                    )
+                                } else {
+                                    return (
+                                        <Backdrop open={true} style={{ zIndex: 10 }}>
+                                            <CircularProgress color='inherit' />
+                                        </Backdrop>
                                     )
                                 }
                             }}
