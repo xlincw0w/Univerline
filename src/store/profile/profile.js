@@ -6,6 +6,8 @@ const initState = {
     reset: 0,
 
     publications: [],
+    friends: [],
+    classes: [],
 
     user_info: {
         id: '',
@@ -27,6 +29,8 @@ const SET_MODIFY_INFO = 'SET_MODIFY_INFO'
 const SET_USER_INFO = 'SET_USER_INFO'
 const RESET_PROFILE_STATE = 'RESET_PROFILE_STATE'
 const SET_FRIEND = 'SET_FRIEND'
+const SET_PROFILE_FRIENDS = 'SET_PROFILE_FRIENDS'
+const SET_PROFILE_CLASSES = 'SET_PROFILE_CLASSES'
 const SET_PENDING = 'SET_PENDING'
 
 const SET_PUBLICATIONS = 'SET_PUBLICATIONS'
@@ -44,6 +48,16 @@ export const SetLoader = (payload) => ({
 
 export const SetFriend = (payload) => ({
     type: SET_FRIEND,
+    payload,
+})
+
+export const SetProfileFriends = (payload) => ({
+    type: SET_PROFILE_FRIENDS,
+    payload,
+})
+
+export const SetProfileClasses = (payload) => ({
+    type: SET_PROFILE_CLASSES,
     payload,
 })
 
@@ -95,6 +109,18 @@ const ProfileReducer = (state = initState, action) => {
             return {
                 ...state,
                 friend: action.payload,
+            }
+
+        case SET_PROFILE_FRIENDS:
+            return {
+                ...state,
+                friends: action.payload,
+            }
+
+        case SET_PROFILE_CLASSES:
+            return {
+                ...state,
+                classes: action.payload,
             }
 
         case SET_PENDING:

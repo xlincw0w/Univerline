@@ -38,8 +38,18 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
     }))(Badge)
 
     const [userData, setUserData] = useState(null)
+    const [refresh, setRefresh] = useState(0)
+
+    const reload = () => {
+        setRefresh(refresh + 1)
+    }
+
+    setTimeout(() => {
+        reload()
+    }, 60000)
 
     useEffect(() => {
+        console.log('kifach')
         Axios.get(constants.url + '/api/online/get/' + id)
             .then((res) => {
                 setUserData(res.data.last_seen)
@@ -47,7 +57,7 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
             .catch((err) => {
                 setUserData(null)
             })
-    }, [])
+    }, [refresh])
 
     const diff = moment.duration(moment().diff(moment(userData))).asSeconds()
     console.log(nom, prenom, diff)
