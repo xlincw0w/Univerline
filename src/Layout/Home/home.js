@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { ResetStateSignup } from '../../store/signup/signupReducer'
 import { ResetAuthState } from '../../store/auth/auth'
+import Footer from '../Footer/newFooter'
 
 AOS.init({
     // Global settings:
@@ -164,6 +165,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </div>
     )
 }
