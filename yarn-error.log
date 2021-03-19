@@ -1,0 +1,114 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\kociela\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Python39\Scripts\;C:\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Users\kociela\AppData\Local\Microsoft\WindowsApps;C:\Users\kociela\AppData\Roaming\npm;C:\Users\kociela\AppData\Local\Programs\Microsoft VS Code\bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/tsparticles/-/tsparticles-1.19.3.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\kociela\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141289:19)
+      at Object.onceWrapper (events.js:421:28)
+      at ClientRequest.emit (events.js:315:20)
+      at TLSSocket.emitRequestTimeout (_http_client.js:784:9)
+      at Object.onceWrapper (events.js:421:28)
+      at TLSSocket.emit (events.js:327:22)
+      at TLSSocket.Socket._onTimeout (net.js:483:8)
+      at listOnTimeout (internal/timers.js:554:17)
+      at processTimers (internal/timers.js:497:7)
+
+npm manifest: 
+  {
+      "name": "socialnetwork",
+      "version": "1.0.0",
+      "description": "socialnetwork",
+      "scripts": {
+          "start": "tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack serve --config webpack.dev.js ",
+          "build": "rm -rf dist && tailwind build ./public/index.css -o ./src/Tailwind/index.css && webpack --config webpack.prod.js",
+          "server_dev": "concurrently \"npm start\" \"nodemon server.js\" ",
+          "server_build": "npm run build && nodemon server.js",
+          "test": "jest --watch /tests"
+      },
+      "repository": {
+          "type": "git",
+          "url": "git+https://github.com/xlincw0w/socialnetwork.git"
+      },
+      "husky": {
+          "hooks": {
+              "pre-commit": "pretty-quick --staged"
+          }
+      },
+      "author": "xlincw0w",
+      "license": "GPL",
+      "dependencies": {
+          "@material-ui/core": "^4.11.3",
+          "@material-ui/icons": "^4.11.2",
+          "@material-ui/lab": "^4.0.0-alpha.57",
+          "@react-firebase/auth": "^0.2.10",
+          "@tailwindcss/forms": "^0.2.1",
+          "@testing-library/jest-dom": "^5.11.4",
+          "@testing-library/react": "^11.1.0",
+          "@testing-library/user-event": "^12.1.10",
+          "aos": "^2.3.4",
+          "axios": "^0.21.0",
+          "classnames": "^2.2.6",
+          "firebase": "^8.2.9",
+          "react": "^17.0.1",
+          "react-dom": "^17.0.1",
+          "react-icons": "^4.1.0",
+          "react-particles-js": "^3.4.1",
+          "react-redux": "^7.2.2",
+          "react-router-dom": "^5.2.0",
+          "react-scroll-to-bottom": "^4.1.0",
+          "react-scroll-to-top": "^1.0.5",
+          "redux": "^4.0.5",
+          "redux-logger": "^3.0.6",
+          "redux-thunk": "^2.3.0",
+          "socket.io": "^3.1.1",
+          "socket.io-client": "^3.1.1"
+      },
+      "devDependencies": {
+          "@babel/core": "^7.12.10",
+          "@babel/plugin-proposal-class-properties": "^7.12.1",
+          "@babel/preset-env": "^7.12.11",
+          "@babel/preset-react": "^7.12.10",
+          "@tailwindcss/custom-forms": "^0.2.1",
+          "@types/classnames": "^2.2.11",
+          "autoprefixer": "^10.1.0",
+          "babel-loader": "^8.2.2",
+          "babel-polyfill": "^6.26.0",
+          "concurrently": "^5.3.0",
+          "cors": "^2.8.5",
+          "css-loader": "^5.0.1",
+          "dotenv": "^8.2.0",
+          "express": "^4.17.1",
+          "file-loader": "^6.2.0",
+          "html-webpack-plugin": "^5.0.0",
+          "husky": "^5.0.9",
+          "knex": "^0.21.13",
+          "pg": "^8.5.1",
+          "postcss-loader": "^4.1.0",
+          "pretty-quick": "^3.1.0",
+          "style-loader": "^2.0.0",
+          "tailwindcss": "^2.0.2",
+          "ts-loader": "^8.0.12",
+          "webpack": "^5.10.3",
+          "webpack-cli": "^4.2.0",
+          "webpack-dev-middleware": "^4.0.2",
+          "webpack-dev-server": "^3.11.0"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
