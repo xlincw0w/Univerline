@@ -234,9 +234,6 @@ export default function Publications() {
         return (
             <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    onClick={() => {
-                        console.log('kifach')
-                    }}
                     className='h-1/4 shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
                     <div className='grid grid-cols-5'>

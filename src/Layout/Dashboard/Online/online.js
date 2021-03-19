@@ -49,7 +49,6 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
     }, 60000)
 
     useEffect(() => {
-        console.log('kifach')
         Axios.get(constants.url + '/api/online/get/' + id)
             .then((res) => {
                 setUserData(res.data.last_seen)
