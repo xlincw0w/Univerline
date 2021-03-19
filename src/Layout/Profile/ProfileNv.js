@@ -72,11 +72,9 @@ export default function ProfileNv() {
                                     <div className='mt-5 bg-gray-50'>
                                         <Grid container spacing={3}>
                                             <Grid item xs={3}>
-                                                <div className='w-full ml-3 mt-3'>
+                                                <div className='w-full mx-auto'>
                                                     <Paper className={classes.paper}>
-                                                        <Paper className={classes.paper}>
-                                                            <PhotoSquare avatar={profile.avatar} />
-                                                        </Paper>
+                                                        <PhotoSquare avatar={profile.avatar} />
                                                     </Paper>
                                                 </div>
                                             </Grid>
