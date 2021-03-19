@@ -56,68 +56,68 @@ export default function partie1(props) {
 const users = {
         utilisateurs: [
             {
-                FirstName: 'Naim',
-                LastName: 'Bessaha',
-                Image: img4,
-                Statu: 'Etudiant(e)',
+                prenom: 'Naim',
+                nom: 'Bessaha',
+                avatar: img4,
+                user_type: 'Etudiant(e)',
             },
             {
-                FirstName: 'Malik',
-                LastName: 'Si-Mohamed',
-                Image: img3,
-                Statu: 'Professeur',
+                prenom: 'Malik',
+                nom: 'Si-Mohamed',
+                avatar: img3,
+                user_type: 'Professeur',
             },
             {
-                FirstName: 'Franck',
-                LastName: 'Lampard',
-                Image: img2,
-                Statu: 'Etudiant(e)',
+                prenom: 'Franck',
+                nom: 'Lampard',
+                avatar: img2,
+                user_type: 'Etudiant(e)',
             },
             {
-                FirstName: 'Naim',
-                LastName: 'Bessaha',
-                Image: img4,
-                Statu: 'Etudiant(e)',
+                prenom: 'Naim',
+                nom: 'Bessaha',
+                avatar: img4,
+                user_type: 'Etudiant(e)',
             },
             {
-                FirstName: 'Malik',
-                LastName: 'Si-Mohamed',
-                Image: img3,
-                Statu: 'Professeur',
+                prenom: 'Malik',
+                nom: 'Si-Mohamed',
+                avatar: img3,
+                user_type: 'Professeur',
             },
             {
-                FirstName: 'Franck',
-                LastName: 'Lampard',
-                Image: img2,
-                Statu: 'Etudiant(e)',
+                prenom: 'Franck',
+                nom: 'Lampard',
+                avatar: img2,
+                user_type: 'Etudiant(e)',
      
             },
             {
-                FirstName: 'Naim',
-                LastName: 'Bessaha',
-                Image: img4,
-                Statu: 'Etudiant(e)',
+                prenom: 'Naim',
+                nom: 'Bessaha',
+                avatar: img4,
+                user_type: 'Etudiant(e)',
 
             },
             {
-                FirstName: 'Malik',
-                LastName: 'Si-Mohamed',
-                Image: img3,
-                Statu: 'Professeur',
+                prenom: 'Malik',
+                nom: 'Si-Mohamed',
+                avatar: img3,
+                user_type: 'Professeur',
              
             },
             {
-                FirstName: 'Franck',
-                LastName: 'Lampard',
-                Image: img2,
-                Statu: 'Etudiant(e)',
+                prenom: 'Franck',
+                nom: 'Lampard',
+                avatar: img2,
+                user_type: 'Etudiant(e)',
                 
             },
         ],
     }
 
     const classes = useStyles()
-    const lent = friends.length
+    const lent = users.utilisateurs.length
     
   
 
@@ -142,7 +142,7 @@ const users = {
         </Grid>
         <Grid xs={12} className='over' style={{ height: '77%' }}>
             {  lent != 0 ?
-            friends.filter((user) => {
+            users.utilisateurs.filter((user) => {
                 if (searchUser === ''){
                     return user
                 }else if (user.prenom.toLowerCase().includes(searchUser.toLowerCase()) || user.nom.toLowerCase().includes(searchUser.toLowerCase())){

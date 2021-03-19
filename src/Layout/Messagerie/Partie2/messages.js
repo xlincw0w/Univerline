@@ -1,65 +1,122 @@
-import React from 'react'
-import me from '../img/1.jpg'
-import rcv from '../img/2.jpg'
+import React, { Component } from 'react'
+
 export default function messages() {
     return (
-        <div className='flex flex-col space-y-4 p-3 '>
-            <div className='flex flex-col space-y-2 text-xs max-w-xs w-full mx-2 order-2 items-start'>
-                <div>
-                    <span className='px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600'>
-                        Je vous en prie, n'hésitez pas à me poser des questions si vous en avez.
-                    </span>
+        <div className='grid grid-cols-12 gap-y-2 h-full w-full '>
+            {/* message reçu */}
+            <div className='col-start-1 col-end-8 p-3 rounded-lg'>
+                <div className='flex flex-row items-center'>
+                    <div className='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>A</div>
+                    <div className='relative ml-3 text-sm bg-gray-100 py-2 px-4 shadow rounded-xl'>
+                        <div>Bonjour, pouvez-vous m'nevoyer le chapitre 1 de CPI?</div>
+                    </div>
                 </div>
             </div>
-            <img src={rcv} alt='My profile' className='w-6 h-6 rounded-full order-1' />
 
-            <div className='flex items-end justify-end'>
-                <div className='flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end'>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white '>Bonjour, est-il possible de me passser les cours</span>
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>Bonjour, oui biensur</div>
                     </div>
                 </div>
-                <img src={me} alt='My profile' className='w-6 h-6 rounded-full order-2' />
             </div>
-            <div className='flex items-end'>
-                <div className='flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start'>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600'>Oui biensur, c'est quoi votre spécialité ?</span>
+
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>Vous êtes en quelle spécialité ?</div>
                     </div>
                 </div>
-                <img src={rcv} alt='My profile' className='w-6 h-6 rounded-full order-1' />
             </div>
-            <div className='flex items-end justify-end'>
-                <div className='flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end'>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block bg-blue-600 text-white '>Je suis en master 2 ISI</span>
-                    </div>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white '>Je cherche les cours de RI</span>
+
+            {/* message reçu */}
+            <div className='col-start-1 col-end-8 p-3 rounded-lg'>
+                <div className='flex flex-row items-center'>
+                    <div className='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>A</div>
+                    <div className='relative ml-3 text-sm bg-gray-200 py-2 px-4 shadow rounded-xl'>
+                        <div>Je suis en master 2 ISI</div>
                     </div>
                 </div>
-                <img src={me} alt='My profile' className='w-6 h-6 rounded-full order-2' />
             </div>
-            <div className='flex items-end'>
-                <div className='flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start'>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600'>Entendu</span>
-                    </div>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600'>
-                            Donnez moi un instant et je vous transmet tout ce qu'il faut
-                        </span>
+
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>Entendu</div>
                     </div>
                 </div>
-                <img src={rcv} alt='My profile' className='w-6 h-6 rounded-full order-1' />
             </div>
-            <div className='flex items-end justify-end'>
-                <div className='flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end'>
-                    <div>
-                        <span className='px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white '>D'accord, je vous remercie</span>
+
+            {/* message reçu*/}
+            <div className='col-start-1 col-end-8 p-3 rounded-lg'>
+                <div className='flex flex-row items-center'>
+                    <div className='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>A</div>
+                    <div className='relative ml-3 text-sm bg-gray-100 py-2 px-4 shadow rounded-xl'>
+                        <div>Donnez moi un instant, je vais vous ajoutez à la class spécifique.</div>
                     </div>
                 </div>
-                <img src={me} alt='My profile' className='w-6 h-6 rounded-full order-2' />
+            </div>
+
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>Merci</div>
+                    </div>
+                </div>
+            </div>
+
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>N'hesitez pas à me poser des questions</div>
+                    </div>
+                </div>
+            </div>
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>N'hesitez pas à me poser des questions</div>
+                    </div>
+                </div>
+            </div>
+            {/* message envoyé */}
+            <div class='col-start-6 col-end-13 p-3 rounded-lg'>
+                <div class='flex items-center justify-start flex-row-reverse'>
+                    <div class='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>B</div>
+                    <div class='relative mr-3 text-sm bg-blue-700 py-2 px-4 shadow rounded-xl'>
+                        <div className='text-white'>N'hesitez pas à me poser des questions</div>
+                    </div>
+                </div>
+            </div>
+            {/* message reçu */}
+            <div className='col-start-1 col-end-8 p-3 rounded-lg'>
+                <div className='flex flex-row items-center'>
+                    <div className='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>A</div>
+                    <div className='relative ml-3 text-sm bg-gray-100 py-2 px-4 shadow rounded-xl'>
+                        <div>Bonjour, pouvez-vous m'nevoyer le chapitre 1 de CPI?</div>
+                    </div>
+                </div>
+            </div>
+            {/* message reçu */}
+            <div className='col-start-1 col-end-8 p-3 rounded-lg'>
+                <div className='flex flex-row items-center'>
+                    <div className='flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0'>A</div>
+                    <div className='relative ml-3 text-sm bg-gray-100 py-2 px-4 shadow rounded-xl'>
+                        <div>Bonjour, pouvez-vous m'nevoyer le chapitre 1 de CPI?</div>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 
 export default function CustomizedTabs() {
     const user_info = useSelector((state) => state.ProfileReducer.user_info)
-    const [value, setValue] = React.useState(0)
+    const [value, setValue] = useState(0)
 
     const AntTabs = withStyles({
         root: {
@@ -81,26 +81,30 @@ export default function CustomizedTabs() {
                 <div className={classes.demo1}>
                     <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
                         <AntTab label='Publications' />
-                        <AntTab label={user_info.user_type === 'etudiant' ? 'Camarades' : 'Enseignant'} />
+                        <AntTab label={user_info.user_type === 'etudiant' ? 'Camarades' : 'Collégues'} />
                         <AntTab label='Classes' />
-                        <AntTab label='Ressources' />
+                        {/* <AntTab label='Ressources' /> */}
                     </AntTabs>
                     {value === 0 && (
                         <div className='mt-4'>
                             <Publications />
                         </div>
                     )}
-                    {value === 1 && <div className='mt-4'>{user_info.user_type === 'etudiant' && <Freinds />}</div>}
+                    {value === 1 && (
+                        <div className='mt-4'>
+                            <Freinds />
+                        </div>
+                    )}
                     {value === 2 && (
                         <div className='mt-4'>
                             <Classes />
                         </div>
                     )}
-                    {value === 3 && (
+                    {/* {value === 3 && (
                         <div className='mt-4'>
                             <Support />
                         </div>
-                    )}
+                    )} */}
                     <Typography className={classes.padding} />
                 </div>
             </div>

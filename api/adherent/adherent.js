@@ -12,7 +12,7 @@ router.route('/add/adherent/').post((req, res) => {
             id_classe: data.id_classe,
             id_etu: data.id_etu,
             date_adherance: moment().format(),
-            confirm: data.confirm,
+            confirm: false,
         })
         .then((rows) => {
             res.json(rows)
@@ -20,6 +20,22 @@ router.route('/add/adherent/').post((req, res) => {
         .catch((err) => {
             console.log(err)
             res.json({ err: true })
+        })
+})
+
+router.route('/confirm/adherent/').post((req, res) => {
+    const id_etu = req.body.id_etu
+    const id_classe = req.body.id_classe
+
+    db('adherant')
+        .where({ id_etu: id_etu, id_classe: id_classe })
+        .update({ confirm: true })
+        .then((resp) => {
+            res.json({ added: true })
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json({ added: false })
         })
 })
 
@@ -52,11 +68,29 @@ router.route('/get/adherent/:id?').get((req, res) => {
         })
 })
 
-//4SUPPRIMER UN ADHERENT
-router.route('/delete/adherent/:id?').delete((req, res) => {
-    const id_etu = req.params.id
+router.route('/get/pending/adh/:id').get((req, res) => {
+    const id = req.params.id
+
     db('adherant')
-        .where('id_etu', id_etu)
+        .select('*')
+        .leftJoin('classe', 'classe.id_classe', ' adherant.id_classe')
+        .leftJoin('users', 'users.id_user', 'adherant.id_etu')
+        .where({ id_ens: id, confirm: false })
+        .then((rows) => {
+            res.json(rows)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json([])
+        })
+})
+
+//4SUPPRIMER UN ADHERENT
+router.route('/delete/adherent/').post((req, res) => {
+    const data = req.body
+
+    db('adherant')
+        .where({ id_etu: data.id_etu, id_classe: data.id_classe })
         .delete('*')
         .then((rows) => {
             res.json(rows)
@@ -64,27 +98,6 @@ router.route('/delete/adherent/:id?').delete((req, res) => {
         .catch((err) => {
             console.log(err)
             res.json({ err: true })
-        })
-})
-
-//modifier un adherent avec son id
-router.route('/update/adherent/:id?').post((req, res) => {
-    console.log('am here')
-    const id = req.params.id
-    const confirm = true
-
-    db('adherant')
-        .where('id_etu', id)
-        .update({
-            confirm,
-        })
-        .then((resp) => {
-            console.log(resp)
-            res.json({ updated: true })
-        })
-        .catch((err) => {
-            console.log(err)
-            res.json({ updated: false })
         })
 })
 

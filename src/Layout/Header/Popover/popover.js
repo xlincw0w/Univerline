@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import Popover from '@material-ui/core/Popover'
 import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar'
@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import cx from 'classnames'
 import { RefreshProfile } from '../../../store/profile/profile'
 import { AiOutlineUsergroupAdd } from 'react-icons/ai'
+import Autocomplete from '@material-ui/lab/Autocomplete'
+import Axios from 'axios'
+import { constants } from '../../../constants'
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -85,12 +88,38 @@ export default function Dropdown(props) {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
+    const [reset, setReset] = useState(0)
+
+    const RefreshPop = () => {
+        setReset(reset + 1)
+    }
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
 
     const handleClose = () => {
         setAnchorEl(null)
+    }
+
+    const [users, setUser] = useState([])
+
+    const handleInputChange = (val) => {
+        Axios.get(constants.url + '/api/profile/byname/' + val)
+            .then((res) => {
+                const result = res.data.map((elem) => {
+                    return {
+                        id_user: elem.id_user,
+                        user_type: elem.user_type,
+                        nom: elem.nom,
+                        prenom: elem.prenom,
+                        searchIn: elem.nom + ' ' + elem.prenom + ' ' + elem.nom,
+                    }
+                })
+                setUser(result)
+                RefreshPop()
+            })
+            .catch((err) => setUser([]))
     }
 
     const open = Boolean(anchorEl)
@@ -161,11 +190,29 @@ export default function Dropdown(props) {
                 </div>
             )}
             {props.item === 'profilesearch' && (
-                <div className='mt-1'>
-                    <input
-                        type='text'
-                        className='focus:ring-indigo-500focus:border-indigo-500 block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
-                        placeholder='Rechercher profile'
+                <div className=''>
+                    <Autocomplete
+                        options={users}
+                        onInputChange={(e) => handleInputChange(e.target.value)}
+                        getOptionLabel={(option) => option.searchIn}
+                        renderInput={(params) => (
+                            <div ref={params.InputProps.ref}>
+                                <input
+                                    type='text'
+                                    className='focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    placeholder='Rechercher profile'
+                                    {...params.inputProps}
+                                />
+                            </div>
+                        )}
+                        renderOption={({ nom, prenom, id_user, user_type }) => {
+                            return (
+                                <div onClick={() => history.push('/profile/' + id_user)}>
+                                    <p className='text-sm text-gray-500'>{nom + ' ' + prenom}</p>
+                                    <p className={cx('text-sm', { 'text-green-500': user_type === 'etudiant', 'text-purple-600': user_type === 'enseignant' })}>{user_type}</p>
+                                </div>
+                            )
+                        }}
                     />
                 </div>
             )}
