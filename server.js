@@ -10,11 +10,11 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use(express.static(path.join(__dirname, 'dist')))
-
 app.get('*', function (req, res) {
     res.redirect('https://' + req.headers.host + req.url)
 })
+
+app.use(express.static(path.join(__dirname, 'dist')))
 
 app.use('/api/profile', require('./api/Profile/profile'))
 app.use('/api/adherent', require('./api/adherent/adherent'))
