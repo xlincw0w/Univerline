@@ -49,9 +49,14 @@ export default function Freinds() {
     const [user_classes, setProfileClasses] = useState([])
 
     const [refresh, setRefresh] = useState(0)
+    const [refresh2, setRefresh2] = useState(0)
 
     const reload = () => {
         setRefresh(refresh + 1)
+    }
+
+    const reload2 = () => {
+        setRefresh2(refresh2 + 1)
     }
 
     const [newClasse, setNewClasse] = useState('')
@@ -71,9 +76,7 @@ export default function Freinds() {
                     setProfileClasses([])
                 })
         }
-    }, [])
-
-    console.log(profile_classes)
+    }, [refresh2])
 
     useEffect(async () => {
         if (user_info.user_type === 'etudiant') {
@@ -148,8 +151,7 @@ export default function Freinds() {
                 id_etu: user.id,
             })
                 .then((res) => {
-                    console.log(res)
-                    reload()
+                    reload2()
                 })
                 .catch((err) => {
                     console.log(err)
