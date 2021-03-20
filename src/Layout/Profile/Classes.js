@@ -16,6 +16,7 @@ import { IoMdAddCircleOutline } from 'react-icons/io'
 import { BiTimeFive } from 'react-icons/bi'
 import Backdrop from '@material-ui/core/Backdrop'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { find } from 'lodash'
 import { SetClasses } from '../../store/auth/auth'
 
@@ -47,16 +48,12 @@ export default function Freinds() {
     const profile_classes = useSelector((state) => state.ProfileReducer.classes)
 
     const [user_classes, setProfileClasses] = useState([])
+    const [loader, setLoader] = useState(false)
 
     const [refresh, setRefresh] = useState(0)
-    const [refresh2, setRefresh2] = useState(0)
 
     const reload = () => {
         setRefresh(refresh + 1)
-    }
-
-    const reload2 = () => {
-        setRefresh2(refresh2 + 1)
     }
 
     const [newClasse, setNewClasse] = useState('')
@@ -76,7 +73,7 @@ export default function Freinds() {
                     setProfileClasses([])
                 })
         }
-    }, [refresh2])
+    }, [refresh])
 
     useEffect(async () => {
         if (user_info.user_type === 'etudiant') {
@@ -121,39 +118,51 @@ export default function Freinds() {
     }, [user_info.id_user, user.id, refresh])
 
     const handleAddClass = () => {
+        setLoader(true)
         if (user_info.id_user === user.id) {
             Axios.post(constants.url + '/api/classe/add/classe', {
                 id_ens: user.id,
                 libelle_classe: newClasse,
             })
                 .then((res) => {
-                    setClassBackdrop(false)
+                    setLoader(false)
                     reload()
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    setLoader(false)
+                    console.log(err)
+                })
         }
     }
 
     const deleteClasse = (id) => {
+        setLoader(true)
         if (user_info.id_user === user.id) {
             Axios.delete(constants.url + '/api/classe/delete/classe/' + id)
                 .then((res) => {
+                    setLoader(false)
                     reload()
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    setLoader(false)
+                    console.log(err)
+                })
         }
     }
 
     const JoinClass = (id_classe) => {
+        setLoader(true)
         if (user.user_type === 'etudiant') {
             Axios.post(constants.url + '/api/adherent/add/adherent/', {
                 id_classe: id_classe,
                 id_etu: user.id,
             })
                 .then((res) => {
-                    reload2()
+                    setLoader(false)
+                    reload()
                 })
                 .catch((err) => {
+                    setLoader(false)
                     console.log(err)
                 })
         }
@@ -162,6 +171,9 @@ export default function Freinds() {
     return (
         <div>
             <div className='mx-auto'>
+                <Backdrop open={loader} style={{ zIndex: 10 }}>
+                    <CircularProgress color='inherit' />
+                </Backdrop>
                 <div>
                     {user_info.user_type === 'etudiant' && (
                         <Grid container xs={12}>
