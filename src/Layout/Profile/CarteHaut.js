@@ -29,21 +29,21 @@ export default function CarteHaut({ profile }) {
                                         <p className='text-green-600 text-sm inline'>Etablissement</p>
                                         <GoLocation className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <p className='text-gray-600 text-base'>{profile.etablissement}</p>
+                                    <p className='text-gray-600 text-base'>{profile.etablissement ? profile.etablissement.capitalize() : ''}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
                                         <p className='text-green-600 text-sm inline'>Niveau educatif</p>
                                         <BsAward className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <p className='text-gray-600 text-base'>{profile.niveau_edu}</p>
+                                    <p className='text-gray-600 text-base'>{profile.niveau_edu ? profile.niveau_edu.capitalize() : ''}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
                                         <p className='text-green-600 text-sm inline'>Domaine educatif</p>
                                         <GiArrowScope className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <p className='text-gray-600 text-base'>{profile.domaine_edu}</p>
+                                    <p className='text-gray-600 text-base'>{profile.domaine_edu ? profile.domaine_edu.capitalize() : ''}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
@@ -156,19 +156,7 @@ export default function CarteHaut({ profile }) {
                                         <p className='text-green-600 text-sm inline'>Email</p>
                                         <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <input
-                                        type='text'
-                                        className='focus:ring-indigo-500 focus:border-indigo-500 block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
-                                        value={profile.email}
-                                        onChange={(e) =>
-                                            dispatch(
-                                                SetUserInfo({
-                                                    ...profile,
-                                                    email: e.target.value,
-                                                })
-                                            )
-                                        }
-                                    />
+                                    <p className='text-gray-600 text-base'>{profile.email}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
@@ -203,14 +191,14 @@ export default function CarteHaut({ profile }) {
                                         <p className='text-purple-700 text-sm inline'>Niveau enseignement</p>
                                         <BsAward className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <p className='text-gray-600 text-base'>{profile.niveau_ens}</p>
+                                    <p className='text-gray-600 text-base'>{profile.niveau_ens ? profile.niveau_ens.capitalize() : ''}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
                                         <p className='text-purple-700 text-sm inline'>Domaine enseignement</p>
                                         <GiArrowScope className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <p className='text-gray-600 text-base'>{profile.domaine_ens}</p>
+                                    <p className='text-gray-600 text-base'>{profile.domaine_ens ? profile.domaine_ens.capitalize() : ''}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
@@ -259,19 +247,7 @@ export default function CarteHaut({ profile }) {
                                         <p className='text-purple-700 text-sm inline'>Email</p>
                                         <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                     </div>
-                                    <input
-                                        type='text'
-                                        className='focus:ring-indigo-500 focus:border-indigo-500 block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
-                                        value={profile.email}
-                                        onChange={(e) =>
-                                            dispatch(
-                                                SetUserInfo({
-                                                    ...profile,
-                                                    email: e.target.value,
-                                                })
-                                            )
-                                        }
-                                    />
+                                    <p className='text-gray-600 text-base'>{profile.email}</p>
                                 </div>
                                 <div className='mt-5'>
                                     <div>
