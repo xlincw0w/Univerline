@@ -58,7 +58,7 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
             })
     }, [refresh])
 
-    const diff = moment.duration(moment().diff(moment(userData))).asSeconds()
+    const diff = moment.duration(moment().utc().diff(moment(userData))).asSeconds()
     console.log(nom, prenom, diff)
 
     return (

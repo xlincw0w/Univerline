@@ -17,7 +17,7 @@ router.route('/update').post((req, res) => {
         .doc(data.uid)
         .set({
             id: data.uid,
-            last_seen: moment().format(),
+            last_seen: moment().utc().format(),
         })
         .then((resp) => {
             res.json({ updated: true })
