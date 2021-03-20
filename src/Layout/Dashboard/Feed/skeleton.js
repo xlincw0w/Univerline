@@ -99,7 +99,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -228,7 +228,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
