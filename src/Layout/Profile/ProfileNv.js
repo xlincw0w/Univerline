@@ -83,32 +83,11 @@ export default function ProfileNv() {
                     </Backdrop>
                     <Container maxWidth='Lg' className={classes.root}>
                         {user.id === profile.id_user && (
-                            // <div className='bg-gray-100'>
-                            //     <Grid container spacing={3}>
-                            //         <Grid item lg={3}>
-                            //             <PhotoSquare avatar={profile.avatar} />
-                            //         </Grid>
-                            //         <Grid item lg={9}>
-                            //             <CarteHaut profile={profile} user={user} />
-                            //             <MenuModif />
-                            //         </Grid>
-                            //     </Grid>
-                            //     <div className=''>
-                            //         <Grid container spacing={3}>
-                            //             <Grid item lg={12}>
-                            //                 <Paper className={classes.paper}>
-                            //                     <MenuNv />
-                            //                 </Paper>
-                            //             </Grid>
-                            //         </Grid>
-                            //     </div>
-                            // </div>
-
                             <Grid container spacing={3}>
                                 <Grid item xs={12}>
                                     <div className='mt-5 bg-gray-50'>
                                         <Paper style={{ width: '100%' }} className={classes.paper}>
-                                            <Grid container direction='row'>
+                                            <Grid container direction='row' spacing={1}>
                                                 <Grid item sm={2} xs={12}>
                                                     <PhotoSquare avatar={profile.avatar} />
                                                 </Grid>
@@ -148,34 +127,6 @@ export default function ProfileNv() {
                                     </div>
                                 </Grid>
                             </Grid>
-                            // <Grid container spacing={3}>
-                            //     <Grid item xs={12}>
-                            //         <div className='mt-5 bg-gray-50'>
-                            //             <Grid container spacing={3}>
-                            //                 <Grid item xs={3}>
-                            //                     <div className='w-full ml-3 mt-3'>
-                            //                         <Paper className={classes.paper}>
-                            //                             <Paper className={classes.paper}>
-                            //                                 <PhotoSquare avatar={profile.avatar} />
-                            //                             </Paper>
-                            //                         </Paper>
-                            //                     </div>
-                            //                 </Grid>
-                            //                 <Grid item xs={9}>
-                            //                     <div className='mb-3'>
-                            //                         <Paper className={classes.paper}>
-                            //                             <CarteHaut profile={profile} user={user} />
-                            //                             <MenuModif />
-                            //                         </Paper>
-                            //                     </div>
-                            //                 </Grid>
-                            //             </Grid>
-                            //             <Paper className={classes.paper}>
-                            //                 <MenuNv />
-                            //             </Paper>
-                            //         </div>
-                            //     </Grid>
-                            // </Grid>
                         )}
                     </Container>
                 </div>

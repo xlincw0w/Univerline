@@ -18,16 +18,24 @@ const Footer = () => {
                 </div> */}
                 <div className='flex flex-row justify-center mt-6 space-x-10'>
                     <div className='cursor-pointer '>
-                        <FaFacebook className='transition rounded-2xl shadow-xl duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 ' size={32} />
+                        <a href='https://www.facebook.com/UniverLine-111044151032005/' alt='facebook'>
+                            <FaFacebook className='transition rounded-2xl shadow-xl duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 ' size={32} />
+                        </a>
                     </div>
+
                     <div>
-                        <IoLogoYoutube
-                            className='cursor-pointer rounded-xl  shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
-                            size={32}
-                        />
+                        <a href='https://youtube.com/channel/UCv2B5Yl2rS1MEZbb0SU5kiQ' alt='youtube'>
+                            <IoLogoYoutube
+                                className='cursor-pointer rounded-xl  shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
+                                size={32}
+                            />
+                        </a>
                     </div>
+
                     <div className='cursor-pointer rounded-xl shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 '>
-                        <RiInstagramFill classsName='' size={32} />
+                        <a href='https://www.instagram.com/univerlinee/' alt='instagram'>
+                            <RiInstagramFill classsName='' size={32} />
+                        </a>
                     </div>
                 </div>
 
