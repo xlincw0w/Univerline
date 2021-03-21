@@ -45,6 +45,7 @@ export default function CarteHaut({ profile }) {
                                     </div>
                                     <p className='text-gray-600 text-base'>{profile.domaine_edu}</p>
                                 </div>
+
                                 <div className='mt-5'>
                                     <div>
                                         <p className='text-green-600 text-sm inline'>Email</p>
@@ -54,8 +55,8 @@ export default function CarteHaut({ profile }) {
                                 </div>
                                 <div className='mt-5'>
                                     <div>
-                                        <p className='text-green-600 text-sm inline'>Date de création</p>
-                                        <BsCalendar className='inline ml-2 mb-1' size={18} />
+                                        <p className='text-green-600 text-sm inline '>Date de création</p>
+                                        <BsCalendar className='inline ml-2 mb-1 ' size={18} />
                                     </div>
                                     <p className='text-gray-600 text-base'>{moment(profile.date_inscription).format('DD - MM - YYYY')}</p>
                                 </div>

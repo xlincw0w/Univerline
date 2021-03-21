@@ -126,7 +126,7 @@ export default function Dropdown(props) {
     const id = open ? 'simple-popover' : undefined
 
     return (
-        <div className='mr-5'>
+        <div>
             {props.item === 'userprofile' && (
                 <div>
                     <UserProfile func={handleClick} />
