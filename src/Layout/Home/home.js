@@ -46,13 +46,15 @@ export default function Home() {
         <div>
             <div>
                 <div className='bg-font md:bg-image h-screen  bg-cover bg-center bg-fixed'>
-                    <div class='custom-shape-divider-bottom-1614867478 '>
+                    
+                    <div className='custom-shape-divider-bottom-1614867478 '>
                         <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
                             <path
                                 d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
-                                class='shape-fill'></path>
+                                className='shape-fill'></path>
                         </svg>
                     </div>
+                    
 
                     <div className='flex justify-center md:flex md:justify-end p-4'>
                         <button
@@ -63,15 +65,15 @@ export default function Home() {
                             Connexion
                         </button>
                     </div>
-                    <div className='p-4 py-10 md:py-10 '>
+                    <div className='md:py-10 '>
                         <div className=' border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-full md:w-2/5  '>
                             <ul className='font-medium font-openSans text-center '>
-                                <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
+                                <li className='text-2xl md:text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
                                     <div>
                                         <span className='text-5xl font-bebasNeue'>R</span>EJOIGNEZ UNIVERLINE
                                     </div>
                                 </li>
-                                <li className='text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
+                                <li className='text-2xl md:text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
 
                                 <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
                                 <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore</li>
