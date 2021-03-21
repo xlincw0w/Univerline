@@ -141,7 +141,7 @@ const users = {
         <Grid container className='' xs={12}  style={{ height: '23%',borderBottom:'1px solid rgb(202, 202, 202)', borderRadius:'10px' }}>
             <Grid container xs={12}>
                 <Grid className='myAvatar bg-gradient-to-r from-white to-blue-600'>
-                    <Avatar alt='Reseau social'  className={classes.large} />
+                    <Avatar alt={user.prenom} src={user.avatar}  className={classes.large} />
                     <h1>Ma Messagerie</h1>
                 </Grid>
                 <Grid xs={12} className='form1'>
