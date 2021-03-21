@@ -118,20 +118,22 @@ export default function Freinds() {
     }, [user_info.id_user, user.id, refresh])
 
     const handleAddClass = () => {
-        setLoader(true)
-        if (user_info.id_user === user.id) {
-            Axios.post(constants.url + '/api/classe/add/classe', {
-                id_ens: user.id,
-                libelle_classe: newClasse,
-            })
-                .then((res) => {
-                    setLoader(false)
-                    reload()
+        if (find(profile_classes, { libelle_classe: newClasse }) === undefined) {
+            setLoader(true)
+            if (user_info.id_user === user.id) {
+                Axios.post(constants.url + '/api/classe/add/classe', {
+                    id_ens: user.id,
+                    libelle_classe: newClasse,
                 })
-                .catch((err) => {
-                    setLoader(false)
-                    console.log(err)
-                })
+                    .then((res) => {
+                        setLoader(false)
+                        reload()
+                    })
+                    .catch((err) => {
+                        setLoader(false)
+                        console.log(err)
+                    })
+            }
         }
     }
 

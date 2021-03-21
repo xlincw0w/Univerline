@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database')
 const moment = require('moment')
-const { leftJoin } = require('../database')
 const { v4 } = require('uuid')
 
 //ajouter une classe avec id d'un enseignant
