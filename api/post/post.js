@@ -184,13 +184,14 @@ router.route('/get/post_ens/allfriends/:id?').get(async (req, res) => {
 //ajouter un post a une classe X
 router.route('/add/post/').post((req, res) => {
     const data = req.body
-    console.log(data)
     db('poste')
         .insert({
             id_poste: v4().split('-').join(''),
             id_user: data.id_classe === '#####' ? data.id_user : '&&&&&',
             id_classe: data.id_user === '&&&&&' ? data.id_classe : '#####',
             payload: data.payload,
+            image: data.image,
+            file: data.file,
             date_poste: moment().format(),
         })
         .then((resp) => {
