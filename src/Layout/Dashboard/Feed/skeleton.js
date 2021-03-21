@@ -428,13 +428,20 @@ const Skeleton = () => {
             )}
             {user.user_type === 'enseignant' && (
                 <div className='grid grid-cols-1 xl:grid-cols-2'>
-                    {feed_prof.map((elem) => {
-                        return (
-                            <div>
-                                <ProfSkeleton elem={elem} />
-                            </div>
-                        )
-                    })}
+                    <div>
+                        {feed_prof.map((elem, index) => {
+                            if (index % 2 === 0) {
+                                return <ProfSkeleton elem={elem} />
+                            }
+                        })}
+                    </div>
+                    <div>
+                        {feed_prof.map((elem, index) => {
+                            if (index % 2 === 1) {
+                                return <ProfSkeleton elem={elem} />
+                            }
+                        })}
+                    </div>
                 </div>
             )}
         </div>
