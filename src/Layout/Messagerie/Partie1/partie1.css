@@ -44,7 +44,6 @@
     padding: 5px;
     border-radius: 10px;
     height: 15%;
-    /* background-color: rgb(245, 243, 243); */
 }
 .util:hover {
     background-color: rgb(202, 202, 202);
