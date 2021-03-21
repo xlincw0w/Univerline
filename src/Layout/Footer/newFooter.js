@@ -1,5 +1,4 @@
 import React from 'react'
-import Typical from 'react-typical'
 import { FaFacebook } from 'react-icons/fa'
 import { IoLogoYoutube } from 'react-icons/io'
 import { RiInstagramFill } from 'react-icons/ri'
