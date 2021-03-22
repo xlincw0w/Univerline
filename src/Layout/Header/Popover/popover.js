@@ -156,7 +156,7 @@ export default function Dropdown(props) {
                                 dispatch(RefreshProfile())
                             }}
                             className={classes.typography}>
-                            <p className='cursor-pointer'>Profile</p>
+                            <p className='cursor-pointer'>Profil</p>
                         </Typography>
                         <Typography onClick={props.disconnect} className={classes.typography}>
                             <p className='cursor-pointer'>Se déconnecter</p>
@@ -206,8 +206,8 @@ export default function Dropdown(props) {
                             <div ref={params.InputProps.ref}>
                                 <input
                                     type='text'
-                                    className='focus:ring-indigo-500 focus:border-indigo-500 block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                    placeholder='Rechercher profile'
+                                    className='block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    placeholder='Rechercher profil'
                                     {...params.inputProps}
                                 />
                             </div>
