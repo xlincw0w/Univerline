@@ -24,7 +24,7 @@ export default function Infos({ user, profile }) {
         <Paper elevation={0}>
             <List className={classes.couleur} aria-label='mailbox folders'>
                 <div>
-                    <p className='inline text-sm text-green-700 ml-3'>{profile.email}</p>
+                    <p className='inline text-sm text-green-700 ml-3 '>{profile.email}</p>
                 </div>
                 <div>
                     <p className='inline text-sm text-green-700 ml-3'>{profile.niveau_edu}</p>

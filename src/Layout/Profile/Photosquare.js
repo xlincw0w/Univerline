@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     square: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: deepOrange[500],
-        width: theme.spacing(28),
-        height: theme.spacing(28),
+        width: theme.spacing(20),
+        height: theme.spacing(20),
     },
     rounded: {
         color: '#fff',
