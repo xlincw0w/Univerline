@@ -33,7 +33,7 @@ const Post = () => {
     const handlePost = () => {
         dispatch(FeedLoading(true))
 
-        if (payload.length === 0) {
+        if (payload.length !== 0) {
             const imagev4 = v4().split('-').join('')
             const filev4 = v4().split('-').join('')
 
