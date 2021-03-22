@@ -56,8 +56,8 @@ const UserProfile = ({ func }) => {
             <div className='mx-auto flex flex-cols' onClick={func}>
                 <div className='block mr-5'>
                     <div className='text-sm text-gray-500'>
-                        <p className='inline mr-2'>{user.nom ? user.nom.capitalize() : ''}</p>
-                        <p className='inline mr-2'>{user.prenom ? user.prenom.capitalize() : ''}</p>
+                        <p className='inline mr-2'>{user.nom ? user.nom.capitalize().split(' ')[0] : ''}</p>
+                        <p className='inline mr-2'>{user.prenom ? user.prenom.capitalize().split(' ')[0] : ''}</p>
                     </div>
                     <p className={cx('text-sm text-center', { 'text-purple-700': user.user_type === 'enseignant', 'text-green-600': user.user_type === 'etudiant' })}>
                         {user.user_type ? user.user_type.capitalize() : ''}
@@ -105,21 +105,28 @@ export default function Dropdown(props) {
     const [users, setUser] = useState([])
 
     const handleInputChange = (val) => {
-        Axios.get(constants.url + '/api/profile/byname/' + val)
-            .then((res) => {
-                const result = res.data.map((elem) => {
-                    return {
-                        id_user: elem.id_user,
-                        user_type: elem.user_type,
-                        nom: elem.nom,
-                        prenom: elem.prenom,
-                        searchIn: elem.nom + ' ' + elem.prenom + ' ' + elem.nom,
-                    }
+        if (val && val !== '') {
+            Axios.get(constants.url + '/api/profile/byname/' + val.toLowerCase())
+                .then((res) => {
+                    const result = res.data.map((elem) => {
+                        return {
+                            id_user: elem.id_user,
+                            user_type: elem.user_type,
+                            nom: elem.nom,
+                            prenom: elem.prenom,
+                            searchIn: elem.nom + ' ' + elem.prenom + ' ' + elem.nom,
+                        }
+                    })
+                    setUser(result)
+                    RefreshPop()
                 })
-                setUser(result)
-                RefreshPop()
-            })
-            .catch((err) => setUser([]))
+                .catch((err) => setUser([]))
+        }
+    }
+
+    const profileGoto = (id) => {
+        history.push('/profile/' + id)
+        handleInputChange('')
     }
 
     const open = Boolean(anchorEl)
@@ -207,9 +214,15 @@ export default function Dropdown(props) {
                         )}
                         renderOption={({ nom, prenom, id_user, user_type }) => {
                             return (
-                                <div onClick={() => history.push('/profile/' + id_user)}>
-                                    <p className='text-sm text-gray-500'>{nom + ' ' + prenom}</p>
-                                    <p className={cx('text-sm', { 'text-green-500': user_type === 'etudiant', 'text-purple-600': user_type === 'enseignant' })}>{user_type}</p>
+                                <div
+                                    className='w-full'
+                                    onClick={() => {
+                                        profileGoto(id_user)
+                                    }}>
+                                    <p className='text-sm text-gray-500'>{nom.capitalize() + ' ' + prenom.capitalize()}</p>
+                                    <p className={cx('text-sm', { 'text-green-500': user_type === 'etudiant', 'text-purple-600': user_type === 'enseignant' })}>
+                                        {user_type.capitalize()}
+                                    </p>
                                 </div>
                             )
                         }}
