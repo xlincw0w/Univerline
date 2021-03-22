@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useSelector,useDispatch  } from 'react-redux'
 import  { constants } from '../../../constants'
 import { SetFriends } from '../../../store/auth/auth'
+import { deepPurple } from '@material-ui/core/colors';
 import Axios from 'axios'
 import img from '../img/1.jpg'
 import img2 from '../img/2.jpg'
@@ -23,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     large: {
         width: theme.spacing(7),
         height: theme.spacing(7),
+        color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
     }
 }))
 
@@ -56,61 +59,70 @@ export default function partie1(props) {
 const users = {
         utilisateurs: [
             {
-                FirstName: 'Naim',
-                LastName: 'Bessaha',
-                Image: img4,
-                Statu: 'Etudiant(e)',
+                id: 1,
+                prenom: 'Naim',
+                nom: 'Bessaha',
+                avatar: img4,
+                user_type: 'Etudiant(e)',
             },
             {
-                FirstName: 'Malik',
-                LastName: 'Si-Mohamed',
-                Image: img3,
-                Statu: 'Professeur',
+                id: 2,
+                prenom: 'Malik',
+                nom: 'Si-Mohamed',
+                avatar: img3,
+                user_type: 'Professeur',
             },
             {
-                FirstName: 'Franck',
-                LastName: 'Lampard',
-                Image: img2,
-                Statu: 'Etudiant(e)',
+                id:3,
+                prenom: 'Franck',
+                nom: 'Lampard',
+                avatar: img2,
+                user_type: 'Etudiant(e)',
             },
             {
-                FirstName: 'Naim',
-                LastName: 'Bessaha',
-                Image: img4,
-                Statu: 'Etudiant(e)',
+                id:4,
+                prenom: 'Naim',
+                nom: 'Bessaha',
+                avatar: img4,
+                user_type: 'Etudiant(e)',
             },
             {
-                FirstName: 'Malik',
-                LastName: 'Si-Mohamed',
-                Image: img3,
-                Statu: 'Professeur',
+                id:5,
+                prenom: 'Malik',
+                nom: 'Si-Mohamed',
+                avatar: img3,
+                user_type: 'Professeur',
             },
             {
-                FirstName: 'Franck',
-                LastName: 'Lampard',
-                Image: img2,
-                Statu: 'Etudiant(e)',
+                id:6,
+                prenom: 'Franck',
+                nom: 'Lampard',
+                avatar: img2,
+                user_type: 'Etudiant(e)',
      
             },
             {
-                FirstName: 'Naim',
-                LastName: 'Bessaha',
-                Image: img4,
-                Statu: 'Etudiant(e)',
+                id:7,
+                prenom: 'Naim',
+                nom: 'Bessaha',
+                avatar: img4,
+                user_type: 'Etudiant(e)',
 
             },
             {
-                FirstName: 'Malik',
-                LastName: 'Si-Mohamed',
-                Image: img3,
-                Statu: 'Professeur',
+                id:8,
+                prenom: 'Malik',
+                nom: 'Si-Mohamed',
+                avatar: img3,
+                user_type: 'Professeur',
              
             },
             {
-                FirstName: 'Franck',
-                LastName: 'Lampard',
-                Image: img2,
-                Statu: 'Etudiant(e)',
+                id:9,
+                prenom: 'Franck',
+                nom: 'Lampard',
+                avatar: img2,
+                user_type: 'Etudiant(e)',
                 
             },
         ],
@@ -118,6 +130,7 @@ const users = {
 
     const classes = useStyles()
     const lent = friends.length
+    
     
   
 
@@ -128,7 +141,7 @@ const users = {
         <Grid container className='' xs={12}  style={{ height: '23%',borderBottom:'1px solid rgb(202, 202, 202)', borderRadius:'10px' }}>
             <Grid container xs={12}>
                 <Grid className='myAvatar bg-gradient-to-r from-white to-blue-600'>
-                    <Avatar alt='Reseau social' src={img} className={classes.large} />
+                    <Avatar alt={user.prenom} src={user.avatar}  className={classes.large} />
                     <h1>Ma Messagerie</h1>
                 </Grid>
                 <Grid xs={12} className='form1'>
@@ -143,9 +156,13 @@ const users = {
         <Grid xs={12} className='over' style={{ height: '77%' }}>
             {  lent != 0 ?
             friends.filter((user) => {
+                const rech = user.nom + ' ' + user.prenom + ' ' + user.nom
+                const rech2= user.nom+user.prenom
+                const rech3=user.prenom+user.nom
+                
                 if (searchUser === ''){
                     return user
-                }else if (user.prenom.toLowerCase().includes(searchUser.toLowerCase()) || user.nom.toLowerCase().includes(searchUser.toLowerCase())){
+                }else if (rech.toLowerCase().includes(searchUser.toLowerCase()) || rech2.toLowerCase().includes(searchUser.toLowerCase()) || rech3.toLowerCase().includes(searchUser.toLowerCase()) ){
                     return user
                 }
             }

@@ -18,10 +18,10 @@ export default function messagerie() {
 
     const vava = (user) => {
  
-        setFirstName(user.FirstName)
-        setLastName(user.LastName)
-        setImage(user.Image)
-        setStatu(user.Statu)
+        setFirstName(user.prenom)
+        setLastName(user.nom)
+        setImage(user.avatar)
+        setStatu(user.user_type)
     }
 
     return (
