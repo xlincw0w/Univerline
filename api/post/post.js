@@ -233,6 +233,8 @@ router.route('/delete/post/:id?').delete((req, res) => {
                 .where({ id_poste: id_poste })
                 .del()
                 .then(() => {})
+                .catch(() => {})
+
             res.json({ delete: true })
         })
         .catch((err) => {
