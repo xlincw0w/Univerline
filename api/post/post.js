@@ -213,7 +213,6 @@ router.route('/update/post/:id?').post((req, res) => {
             payload,
         })
         .then((resp) => {
-            console.log(resp)
             res.json({ updated: true })
         })
         .catch((err) => {
@@ -230,7 +229,10 @@ router.route('/delete/post/:id?').delete((req, res) => {
         .where('id_poste', id_poste)
         .delete('*')
         .then((resp) => {
-            console.log(resp)
+            db('commentaire')
+                .where({ id_poste: id_poste })
+                .del()
+                .then(() => {})
             res.json({ delete: true })
         })
         .catch((err) => {

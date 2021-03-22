@@ -169,7 +169,7 @@ const Skeleton = () => {
                                 <div className='mb-2 mt-4'>
                                     <div className='ml-2 my-1 text-center'>
                                         <a href={file} target='_blank' download>
-                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-red-500' />
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
                                             <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
                                         </a>
                                     </div>
@@ -336,7 +336,7 @@ const Skeleton = () => {
                                 <div className='mb-2 mt-4'>
                                     <div className='ml-2 my-1 text-center'>
                                         <a href={file} target='_blank' download>
-                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-red-500' />
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
                                             <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
                                         </a>
                                     </div>
