@@ -49,7 +49,6 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
     }, 60000)
 
     useEffect(() => {
-        console.log('kifach')
         Axios.get(constants.url + '/api/online/get/' + id)
             .then((res) => {
                 setUserData(res.data.last_seen)
@@ -59,7 +58,7 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
             })
     }, [refresh])
 
-    const diff = moment.duration(moment().diff(moment(userData))).asSeconds()
+    const diff = moment.duration(moment().utc().diff(moment(userData))).asSeconds()
     console.log(nom, prenom, diff)
 
     return (

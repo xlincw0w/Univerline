@@ -8,14 +8,6 @@ const Footer = () => {
         <React.Fragment>
             <hr className='border-gray-200 ' />
             <div className='grid grid-rows h-34 '>
-                {/* <div>
-                    <Typical
-                        className='text-center mx-auto text-3xl font-bebasNeue font-black tracking-wide'
-                        steps={['CONTACT', 1500, 'CONTACTEZ-NOUS !', 800]}
-                        loop={Infinity}
-                        wrapper='p'
-                    />
-                </div> */}
                 <div className='flex flex-row justify-center mt-6 space-x-10'>
                     <div className='cursor-pointer '>
                         <FaFacebook className='transition rounded-2xl shadow-xl duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 ' size={32} />

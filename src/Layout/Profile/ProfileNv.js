@@ -53,7 +53,11 @@ export default function ProfileNv() {
                 })
                     .then((res) => {
                         dispatch(SetFriend(res.data.friend))
-                        if (res.data.pending) dispatch(SetPending(res.data.pending))
+                        if (res.data.pending) {
+                            dispatch(SetPending(res.data.pending))
+                        } else {
+                            dispatch(SetPending(false))
+                        }
                     })
                     .catch((err) => {
                         dispatch(SetFriend(false))
@@ -65,7 +69,11 @@ export default function ProfileNv() {
                 })
                     .then((res) => {
                         dispatch(SetFriend(res.data.friend))
-                        if (res.data.pending) dispatch(SetPending(res.data.pending))
+                        if (res.data.pending) {
+                            dispatch(SetPending(res.data.pending))
+                        } else {
+                            dispatch(SetPending(false))
+                        }
                     })
                     .catch((err) => {
                         dispatch(SetFriend(false))

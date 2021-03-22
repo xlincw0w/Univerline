@@ -26,9 +26,10 @@ const PendingUser = ({ elem, RefreshPending }) => {
     const dispatch = useDispatch()
     const classes = useStyles()
     const user = useSelector((state) => state.AuthReducer.user)
+    const [loader, setLoader] = useState(false)
 
     const handleAdd = () => {
-        dispatch(SetLoader(true))
+        setLoader(true)
 
         if (user.user_type === 'etudiant') {
             Axios.all([
@@ -45,12 +46,12 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        dispatch(SetLoader(false))
+                        setLoader(false)
                     })
                 )
                 .catch((err) => {
                     RefreshPending()
-                    dispatch(SetLoader(false))
+                    setLoader(false)
                 })
         } else {
             Axios.all([
@@ -67,19 +68,19 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        dispatch(SetLoader(false))
+                        setLoader(false)
                     })
                 )
                 .catch((err) => {
                     console.log(err)
                     RefreshPending()
-                    dispatch(SetLoader(false))
+                    setLoader(false)
                 })
         }
     }
 
     const handleRemove = () => {
-        dispatch(SetLoader(true))
+        setLoader(true)
 
         if (user.user_type === 'etudiant') {
             Axios.all([
@@ -96,13 +97,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        dispatch(SetLoader(false))
+                        setLoader(false)
                     })
                 )
                 .catch((err) => {
                     console.log(err)
                     RefreshPending()
-                    dispatch(SetLoader(false))
+                    setLoader(false)
                 })
         } else {
             Axios.all([
@@ -119,18 +120,19 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        dispatch(SetLoader(false))
+                        setLoader(false)
                     })
                 )
                 .catch((err) => {
                     console.log(err)
                     RefreshPending()
-                    dispatch(SetLoader(false))
+                    setLoader(false)
                 })
         }
     }
 
     const handleAdh = () => {
+        setLoader(true)
         Axios.post(constants.url + '/api/adherent/confirm/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
@@ -138,13 +140,16 @@ const PendingUser = ({ elem, RefreshPending }) => {
             .then((res) => {
                 console.log(res)
                 RefreshPending()
+                setLoader(false)
             })
             .catch((err) => {
                 console.log(err)
+                setLoader(false)
             })
     }
 
     const removeAdh = () => {
+        setLoader(true)
         Axios.post(constants.url + '/api/adherent/delete/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
@@ -152,14 +157,19 @@ const PendingUser = ({ elem, RefreshPending }) => {
             .then((res) => {
                 console.log(res)
                 RefreshPending()
+                setLoader(false)
             })
             .catch((err) => {
                 console.log(err)
+                setLoader(false)
             })
     }
 
     return (
         <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-2/3 mx-auto mt-8'>
+            <Backdrop open={loader} style={{ zIndex: 10 }}>
+                <CircularProgress color='inherit' />
+            </Backdrop>
             <div className='border-2 rounded-xl bg-white shadow-xl'>
                 {elem.id_classe && (
                     <div className='w-full mt-2'>

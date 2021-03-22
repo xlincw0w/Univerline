@@ -111,7 +111,7 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -232,11 +232,8 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
-                    onClick={() => {
-                        console.log('kifach')
-                    }}
                     className='h-1/4 shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
                     <div className='grid grid-cols-5'>
@@ -315,7 +312,7 @@ export default function Publications() {
     }
 
     return (
-        <div>
+        <div className='grid grid-cols-1 lg:grid-cols-2'>
             {user_info.user_type === 'etudiant' &&
                 publications.map((elem) => {
                     return <StudSkeleton elem={elem} />

@@ -14,6 +14,8 @@ import Options from './options/options'
 import Button from '@material-ui/core/Button'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import firebase from 'firebase'
+import { BsFileEarmarkCheck } from 'react-icons/bs'
 
 const Skeleton = () => {
     const dispatch = useDispatch()
@@ -21,6 +23,8 @@ const Skeleton = () => {
     const feed_friends = useSelector((state) => state.FeedReducer.feed_friends)
     const feed_prof = useSelector((state) => state.FeedReducer.feed_prof)
     const refresh = useSelector((state) => state.FeedReducer.refresh)
+
+    const storageRef = firebase.storage().ref()
 
     useEffect(() => {
         if (user.user_type === 'etudiant') {
@@ -58,9 +62,33 @@ const Skeleton = () => {
         const [refresh, setRefresh] = useState(0)
         const [backdrop, setBackdrop] = useState(false)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -99,7 +127,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -132,6 +160,21 @@ const Skeleton = () => {
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-red-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -193,9 +236,33 @@ const Skeleton = () => {
         const [refresh, setRefresh] = useState(0)
         const [backdrop, setBackdrop] = useState(false)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -228,7 +295,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -260,6 +327,21 @@ const Skeleton = () => {
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-red-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -344,12 +426,24 @@ const Skeleton = () => {
                     </div>
                 </div>
             )}
-            <div className='grid grid-cols-1 xl:grid-cols-2'>
-                {user.user_type === 'enseignant' &&
-                    feed_prof.map((elem) => {
-                        return <ProfSkeleton elem={elem} />
-                    })}
-            </div>
+            {user.user_type === 'enseignant' && (
+                <div className='grid grid-cols-1 xl:grid-cols-2'>
+                    <div>
+                        {feed_prof.map((elem, index) => {
+                            if (index % 2 === 0) {
+                                return <ProfSkeleton elem={elem} />
+                            }
+                        })}
+                    </div>
+                    <div>
+                        {feed_prof.map((elem, index) => {
+                            if (index % 2 === 1) {
+                                return <ProfSkeleton elem={elem} />
+                            }
+                        })}
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
