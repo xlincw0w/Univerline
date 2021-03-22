@@ -33,112 +33,116 @@ const Post = () => {
     const handlePost = () => {
         dispatch(FeedLoading(true))
 
-        const imagev4 = v4().split('-').join('')
-        const filev4 = v4().split('-').join('')
+        if (payload.length === 0) {
+            const imagev4 = v4().split('-').join('')
+            const filev4 = v4().split('-').join('')
 
-        let imageExt = null
-        let fileExt = null
+            let imageExt = null
+            let fileExt = null
 
-        if (image) {
-            const imageArray = image.name.split('.')
-            imageExt = imageArray[imageArray.length - 1]
+            if (image) {
+                const imageArray = image.name.split('.')
+                imageExt = imageArray[imageArray.length - 1]
 
-            storageRef
-                .child(imagev4 + '.' + imageExt)
-                .put(image)
-                .then((snap) => {
-                    console.log('uploaded')
+                storageRef
+                    .child(imagev4 + '.' + imageExt)
+                    .put(image)
+                    .then((snap) => {
+                        console.log('uploaded')
+                    })
+                    .catch((err) => {
+                        console.log('upload failed')
+                    })
+            }
+
+            if (file) {
+                const fileArray = file.name.split('.')
+                fileExt = fileArray[fileArray.length - 1]
+
+                storageRef
+                    .child(filev4 + '.' + fileExt)
+                    .put(file)
+                    .then((snap) => {
+                        console.log('uploaded')
+                    })
+                    .catch((err) => {
+                        console.log('upload failed')
+                    })
+            }
+
+            if (user.user_type === 'etudiant') {
+                Axios.post(constants.url + '/api/post/add/post/', {
+                    id_classe: '#####',
+                    id_user: user.id,
+                    image: image ? imagev4 + '.' + imageExt : null,
+                    file: file ? filev4 + '.' + fileExt : null,
+                    payload,
                 })
-                .catch((err) => {
-                    console.log('upload failed')
-                })
-        }
+                    .then((res) => {
+                        dispatch(FeedLoading(false))
+                        if (res.data.AJOUT) {
+                            dispatch(RefreshFeed())
 
-        if (file) {
-            const fileArray = file.name.split('.')
-            fileExt = fileArray[fileArray.length - 1]
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        } else {
+                            console.log('not added')
 
-            storageRef
-                .child(filev4 + '.' + fileExt)
-                .put(file)
-                .then((snap) => {
-                    console.log('uploaded')
-                })
-                .catch((err) => {
-                    console.log('upload failed')
-                })
-        }
-
-        if (user.user_type === 'etudiant') {
-            Axios.post(constants.url + '/api/post/add/post/', {
-                id_classe: '#####',
-                id_user: user.id,
-                image: image ? imagev4 + '.' + imageExt : null,
-                file: file ? filev4 + '.' + fileExt : null,
-                payload,
-            })
-                .then((res) => {
-                    dispatch(FeedLoading(false))
-                    if (res.data.AJOUT) {
-                        dispatch(RefreshFeed())
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        dispatch(FeedLoading(false))
 
                         setImgUploaded(false)
                         setFileUploaded(false)
                         setImage(null)
                         setFile(null)
-                    } else {
-                        console.log('not added')
+                    })
+            } else if (user.user_type === 'enseignant') {
+                Axios.post(constants.url + '/api/post/add/post/', {
+                    id_classe: classvalue.id_classe === 'collegue' ? '#####' : classvalue.id_classe,
+                    id_user: classvalue.id_classe === 'collegue' ? user.id : '&&&&&',
+                    image: image ? imagev4 + '.' + imageExt : null,
+                    file: file ? filev4 + '.' + fileExt : null,
+                    payload,
+                })
+                    .then((res) => {
+                        dispatch(FeedLoading(false))
+                        if (res.data.AJOUT) {
+                            dispatch(RefreshFeed())
+
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        } else {
+                            console.log('not added')
+
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        }
+                    })
+                    .catch((err) => {
+                        dispatch(FeedLoading(false))
 
                         setImgUploaded(false)
                         setFileUploaded(false)
                         setImage(null)
                         setFile(null)
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                    dispatch(FeedLoading(false))
-
-                    setImgUploaded(false)
-                    setFileUploaded(false)
-                    setImage(null)
-                    setFile(null)
-                })
-        } else if (user.user_type === 'enseignant') {
-            Axios.post(constants.url + '/api/post/add/post/', {
-                id_classe: classvalue.id_classe === 'collegue' ? '#####' : classvalue.id_classe,
-                id_user: classvalue.id_classe === 'collegue' ? user.id : '&&&&&',
-                image: image ? imagev4 + '.' + imageExt : null,
-                file: file ? filev4 + '.' + fileExt : null,
-                payload,
-            })
-                .then((res) => {
-                    dispatch(FeedLoading(false))
-                    if (res.data.AJOUT) {
-                        dispatch(RefreshFeed())
-
-                        setImgUploaded(false)
-                        setFileUploaded(false)
-                        setImage(null)
-                        setFile(null)
-                    } else {
-                        console.log('not added')
-
-                        setImgUploaded(false)
-                        setFileUploaded(false)
-                        setImage(null)
-                        setFile(null)
-                    }
-                })
-                .catch((err) => {
-                    dispatch(FeedLoading(false))
-
-                    setImgUploaded(false)
-                    setFileUploaded(false)
-                    setImage(null)
-                    setFile(null)
-                    console.log(err)
-                })
+                        console.log(err)
+                    })
+            }
+        } else {
+            dispatch(FeedLoading(false))
         }
     }
 

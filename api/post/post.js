@@ -192,7 +192,7 @@ router.route('/add/post/').post((req, res) => {
             payload: data.payload,
             image: data.image,
             file: data.file,
-            date_poste: moment().format(),
+            date_poste: moment().utc().format(),
         })
         .then((resp) => {
             res.json({ AJOUT: true })
