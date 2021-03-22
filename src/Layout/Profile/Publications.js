@@ -162,7 +162,7 @@ export default function Publications() {
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -203,7 +203,7 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='focus:ring-indigo-500 focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
@@ -330,7 +330,7 @@ export default function Publications() {
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
