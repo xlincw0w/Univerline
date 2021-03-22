@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SetFriend, SetPending, SetUserInfo } from '../../store/profile/profile'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import cx from 'classnames'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
