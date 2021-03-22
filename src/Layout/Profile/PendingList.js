@@ -7,6 +7,8 @@ import Axios from 'axios'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { SetLoader } from '../../store/profile/profile'
+import { BsPersonCheck } from 'react-icons/bs'
+import { MdRemoveCircleOutline } from 'react-icons/md'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -160,7 +162,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
 
     return (
         <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-2/3 mx-auto mt-8'>
-            <div className='border-2 rounded-xl bg-white shadow-xl'>
+            <div className='rounded-xl bg-white shadow-xl'>
                 {elem.id_classe && (
                     <div className='w-full mt-2'>
                         <p className='text-gray-600 text-sm text-center'>{elem.libelle_classe.capitalize()}</p>
@@ -172,7 +174,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
                             <Avatar alt='Remy Sharp' src={elem.avatar} className={classes.large} />
                             <div className=''>
                                 <p
-                                    className='mt-2'
+                                    className='mt-0 md:mt-2'
                                     style={{
                                         width: 'max-content',
                                     }}>
@@ -180,8 +182,8 @@ const PendingUser = ({ elem, RefreshPending }) => {
                                 </p>
                                 {elem.user_type === 'etudiant' && (
                                     <div>
-                                        <p className='text-center text-gray-400 text-sm'>{elem.domaine_edu.capitalize()}</p>
-                                        <p className='text-gray-400 text-sm text-center'>{elem.etablissement.capitalize()}</p>
+                                        <p className='text-center text-gray-400 text-xs'>{elem.domaine_edu.capitalize()}</p>
+                                        <p className='text-gray-400 text-xs text-center'>{elem.etablissement.capitalize()}</p>
                                     </div>
                                 )}
                             </div>
@@ -201,11 +203,15 @@ const PendingUser = ({ elem, RefreshPending }) => {
                         )}
                         {!elem.id_classe && (
                             <div>
-                                <button onClick={handleAdd} className='bg-blue-500 w-32 mb-1 shadow-lg rounded-xl p-2 active:bg-blue-700 text-white focus:outline-none block'>
-                                    Accepter
+                                <button
+                                    onClick={handleAdd}
+                                    className='bg-blue-500 h-8 md:h-full w-8 md:w-32 mb-1 shadow-lg rounded-full md:rounded-xl p-2 active:bg-blue-700 text-white focus:outline-none block'>
+                                    <BsPersonCheck className='absolute mt-0 md:mt-1 ml-0 md:ml-1' /> <span className='ml-2 invisible md:visible'>Accepter</span>
                                 </button>
-                                <button onClick={handleRemove} className='bg-gray-200 w-32 mt-1 shadow-lg rounded-xl p-2 active:bg-green-400 focus:outline-none block'>
-                                    Supprimer
+                                <button
+                                    onClick={handleRemove}
+                                    className='bg-gray-200 h-8 md:h-full w-8 md:w-32 mt-1 shadow-lg  rounded-full md:rounded-xl p-2 active:bg-green-400 focus:outline-none block'>
+                                    <MdRemoveCircleOutline className='absolute mt-0 md:mt-1' /> <span className='ml-4 invisible md:visible'>Supprimer</span>
                                 </button>
                             </div>
                         )}
@@ -263,7 +269,7 @@ const PendingList = () => {
                     <CircularProgress color='inherit' />
                 </Backdrop>
                 <div className='w-full h-full bg-gray-200 bg-opacity-60' style={{ minHeight: '100vh', height: 'auto' }}>
-                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-3/6' style={{ minHeight: '90vh', height: 'auto' }}>
+                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
                         <div>
                             <p className='text-center text-gray-900 text-2xl mt-3'>Demandes d'ajout</p>
                             <p className='text-center text-gray-500'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>

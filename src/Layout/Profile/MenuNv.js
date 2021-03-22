@@ -86,7 +86,7 @@ export default function CustomizedTabs() {
                         {/* <AntTab label='Ressources' /> */}
                     </AntTabs>
                     {value === 0 && (
-                        <div className='mt-4'>
+                        <div className='mt-4 '>
                             <Publications />
                         </div>
                     )}
@@ -96,7 +96,7 @@ export default function CustomizedTabs() {
                         </div>
                     )}
                     {value === 2 && (
-                        <div className='mt-4'>
+                        <div className='mt-4 '>
                             <Classes />
                         </div>
                     )}
