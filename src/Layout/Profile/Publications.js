@@ -6,6 +6,7 @@ import { SetPublications } from '../../store/profile/profile'
 import { FaComments } from 'react-icons/fa'
 import { HiShare } from 'react-icons/hi'
 import Comments from '../Dashboard/Feed/comments'
+import { useHistory } from 'react-router-dom'
 import Options from '../Dashboard/Feed/options/options'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
@@ -13,6 +14,8 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import cx from 'classnames'
 import { useParams } from 'react-router-dom'
+import firebase from 'firebase'
+import { BsFileEarmarkCheck } from 'react-icons/bs'
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -21,6 +24,8 @@ export default function Publications() {
     const refresh = useSelector((state) => state.FeedReducer.refresh)
     const user = useSelector((state) => state.AuthReducer.user)
     const routeParams = useParams()
+
+    const storageRef = firebase.storage().ref()
 
     useEffect(async () => {
         if (user_info.id_user && user.id) {
@@ -65,6 +70,7 @@ export default function Publications() {
     }, [user_info.id_user, user.id, refresh])
 
     const ProfSkeleton = ({ elem }) => {
+        const history = useHistory()
         const [loadComment, setLoadComment] = useState(false)
 
         const [comments, setComments] = useState([])
@@ -72,9 +78,33 @@ export default function Publications() {
         const [refresh, setRefresh] = useState(0)
         const [backdrop, setBackdrop] = useState(false)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -133,6 +163,21 @@ export default function Publications() {
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -194,9 +239,33 @@ export default function Publications() {
         const [backdrop, setBackdrop] = useState(false)
         const user = useSelector((state) => state.AuthReducer.user)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -262,6 +331,21 @@ export default function Publications() {
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -313,14 +397,34 @@ export default function Publications() {
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2'>
-            {user_info.user_type === 'etudiant' &&
-                publications.map((elem) => {
-                    return <StudSkeleton elem={elem} />
-                })}
-            {user_info.user_type === 'enseignant' &&
-                publications.map((elem) => {
-                    return <ProfSkeleton elem={elem} />
-                })}
+            <div>
+                {user_info.user_type === 'etudiant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 0) {
+                            return <StudSkeleton elem={elem} />
+                        }
+                    })}
+                {user_info.user_type === 'enseignant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 0) {
+                            return <ProfSkeleton elem={elem} />
+                        }
+                    })}
+            </div>
+            <div>
+                {user_info.user_type === 'etudiant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 1) {
+                            return <StudSkeleton elem={elem} />
+                        }
+                    })}
+                {user_info.user_type === 'enseignant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 1) {
+                            return <ProfSkeleton elem={elem} />
+                        }
+                    })}
+            </div>
         </div>
     )
 }
