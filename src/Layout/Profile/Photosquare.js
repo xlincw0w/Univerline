@@ -27,7 +27,7 @@ export default function PhotoSquare({ avatar }) {
 
     return (
         <div className={classes.root}>
-            <Avatar variant='square' src={avatar} className={classes.square}></Avatar>
+            <Avatar variant='circle' src={avatar} className={classes.square}></Avatar>
         </div>
     )
 }
