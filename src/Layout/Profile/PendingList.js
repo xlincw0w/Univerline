@@ -7,6 +7,8 @@ import Axios from 'axios'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { SetLoader } from '../../store/profile/profile'
+import { BsPersonCheck } from 'react-icons/bs'
+import { MdRemoveCircleOutline } from 'react-icons/md'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -172,7 +174,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
                             <Avatar alt='Remy Sharp' src={elem.avatar} className={classes.large} />
                             <div className=''>
                                 <p
-                                    className='mt-2'
+                                    className='mt-0 md:mt-2'
                                     style={{
                                         width: 'max-content',
                                     }}>
@@ -180,8 +182,8 @@ const PendingUser = ({ elem, RefreshPending }) => {
                                 </p>
                                 {elem.user_type === 'etudiant' && (
                                     <div>
-                                        <p className='text-center text-gray-400 text-sm'>{elem.domaine_edu.capitalize()}</p>
-                                        <p className='text-gray-400 text-sm text-center'>{elem.etablissement.capitalize()}</p>
+                                        <p className='text-center text-gray-400 text-xs'>{elem.domaine_edu.capitalize()}</p>
+                                        <p className='text-gray-400 text-xs text-center'>{elem.etablissement.capitalize()}</p>
                                     </div>
                                 )}
                             </div>
@@ -271,7 +273,7 @@ const PendingList = () => {
                     <CircularProgress color='inherit' />
                 </Backdrop>
                 <div className='w-full h-full bg-gray-200 bg-opacity-60' style={{ minHeight: '100vh', height: 'auto' }}>
-                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-3/6' style={{ minHeight: '90vh', height: 'auto' }}>
+                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
                         <div>
                             <p className='text-center text-gray-900 text-2xl mt-3'>Demandes d'ajout</p>
                             <p className='text-center text-gray-500'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>
