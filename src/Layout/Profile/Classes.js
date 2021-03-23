@@ -200,7 +200,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
-                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
@@ -246,7 +246,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => setNewClasse(e.target.value)}
-                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Nom de la classe'
                                             />
                                         </div>
@@ -284,7 +284,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
-                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
