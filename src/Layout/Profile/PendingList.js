@@ -28,10 +28,9 @@ const PendingUser = ({ elem, RefreshPending }) => {
     const dispatch = useDispatch()
     const classes = useStyles()
     const user = useSelector((state) => state.AuthReducer.user)
-    const [loader, setLoader] = useState(false)
 
     const handleAdd = () => {
-        setLoader(true)
+        dispatch(SetLoader(true))
 
         if (user.user_type === 'etudiant') {
             Axios.all([
@@ -48,12 +47,12 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        setLoader(false)
+                        dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
                     RefreshPending()
-                    setLoader(false)
+                    dispatch(SetLoader(false))
                 })
         } else {
             Axios.all([
@@ -70,19 +69,19 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        setLoader(false)
+                        dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
                     console.log(err)
                     RefreshPending()
-                    setLoader(false)
+                    dispatch(SetLoader(false))
                 })
         }
     }
 
     const handleRemove = () => {
-        setLoader(true)
+        dispatch(SetLoader(true))
 
         if (user.user_type === 'etudiant') {
             Axios.all([
@@ -99,13 +98,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        setLoader(false)
+                        dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
                     console.log(err)
                     RefreshPending()
-                    setLoader(false)
+                    dispatch(SetLoader(false))
                 })
         } else {
             Axios.all([
@@ -122,19 +121,18 @@ const PendingUser = ({ elem, RefreshPending }) => {
                 .then(
                     Axios.spread((...res) => {
                         RefreshPending()
-                        setLoader(false)
+                        dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
                     console.log(err)
                     RefreshPending()
-                    setLoader(false)
+                    dispatch(SetLoader(false))
                 })
         }
     }
 
     const handleAdh = () => {
-        setLoader(true)
         Axios.post(constants.url + '/api/adherent/confirm/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
@@ -142,16 +140,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
             .then((res) => {
                 console.log(res)
                 RefreshPending()
-                setLoader(false)
             })
             .catch((err) => {
                 console.log(err)
-                setLoader(false)
             })
     }
 
     const removeAdh = () => {
-        setLoader(true)
         Axios.post(constants.url + '/api/adherent/delete/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
@@ -159,24 +154,15 @@ const PendingUser = ({ elem, RefreshPending }) => {
             .then((res) => {
                 console.log(res)
                 RefreshPending()
-                setLoader(false)
             })
             .catch((err) => {
                 console.log(err)
-                setLoader(false)
             })
     }
 
     return (
-        <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-2/3 mx-auto mt-8'>
-<<<<<<< HEAD
-            <div className='rounded-xl bg-white shadow-xl'>
-=======
-            <Backdrop open={loader} style={{ zIndex: 10 }}>
-                <CircularProgress color='inherit' />
-            </Backdrop>
-            <div className='border-2 rounded-xl bg-white shadow-xl'>
->>>>>>> ff01393e99d338b9375327a59092452e85cbbcca
+        <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-full sm:w-2/3 mx-auto mt-8'>
+            <div className='rounded-xl bg-white shadow-xl '>
                 {elem.id_classe && (
                     <div className='w-full mt-2'>
                         <p className='text-gray-600 text-sm text-center'>{elem.libelle_classe.capitalize()}</p>
@@ -206,17 +192,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
 
                     <div className='mr-1 mb-3'>
                         {elem.id_classe && (
-                            <div>
-                                <button onClick={handleAdh} className='bg-blue-500 w-32 mb-1 shadow-lg rounded-xl p-2 active:bg-blue-700 text-white focus:outline-none block'>
-                                    Accepter
-                                </button>
-                                <button onClick={removeAdh} className='bg-gray-200 w-32 mt-1 shadow-lg rounded-xl p-2 active:bg-green-400 focus:outline-none block'>
-                                    Supprimer
-                                </button>
-                            </div>
-                        )}
-                        {!elem.id_classe && (
-                            <div>
+                            <div className=''>
                                 <button
                                     onClick={handleAdd}
                                     className='bg-blue-500 h-8 md:h-full w-8 md:w-32 mb-1 shadow-lg rounded-full md:rounded-xl p-2 active:bg-blue-700 text-white focus:outline-none block'>
@@ -226,6 +202,20 @@ const PendingUser = ({ elem, RefreshPending }) => {
                                     onClick={handleRemove}
                                     className='bg-gray-200 h-8 md:h-full w-8 md:w-32 mt-1 shadow-lg  rounded-full md:rounded-xl p-2 active:bg-green-400 focus:outline-none block'>
                                     <MdRemoveCircleOutline className='absolute mt-0 md:mt-1' /> <span className='ml-4 invisible md:visible'>Supprimer</span>
+                                </button>
+                            </div>
+                        )}
+                        {!elem.id_classe && (
+                            <div className='flex flex-row sm:flex-col space-x-2 pr-2'>
+                                <button
+                                    onClick={handleAdd}
+                                    className='bg-blue-500 h-8 md:h-full w-8 md:w-28 m-0 sm:mb-1 sm:ml-2 shadow-lg rounded-full md:rounded-xl p-2 active:bg-blue-700 text-white focus:outline-none block'>
+                                    <BsPersonCheck className='absolute mt-0 md:mt-1 ml-0 md:ml-1' /> <span className=' invisible md:visible text-sm ml-5'>Accepter</span>
+                                </button>
+                                <button
+                                    onClick={handleRemove}
+                                    className='bg-gray-200 h-8 md:h-full w-8 md:w-28 m-0 sm:mt-1 sm:mr-8 shadow-lg  rounded-full md:rounded-xl p-2  active:bg-green-400 focus:outline-none block '>
+                                    <MdRemoveCircleOutline className='absolute text-red-700  mt-0 md:mt-1' /> <span className=' invisible md:visible text-sm ml-4'>Supprimer</span>
                                 </button>
                             </div>
                         )}
