@@ -12,7 +12,6 @@ import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import cx from 'classnames'
 import { useParams } from 'react-router-dom'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
@@ -23,7 +22,6 @@ export default function Publications() {
     const publications = useSelector((state) => state.ProfileReducer.publications)
     const refresh = useSelector((state) => state.FeedReducer.refresh)
     const user = useSelector((state) => state.AuthReducer.user)
-    const routeParams = useParams()
 
     const storageRef = firebase.storage().ref()
 
@@ -70,7 +68,6 @@ export default function Publications() {
     }, [user_info.id_user, user.id, refresh])
 
     const ProfSkeleton = ({ elem }) => {
-        const history = useHistory()
         const [loadComment, setLoadComment] = useState(false)
 
         const [comments, setComments] = useState([])
@@ -141,7 +138,7 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -301,7 +298,7 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
                     onClick={() => {
                         console.log('kifach')

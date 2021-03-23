@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography'
 import Publications from './Publications'
 import Freinds from './Freinds'
 import Classes from './Classes'
-import Support from './Support'
 import { useSelector } from 'react-redux'
 
 export default function CustomizedTabs() {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Badge from '@material-ui/core/Badge'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 import Axios from 'axios'
 import { constants } from '../../../constants'
 import cx from 'classnames'
@@ -59,10 +59,9 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
     }, [refresh])
 
     const diff = moment.duration(moment().utc().diff(moment(userData))).asSeconds()
-    console.log(nom, prenom, diff)
 
     return (
-        <div id={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff === 0 || diff > 300 ? true : false })}>
+        <div key={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff === 0 || diff > 300 ? true : false })}>
             <div className='mx-auto mt-3 flex flex-cols'>
                 <div>
                     <StyledBadge

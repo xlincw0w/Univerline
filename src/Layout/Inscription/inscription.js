@@ -8,23 +8,19 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FaGooglePlusSquare } from 'react-icons/fa'
-import { FaTwitterSquare } from 'react-icons/fa'
 
 import { FaFeatherAlt } from 'react-icons/fa'
 
 import firebase from 'firebase/app'
-import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
+import { FirebaseAuthConsumer } from '@react-firebase/auth'
 
 import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signup/signupReducer'
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Icon from '@material-ui/core/Icon'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
-
-import cx from 'classnames'
 
 const Inscription = (props) => {
     const history = useHistory()

@@ -34,7 +34,6 @@ export default function Freinds() {
     const history = useHistory()
     const dispatch = useDispatch()
     const classes = useStyles()
-    const friends = useSelector((state) => state.AuthReducer.friends)
     const user = useSelector((state) => state.AuthReducer.user)
     const user_info = useSelector((state) => state.ProfileReducer.user_info)
     const profile_friends = useSelector((state) => state.ProfileReducer.friends)

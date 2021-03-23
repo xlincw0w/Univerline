@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../constants'
-import { SetProfileClasses, SetProfileFriends } from '../../store/profile/profile'
+import { SetProfileClasses } from '../../store/profile/profile'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
@@ -17,8 +17,8 @@ import { BiTimeFive } from 'react-icons/bi'
 import { RiCloseFill } from 'react-icons/ri'
 import Backdrop from '@material-ui/core/Backdrop'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { find } from 'lodash'
-import { SetClasses } from '../../store/auth/auth'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -48,6 +48,7 @@ export default function Freinds() {
     const profile_classes = useSelector((state) => state.ProfileReducer.classes)
 
     const [user_classes, setProfileClasses] = useState([])
+    const [loader, setLoader] = useState(false)
 
     const [refresh, setRefresh] = useState(0)
 
@@ -65,17 +66,7 @@ export default function Freinds() {
                 Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
                     id: user.id,
                     id_ens: user_info.id_user,
-                }).catch((err) => {
-                    setProfileClasses([])
                 })
-            }
-        }
-    }, [])
-
-    useEffect(async () => {
-        if (user_info.user_type === 'etudiant') {
-            if (user_info.id_user === user.id) {
-                Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
                     .then((res) => {
                         setProfileClasses(res.data)
                     })
@@ -131,40 +122,53 @@ export default function Freinds() {
     }, [user_info.id_user, user.id, refresh])
 
     const handleAddClass = () => {
-        if (user_info.id_user === user.id) {
-            Axios.post(constants.url + '/api/classe/add/classe', {
-                id_ens: user.id,
-                libelle_classe: newClasse,
-            })
-                .then((res) => {
-                    setClassBackdrop(false)
-                    reload()
+        if (find(profile_classes, { libelle_classe: newClasse }) === undefined) {
+            setLoader(true)
+            if (user_info.id_user === user.id) {
+                Axios.post(constants.url + '/api/classe/add/classe', {
+                    id_ens: user.id,
+                    libelle_classe: newClasse,
                 })
-                .catch((err) => console.log(err))
+                    .then((res) => {
+                        setLoader(false)
+                        reload()
+                    })
+                    .catch((err) => {
+                        setLoader(false)
+                        console.log(err)
+                    })
+            }
         }
     }
 
     const deleteClasse = (id) => {
+        setLoader(true)
         if (user_info.id_user === user.id) {
             Axios.delete(constants.url + '/api/classe/delete/classe/' + id)
                 .then((res) => {
+                    setLoader(false)
                     reload()
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    setLoader(false)
+                    console.log(err)
+                })
         }
     }
 
     const JoinClass = (id_classe) => {
+        setLoader(true)
         if (user.user_type === 'etudiant') {
             Axios.post(constants.url + '/api/adherent/add/adherent/', {
                 id_classe: id_classe,
                 id_etu: user.id,
             })
                 .then((res) => {
-                    console.log(res)
+                    setLoader(false)
                     reload()
                 })
                 .catch((err) => {
+                    setLoader(false)
                     console.log(err)
                 })
         }
@@ -189,6 +193,9 @@ export default function Freinds() {
     return (
         <div>
             <div className='mx-auto'>
+                <Backdrop open={loader} style={{ zIndex: 10 }}>
+                    <CircularProgress color='inherit' />
+                </Backdrop>
                 <div>
                     {user_info.user_type === 'etudiant' && (
                         <Grid container xs={12}>
@@ -200,7 +207,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
-                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
@@ -246,7 +253,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => setNewClasse(e.target.value)}
-                                                className='block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Nom de la classe'
                                             />
                                         </div>
@@ -284,7 +291,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
-                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>

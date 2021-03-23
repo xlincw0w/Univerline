@@ -47,11 +47,11 @@ export default function Feature2() {
             <div className='mt-5 ml-5'>
                 {user.user_type === 'etudiant' &&
                     friends.map((elem) => {
-                        return <Online id={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />
+                        return <Online key={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />
                     })}
                 {user.user_type === 'enseignant' &&
                     friends.map((elem) => {
-                        return <Online id={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />
+                        return <Online key={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />
                     })}
             </div>
         </div>

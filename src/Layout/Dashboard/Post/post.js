@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -48,9 +48,7 @@ const Post = () => {
                 storageRef
                     .child(imagev4 + '.' + imageExt)
                     .put(image)
-                    .then((snap) => {
-                        console.log('uploaded')
-                    })
+                    .then((snap) => {})
                     .catch((err) => {
                         console.log('upload failed')
                     })
@@ -63,9 +61,7 @@ const Post = () => {
                 storageRef
                     .child(filev4 + '.' + fileExt)
                     .put(file)
-                    .then((snap) => {
-                        console.log('uploaded')
-                    })
+                    .then((snap) => {})
                     .catch((err) => {
                         console.log('upload failed')
                     })

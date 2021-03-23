@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Header from '../Header/header'
 import Auth from '../Auth/auth'
@@ -7,13 +7,9 @@ import Messagerie from '../Messagerie/messagerie'
 import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
 import Dashboard from '../Dashboard/dashboard'
-// import Erreur from '../Erreur/erreur'
-// import Footer from '../Footer/footer'
 import Profile from '../Profile/IndexProfile'
 
-import firebase from 'firebase/app'
-
-import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
+import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import Axios from 'axios'
 import { constants } from '../../constants'
 import PendingList from '../Profile/PendingList'
@@ -99,9 +95,6 @@ const Main = () => {
                                             <Route exact path='/'>
                                                 <Home />
                                             </Route>
-                                            {/* <Route>
-                                                <Erreur />
-                                            </Route> */}
                                         </React.Fragment>
                                     )
                                 } else {

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import './Home.css'
 import AOS from 'aos'
-import 'aos/dist/aos.css'
 import img1 from './img/image1.png'
 import img2 from './img/image2.png'
 import img3 from './img/image3.png'
@@ -10,9 +8,10 @@ import { useDispatch } from 'react-redux'
 import { ResetStateSignup } from '../../store/signup/signupReducer'
 import { ResetAuthState } from '../../store/auth/auth'
 import Footer from '../Footer/newFooter'
+import 'aos/dist/aos.css'
+import './Home.css'
 
 AOS.init({
-    
     // Global settings:
     disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
     startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
@@ -46,7 +45,6 @@ export default function Home() {
         <div>
             <div>
                 <div className='bg-font md:bg-image h-screen  bg-cover bg-center bg-fixed'>
-                    
                     <div className='custom-shape-divider-bottom-1614867478 '>
                         <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
                             <path
@@ -54,7 +52,6 @@ export default function Home() {
                                 className='shape-fill'></path>
                         </svg>
                     </div>
-                    
 
                     <div className='flex justify-center md:flex md:justify-end p-4'>
                         <button
@@ -93,7 +90,6 @@ export default function Home() {
                 </div>
                 {/* deuxième partie*/}
                 <div className='grid grid-cols-2 gap-2 font-openSans'>
-                    
                     <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                         <img src={img1} alt='img1' />
                     </div>
@@ -117,7 +113,6 @@ export default function Home() {
                             </button>
                         </div>
                     </div>
-                  
 
                     <div className='flex flex-col mt-18  items-center justify-center'>
                         <div className='pl-10'>

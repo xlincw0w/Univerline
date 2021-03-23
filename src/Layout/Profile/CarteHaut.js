@@ -1,5 +1,4 @@
 import React from 'react'
-import cx from 'classnames'
 import moment from 'moment'
 import { HiOutlineMailOpen } from 'react-icons/hi'
 import { BsAward } from 'react-icons/bs'
