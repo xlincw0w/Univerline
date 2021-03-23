@@ -70,7 +70,6 @@ router.route('/get/adherent/:id?').get((req, res) => {
 
 router.route('/get/pending/adh/:id').get((req, res) => {
     const id = req.params.id
-
     db('adherant')
         .select('*')
         .leftJoin('classe', 'classe.id_classe', ' adherant.id_classe')

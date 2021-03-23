@@ -14,6 +14,7 @@ import { filter } from 'lodash'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { BiTimeFive } from 'react-icons/bi'
+import { RiCloseFill } from 'react-icons/ri'
 import Backdrop from '@material-ui/core/Backdrop'
 import Button from '@material-ui/core/Button'
 import { find } from 'lodash'
@@ -59,13 +60,11 @@ export default function Freinds() {
     const [filterWord, updateFilter] = useState('')
 
     useEffect(() => {
-        if (user.user_type === 'etudiant') {
-            Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
-                id: user.id,
-                id_ens: user_info.id_user,
-            })
-                .then((res) => {
-                    setProfileClasses(res.data)
+        if (user.id && user_info.id_user) {
+            if (user.user_type === 'etudiant') {
+                Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
+                    id: user.id,
+                    id_ens: user_info.id_user,
                 })
                 .catch((err) => {
                     setProfileClasses([])
@@ -73,26 +72,24 @@ export default function Freinds() {
         }
     }, [])
 
-    console.log(profile_classes)
-
     useEffect(async () => {
         if (user_info.user_type === 'etudiant') {
             if (user_info.id_user === user.id) {
                 Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
                     .then((res) => {
-                        dispatch(SetProfileClasses(res.data))
+                        setProfileClasses(res.data)
                     })
                     .catch((err) => {
-                        console.log(err)
-                        dispatch(SetProfileClasses([]))
+                        setProfileClasses([])
                     })
-            } else {
-                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
-                    id_user: user.id,
-                    id_friend: user_info.id_user,
-                })
+            }
+        }
+    }, [refresh, user.id, user_info.id_user])
 
-                if (res.data.friend) {
+    useEffect(async () => {
+        if (user.id && user_info.id_user) {
+            if (user_info.user_type === 'etudiant') {
+                if (user_info.id_user === user.id) {
                     Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetProfileClasses(res.data))
@@ -102,18 +99,34 @@ export default function Freinds() {
                             dispatch(SetProfileClasses([]))
                         })
                 } else {
-                    dispatch(SetProfileClasses([]))
+                    const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                        id_user: user.id,
+                        id_friend: user_info.id_user,
+                    })
+
+                    if (res.data.friend) {
+                        Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
+                            .then((res) => {
+                                dispatch(SetProfileClasses(res.data))
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                                dispatch(SetProfileClasses([]))
+                            })
+                    } else {
+                        dispatch(SetProfileClasses([]))
+                    }
                 }
+            } else {
+                Axios.get(constants.url + '/api/classe/get/classe/' + user_info.id_user)
+                    .then((res) => {
+                        dispatch(SetProfileClasses(res.data))
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        dispatch(SetProfileClasses([]))
+                    })
             }
-        } else {
-            Axios.get(constants.url + '/api/classe/get/classe/' + user_info.id_user)
-                .then((res) => {
-                    dispatch(SetProfileClasses(res.data))
-                })
-                .catch((err) => {
-                    console.log(err)
-                    dispatch(SetProfileClasses([]))
-                })
         }
     }, [user_info.id_user, user.id, refresh])
 
@@ -155,6 +168,22 @@ export default function Freinds() {
                     console.log(err)
                 })
         }
+    }
+
+    const QuitClass = (id_classe) => {
+        setLoader(true)
+        Axios.post(constants.url + '/api/adherent/delete/adherent/', {
+            id_etu: user.id,
+            id_classe,
+        })
+            .then((res) => {
+                reload()
+                setLoader(false)
+            })
+            .catch((err) => {
+                console.log(err)
+                setLoader(false)
+            })
     }
 
     return (
@@ -294,27 +323,13 @@ export default function Freinds() {
                                                             )}
                                                             {user.user_type === 'etudiant' && (
                                                                 <div>
-                                                                    {/* {() => {
-                                                                        let row = find(user_classe, { id_classe: elem.id_classe })
-                                                                        console.log(row)
-                                                                        return (
-                                                                            <div className='flex flex-row-reverse mr-2 mt-5 text-gray-500 duration-300 hover:text-red-500'>
-                                                                                <p>djsqkldqs</p>
-                                                                                <IoMdAddCircleOutline
-                                                                                    onClick={() => JoinClass(elem.id_classe)}
-                                                                                    className='mx-auto text-gray-600 duration-300 hover:text-green-500 cursor-pointer'
-                                                                                    size={30}
-                                                                                />
-                                                                            </div>
-                                                                        )
-                                                                    }} */}
                                                                     {find(user_classes, { id_classe: elem.id_classe, confirm: true }) !== undefined && (
                                                                         <div className='flex flex-row-reverse mr-2 mt-5 text-gray-500 duration-300 hover:text-red-500'>
-                                                                            {/* <IoMdAddCircleOutline
-                                                                                onClick={() => JoinClass(elem.id_classe)}
-                                                                                className='mx-auto text-gray-600 duration-300 hover:text-green-500 cursor-pointer'
+                                                                            <RiCloseFill
+                                                                                onClick={() => QuitClass(elem.id_classe)}
+                                                                                className='mx-auto text-red-400 duration-300 hover:text-red-600 cursor-pointer'
                                                                                 size={30}
-                                                                            /> */}
+                                                                            />
                                                                         </div>
                                                                     )}
                                                                     {find(user_classes, { id_classe: elem.id_classe, confirm: false }) !== undefined && (

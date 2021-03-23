@@ -9,6 +9,7 @@ import Axios from 'axios'
 import { constants } from '../../../../constants'
 import { useDispatch } from 'react-redux'
 import { FeedLoading, RefreshFeed } from '../../../../store/feed/feed'
+import firebase from 'firebase'
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -21,6 +22,8 @@ export default function Options({ elem }) {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
+    const storageRef = firebase.storage().ref()
+
     const handleClick = (e) => {
         dispatch(FeedLoading(true))
         Axios.delete(constants.url + '/api/post/delete/post/' + elem.id_poste)
@@ -28,6 +31,16 @@ export default function Options({ elem }) {
                 if (res.data.delete) {
                     dispatch(FeedLoading(false))
                     dispatch(RefreshFeed())
+
+                    if (elem.file) {
+                        storageRef.child(elem.file).delete()
+                    }
+
+                    if (elem.image) {
+                        storageRef.child(elem.image).delete()
+                    }
+                } else {
+                    dispatch(FeedLoading(false))
                 }
             })
             .catch((err) => {

@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { HiOutlinePhotograph } from 'react-icons/hi'
 import { FiFolderPlus } from 'react-icons/fi'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
+import { RiCloseCircleLine } from 'react-icons/ri'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../../constants'
@@ -151,7 +152,7 @@ const Post = () => {
             <div className=''>
                 <textarea
                     type='text'
-                    className='focus:ring-indigo-500 focus:border-indigo-500 block w-full h-28 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                    className='block w-full h-28 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                     placeholder='Exprimez vous !'
                     onChange={(e) => {
                         setPayload(e.target.value)
@@ -163,7 +164,15 @@ const Post = () => {
                     <div className='ml-3 py-2 text-center'>
                         <img src={URL.createObjectURL(image)} className='w-32 h-32 mx-auto' />
                         <div className='ml-2 my-1'>
-                            <p className='text-gray-100 text-base'>{image.name}</p>
+                            <p className='text-gray-100 text-base inline'>{image.name}</p>
+                            <RiCloseCircleLine
+                                onClick={() => {
+                                    setImgUploaded(false)
+                                    setImage(null)
+                                }}
+                                size={30}
+                                className='text-gray-200 inline ml-2 duration-300 hover:text-red-300 cursor-pointer'
+                            />
                         </div>
                     </div>
                 </div>
@@ -174,6 +183,14 @@ const Post = () => {
                         <div className='ml-2 my-1 text-center'>
                             <BsFileEarmarkCheck size={23} className='text-gray-100 inline' />
                             <p className='text-gray-100 text-base'>{file.name}</p>
+                            <RiCloseCircleLine
+                                onClick={() => {
+                                    setFileUploaded(false)
+                                    setFile(null)
+                                }}
+                                size={30}
+                                className='text-gray-200 inline ml-2 duration-300 hover:text-red-300 cursor-pointer'
+                            />
                         </div>
                     </div>
                 </div>
