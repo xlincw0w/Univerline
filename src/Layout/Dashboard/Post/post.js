@@ -4,10 +4,13 @@ import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import { HiOutlinePhotograph } from 'react-icons/hi'
 import { FiFolderPlus } from 'react-icons/fi'
+import { BsFileEarmarkCheck } from 'react-icons/bs'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../../constants'
 import { FeedLoading, RefreshFeed } from '../../../store/feed/feed'
+import firebase from 'firebase'
+import { v4 } from 'uuid'
 
 const Post = () => {
     const dispatch = useDispatch()
@@ -20,47 +23,126 @@ const Post = () => {
     const user = useSelector((state) => state.AuthReducer.user)
     const classes = useSelector((state) => state.AuthReducer.classes)
 
+    const [imgUploaded, setImgUploaded] = useState(false)
+    const [fileUploaded, setFileUploaded] = useState(false)
+
     const [classvalue, setClass] = useState({ id_classe: 'collegue', libelle_classe: 'Collégues' })
 
+    const storageRef = firebase.storage().ref()
+
     const handlePost = () => {
-        if (user.user_type === 'etudiant') {
-            dispatch(FeedLoading(true))
-            Axios.post(constants.url + '/api/post/add/post/', {
-                id_classe: '#####',
-                id_user: user.id,
-                payload,
-            })
-                .then((res) => {
-                    dispatch(FeedLoading(false))
-                    if (res.data.AJOUT) {
-                        dispatch(RefreshFeed())
-                    } else {
-                        console.log('not added')
-                    }
+        dispatch(FeedLoading(true))
+
+        if (payload.length !== 0) {
+            const imagev4 = v4().split('-').join('')
+            const filev4 = v4().split('-').join('')
+
+            let imageExt = null
+            let fileExt = null
+
+            if (image) {
+                const imageArray = image.name.split('.')
+                imageExt = imageArray[imageArray.length - 1]
+
+                storageRef
+                    .child(imagev4 + '.' + imageExt)
+                    .put(image)
+                    .then((snap) => {
+                        console.log('uploaded')
+                    })
+                    .catch((err) => {
+                        console.log('upload failed')
+                    })
+            }
+
+            if (file) {
+                const fileArray = file.name.split('.')
+                fileExt = fileArray[fileArray.length - 1]
+
+                storageRef
+                    .child(filev4 + '.' + fileExt)
+                    .put(file)
+                    .then((snap) => {
+                        console.log('uploaded')
+                    })
+                    .catch((err) => {
+                        console.log('upload failed')
+                    })
+            }
+
+            if (user.user_type === 'etudiant') {
+                Axios.post(constants.url + '/api/post/add/post/', {
+                    id_classe: '#####',
+                    id_user: user.id,
+                    image: image ? imagev4 + '.' + imageExt : null,
+                    file: file ? filev4 + '.' + fileExt : null,
+                    payload,
                 })
-                .catch((err) => {
-                    console.log(err)
-                    dispatch(FeedLoading(false))
+                    .then((res) => {
+                        dispatch(FeedLoading(false))
+                        if (res.data.AJOUT) {
+                            dispatch(RefreshFeed())
+
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        } else {
+                            console.log('not added')
+
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        dispatch(FeedLoading(false))
+
+                        setImgUploaded(false)
+                        setFileUploaded(false)
+                        setImage(null)
+                        setFile(null)
+                    })
+            } else if (user.user_type === 'enseignant') {
+                Axios.post(constants.url + '/api/post/add/post/', {
+                    id_classe: classvalue.id_classe === 'collegue' ? '#####' : classvalue.id_classe,
+                    id_user: classvalue.id_classe === 'collegue' ? user.id : '&&&&&',
+                    image: image ? imagev4 + '.' + imageExt : null,
+                    file: file ? filev4 + '.' + fileExt : null,
+                    payload,
                 })
-        } else if (user.user_type === 'enseignant') {
-            dispatch(FeedLoading(true))
-            Axios.post(constants.url + '/api/post/add/post/', {
-                id_classe: classvalue.id_classe === 'collegue' ? '#####' : classvalue.id_classe,
-                id_user: classvalue.id_classe === 'collegue' ? user.id : '&&&&&',
-                payload,
-            })
-                .then((res) => {
-                    dispatch(FeedLoading(false))
-                    if (res.data.AJOUT) {
-                        dispatch(RefreshFeed())
-                    } else {
-                        console.log('not added')
-                    }
-                })
-                .catch((err) => {
-                    dispatch(FeedLoading(false))
-                    console.log(err)
-                })
+                    .then((res) => {
+                        dispatch(FeedLoading(false))
+                        if (res.data.AJOUT) {
+                            dispatch(RefreshFeed())
+
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        } else {
+                            console.log('not added')
+
+                            setImgUploaded(false)
+                            setFileUploaded(false)
+                            setImage(null)
+                            setFile(null)
+                        }
+                    })
+                    .catch((err) => {
+                        dispatch(FeedLoading(false))
+
+                        setImgUploaded(false)
+                        setFileUploaded(false)
+                        setImage(null)
+                        setFile(null)
+                        console.log(err)
+                    })
+            }
+        } else {
+            dispatch(FeedLoading(false))
         }
     }
 
@@ -76,6 +158,26 @@ const Post = () => {
                     }}
                 />
             </div>
+            {imgUploaded && (
+                <div className='w-full bg-gray-600'>
+                    <div className='ml-3 py-2 text-center'>
+                        <img src={URL.createObjectURL(image)} className='w-32 h-32 mx-auto' />
+                        <div className='ml-2 my-1'>
+                            <p className='text-gray-100 text-base'>{image.name}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {fileUploaded && (
+                <div className='w-full bg-gray-600'>
+                    <div className='ml-3 py-2'>
+                        <div className='ml-2 my-1 text-center'>
+                            <BsFileEarmarkCheck size={23} className='text-gray-100 inline' />
+                            <p className='text-gray-100 text-base'>{file.name}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className=''>
                 <div className='grid grid-cols-4 rounded-xl shadow-xl mx-auto'>
                     <div className='col-span-1 w-full flex'>
@@ -87,7 +189,8 @@ const Post = () => {
                                 className='hidden'
                                 ref={imageInput}
                                 onChange={(e) => {
-                                    setImage(e.target.file[0])
+                                    setImage(e.target.files[0])
+                                    setImgUploaded(true)
                                 }}
                             />
                             <FiFolderPlus onClick={() => fileInput.current.click()} size={22} className='m-auto mt-1 inline-block mx-1 cursor-pointer' />
@@ -96,7 +199,8 @@ const Post = () => {
                                 className='hidden'
                                 ref={fileInput}
                                 onChange={(e) => {
-                                    setFile(e.target.file[0])
+                                    setFile(e.target.files[0])
+                                    setFileUploaded(true)
                                 }}
                             />
                         </div>

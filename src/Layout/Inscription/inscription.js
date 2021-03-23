@@ -316,6 +316,7 @@ const Inscription = (props) => {
                                                                 dispatch(SetLoader(false))
                                                             })
                                                             .catch((err) => {
+                                                                console.log(err)
                                                                 dispatch(UpdateSignupStep('error'))
                                                                 dispatch(SetLoader(false))
                                                             })

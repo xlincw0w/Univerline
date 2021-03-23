@@ -59,7 +59,7 @@ export default function Header() {
                 if (isSignedIn) {
                     return (
                         <React.Fragment>
-                            <div className='w-screen h-16 bg-gray-50 shadow-lg select-none fixed' style={{ zIndex: 100 }}>
+                            <div className='w-screen h-16 bg-white shadow-lg select-none fixed' style={{ zIndex: 100 }}>
                                 <div className='grid grid-cols-4 h-full'>
                                     <div className='flex'>
                                         <p
@@ -67,7 +67,7 @@ export default function Header() {
                                                 history.push('/')
                                             }}
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
-                                            <img src={plume1} className='w-12 h-12 absolute -mt-6 -ml-4' />
+                                            <img src={plume1} className='w-14 h-12' />
                                         </p>
                                         <p className='text-gray-500 invisible lg:visible text-base inline flex justify-center items-center ml-8'>Univerline</p>
                                     </div>

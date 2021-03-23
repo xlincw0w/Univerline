@@ -6,7 +6,20 @@ router.route('/update/').post((req, res) => {
     const data = req.body
 
     db('users')
-        .update({ ...data })
+        .update({
+            id_user: data.id_user,
+            nom: data.nom ? data.nom.toLowerCase() : '',
+            prenom: data.prenom ? data.prenom.toLowerCase() : '',
+            // email: data.email ? data.email.toLowerCase() : '',
+            niveau_ens: data.niveau_ens ? data.niveau_ens.toLowerCase() : '',
+            domaine_ens: data.domaine_ens ? data.domaine_ens.toLowerCase() : '',
+            niveau_edu: data.niveau_edu ? data.niveau_edu.toLowerCase() : '',
+            domaine_edu: data.domaine_edu ? data.domaine_edu.toLowerCase() : '',
+            etablissement: data.etablissement ? data.etablissement.toLowerCase() : '',
+            date_inscription: data.date_inscription,
+            // user_type: data.user_type,
+            // avatar: data.avatar,
+        })
         .where({ id_user: data.id_user })
         .then((resp) => {
             res.json(resp)

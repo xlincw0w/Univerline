@@ -34,7 +34,7 @@ export default function Feature2() {
     }, [user.id])
 
     return (
-        <div className='bg-gray-50 h-4/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll'>
+        <div className='bg-gray-50 h-3/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll'>
             <div className='text-gray-700 text-base'>
                 <div className='inline-block ml-4 mt-4'>
                     <div className="pl-6 inline-block md:pl-0">
