@@ -14,6 +14,8 @@ import { AiOutlineUsergroupAdd } from 'react-icons/ai'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import Axios from 'axios'
 import { constants } from '../../../constants'
+import { FiLogOut } from 'react-icons/fi'
+import { CgProfile } from 'react-icons/cg'
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -156,10 +158,16 @@ export default function Dropdown(props) {
                                 dispatch(RefreshProfile())
                             }}
                             className={classes.typography}>
-                            <p className='cursor-pointer'>Profil</p>
+                            <div>
+                                <CgProfile size={25} className='inline pr-2' />
+                                <p className='cursor-pointer inline'>Profil</p>
+                            </div>
                         </Typography>
                         <Typography onClick={props.disconnect} className={classes.typography}>
-                            <p className='cursor-pointer'>Se déconnecter</p>
+                            <div>
+                                <FiLogOut size={25} className='inline pr-2' />
+                                <p className='cursor-pointer inline'>Se déconnecter</p>
+                            </div>
                         </Typography>
                     </Popover>
                 </div>

@@ -34,11 +34,11 @@ export default function Feature2() {
     }, [user.id])
 
     return (
-        <div className='bg-gray-50 h-3/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll'>
+        <div className='bg-gray-50 h-3/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll invisible md:visible'>
             <div className='text-gray-700 text-base'>
                 <div className='inline-block ml-4 mt-4'>
-                    <div className="pl-6 inline-block md:pl-0">
-                    <HiStatusOnline className='inline-block' size={25} />
+                    <div className='pl-6 inline-block md:pl-0'>
+                        <HiStatusOnline className='inline-block' size={25} />
                     </div>
                     <p className=' hidden md:inline ml-3'>En ligne</p>
                 </div>

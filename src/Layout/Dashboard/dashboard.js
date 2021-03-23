@@ -20,10 +20,10 @@ export default function Dashboard() {
                 {!user.id && <Inscription complete='whoyouare' />}
                 {user.id && user.user_type && (
                     <div className='grid grid-cols-5 h-full'>
-                        <div className='col-span-4'>
+                        <div className='col-span-5 md:col-span-4'>
                             <Content />
                         </div>
-                        <div className='h-screen h-full'>
+                        <div className=''>
                             <div className='fixed h-full w-full'>
                                 <div className='h-full'>
                                     <Feature1 />

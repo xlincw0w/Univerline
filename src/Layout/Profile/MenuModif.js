@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import { BsPencilSquare } from 'react-icons/bs'
 import { BsTrash } from 'react-icons/bs'

@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     square: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: deepOrange[500],
-        width: theme.spacing(20),
-        height: theme.spacing(20),
+        width: theme.spacing(22),
+        height: theme.spacing(22),
     },
     rounded: {
         color: '#fff',
@@ -27,7 +27,7 @@ export default function PhotoSquare({ avatar }) {
 
     return (
         <div className={classes.root}>
-            <Avatar variant='square' src={avatar} className={classes.square}></Avatar>
+            <Avatar variant='circle' src={avatar} className={classes.square}></Avatar>
         </div>
     )
 }
