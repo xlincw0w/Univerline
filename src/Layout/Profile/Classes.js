@@ -65,10 +65,10 @@ export default function Freinds() {
                 Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
                     id: user.id,
                     id_ens: user_info.id_user,
-                })
-                .catch((err) => {
+                }).catch((err) => {
                     setProfileClasses([])
                 })
+            }
         }
     }, [])
 
