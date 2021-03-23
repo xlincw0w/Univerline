@@ -70,7 +70,8 @@ export default function Freinds() {
                     setProfileClasses([])
                 })
         }
-    }, [])
+    }
+},[])
 
     useEffect(async () => {
         if (user_info.user_type === 'etudiant') {
