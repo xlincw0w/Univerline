@@ -7,7 +7,7 @@ import Dropdown from './Popover/popover'
 import Axios from 'axios'
 import { constants } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { SetUser } from '../../store/auth/auth'
+import { SetUser, Uncomplete } from '../../store/auth/auth'
 
 export default function Header() {
     const dispatch = useDispatch()
@@ -31,6 +31,7 @@ export default function Header() {
         if (user) {
             Axios.get(constants.url + '/api/profile/' + user.uid)
                 .then((res) => {
+                    if (!res.data.id_user) dispatch(Uncomplete(true))
                     dispatch(
                         SetUser({
                             id: res.data.id_user,

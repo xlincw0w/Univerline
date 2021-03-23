@@ -49,19 +49,21 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
     }, 60000)
 
     useEffect(() => {
-        Axios.get(constants.url + '/api/online/get/' + id)
-            .then((res) => {
-                setUserData(res.data.last_seen)
-            })
-            .catch((err) => {
-                setUserData(null)
-            })
+        if (id) {
+            Axios.get(constants.url + '/api/online/get/' + id)
+                .then((res) => {
+                    setUserData(res.data.last_seen)
+                })
+                .catch((err) => {
+                    setUserData(null)
+                })
+        }
     }, [refresh])
 
     const diff = moment.duration(moment().utc().diff(moment(userData))).asSeconds()
 
     return (
-        <div key={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff === 0 || diff > 300 ? true : false })}>
+        <div key={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff <= 0 || diff > 300 ? true : false })}>
             <div className='mx-auto mt-3 flex flex-cols'>
                 <div>
                     <StyledBadge

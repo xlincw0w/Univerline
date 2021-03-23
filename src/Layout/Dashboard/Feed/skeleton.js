@@ -27,29 +27,31 @@ const Skeleton = () => {
     const storageRef = firebase.storage().ref()
 
     useEffect(() => {
-        if (user.user_type === 'etudiant') {
-            Axios.get(constants.url + '/api/post/get/post/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeed(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeed([]))
-                })
-            Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeedProf(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeedProf([]))
-                })
-        } else if (user.user_type === 'enseignant') {
-            Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeedProf(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeedProf([]))
-                })
+        if (user.id) {
+            if (user.user_type === 'etudiant') {
+                Axios.get(constants.url + '/api/post/get/post/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeed(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeed([]))
+                    })
+                Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeedProf(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeedProf([]))
+                    })
+            } else if (user.user_type === 'enseignant') {
+                Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeedProf(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeedProf([]))
+                    })
+            }
         }
     }, [user.id, refresh])
 

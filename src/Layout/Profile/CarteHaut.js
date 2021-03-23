@@ -19,45 +19,6 @@ export default function CarteHaut({ profile }) {
                 <div>
                     {!modify && (
                         <Container maxWidth='lg'>
-                            {/* <div className='grid grid-cols-3 w-full ml-3 pt-3'>
-                                <div className='mt-5'>
-                                    <div>
-                                        <p className='text-green-600 text-sm inline'>Etablissement</p>
-                                        <GoLocation className='inline ml-2 mb-1' size={20} />
-                                    </div>
-                                    <p className='text-gray-600 text-base'>{profile.etablissement}</p>
-                                </div>
-                                <div className='mt-5'>
-                                    <div>
-                                        <p className='text-green-600 text-sm inline'>Niveau educatif</p>
-                                        <BsAward className='inline ml-2 mb-1' size={20} />
-                                    </div>
-                                    <p className='text-gray-600 text-base'>{profile.niveau_edu}</p>
-                                </div>
-                                <div className='mt-5'>
-                                    <div>
-                                        <p className='text-green-600 text-sm inline'>Domaine educatif</p>
-                                        <GiArrowScope className='inline ml-2 mb-1' size={20} />
-                                    </div>
-                                    <p className='text-gray-600 text-base'>{profile.domaine_edu}</p>
-                                </div>
-
-                                <div className='mt-5'>
-                                    <div>
-                                        <p className='text-green-600 text-sm inline'>Email</p>
-                                        <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
-                                    </div>
-                                    <p className='text-gray-600 text-base'>{profile.email}</p>
-                                </div>
-                                <div className='mt-5'>
-                                    <div>
-                                        <p className='text-green-600 text-sm inline '>Date de création</p>
-                                        <BsCalendar className='inline ml-2 mb-1 ' size={18} />
-                                    </div>
-                                    <p className='text-gray-600 text-base'>{moment(profile.date_inscription).format('DD - MM - YYYY')}</p>
-                                </div>
-                            </div> */}
-
                             <Grid container>
                                 <Grid item sm={12}>
                                     <Grid container spacing={2}>
@@ -73,21 +34,21 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-green-600 text-sm inline'>Etablissement</p>
                                                 <GoLocation className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <p className='text-gray-600 text-base'>{profile.etablissement}</p>
+                                            <p className='text-gray-600 text-base'>{profile.etablissement ? profile.etablissement.capitalize() : ''}</p>
                                         </Grid>
                                         <Grid item md={4} xs={4}>
                                             <div>
                                                 <p className='text-green-600 text-sm inline'>Niveau educatif</p>
                                                 <BsAward className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <p className='text-gray-600 text-base'>{profile.niveau_edu}</p>
+                                            <p className='text-gray-600 text-base'>{profile.niveau_edu ? profile.niveau_edu.capitalize() : ''}</p>
                                         </Grid>
                                         <Grid item md={4} xs={4}>
                                             <div>
                                                 <p className='text-green-600 text-sm inline'>Domaine educatif</p>
                                                 <GiArrowScope className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <p className='text-gray-600 text-base'>{profile.domaine_edu}</p>
+                                            <p className='text-gray-600 text-base'>{profile.domaine_edu ? profile.domaine_edu.capitalize() : ''}</p>
                                         </Grid>
                                     </Grid>
 
@@ -250,14 +211,14 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-purple-700 text-sm inline'>Domaine enseignement</p>
                                                 <GiArrowScope className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <p className='text-gray-600 text-base'>{profile.domaine_ens}</p>
+                                            <p className='text-gray-600 text-base'>{profile.domaine_ens ? profile.domaine_ens.capitalize() : ''}</p>
                                         </Grid>
                                         <Grid item md={4} xs={6}>
                                             <div>
                                                 <p className='text-purple-700 text-sm inline'>Niveau enseignement</p>
                                                 <BsAward className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <p className='text-gray-600 text-base'>{profile.niveau_ens}</p>
+                                            <p className='text-gray-600 text-base'>{profile.niveau_ens ? profile.niveau_ens.capitalize() : ''}</p>
                                         </Grid>
                                         <Grid item md={4} xs={6}>
                                             <div>
