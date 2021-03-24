@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom'
 import { filter } from 'lodash'
 import { Container } from '@material-ui/core'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
@@ -45,10 +45,10 @@ export default function Freinds() {
         if (user_info.user_type === 'etudiant') {
             if (user_info.id_user === user.id) {
                 Axios.get(constants.url + '/api/amis/get/amis/' + user_info.id_user)
-                    .then(res => {
+                    .then((res) => {
                         dispatch(SetProfileFriends(res.data))
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         console.log(err)
                         dispatch(SetProfileFriends([]))
                     })
@@ -60,10 +60,10 @@ export default function Freinds() {
 
                 if (res.data.friend) {
                     Axios.get(constants.url + '/api/amis/get/amis/' + user_info.id_user)
-                        .then(res => {
+                        .then((res) => {
                             dispatch(SetProfileFriends(res.data))
                         })
-                        .catch(err => {
+                        .catch((err) => {
                             console.log(err)
                             dispatch(SetProfileFriends([]))
                         })
@@ -74,10 +74,10 @@ export default function Freinds() {
         } else {
             if (user_info.id_user === user.id) {
                 Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user_info.id_user)
-                    .then(res => {
+                    .then((res) => {
                         dispatch(SetProfileFriends(res.data))
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         console.log(err)
                         dispatch(SetProfileFriends([]))
                     })
@@ -89,10 +89,10 @@ export default function Freinds() {
 
                 if (res.data.friend) {
                     Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user_info.id_user)
-                        .then(res => {
+                        .then((res) => {
                             dispatch(SetProfileFriends(res.data))
                         })
-                        .catch(err => {
+                        .catch((err) => {
                             console.log(err)
                             dispatch(SetProfileFriends([]))
                         })
@@ -112,17 +112,17 @@ export default function Freinds() {
                             <input
                                 type='text'
                                 required={true}
-                                onChange={e => updateFilter(e.target.value)}
+                                onChange={(e) => updateFilter(e.target.value)}
                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                 placeholder='Rechercher parmis les camarades.'
                             />
                         </Paper>
                     </Grid>
 
-                    {filter(profile_friends, o => {
+                    {filter(profile_friends, (o) => {
                         let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
                         return searchIn.includes(filterWord)
-                    }).map(elem => {
+                    }).map((elem) => {
                         return (
                             <Grid item lg={6} sm={12} xs={12}>
                                 <div
@@ -134,8 +134,8 @@ export default function Freinds() {
                                         <CardHeader
                                             avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                             align='left'
-                                            title={elem.nom + ' ' + elem.prenom}
-                                            subheader={elem.niveau_edu + ' ' + elem.domaine_edu}
+                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
+                                            subheader={elem.niveau_edu.capitalize() + ' ' + elem.domaine_edu.capitalize()}
                                         />
                                     </Card>
                                 </div>
@@ -154,17 +154,17 @@ export default function Freinds() {
                                     <input
                                         type='text'
                                         required={true}
-                                        onChange={e => updateFilter(e.target.value)}
+                                        onChange={(e) => updateFilter(e.target.value)}
                                         className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                         placeholder={`Rechercher parmis les ${user.user_type === 'etudiant' ? 'camarades' : 'collégues'}.`}
                                     />
                                 </Paper>
                             </Grid>
 
-                            {filter(profile_friends, o => {
+                            {filter(profile_friends, (o) => {
                                 let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
                                 return searchIn.includes(filterWord)
-                            }).map(elem => {
+                            }).map((elem) => {
                                 return (
                                     <Grid item xs={12}>
                                         <div
@@ -176,8 +176,8 @@ export default function Freinds() {
                                                 <CardHeader
                                                     avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                     align='left'
-                                                    title={elem.nom + ' ' + elem.prenom}
-                                                    subheader={elem.niveau_ens + ' ' + elem.domaine_ens}
+                                                    title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
+                                                    subheader={elem.niveau_ens.capitalize() + ' ' + elem.domaine_ens.capitalize()}
                                                 />
                                             </Card>
                                         </div>
