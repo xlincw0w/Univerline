@@ -20,7 +20,7 @@ import Button from '@material-ui/core/Button'
 import { find } from 'lodash'
 import { SetClasses } from '../../store/auth/auth'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     container: {
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
@@ -42,10 +42,10 @@ export default function Freinds() {
     const history = useHistory()
     const dispatch = useDispatch()
     const classes = useStyles()
-    const user = useSelector((state) => state.AuthReducer.user)
+    const user = useSelector(state => state.AuthReducer.user)
     // const user_classes = useSelector((state) => state.AuthReducer.classes)
-    const user_info = useSelector((state) => state.ProfileReducer.user_info)
-    const profile_classes = useSelector((state) => state.ProfileReducer.classes)
+    const user_info = useSelector(state => state.ProfileReducer.user_info)
+    const profile_classes = useSelector(state => state.ProfileReducer.classes)
 
     const [user_classes, setProfileClasses] = useState([])
 
@@ -65,22 +65,21 @@ export default function Freinds() {
                 Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
                     id: user.id,
                     id_ens: user_info.id_user,
-                })
-                .catch((err) => {
+                }).catch(err => {
                     setProfileClasses([])
                 })
+            }
         }
-    }
-},[])
+    }, [])
 
     useEffect(async () => {
         if (user_info.user_type === 'etudiant') {
             if (user_info.id_user === user.id) {
                 Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
-                    .then((res) => {
+                    .then(res => {
                         setProfileClasses(res.data)
                     })
-                    .catch((err) => {
+                    .catch(err => {
                         setProfileClasses([])
                     })
             }
@@ -92,10 +91,10 @@ export default function Freinds() {
             if (user_info.user_type === 'etudiant') {
                 if (user_info.id_user === user.id) {
                     Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
-                        .then((res) => {
+                        .then(res => {
                             dispatch(SetProfileClasses(res.data))
                         })
-                        .catch((err) => {
+                        .catch(err => {
                             console.log(err)
                             dispatch(SetProfileClasses([]))
                         })
@@ -107,10 +106,10 @@ export default function Freinds() {
 
                     if (res.data.friend) {
                         Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
-                            .then((res) => {
+                            .then(res => {
                                 dispatch(SetProfileClasses(res.data))
                             })
-                            .catch((err) => {
+                            .catch(err => {
                                 console.log(err)
                                 dispatch(SetProfileClasses([]))
                             })
@@ -120,10 +119,10 @@ export default function Freinds() {
                 }
             } else {
                 Axios.get(constants.url + '/api/classe/get/classe/' + user_info.id_user)
-                    .then((res) => {
+                    .then(res => {
                         dispatch(SetProfileClasses(res.data))
                     })
-                    .catch((err) => {
+                    .catch(err => {
                         console.log(err)
                         dispatch(SetProfileClasses([]))
                     })
@@ -137,51 +136,51 @@ export default function Freinds() {
                 id_ens: user.id,
                 libelle_classe: newClasse,
             })
-                .then((res) => {
+                .then(res => {
                     setClassBackdrop(false)
                     reload()
                 })
-                .catch((err) => console.log(err))
+                .catch(err => console.log(err))
         }
     }
 
-    const deleteClasse = (id) => {
+    const deleteClasse = id => {
         if (user_info.id_user === user.id) {
             Axios.delete(constants.url + '/api/classe/delete/classe/' + id)
-                .then((res) => {
+                .then(res => {
                     reload()
                 })
-                .catch((err) => console.log(err))
+                .catch(err => console.log(err))
         }
     }
 
-    const JoinClass = (id_classe) => {
+    const JoinClass = id_classe => {
         if (user.user_type === 'etudiant') {
             Axios.post(constants.url + '/api/adherent/add/adherent/', {
                 id_classe: id_classe,
                 id_etu: user.id,
             })
-                .then((res) => {
+                .then(res => {
                     console.log(res)
                     reload()
                 })
-                .catch((err) => {
+                .catch(err => {
                     console.log(err)
                 })
         }
     }
 
-    const QuitClass = (id_classe) => {
+    const QuitClass = id_classe => {
         setLoader(true)
         Axios.post(constants.url + '/api/adherent/delete/adherent/', {
             id_etu: user.id,
             id_classe,
         })
-            .then((res) => {
+            .then(res => {
                 reload()
                 setLoader(false)
             })
-            .catch((err) => {
+            .catch(err => {
                 console.log(err)
                 setLoader(false)
             })
@@ -193,24 +192,24 @@ export default function Freinds() {
                 <div>
                     {user_info.user_type === 'etudiant' && (
                         <Grid container xs={12}>
-                            <div className='mx-auto w-144'>
+                            <div className='mx-auto w-100'>
                                 <Grid item xs={12}>
                                     <Grid item xs={12}>
                                         <Paper className={classes.paper}>
                                             <input
                                                 type='text'
                                                 required={true}
-                                                onChange={(e) => updateFilter(e.target.value)}
+                                                onChange={e => updateFilter(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
                                     </Grid>
 
-                                    {filter(profile_classes, (o) => {
+                                    {filter(profile_classes, o => {
                                         let searchIn = o.libelle_classe
                                         return searchIn.includes(filterWord)
-                                    }).map((elem) => {
+                                    }).map(elem => {
                                         return (
                                             <Grid item xs={12}>
                                                 <div
@@ -246,7 +245,7 @@ export default function Freinds() {
                                             <input
                                                 type='text'
                                                 required={true}
-                                                onChange={(e) => setNewClasse(e.target.value)}
+                                                onChange={e => setNewClasse(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Nom de la classe'
                                             />
@@ -266,7 +265,7 @@ export default function Freinds() {
                                     </div>
                                 </div>
                             </Backdrop>
-                            <div className='mx-auto w-144'>
+                            <div className='mx-auto w-100'>
                                 <Grid item xs={12}>
                                     <Grid item xs={12}>
                                         {user_info.id_user === user.id && (
@@ -284,17 +283,17 @@ export default function Freinds() {
                                             <input
                                                 type='text'
                                                 required={true}
-                                                onChange={(e) => updateFilter(e.target.value)}
+                                                onChange={e => updateFilter(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
                                     </Grid>
 
-                                    {filter(profile_classes, (o) => {
+                                    {filter(profile_classes, o => {
                                         let searchIn = o.libelle_classe
                                         return searchIn.includes(filterWord)
-                                    }).map((elem) => {
+                                    }).map(elem => {
                                         return (
                                             <Grid item xs={12} id={elem.id_classe}>
                                                 <div
