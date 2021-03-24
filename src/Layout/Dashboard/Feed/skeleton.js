@@ -27,29 +27,31 @@ const Skeleton = () => {
     const storageRef = firebase.storage().ref()
 
     useEffect(() => {
-        if (user.user_type === 'etudiant') {
-            Axios.get(constants.url + '/api/post/get/post/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeed(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeed([]))
-                })
-            Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeedProf(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeedProf([]))
-                })
-        } else if (user.user_type === 'enseignant') {
-            Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeedProf(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeedProf([]))
-                })
+        if (user.id) {
+            if (user.user_type === 'etudiant') {
+                Axios.get(constants.url + '/api/post/get/post/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeed(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeed([]))
+                    })
+                Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeedProf(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeedProf([]))
+                    })
+            } else if (user.user_type === 'enseignant') {
+                Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeedProf(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeedProf([]))
+                    })
+            }
         }
     }, [user.id, refresh])
 
@@ -127,7 +129,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -295,7 +297,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -414,14 +416,14 @@ const Skeleton = () => {
                     {(feed_mobile === 'all' || feed_mobile === 'etudiant') && (
                         <div>
                             {feed_friends.map((elem) => {
-                                return <StudSkeleton elem={elem} />
+                                return <StudSkeleton key={elem.id_poste} elem={elem} />
                             })}
                         </div>
                     )}
                     <div>
                         {(feed_mobile === 'all' || feed_mobile === 'enseignant') &&
                             feed_prof.map((elem) => {
-                                return <ProfSkeleton elem={elem} />
+                                return <ProfSkeleton key={elem.id_poste} elem={elem} />
                             })}
                     </div>
                 </div>
@@ -431,14 +433,14 @@ const Skeleton = () => {
                     <div>
                         {feed_prof.map((elem, index) => {
                             if (index % 2 === 0) {
-                                return <ProfSkeleton elem={elem} />
+                                return <ProfSkeleton key={elem.id_poste} elem={elem} />
                             }
                         })}
                     </div>
                     <div>
                         {feed_prof.map((elem, index) => {
                             if (index % 2 === 1) {
-                                return <ProfSkeleton elem={elem} />
+                                return <ProfSkeleton key={elem.id_poste} elem={elem} />
                             }
                         })}
                     </div>

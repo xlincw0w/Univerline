@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import './Home.css'
 import AOS from 'aos'
-import 'aos/dist/aos.css'
 import img1 from './img/image1.png'
 import img2 from './img/image2.png'
 import img3 from './img/image3.png'
@@ -10,9 +8,10 @@ import { useDispatch } from 'react-redux'
 import { ResetStateSignup } from '../../store/signup/signupReducer'
 import { ResetAuthState } from '../../store/auth/auth'
 import Footer from '../Footer/newFooter'
+import 'aos/dist/aos.css'
+import './Home.css'
 
 AOS.init({
-    
     // Global settings:
     disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
     startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
@@ -47,15 +46,14 @@ export default function Home() {
             <div>
                 <div className='bg-font md:bg-image h-screen  bg-cover bg-center bg-fixed'>
                     <div className="invisible md:visible">
-                    <div className='custom-shape-divider-bottom-1614867478 '>
-                        <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
-                            <path
-                                d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
-                                className='shape-fill'></path>
-                        </svg>
+                        <div className='custom-shape-divider-bottom-1614867478 '>
+                            <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
+                                <path
+                                    d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z'
+                                    className='shape-fill'></path>
+                            </svg>
+                        </div>
                     </div>
-                    </div>
-                    
 
                     <div className='flex justify-center md:flex md:justify-end p-4'>
                         <button
@@ -93,8 +91,7 @@ export default function Home() {
                     </div>
                 </div>
                 {/* deuxième partie*/}
-                <div className='hidden md:visible md:grid md:grid-cols-2 gap-2 font-openSans'>
-                    
+                <div className='hidden md:visible md:grid md:grid-cols-2 gap-2 font-openSans'>                    
                     <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                         <img src={img1} alt='img1' />
                     </div>
