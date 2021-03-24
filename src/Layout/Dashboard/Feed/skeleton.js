@@ -27,29 +27,31 @@ const Skeleton = () => {
     const storageRef = firebase.storage().ref()
 
     useEffect(() => {
-        if (user.user_type === 'etudiant') {
-            Axios.get(constants.url + '/api/post/get/post/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeed(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeed([]))
-                })
-            Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeedProf(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeedProf([]))
-                })
-        } else if (user.user_type === 'enseignant') {
-            Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
-                .then((res) => {
-                    dispatch(SetFeedProf(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFeedProf([]))
-                })
+        if (user.id) {
+            if (user.user_type === 'etudiant') {
+                Axios.get(constants.url + '/api/post/get/post/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeed(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeed([]))
+                    })
+                Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeedProf(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeedProf([]))
+                    })
+            } else if (user.user_type === 'enseignant') {
+                Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
+                    .then((res) => {
+                        dispatch(SetFeedProf(res.data))
+                    })
+                    .catch((err) => {
+                        dispatch(SetFeedProf([]))
+                    })
+            }
         }
     }, [user.id, refresh])
 
@@ -127,7 +129,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -159,7 +161,7 @@ const Skeleton = () => {
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe || 'Collégues'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -169,7 +171,7 @@ const Skeleton = () => {
                                 <div className='mb-2 mt-4'>
                                     <div className='ml-2 my-1 text-center'>
                                         <a href={file} target='_blank' download>
-                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-red-500' />
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
                                             <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
                                         </a>
                                     </div>
@@ -200,7 +202,7 @@ const Skeleton = () => {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
@@ -295,7 +297,7 @@ const Skeleton = () => {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20 table'>
                 <div
                     className={cx('h-1/4 shadow-xl rounded-xl', {
                         'bg-gradient-to-r from-gray-500 to-gray-800': elem.id_user === user.id,
@@ -326,7 +328,7 @@ const Skeleton = () => {
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -336,7 +338,7 @@ const Skeleton = () => {
                                 <div className='mb-2 mt-4'>
                                     <div className='ml-2 my-1 text-center'>
                                         <a href={file} target='_blank' download>
-                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-red-500' />
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
                                             <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
                                         </a>
                                     </div>
@@ -363,7 +365,7 @@ const Skeleton = () => {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
@@ -414,14 +416,14 @@ const Skeleton = () => {
                     {(feed_mobile === 'all' || feed_mobile === 'etudiant') && (
                         <div>
                             {feed_friends.map((elem) => {
-                                return <StudSkeleton elem={elem} />
+                                return <StudSkeleton key={elem.id_poste} elem={elem} />
                             })}
                         </div>
                     )}
                     <div>
                         {(feed_mobile === 'all' || feed_mobile === 'enseignant') &&
                             feed_prof.map((elem) => {
-                                return <ProfSkeleton elem={elem} />
+                                return <ProfSkeleton key={elem.id_poste} elem={elem} />
                             })}
                     </div>
                 </div>
@@ -431,14 +433,14 @@ const Skeleton = () => {
                     <div>
                         {feed_prof.map((elem, index) => {
                             if (index % 2 === 0) {
-                                return <ProfSkeleton elem={elem} />
+                                return <ProfSkeleton key={elem.id_poste} elem={elem} />
                             }
                         })}
                     </div>
                     <div>
                         {feed_prof.map((elem, index) => {
                             if (index % 2 === 1) {
-                                return <ProfSkeleton elem={elem} />
+                                return <ProfSkeleton key={elem.id_poste} elem={elem} />
                             }
                         })}
                     </div>

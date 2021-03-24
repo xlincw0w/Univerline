@@ -6,13 +6,15 @@ import { SetPublications } from '../../store/profile/profile'
 import { FaComments } from 'react-icons/fa'
 import { HiShare } from 'react-icons/hi'
 import Comments from '../Dashboard/Feed/comments'
+import { useHistory } from 'react-router-dom'
 import Options from '../Dashboard/Feed/options/options'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import cx from 'classnames'
 import { useParams } from 'react-router-dom'
+import firebase from 'firebase'
+import { BsFileEarmarkCheck } from 'react-icons/bs'
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -20,7 +22,8 @@ export default function Publications() {
     const publications = useSelector((state) => state.ProfileReducer.publications)
     const refresh = useSelector((state) => state.FeedReducer.refresh)
     const user = useSelector((state) => state.AuthReducer.user)
-    const routeParams = useParams()
+
+    const storageRef = firebase.storage().ref()
 
     useEffect(async () => {
         if (user_info.id_user && user.id) {
@@ -72,9 +75,33 @@ export default function Publications() {
         const [refresh, setRefresh] = useState(0)
         const [backdrop, setBackdrop] = useState(false)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -111,7 +138,7 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -132,7 +159,22 @@ export default function Publications() {
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -158,7 +200,7 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
@@ -194,9 +236,33 @@ export default function Publications() {
         const [backdrop, setBackdrop] = useState(false)
         const user = useSelector((state) => state.AuthReducer.user)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -232,7 +298,7 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
                     onClick={() => {
                         console.log('kifach')
@@ -264,7 +330,22 @@ export default function Publications() {
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -286,7 +367,7 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
@@ -315,15 +396,35 @@ export default function Publications() {
     }
 
     return (
-        <div>
-            {user_info.user_type === 'etudiant' &&
-                publications.map((elem) => {
-                    return <StudSkeleton elem={elem} />
-                })}
-            {user_info.user_type === 'enseignant' &&
-                publications.map((elem) => {
-                    return <ProfSkeleton elem={elem} />
-                })}
+        <div className='grid grid-cols-1 lg:grid-cols-2'>
+            <div>
+                {user_info.user_type === 'etudiant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 0) {
+                            return <StudSkeleton elem={elem} />
+                        }
+                    })}
+                {user_info.user_type === 'enseignant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 0) {
+                            return <ProfSkeleton elem={elem} />
+                        }
+                    })}
+            </div>
+            <div>
+                {user_info.user_type === 'etudiant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 1) {
+                            return <StudSkeleton elem={elem} />
+                        }
+                    })}
+                {user_info.user_type === 'enseignant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 1) {
+                            return <ProfSkeleton elem={elem} />
+                        }
+                    })}
+            </div>
         </div>
     )
 }

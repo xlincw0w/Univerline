@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -6,11 +6,12 @@ import Typography from '@material-ui/core/Typography'
 import Publications from './Publications'
 import Freinds from './Freinds'
 import Classes from './Classes'
-import Support from './Support'
 import { useSelector } from 'react-redux'
+import Grid from '@material-ui/core/Grid'
 
 export default function CustomizedTabs() {
-    const user_info = useSelector((state) => state.ProfileReducer.user_info)
+    const user_info = useSelector(state => state.ProfileReducer.user_info)
+    const user = useSelector(state => state.AuthReducer.user)
     const [value, setValue] = useState(0)
 
     const AntTabs = withStyles({
@@ -22,7 +23,7 @@ export default function CustomizedTabs() {
         },
     })(Tabs)
 
-    const AntTab = withStyles((theme) => ({
+    const AntTab = withStyles(theme => ({
         root: {
             textTransform: 'none',
             minWidth: 72,
@@ -53,9 +54,9 @@ export default function CustomizedTabs() {
             },
         },
         selected: {},
-    }))((props) => <Tab disableRipple {...props} />)
+    }))(props => <Tab disableRipple {...props} />)
 
-    const useStyles = makeStyles((theme) => ({
+    const useStyles = makeStyles(theme => ({
         root: {
             flexGrow: 1,
         },
@@ -79,33 +80,46 @@ export default function CustomizedTabs() {
         <div style={{ minHeight: '50vh' }}>
             <div className={classes.root}>
                 <div className={classes.demo1}>
-                    <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
-                        <AntTab label='Publications' />
-                        <AntTab label={user_info.user_type === 'etudiant' ? 'Camarades' : 'Collégues'} />
-                        <AntTab label='Classes' />
-                        {/* <AntTab label='Ressources' /> */}
-                    </AntTabs>
-                    {value === 0 && (
-                        <div className='mt-4'>
-                            <Publications />
+                    {user.user_type === user_info.user_type && (
+                        <div>
+                            <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
+                                <AntTab label='Publications' />
+                                <AntTab label={user_info.user_type === 'etudiant' ? 'Camarades' : 'Collégues'} />
+                                <AntTab label='Classes' />
+                            </AntTabs>
+                            {value === 0 && (
+                                <div className='mt-4'>
+                                    <Grid item lg={12} md={12} xs={12}>
+                                        <Publications />
+                                    </Grid>
+                                </div>
+                            )}
+                            {value === 1 && (
+                                <div className='mt-4'>
+                                    <Freinds />
+                                </div>
+                            )}
+                            {value === 2 && (
+                                <div className='mt-4'>
+                                    <Classes />
+                                </div>
+                            )}
+                            <Typography className={classes.padding} />
                         </div>
                     )}
-                    {value === 1 && (
-                        <div className='mt-4'>
-                            <Freinds />
+                    {user.user_type !== user_info.user_type && (
+                        <div>
+                            <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
+                                <AntTab label='Classes' />
+                            </AntTabs>
+                            {value === 0 && (
+                                <div className='mt-4'>
+                                    <Classes />
+                                </div>
+                            )}
+                            <Typography className={classes.padding} />
                         </div>
                     )}
-                    {value === 2 && (
-                        <div className='mt-4'>
-                            <Classes />
-                        </div>
-                    )}
-                    {/* {value === 3 && (
-                        <div className='mt-4'>
-                            <Support />
-                        </div>
-                    )} */}
-                    <Typography className={classes.padding} />
                 </div>
             </div>
         </div>

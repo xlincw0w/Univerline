@@ -34,11 +34,7 @@ export default function champ() {
                     <div className='relative w-full'>
                         {/* champs de saisi */}
 
-                        <textarea
-                            type='text'
-                            className='focus:ring-indigo-500 focus:border-indigo-500 block w-full h-12 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                            placeholder='Votre message'
-                        />
+                        <textarea type='text' className='block w-full h-12 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto' placeholder='Votre message' />
                         {/* émoticones */}
                         {/* <button className='absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600'> */}
                         {/* <Emoticons

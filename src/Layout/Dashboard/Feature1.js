@@ -43,7 +43,7 @@ export default function Feature1() {
             <div className='mt-2 ml-4'>
                 {classes.map((elem) => {
                     return (
-                        <div id={elem.id_classe} className='my-2'>
+                        <div key={elem.id_classe} className='my-2'>
                             <div className='text-sm text-gray-600 pt-2 font-openSans border-b'>{elem.libelle_classe}</div>
                         </div>
                     )

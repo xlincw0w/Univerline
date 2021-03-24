@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
@@ -8,23 +8,19 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FaGooglePlusSquare } from 'react-icons/fa'
-import { FaTwitterSquare } from 'react-icons/fa'
 
 import { FaFeatherAlt } from 'react-icons/fa'
 
 import firebase from 'firebase/app'
-import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
+import { FirebaseAuthConsumer } from '@react-firebase/auth'
 
 import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signup/signupReducer'
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Icon from '@material-ui/core/Icon'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
-
-import cx from 'classnames'
 
 const Inscription = (props) => {
     const history = useHistory()
@@ -33,7 +29,25 @@ const Inscription = (props) => {
     const step = useSelector((state) => state.SignUpReducer.step)
     const loader = useSelector((state) => state.SignUpReducer.loader)
 
-    React.useEffect(() => {
+    firebase.auth().languageCode = 'fr'
+
+    useEffect(() => {
+        if (props.complete) {
+            const userCred = firebase.auth().currentUser
+            dispatch(
+                UpdateSignupUser({
+                    ...user,
+                    id: userCred.uid,
+                    nom: userCred.displayName || '',
+                    email: userCred.email,
+                    isNewUser: false,
+                })
+            )
+            dispatch(UpdateSignupStep('whoyouare'))
+        }
+    }, [])
+
+    useEffect(() => {
         if (props.step === 'confirmemail') {
             dispatch(UpdateSignupStep('confirmemail'))
             let userCred = firebase.auth().currentUser
@@ -73,7 +87,7 @@ const Inscription = (props) => {
         </p>,
     ]
 
-    const [error_index, setErrorIndex] = React.useState(0)
+    const [error_index, setErrorIndex] = useState(0)
 
     const handleAuth = async (e) => {
         e.preventDefault()
@@ -303,6 +317,12 @@ const Inscription = (props) => {
                                                             .auth()
                                                             .signInWithPopup(facebookAuthProvider)
                                                             .then((userCred) => {
+                                                                firebase
+                                                                    .auth()
+                                                                    .currentUser.updateProfile({ emailVerified: true })
+                                                                    .then((res) => {
+                                                                        console.log(res)
+                                                                    })
                                                                 dispatch(
                                                                     UpdateSignupUser({
                                                                         ...user,
@@ -322,14 +342,6 @@ const Inscription = (props) => {
                                                             })
                                                     }}
                                                     className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700'
-                                                    size={50}
-                                                />
-                                                <FaTwitterSquare
-                                                    onClick={() => {
-                                                        const twitterAuthProvider = new firebase.auth.TwitterAuthProvider()
-                                                        firebase.auth().signInWithPopup(twitterAuthProvider)
-                                                    }}
-                                                    className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400'
                                                     size={50}
                                                 />
                                             </div>
@@ -521,6 +533,34 @@ const Inscription = (props) => {
                                         <form onSubmit={handleForm}>
                                             <div className='mt-32 text-center'>
                                                 <div className='my-5'>
+                                                    {props.complete && (
+                                                        <div>
+                                                            <div className='my-5'>
+                                                                <TextField
+                                                                    onChange={(e) => {
+                                                                        dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
+                                                                    }}
+                                                                    className='w-3/6 shadow'
+                                                                    label='Nom'
+                                                                    variant='outlined'
+                                                                    type='text'
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div className='my-5'>
+                                                                <TextField
+                                                                    onChange={(e) => {
+                                                                        dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
+                                                                    }}
+                                                                    className='w-3/6 shadow'
+                                                                    label='Prénom'
+                                                                    variant='outlined'
+                                                                    type='text'
+                                                                    required
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                     <Autocomplete
                                                         id='combo-box-demo'
                                                         className='w-3/6 mx-auto shadow'
@@ -586,6 +626,34 @@ const Inscription = (props) => {
                                         </p>
                                         <form onSubmit={handleForm}>
                                             <div className='mt-10 2xl:mt-32 text-center'>
+                                                {props.complete && (
+                                                    <div>
+                                                        <div className='my-5'>
+                                                            <TextField
+                                                                onChange={(e) => {
+                                                                    dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
+                                                                }}
+                                                                className='w-3/6 shadow'
+                                                                label='Nom'
+                                                                variant='outlined'
+                                                                type='text'
+                                                                required
+                                                            />
+                                                        </div>
+                                                        <div className='my-5'>
+                                                            <TextField
+                                                                onChange={(e) => {
+                                                                    dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
+                                                                }}
+                                                                className='w-3/6 shadow'
+                                                                label='Prénom'
+                                                                variant='outlined'
+                                                                type='text'
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )}
                                                 <div className='my-5'>
                                                     <TextField
                                                         onChange={(e) => {

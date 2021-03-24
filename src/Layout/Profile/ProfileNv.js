@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import React, { useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
@@ -82,28 +82,6 @@ export default function ProfileNv() {
                     </Backdrop>
                     <Container maxWidth='lg' className={classes.root}>
                         {user.id === profile.id_user && (
-                            // <Grid container spacing={3}>
-                            //     <Grid item md={12}>
-                            //         <Paper className={classes.paper}>
-                            //             <Grid container spacing={0}>
-                            //                 <Grid item md={3} xs={12} style={{ textAlign: 'center' }}>
-                            //                     <span style={{ display: 'inline-block' }}>
-                            //                         <PhotoSquare avatar={profile.avatar} />
-                            //                     </span>
-                            //                 </Grid>
-                            //                 <Grid item md={9} xs={12}>
-                            //                     <CarteHaut profile={profile} user={user} />
-                            //                     <MenuModif />
-                            //                 </Grid>
-                            //             </Grid>
-                            //         </Paper>
-
-                            //         <Paper className={classes.paper}>
-                            //             <MenuNv />
-                            //         </Paper>
-                            //     </Grid>
-                            // </Grid>
-
                             <Grid container spacing={3}>
                                 <Grid item sm={12}>
                                     <Paper style={{ width: '100%' }} className={classes.paper}>

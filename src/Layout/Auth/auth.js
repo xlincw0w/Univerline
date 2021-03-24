@@ -123,7 +123,6 @@ export default function Auth() {
                                 className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700'
                                 size={50}
                             />
-                            <FaTwitterSquare className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400' size={50} />
                         </div>
                     </div>
                     <form className='w-full' onSubmit={handleAuth}>

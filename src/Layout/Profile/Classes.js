@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../constants'
-import { SetProfileClasses, SetProfileFriends } from '../../store/profile/profile'
+import { SetProfileClasses } from '../../store/profile/profile'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
@@ -14,12 +14,13 @@ import { filter } from 'lodash'
 import { HiOutlineTrash } from 'react-icons/hi'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { BiTimeFive } from 'react-icons/bi'
+import { RiCloseFill } from 'react-icons/ri'
 import Backdrop from '@material-ui/core/Backdrop'
 import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { find } from 'lodash'
-import { SetClasses } from '../../store/auth/auth'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     container: {
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
@@ -41,12 +42,13 @@ export default function Freinds() {
     const history = useHistory()
     const dispatch = useDispatch()
     const classes = useStyles()
-    const user = useSelector((state) => state.AuthReducer.user)
+    const user = useSelector(state => state.AuthReducer.user)
     // const user_classes = useSelector((state) => state.AuthReducer.classes)
-    const user_info = useSelector((state) => state.ProfileReducer.user_info)
-    const profile_classes = useSelector((state) => state.ProfileReducer.classes)
+    const user_info = useSelector(state => state.ProfileReducer.user_info)
+    const profile_classes = useSelector(state => state.ProfileReducer.classes)
 
     const [user_classes, setProfileClasses] = useState([])
+    const [loader, setLoader] = useState(false)
 
     const [refresh, setRefresh] = useState(0)
 
@@ -59,128 +61,162 @@ export default function Freinds() {
     const [filterWord, updateFilter] = useState('')
 
     useEffect(() => {
-        if (user.user_type === 'etudiant') {
-            Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
-                id: user.id,
-                id_ens: user_info.id_user,
-            })
-                .then((res) => {
-                    setProfileClasses(res.data)
+        if (user.id && user_info.id_user) {
+            if (user.user_type === 'etudiant') {
+                Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
+                    id: user.id,
+                    id_ens: user_info.id_user,
                 })
-                .catch((err) => {
-                    setProfileClasses([])
-                })
+                    .then((res) => {
+                        setProfileClasses(res.data)
+                    })
+                    .catch(err => {
+                        setProfileClasses([])
+                    })
+            }
         }
-    }, [])
-
-    console.log(profile_classes)
+    }, [refresh, user.id, user_info.id_user])
 
     useEffect(async () => {
-        if (user_info.user_type === 'etudiant') {
-            if (user_info.id_user === user.id) {
-                Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
-                    .then((res) => {
-                        dispatch(SetProfileClasses(res.data))
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                        dispatch(SetProfileClasses([]))
-                    })
-            } else {
-                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
-                    id_user: user.id,
-                    id_friend: user_info.id_user,
-                })
-
-                if (res.data.friend) {
+        if (user.id && user_info.id_user) {
+            if (user_info.user_type === 'etudiant') {
+                if (user_info.id_user === user.id) {
                     Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
-                        .then((res) => {
+                        .then(res => {
                             dispatch(SetProfileClasses(res.data))
                         })
-                        .catch((err) => {
+                        .catch(err => {
                             console.log(err)
                             dispatch(SetProfileClasses([]))
                         })
                 } else {
-                    dispatch(SetProfileClasses([]))
+                    const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                        id_user: user.id,
+                        id_friend: user_info.id_user,
+                    })
+
+                    if (res.data.friend) {
+                        Axios.get(constants.url + '/api/classe/get/classe/etu/' + user_info.id_user)
+                            .then(res => {
+                                dispatch(SetProfileClasses(res.data))
+                            })
+                            .catch(err => {
+                                console.log(err)
+                                dispatch(SetProfileClasses([]))
+                            })
+                    } else {
+                        dispatch(SetProfileClasses([]))
+                    }
                 }
+            } else {
+                Axios.get(constants.url + '/api/classe/get/classe/' + user_info.id_user)
+                    .then(res => {
+                        dispatch(SetProfileClasses(res.data))
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        dispatch(SetProfileClasses([]))
+                    })
             }
-        } else {
-            Axios.get(constants.url + '/api/classe/get/classe/' + user_info.id_user)
-                .then((res) => {
-                    dispatch(SetProfileClasses(res.data))
-                })
-                .catch((err) => {
-                    console.log(err)
-                    dispatch(SetProfileClasses([]))
-                })
         }
     }, [user_info.id_user, user.id, refresh])
 
     const handleAddClass = () => {
-        if (user_info.id_user === user.id) {
-            Axios.post(constants.url + '/api/classe/add/classe', {
-                id_ens: user.id,
-                libelle_classe: newClasse,
-            })
-                .then((res) => {
-                    setClassBackdrop(false)
-                    reload()
+        if (find(profile_classes, { libelle_classe: newClasse }) === undefined) {
+            setLoader(true)
+            if (user_info.id_user === user.id) {
+                Axios.post(constants.url + '/api/classe/add/classe', {
+                    id_ens: user.id,
+                    libelle_classe: newClasse,
                 })
-                .catch((err) => console.log(err))
+                    .then((res) => {
+                        setLoader(false)
+                        reload()
+                    })
+                    .catch((err) => {
+                        setLoader(false)
+                        console.log(err)
+                    })
+            }
         }
     }
 
     const deleteClasse = (id) => {
+        setLoader(true)
         if (user_info.id_user === user.id) {
             Axios.delete(constants.url + '/api/classe/delete/classe/' + id)
                 .then((res) => {
+                    setLoader(false)
                     reload()
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    setLoader(false)
+                    console.log(err)
+                })
         }
     }
 
     const JoinClass = (id_classe) => {
+        setLoader(true)
         if (user.user_type === 'etudiant') {
             Axios.post(constants.url + '/api/adherent/add/adherent/', {
                 id_classe: id_classe,
                 id_etu: user.id,
             })
                 .then((res) => {
-                    console.log(res)
+                    setLoader(false)
                     reload()
                 })
                 .catch((err) => {
+                    setLoader(false)
                     console.log(err)
                 })
         }
     }
 
+    const QuitClass = id_classe => {
+        setLoader(true)
+        Axios.post(constants.url + '/api/adherent/delete/adherent/', {
+            id_etu: user.id,
+            id_classe,
+        })
+            .then(res => {
+                reload()
+                setLoader(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoader(false)
+            })
+    }
+
     return (
         <div>
             <div className='mx-auto'>
+                <Backdrop open={loader} style={{ zIndex: 10 }}>
+                    <CircularProgress color='inherit' />
+                </Backdrop>
                 <div>
                     {user_info.user_type === 'etudiant' && (
                         <Grid container xs={12}>
-                            <div className='mx-auto w-144'>
+                            <div className='mx-auto w-100'>
                                 <Grid item xs={12}>
                                     <Grid item xs={12}>
                                         <Paper className={classes.paper}>
                                             <input
                                                 type='text'
                                                 required={true}
-                                                onChange={(e) => updateFilter(e.target.value)}
+                                                onChange={e => updateFilter(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
                                     </Grid>
 
-                                    {filter(profile_classes, (o) => {
+                                    {filter(profile_classes, o => {
                                         let searchIn = o.libelle_classe
                                         return searchIn.includes(filterWord)
-                                    }).map((elem) => {
+                                    }).map(elem => {
                                         return (
                                             <Grid item xs={12}>
                                                 <div
@@ -192,7 +228,7 @@ export default function Freinds() {
                                                         <CardHeader
                                                             avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                             align='left'
-                                                            title={elem.nom + ' ' + elem.prenom}
+                                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
                                                             subheader={elem.libelle_classe}
                                                         />
                                                     </Card>
@@ -216,7 +252,7 @@ export default function Freinds() {
                                             <input
                                                 type='text'
                                                 required={true}
-                                                onChange={(e) => setNewClasse(e.target.value)}
+                                                onChange={e => setNewClasse(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Nom de la classe'
                                             />
@@ -236,7 +272,7 @@ export default function Freinds() {
                                     </div>
                                 </div>
                             </Backdrop>
-                            <div className='mx-auto w-144'>
+                            <div className='mx-auto w-100'>
                                 <Grid item xs={12}>
                                     <Grid item xs={12}>
                                         {user_info.id_user === user.id && (
@@ -254,17 +290,17 @@ export default function Freinds() {
                                             <input
                                                 type='text'
                                                 required={true}
-                                                onChange={(e) => updateFilter(e.target.value)}
+                                                onChange={e => updateFilter(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder='Rechercher parmis les classes.'
                                             />
                                         </Paper>
                                     </Grid>
 
-                                    {filter(profile_classes, (o) => {
+                                    {filter(profile_classes, o => {
                                         let searchIn = o.libelle_classe
                                         return searchIn.includes(filterWord)
-                                    }).map((elem) => {
+                                    }).map(elem => {
                                         return (
                                             <Grid item xs={12} id={elem.id_classe}>
                                                 <div
@@ -278,7 +314,7 @@ export default function Freinds() {
                                                                 <CardHeader
                                                                     avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                                     align='left'
-                                                                    title={elem.nom + ' ' + elem.prenom}
+                                                                    title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
                                                                     subheader={elem.libelle_classe}
                                                                 />
                                                             </div>
@@ -294,27 +330,13 @@ export default function Freinds() {
                                                             )}
                                                             {user.user_type === 'etudiant' && (
                                                                 <div>
-                                                                    {/* {() => {
-                                                                        let row = find(user_classe, { id_classe: elem.id_classe })
-                                                                        console.log(row)
-                                                                        return (
-                                                                            <div className='flex flex-row-reverse mr-2 mt-5 text-gray-500 duration-300 hover:text-red-500'>
-                                                                                <p>djsqkldqs</p>
-                                                                                <IoMdAddCircleOutline
-                                                                                    onClick={() => JoinClass(elem.id_classe)}
-                                                                                    className='mx-auto text-gray-600 duration-300 hover:text-green-500 cursor-pointer'
-                                                                                    size={30}
-                                                                                />
-                                                                            </div>
-                                                                        )
-                                                                    }} */}
                                                                     {find(user_classes, { id_classe: elem.id_classe, confirm: true }) !== undefined && (
                                                                         <div className='flex flex-row-reverse mr-2 mt-5 text-gray-500 duration-300 hover:text-red-500'>
-                                                                            {/* <IoMdAddCircleOutline
-                                                                                onClick={() => JoinClass(elem.id_classe)}
-                                                                                className='mx-auto text-gray-600 duration-300 hover:text-green-500 cursor-pointer'
+                                                                            <RiCloseFill
+                                                                                onClick={() => QuitClass(elem.id_classe)}
+                                                                                className='mx-auto text-red-400 duration-300 hover:text-red-600 cursor-pointer'
                                                                                 size={30}
-                                                                            /> */}
+                                                                            />
                                                                         </div>
                                                                     )}
                                                                     {find(user_classes, { id_classe: elem.id_classe, confirm: false }) !== undefined && (

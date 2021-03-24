@@ -118,6 +118,11 @@ router.route('/delete/classe/:id?').delete((req, res) => {
         .where({ id_classe: id })
         .delete('*')
         .then((rows) => {
+            db('poste')
+                .where({ id_classe: id })
+                .then(() => {})
+                .catch(() => {})
+
             res.json(rows)
         })
         .catch((err) => {

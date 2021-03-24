@@ -225,7 +225,8 @@ export default function Dropdown(props) {
                                 <input
                                     className=' focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-24'
                                     type='text'
-                                    placeholder='      Rechercher profil'
+                                    className='block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    placeholder='Rechercher profil'
                                     {...params.inputProps}
                                 />
                             </div>

@@ -7,11 +7,12 @@ import Dropdown from './Popover/popover'
 import Axios from 'axios'
 import { constants } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { SetUser } from '../../store/auth/auth'
+import { SetUser, SetFriends, Uncomplete } from '../../store/auth/auth'
 
 export default function Header() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector((state) => state.AuthReducer.user)
 
     const disconnect = () => {
         firebase
@@ -31,6 +32,7 @@ export default function Header() {
         if (user) {
             Axios.get(constants.url + '/api/profile/' + user.uid)
                 .then((res) => {
+                    if (!res.data.id_user) dispatch(Uncomplete(true))
                     dispatch(
                         SetUser({
                             id: res.data.id_user,
@@ -52,6 +54,26 @@ export default function Header() {
                 })
         }
     }, [])
+
+    useEffect(() => {
+        if (user.user_type === 'etudiant') {
+            Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        } else if (user.user_type === 'enseignant') {
+            Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        }
+    }, [user.id])
 
     return (
         <FirebaseAuthConsumer>
@@ -107,8 +129,9 @@ export default function Header() {
                                                 history.push('/')
                                             }}
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
-                                            Reseau Social
+                                            <img src={plume1} className='w-14 h-12' />
                                         </p>
+                                        <p className='text-gray-500 invisible lg:visible text-base inline flex justify-center items-center ml-3'>Univerline</p>
                                     </div>
                                     <div className=''>
                                         <p></p>
