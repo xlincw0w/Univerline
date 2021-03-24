@@ -401,13 +401,13 @@ export default function Publications() {
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return <StudSkeleton elem={elem} />
+                            return <StudSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return <ProfSkeleton elem={elem} />
+                            return <ProfSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
             </div>
@@ -415,13 +415,13 @@ export default function Publications() {
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return <StudSkeleton elem={elem} />
+                            return <StudSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return <ProfSkeleton elem={elem} />
+                            return <ProfSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
             </div>
