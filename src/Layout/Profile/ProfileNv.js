@@ -52,11 +52,11 @@ export default function ProfileNv() {
                     id_friend: routeParams.id,
                 })
                     .then((res) => {
+                        dispatch(SetLoader(false))
                         dispatch(SetFriend(res.data.friend))
                         if (res.data.pending) dispatch(SetPending(res.data.pending))
                         else {
                             dispatch(SetPending(false))
-                            dispatch(SetLoader(false))
                         }
                     })
                     .catch((err) => {
