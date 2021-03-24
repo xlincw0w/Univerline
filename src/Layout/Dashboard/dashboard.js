@@ -6,6 +6,7 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useSelector } from 'react-redux'
 import Inscription from '../Inscription/inscription'
+import Loader from 'react-loader-spinner'
 
 export default function Dashboard() {
     const uncomplete = useSelector((state) => state.AuthReducer.uncomplete)
@@ -15,7 +16,13 @@ export default function Dashboard() {
     return (
         <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>
             <Backdrop open={loading} style={{ zIndex: 10 }}>
-                <CircularProgress color='inherit' />
+                <Loader
+                    type='Circles'
+                    color='#00BFFF'
+                    height={120}
+                    width={120}
+                    timeout={3000} //3 secs
+                />
             </Backdrop>
             <div className='w-full h-full bg-gray-200 bg-opacity-60'>
                 {uncomplete && <Inscription complete='whoyouare' />}

@@ -11,9 +11,10 @@ import Axios from 'axios'
 import { constants } from '../../constants'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { SetFriend, SetPending, SetUserInfo } from '../../store/profile/profile'
+import { SetFriend, SetLoader, SetPending, SetUserInfo } from '../../store/profile/profile'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from 'react-loader-spinner'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +37,7 @@ export default function ProfileNv() {
     const classes = useStyles()
 
     useEffect(() => {
+        dispatch(SetLoader(true))
         Axios.get(constants.url + '/api/profile/' + routeParams.id)
             .then((res) => {
                 dispatch(SetUserInfo(res.data))
@@ -51,11 +53,16 @@ export default function ProfileNv() {
                     id_friend: routeParams.id,
                 })
                     .then((res) => {
+                        dispatch(SetLoader(false))
                         dispatch(SetFriend(res.data.friend))
                         if (res.data.pending) dispatch(SetPending(res.data.pending))
+                        else {
+                            dispatch(SetPending(false))
+                        }
                     })
                     .catch((err) => {
                         dispatch(SetFriend(false))
+                        dispatch(SetLoader(false))
                     })
             } else {
                 Axios.post(constants.url + '/api/collegue/isFriend/ens', {
@@ -65,21 +72,34 @@ export default function ProfileNv() {
                     .then((res) => {
                         dispatch(SetFriend(res.data.friend))
                         if (res.data.pending) dispatch(SetPending(res.data.pending))
+                        else {
+                            dispatch(SetPending(false))
+                        }
+                        dispatch(SetLoader(false))
                     })
                     .catch((err) => {
                         dispatch(SetFriend(false))
+                        dispatch(SetLoader(false))
                     })
             }
+        } else {
+            dispatch(SetLoader(false))
         }
     }, [reset, user, routeParams.id])
 
     return (
         <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>
             <div className='w-full h-full bg-gray-200 bg-opacity-60'>
+                <Backdrop open={loader} style={{ zIndex: 12 }}>
+                    <Loader
+                        type='Circles'
+                        color='#00BFFF'
+                        height={120}
+                        width={120}
+                        timeout={3000} //3 secs
+                    />
+                </Backdrop>
                 <div className='' style={{ minHeight: '100vh' }}>
-                    <Backdrop open={loader} style={{ zIndex: 10 }}>
-                        <CircularProgress color='inherit' />
-                    </Backdrop>
                     <Container maxWidth='lg' className={classes.root}>
                         {user.id === profile.id_user && (
                             <Grid container spacing={3}>

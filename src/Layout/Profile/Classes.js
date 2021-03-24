@@ -122,21 +122,28 @@ export default function Freinds() {
     }, [user_info.id_user, user.id, refresh])
 
     const handleAddClass = () => {
-        if (find(profile_classes, { libelle_classe: newClasse }) === undefined) {
-            setLoader(true)
-            if (user_info.id_user === user.id) {
-                Axios.post(constants.url + '/api/classe/add/classe', {
-                    id_ens: user.id,
-                    libelle_classe: newClasse,
-                })
-                    .then((res) => {
-                        setLoader(false)
-                        reload()
+        if (
+            newClasse.toLowerCase() !== 'collegue' &&
+            newClasse.toLowerCase() !== 'collégue' &&
+            newClasse.toLowerCase() !== 'collegues' &&
+            newClasse.toLowerCase() !== 'collégues'
+        ) {
+            if (find(profile_classes, { libelle_classe: newClasse }) === undefined) {
+                setLoader(true)
+                if (user_info.id_user === user.id) {
+                    Axios.post(constants.url + '/api/classe/add/classe', {
+                        id_ens: user.id,
+                        libelle_classe: newClasse,
                     })
-                    .catch((err) => {
-                        setLoader(false)
-                        console.log(err)
-                    })
+                        .then((res) => {
+                            setLoader(false)
+                            reload()
+                        })
+                        .catch((err) => {
+                            setLoader(false)
+                            console.log(err)
+                        })
+                }
             }
         }
     }
@@ -199,7 +206,7 @@ export default function Freinds() {
                 <div>
                     {user_info.user_type === 'etudiant' && (
                         <Grid container xs={12}>
-                            <div className='mx-auto w-144'>
+                            <div className='mx-auto w-100'>
                                 <Grid item xs={12}>
                                     <Grid item xs={12}>
                                         <Paper className={classes.paper}>
@@ -272,7 +279,7 @@ export default function Freinds() {
                                     </div>
                                 </div>
                             </Backdrop>
-                            <div className='mx-auto w-144'>
+                            <div className='mx-auto w-100'>
                                 <Grid item xs={12}>
                                     <Grid item xs={12}>
                                         {user_info.id_user === user.id && (

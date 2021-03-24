@@ -83,7 +83,7 @@ const Inscription = (props) => {
             <span className='text-red-800'>Oups </span>Un problème est survenu lors de la création de votre compte veuillez réssayer ultérieurment.
         </p>,
         <p>
-            Vous avez déja crée un <span className='text-red-800'>Compte </span>avec cet email.
+            Vous avez déjà crée un <span className='text-red-800'>Compte </span>avec cet email.
         </p>,
     ]
 
@@ -191,7 +191,7 @@ const Inscription = (props) => {
             {(userCred) => {
                 if (userCred.isSignedIn && !user.isNewUser && userCred.emailVerified) {
                     return (
-                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
+                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl h-screen mt-5'>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -214,7 +214,7 @@ const Inscription = (props) => {
                                         </div>
                                         <div className='mt-12'>
                                             <p>
-                                                Vous êtes déja <span className='text-purple-800'> Connecté </span> ou vous vous êtes déja{' '}
+                                                Vous êtes déjà <span className='text-purple-800'> Connecté </span> ou vous vous êtes déjà{' '}
                                                 <span className='text-green-800'>Inscrit</span>
                                             </p>
                                             <div className='mt-20 text-gray-500 text-2xl'>
@@ -238,7 +238,7 @@ const Inscription = (props) => {
                     )
                 } else {
                     return (
-                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
+                        <div className='w-full lg:w-5/6 mx-auto shadow h-screen rounded-xl mt-5'>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -249,12 +249,12 @@ const Inscription = (props) => {
                                             }}>
                                             UNIVERLINE
                                         </p>
-                                        <p className='pt-10 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
+                                        <p className='pt-8 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
                                             Restez connecté avec vos collègues et vos camarades à tout instant.
                                         </p>
                                         {step === 'auth' && (
                                             <div>
-                                                <p className='pt-40 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
+                                                <p className='pt-34 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
                                                     Vous possedez déja un compte ?
                                                 </p>
                                                 <div className='mx-auto table mt-5'>
@@ -307,7 +307,7 @@ const Inscription = (props) => {
                                                             })
                                                     }}
                                                     className='inline mx-5 cursor-pointer duration-300 hover:text-green-700'
-                                                    size={60}
+                                                    size={50}
                                                 />
                                                 <FaFacebookSquare
                                                     onClick={() => {
@@ -342,13 +342,13 @@ const Inscription = (props) => {
                                                             })
                                                     }}
                                                     className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700'
-                                                    size={60}
+                                                    size={50}
                                                 />
                                             </div>
                                         </div>
                                         <form className='w-full' onSubmit={handleAuth}>
                                             <div className='mt-5 2xl:mt-20 text-center'>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
@@ -360,7 +360,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
@@ -372,7 +372,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, email: e.target.value }))
@@ -384,7 +384,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, password: e.target.value }))
@@ -398,7 +398,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, confirmed_password: e.target.value }))
@@ -417,7 +417,7 @@ const Inscription = (props) => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className='mx-auto table mt-5 2xl:mt-10'>
+                                            <div className='mx-auto table mt-4 2xl:mt-10'>
                                                 <Button type='submit' className='shadow' variant='contained' color='secondary'>
                                                     Suivant
                                                 </Button>

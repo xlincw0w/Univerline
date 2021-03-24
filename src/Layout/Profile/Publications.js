@@ -45,13 +45,13 @@ export default function Publications() {
                     dispatch(SetPublications([]))
                 }
             } else if (user_info.user_type === 'enseignant') {
-                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                const res = await Axios.post(constants.url + '/api/collegue/isFriend/ens', {
                     id_user: user.id,
-                    id_friend: user_info.id_user,
+                    id_collegue: user_info.id_user,
                 })
 
                 if (res.data.friend || user_info.id_user === user.id) {
-                    Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
+                    Axios.get(constants.url + '/api/post/get/post_collegue/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetPublications(res.data))
                         })
@@ -156,7 +156,7 @@ export default function Publications() {
                     <div className='h-auto'>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
-                            <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
+                            <p className='text-gray-500 text-sm'>{elem.libelle_classe || 'Collégues'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
@@ -401,13 +401,13 @@ export default function Publications() {
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return <StudSkeleton elem={elem} />
+                            return <StudSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return <ProfSkeleton elem={elem} />
+                            return <ProfSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
             </div>
@@ -415,13 +415,13 @@ export default function Publications() {
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return <StudSkeleton elem={elem} />
+                            return <StudSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return <ProfSkeleton elem={elem} />
+                            return <ProfSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
             </div>

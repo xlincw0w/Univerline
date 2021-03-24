@@ -31,7 +31,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
 
     const handleAdd = () => {
         dispatch(SetLoader(true))
-
+        console.log('kifach')
         if (user.user_type === 'etudiant') {
             Axios.all([
                 Axios.post(constants.url + '/api/amis/confirm/amis', {
@@ -194,12 +194,12 @@ const PendingUser = ({ elem, RefreshPending }) => {
                         {elem.id_classe && (
                             <div className=''>
                                 <button
-                                    onClick={handleAdd}
+                                    onClick={handleAdh}
                                     className='bg-blue-500 h-8 md:h-full w-8 md:w-32 mb-1 shadow-lg rounded-full md:rounded-xl p-2 active:bg-blue-700 text-white focus:outline-none block'>
                                     <BsPersonCheck className='absolute mt-0 md:mt-1 ml-0 md:ml-1' /> <span className='ml-2 invisible md:visible'>Accepter</span>
                                 </button>
                                 <button
-                                    onClick={handleRemove}
+                                    onClick={removeAdh}
                                     className='bg-gray-200 h-8 md:h-full w-8 md:w-32 mt-1 shadow-lg  rounded-full md:rounded-xl p-2 active:bg-green-400 focus:outline-none block'>
                                     <MdRemoveCircleOutline className='absolute mt-0 md:mt-1' /> <span className='ml-4 invisible md:visible'>Supprimer</span>
                                 </button>

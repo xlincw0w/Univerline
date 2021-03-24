@@ -54,7 +54,6 @@ export default function MenuModif() {
                 })
             )
             .catch((err) => {
-                console.log(err)
                 dispatch(SetLoader(false))
                 dispatch(RefreshProfile())
             })
@@ -77,11 +76,9 @@ export default function MenuModif() {
                 Axios.spread((...res) => {
                     dispatch(SetLoader(false))
                     dispatch(RefreshProfile())
-                    dispatch(SetPending(false))
                 })
             )
             .catch((err) => {
-                console.log(err)
                 dispatch(SetLoader(false))
                 dispatch(RefreshProfile())
             })
@@ -111,7 +108,6 @@ export default function MenuModif() {
                 })
             )
             .catch((err) => {
-                console.log(err)
                 dispatch(SetLoader(false))
                 dispatch(RefreshProfile())
             })
@@ -133,11 +129,9 @@ export default function MenuModif() {
                 Axios.spread((...res) => {
                     dispatch(SetLoader(false))
                     dispatch(RefreshProfile())
-                    dispatch(SetPending(false))
                 })
             )
             .catch((err) => {
-                console.log(err)
                 dispatch(SetLoader(false))
                 dispatch(RefreshProfile())
             })

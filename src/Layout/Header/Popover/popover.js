@@ -16,6 +16,7 @@ import Axios from 'axios'
 import { constants } from '../../../constants'
 import { FiLogOut } from 'react-icons/fi'
 import { CgProfile } from 'react-icons/cg'
+import { AiOutlineSearch } from 'react-icons/ai'
 
 const useStyles = makeStyles((theme) => ({
     typography: {
@@ -56,12 +57,16 @@ const UserProfile = ({ func }) => {
     return (
         <div className='cursor-pointer duration-300 hover:bg-gray-100'>
             <div className='mx-auto flex flex-cols' onClick={func}>
-                <div className='block mr-5'>
+                <div className=' mr-5 hidden md:block'>
                     <div className='text-sm text-gray-500'>
-                        <p className='inline mr-2'>{user.nom ? user.nom.capitalize().split(' ')[0] : ''}</p>
+                        <p className=' inline mr-2 '>{user.nom ? user.nom.capitalize().split(' ')[0] : ''}</p>
                         <p className='inline mr-2'>{user.prenom ? user.prenom.capitalize().split(' ')[0] : ''}</p>
                     </div>
-                    <p className={cx('text-sm text-center', { 'text-purple-700': user.user_type === 'enseignant', 'text-green-600': user.user_type === 'etudiant' })}>
+                    <p
+                        className={cx('text-sm text-center', {
+                            'text-purple-700': user.user_type === 'enseignant',
+                            'text-green-600': user.user_type === 'etudiant',
+                        })}>
                         {user.user_type ? user.user_type.capitalize() : ''}
                     </p>
                 </div>
@@ -173,8 +178,12 @@ export default function Dropdown(props) {
                 </div>
             )}
             {props.item === 'notification' && (
-                <div className='mt-1'>
-                    <IoMdNotificationsOutline onClick={(e) => handleClick(e)} size={30} />
+                <div className='mt-1 px-2'>
+                    <IoMdNotificationsOutline
+                        className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
+                        onClick={(e) => handleClick(e)}
+                        size={30}
+                    />
                     <Popover
                         id={id}
                         open={open}
@@ -195,8 +204,9 @@ export default function Dropdown(props) {
                 </div>
             )}
             {props.item === 'messagerie' && (
-                <div className='mt-2'>
+                <div className='mt-2 px-2'>
                     <BiMessage
+                        className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
                         onClick={() => {
                             history.push('/messagerie')
                         }}
@@ -205,7 +215,7 @@ export default function Dropdown(props) {
                 </div>
             )}
             {props.item === 'profilesearch' && (
-                <div className=''>
+                <div className='px-8'>
                     <Autocomplete
                         options={users}
                         onInputChange={(e) => handleInputChange(e.target.value)}
@@ -213,6 +223,7 @@ export default function Dropdown(props) {
                         renderInput={(params) => (
                             <div ref={params.InputProps.ref}>
                                 <input
+                                    className=' focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-24'
                                     type='text'
                                     className='block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Rechercher profil'
@@ -240,6 +251,7 @@ export default function Dropdown(props) {
             {props.item === 'pendinglist' && (
                 <div className='mt-1 cursor-pointer'>
                     <AiOutlineUsergroupAdd
+                        className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
                         onClick={() => {
                             history.push('/pending')
                         }}

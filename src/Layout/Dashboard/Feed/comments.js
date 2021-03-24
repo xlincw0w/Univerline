@@ -47,7 +47,7 @@ const Comments = ({ elem, Reload }) => {
                     </div>
                 </div>
                 <div className='block ml-2 pb-1 text-gray-500'>
-                    <p>{elem.payload}</p>
+                    <p className='w-96 break-words'>{elem.payload}</p>
                 </div>
             </div>
         </div>

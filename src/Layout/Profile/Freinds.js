@@ -11,6 +11,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
 import { useHistory } from 'react-router-dom'
 import { filter } from 'lodash'
+import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -103,97 +104,90 @@ export default function Freinds() {
     }, [user_info.id_user, user.id])
 
     return (
-        <div>
-            <div className='mx-auto'>
-                <div>
-                    {user_info.user_type === 'etudiant' && (
-                        <Grid container xs={12}>
-                            <div className='mx-auto w-144'>
-                                <Grid item xs={12}>
-                                    <Grid item xs={12}>
-                                        <Paper className={classes.paper}>
-                                            <input
-                                                type='text'
-                                                required={true}
-                                                onChange={(e) => updateFilter(e.target.value)}
-                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                                placeholder='Rechercher parmis les camarades.'
-                                            />
-                                        </Paper>
-                                    </Grid>
+        <Container maxWidth='md'>
+            {user_info.user_type === 'etudiant' && (
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Paper className={classes.paper}>
+                            <input
+                                type='text'
+                                required={true}
+                                onChange={(e) => updateFilter(e.target.value)}
+                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                placeholder='Rechercher parmis les camarades.'
+                            />
+                        </Paper>
+                    </Grid>
 
-                                    {filter(profile_friends, (o) => {
-                                        let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
-                                        return searchIn.includes(filterWord)
-                                    }).map((elem) => {
-                                        return (
-                                            <Grid item xs={12}>
-                                                <div
-                                                    className='cursor-pointer'
-                                                    onClick={() => {
-                                                        history.push('/profile/' + elem.id_user)
-                                                    }}>
-                                                    <Card className={classes.root}>
-                                                        <CardHeader
-                                                            avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
-                                                            align='left'
-                                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
-                                                            subheader={elem.niveau_edu.capitalize() + ' ' + elem.domaine_edu.capitalize()}
-                                                        />
-                                                    </Card>
-                                                </div>
-                                            </Grid>
-                                        )
-                                    })}
-                                </Grid>
-                            </div>
-                        </Grid>
-                    )}
-                    {user_info.user_type === 'enseignant' && (
-                        <Grid container xs={12}>
-                            <div className='mx-auto w-144'>
-                                <Grid item xs={12}>
-                                    <Grid item xs={12}>
-                                        <Paper className={classes.paper}>
-                                            <input
-                                                type='text'
-                                                required={true}
-                                                onChange={(e) => updateFilter(e.target.value)}
-                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                                placeholder={`Rechercher parmis les ${user.user_type === 'etudiant' ? 'camarades' : 'collégues'}.`}
-                                            />
-                                        </Paper>
-                                    </Grid>
+                    {filter(profile_friends, (o) => {
+                        let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
+                        return searchIn.includes(filterWord)
+                    }).map((elem) => {
+                        return (
+                            <Grid item lg={6} sm={12} xs={12}>
+                                <div
+                                    className='cursor-pointer'
+                                    onClick={() => {
+                                        history.push('/profile/' + elem.id_user)
+                                    }}>
+                                    <Card className={classes.root}>
+                                        <CardHeader
+                                            avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
+                                            align='left'
+                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
+                                            subheader={elem.niveau_edu.capitalize() + ' ' + elem.domaine_edu.capitalize()}
+                                        />
+                                    </Card>
+                                </div>
+                            </Grid>
+                        )
+                    })}
+                </Grid>
+            )}
 
-                                    {filter(profile_friends, (o) => {
-                                        let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
-                                        return searchIn.includes(filterWord)
-                                    }).map((elem) => {
-                                        return (
-                                            <Grid item xs={12}>
-                                                <div
-                                                    className='cursor-pointer'
-                                                    onClick={() => {
-                                                        history.push('/profile/' + elem.id_user)
-                                                    }}>
-                                                    <Card className={classes.root}>
-                                                        <CardHeader
-                                                            avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
-                                                            align='left'
-                                                            title={elem.nom + ' ' + elem.prenom}
-                                                            subheader={elem.niveau_ens + ' ' + elem.domaine_ens}
-                                                        />
-                                                    </Card>
-                                                </div>
-                                            </Grid>
-                                        )
-                                    })}
-                                </Grid>
-                            </div>
+            {user_info.user_type === 'enseignant' && (
+                <Grid container xs={12}>
+                    <div className='mx-auto w-144'>
+                        <Grid item xs={12}>
+                            <Grid item xs={12}>
+                                <Paper className={classes.paper}>
+                                    <input
+                                        type='text'
+                                        required={true}
+                                        onChange={(e) => updateFilter(e.target.value)}
+                                        className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                        placeholder={`Rechercher parmis les ${user.user_type === 'etudiant' ? 'camarades' : 'collégues'}.`}
+                                    />
+                                </Paper>
+                            </Grid>
+
+                            {filter(profile_friends, (o) => {
+                                let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
+                                return searchIn.includes(filterWord)
+                            }).map((elem) => {
+                                return (
+                                    <Grid item xs={12}>
+                                        <div
+                                            className='cursor-pointer'
+                                            onClick={() => {
+                                                history.push('/profile/' + elem.id_user)
+                                            }}>
+                                            <Card className={classes.root}>
+                                                <CardHeader
+                                                    avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
+                                                    align='left'
+                                                    title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
+                                                    subheader={elem.niveau_ens.capitalize() + ' ' + elem.domaine_ens.capitalize()}
+                                                />
+                                            </Card>
+                                        </div>
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
-                    )}
-                </div>
-            </div>
-        </div>
+                    </div>
+                </Grid>
+            )}
+        </Container>
     )
 }
