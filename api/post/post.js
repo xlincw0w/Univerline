@@ -181,6 +181,19 @@ router.route('/get/post_ens/allfriends/:id?').get(async (req, res) => {
     res.json(postes)
 })
 
+router.route('/get/post_collegue/:id').get(async (req, res) => {
+    const id = req.params.id
+
+    const collegue = await db('poste')
+        .select('*')
+        .where({ 'users.id_user': id })
+        .leftJoin('users', 'users.id_user', 'poste.id_user')
+        .leftJoin('classe', 'classe.id_classe', 'poste.id_classe')
+        .orderBy('date_poste', 'desc')
+
+    res.json(collegue)
+})
+
 //ajouter un post a une classe X
 router.route('/add/post/').post((req, res) => {
     const data = req.body

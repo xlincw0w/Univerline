@@ -45,13 +45,13 @@ export default function Publications() {
                     dispatch(SetPublications([]))
                 }
             } else if (user_info.user_type === 'enseignant') {
-                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                const res = await Axios.post(constants.url + '/api/collegue/isFriend/ens', {
                     id_user: user.id,
-                    id_friend: user_info.id_user,
+                    id_collegue: user_info.id_user,
                 })
 
                 if (res.data.friend || user_info.id_user === user.id) {
-                    Axios.get(constants.url + '/api/post/get/post_ens/all/' + user_info.id_user)
+                    Axios.get(constants.url + '/api/post/get/post_collegue/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetPublications(res.data))
                         })
