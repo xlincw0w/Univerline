@@ -59,21 +59,21 @@ export default function Auth() {
     }
 
     return (
-        <div className='w-full lg:w-5/6 h-screen mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
+        <div className='w-full lg:w-5/6  mx-auto shadow rounded-xl mt-2 h-screen'>
             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
                         <p
-                            className='pt-14 text-6xl text-gray-100 text-center cursor-pointer'
+                            className='pt-8 text-6xl text-gray-100 text-center cursor-pointer'
                             onClick={() => {
                                 history.push('/')
                             }}>
                             UNIVERLINE
                         </p>
-                        <p className='pt-10 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Restez connecté avec vos collègues et vos camarades à tout instant.</p>
+                        <p className='pt-8 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Restez connecté avec vos collègues et vos camarades à tout instant.</p>
 
                         <div>
-                            <p className='pt-40 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Vous ne possedez pas de compte ?</p>
+                            <p className='pt-36 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>Vous ne possedez pas de compte ?</p>
                             <div className='mx-auto table mt-5'>
                                 <Button
                                     onClick={() => {
@@ -91,8 +91,8 @@ export default function Auth() {
                     <Backdrop open={loader} style={{ zIndex: 10 }}>
                         <CircularProgress color='inherit' />
                     </Backdrop>
-                    <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>Authentifiez-vous</p>
-                    <div className='mt-5 2xl:mt-20 flex'>
+                    <p className='text-gray-800 text-4xl text-center mt-12 font-sans font-black'>Authentifiez-vous</p>
+                    <div className='mt-10 2xl:mt-16 flex'>
                         <div className='mx-auto'>
                             <FaGooglePlusSquare
                                 onClick={() => {
@@ -106,7 +106,7 @@ export default function Auth() {
                                         .catch((err) => {})
                                 }}
                                 className='inline mx-5 cursor-pointer duration-300 hover:text-green-700'
-                                size={60}
+                                size={50}
                             />
                             <FaFacebookSquare
                                 onClick={() => {
@@ -121,12 +121,12 @@ export default function Auth() {
                                         .catch((err) => {})
                                 }}
                                 className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700'
-                                size={60}
+                                size={50}
                             />
                         </div>
                     </div>
                     <form className='w-full' onSubmit={handleAuth}>
-                        <div className='mt-5 2xl:mt-10 text-center'>
+                        <div className='mt-8 2xl:mt-10 text-center'>
                             <div className='my-5'>
                                 <TextField
                                     required
