@@ -118,7 +118,7 @@ export default function Freinds() {
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
                                                 className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                                placeholder='Rechercher parmis les camarades.'
+                                                placeholder='Rechercher parmis les camarades .'
                                             />
                                         </Paper>
                                     </Grid>
