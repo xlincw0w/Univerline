@@ -7,7 +7,7 @@ import Comments from './comments'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { constants } from '../../../constants'
-import { SetFeed, SetFeedProf } from '../../../store/feed/feed'
+import { FeedLoading, SetFeed, SetFeedProf } from '../../../store/feed/feed'
 import moment from 'moment'
 import cx from 'classnames'
 import Options from './options/options'
@@ -27,30 +27,39 @@ const Skeleton = () => {
     const storageRef = firebase.storage().ref()
 
     useEffect(() => {
+        dispatch(FeedLoading(true))
         if (user.id) {
             if (user.user_type === 'etudiant') {
                 Axios.get(constants.url + '/api/post/get/post/' + user.id)
                     .then((res) => {
                         dispatch(SetFeed(res.data))
+                        dispatch(FeedLoading(false))
                     })
                     .catch((err) => {
                         dispatch(SetFeed([]))
+                        dispatch(FeedLoading(false))
                     })
                 Axios.get(constants.url + '/api/post/get/post_ens/' + user.id)
                     .then((res) => {
                         dispatch(SetFeedProf(res.data))
+                        dispatch(FeedLoading(false))
                     })
                     .catch((err) => {
                         dispatch(SetFeedProf([]))
+                        dispatch(FeedLoading(false))
                     })
             } else if (user.user_type === 'enseignant') {
                 Axios.get(constants.url + '/api/post/get/post_ens/allfriends/' + user.id)
                     .then((res) => {
                         dispatch(SetFeedProf(res.data))
+                        dispatch(FeedLoading(false))
                     })
                     .catch((err) => {
                         dispatch(SetFeedProf([]))
+                        dispatch(FeedLoading(false))
                     })
+            } else {
+                dispatch(FeedLoading(false))
             }
         }
     }, [user.id, refresh])
