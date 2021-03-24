@@ -90,7 +90,7 @@ const AuthReducer = (state = initState, action) => {
         case SET_CONVERSATION:
             return {
                 ...state,
-                conversation: action.payload,
+                conversations: action.payload,
             }
 
         case SET_FRIENDS:

@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ImageAvatars() {
+export default function ImageAvatars(props) {
     const classes = useStyles();
-
+    const avatar = props.avatar
     return (
         <div className={classes.root}>
 
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.large} />
+            <Avatar alt="Remy Sharp" src={avatar} className={classes.large} />
         </div>
     );
 }

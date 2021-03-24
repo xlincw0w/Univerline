@@ -94,8 +94,8 @@ export default function AmiCard(props) {
                         </StyledBadge>
                     }
 
-                    title={user.nom}
-                    subheader="prof"
+                    title={` ${user.nom} ${user.prenom}`}
+                    subheader='etudiant'
                 />
             </CardActionArea>
         </Card>

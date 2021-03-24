@@ -100,9 +100,9 @@ export const getRealtimeConversations = (user) => {
 
                 });
 
-                dispatch(SetConversation(conversation))
+                dispatch(SetConversation(conversations))
 
-                console.log(conversations);
+
             })
         //user_uid_1 == 'myid' and user_uid_2 = 'yourId' OR user_uid_1 = 'yourId' and user_uid_2 = 'myId'
 

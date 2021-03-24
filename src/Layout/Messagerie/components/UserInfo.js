@@ -26,11 +26,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-function UserInfo() {
+function UserInfo(props) {
 
     const classes = useStyles()
+    const user = props.user
+    const avatar = props.userAvatar
 
-
+    console.log("user info", user)
     return (
         <>
             <Grid container direction="column" justify="center">
@@ -39,19 +41,16 @@ function UserInfo() {
                     <Grid container justify="center" direction="column">
                         <Grid item >
                             <div className="centrer" >
-                                <AvatarUserInfo />
-
+                                <AvatarUserInfo avatar={avatar} />
                             </div>
 
                         </Grid>
                         <Grid item>
                             <div className="chat-title-container" >
                                 <div className="chat-title">
-                                    Chérif Kadri
-                                     </div>
-                                <div className="chat-subtitle">
-                                    en ligne
-                                     </div>
+                                    {user}
+                                </div>
+
                             </div>
                         </Grid>
 

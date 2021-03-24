@@ -50,7 +50,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function BadgeAvatars() {
+export default function AvatarUsers(props) {
+    const user = props.user;
+    const avatar = props.userAvatar
     const classes = useStyles();
 
     return (
@@ -64,7 +66,7 @@ export default function BadgeAvatars() {
                 }}
                 variant="dot"
             >
-                <Avatar alt="Remy Sharp" className={classes.color} src="" >C</Avatar>
+                <Avatar alt="Remy Sharp" className={classes.color} src={avatar} >C</Avatar>
             </StyledBadge>
 
         </div>

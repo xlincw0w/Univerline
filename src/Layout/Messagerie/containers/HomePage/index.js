@@ -46,11 +46,13 @@ const HomePage = (props) => {
   const dispatch = useDispatch();
   // const auth = useSelector(state => state.auth);
   const userS = useSelector((state) => state.AuthReducer.user)
+  const conversations = useSelector((state) => state.AuthReducer.conversations)
 
   const [chatStarted, setChatStarted] = useState(false);
   const [chatUser, setChatUser] = useState('');
   const [message, setMessage] = useState('');
   const [userUid, setUserUid] = useState(null);
+  const [userAvatar, setUserAvatar] = useState(null);
   {/** *******************************Friends filter******************************* */ }
   const friends = useSelector((state) => state.AuthReducer.friends)
   const user_info = useSelector((state) => state.ProfileReducer.user_info)
@@ -125,7 +127,7 @@ const HomePage = (props) => {
 
   {/**************************************Friends ******************************************* */ }
 
-  console.log(user_info)
+
 
   let unsubscribe;
 
@@ -162,10 +164,11 @@ const HomePage = (props) => {
     setChatStarted(true)
     setChatUser(`${user.nom} ${user.prenom}`)
     setUserUid(user.id_user);
-
-    console.log(user);
+    setUserAvatar(user.avatar)
 
     dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: user.id_user }));
+    console.log("ici conversations", user);
+
 
   }
   const submitMessage = (e) => {
@@ -315,10 +318,10 @@ const HomePage = (props) => {
                 <div className="chat-feed">
                   <div className="chat-title-container" >
                     {
-                      !chatStarted ?
+                      chatStarted ?
                         <Grid container justify="center" spacing={1}>
                           <Grid item>
-                            <AvatarUsers user={chatUser} />
+                            <AvatarUsers user={chatUser} userAvatar={userAvatar} />
                           </Grid>
                           <Grid item>
                             <div className="chat-title">
@@ -335,11 +338,10 @@ const HomePage = (props) => {
                   <div className="messageSections">
                     {
                       chatStarted ?
-                        userS.conversations.map(con =>
-                          <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
-                            <p className="messageStyle" >{con.message}</p>
-                          </div>)
-                        : userS.id
+                        conversations.map(con => <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
+                          <p className="messageStyle" >{con.message}</p>
+                        </div>)
+                        : null
                     }
 
                   </div>
@@ -385,7 +387,10 @@ const HomePage = (props) => {
 
         <Grid item sm={3}  >
           <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }}>
-            <UserInfo />
+            {
+              chatStarted ? <UserInfo user={chatUser} userAvatar={userAvatar} /> : null
+            }
+
           </Card>
         </Grid>
 
