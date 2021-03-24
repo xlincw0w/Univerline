@@ -228,7 +228,7 @@ export default function Freinds() {
                                                         <CardHeader
                                                             avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                             align='left'
-                                                            title={elem.nom + ' ' + elem.prenom}
+                                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
                                                             subheader={elem.libelle_classe}
                                                         />
                                                     </Card>
@@ -314,7 +314,7 @@ export default function Freinds() {
                                                                 <CardHeader
                                                                     avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                                     align='left'
-                                                                    title={elem.nom + ' ' + elem.prenom}
+                                                                    title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
                                                                     subheader={elem.libelle_classe}
                                                                 />
                                                             </div>

@@ -11,28 +11,6 @@ export default function Feature2() {
     const user = useSelector((state) => state.AuthReducer.user)
     const friends = useSelector((state) => state.AuthReducer.friends)
 
-    useEffect(() => {
-        if (user.user_type === 'etudiant') {
-            Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
-                .then((res) => {
-                    dispatch(SetFriends(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFriends([]))
-                })
-        } else if (user.user_type === 'enseignant') {
-            Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
-                .then((res) => {
-                    dispatch(SetFriends(res.data))
-                })
-                .catch((err) => {
-                    dispatch(SetFriends([]))
-                })
-        } else {
-            dispatch(SetFriends([]))
-        }
-    }, [user.id])
-
     return (
         <div className='bg-gray-50 h-3/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll invisible md:visible'>
             <div className='text-gray-700 text-base'>

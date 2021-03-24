@@ -18,7 +18,11 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 String.prototype.capitalize = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1)
+    try {
+        return this.charAt(0).toUpperCase() + this.slice(1)
+    } catch (err) {
+        return ''
+    }
 }
 
 const Main = () => {

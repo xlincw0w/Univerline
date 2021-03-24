@@ -137,8 +137,8 @@ export default function Freinds() {
                                                         <CardHeader
                                                             avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                             align='left'
-                                                            title={elem.nom + ' ' + elem.prenom}
-                                                            subheader={elem.niveau_edu + ' ' + elem.domaine_edu}
+                                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
+                                                            subheader={elem.niveau_edu.capitalize() + ' ' + elem.domaine_edu.capitalize()}
                                                         />
                                                     </Card>
                                                 </div>

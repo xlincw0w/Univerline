@@ -7,11 +7,12 @@ import Dropdown from './Popover/popover'
 import Axios from 'axios'
 import { constants } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { SetUser, Uncomplete } from '../../store/auth/auth'
+import { SetUser, SetFriends, Uncomplete } from '../../store/auth/auth'
 
 export default function Header() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector((state) => state.AuthReducer.user)
 
     const disconnect = () => {
         firebase
@@ -53,6 +54,26 @@ export default function Header() {
                 })
         }
     }, [])
+
+    useEffect(() => {
+        if (user.user_type === 'etudiant') {
+            Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        } else if (user.user_type === 'enseignant') {
+            Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        }
+    }, [user.id])
 
     return (
         <FirebaseAuthConsumer>
