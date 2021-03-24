@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../constants'
-import { SetProfileClasses, SetProfileFriends } from '../../store/profile/profile'
+import { SetProfileClasses } from '../../store/profile/profile'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import Avatar from '@material-ui/core/Avatar'
@@ -19,7 +19,6 @@ import Backdrop from '@material-ui/core/Backdrop'
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { find } from 'lodash'
-import { SetClasses } from '../../store/auth/auth'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -229,7 +228,7 @@ export default function Freinds() {
                                                         <CardHeader
                                                             avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                             align='left'
-                                                            title={elem.nom + ' ' + elem.prenom}
+                                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
                                                             subheader={elem.libelle_classe}
                                                         />
                                                     </Card>
@@ -315,7 +314,7 @@ export default function Freinds() {
                                                                 <CardHeader
                                                                     avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                                     align='left'
-                                                                    title={elem.nom + ' ' + elem.prenom}
+                                                                    title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
                                                                     subheader={elem.libelle_classe}
                                                                 />
                                                             </div>

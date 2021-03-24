@@ -1,4 +1,5 @@
 const initState = {
+    uncomplete: false,
     user: {
         id: '',
         nom: '',
@@ -18,12 +19,15 @@ const initState = {
 
     classes: [],
     friends: [],
+    conversations: [],
 
     failedAuth: false,
     loader: false,
 }
 
 const SET_USER = 'SET_USER'
+const SET_UNCOMPLETE = 'SET_UNCOMPLETE'
+const SET_CONVERSATION = 'SET_CONVERSATION'
 const SET_FRIENDS = 'SET_FRIENDS'
 const SET_CLASSES = 'SET_CLASSES'
 const RESET_AUTH = 'RESET_STATE'
@@ -32,6 +36,16 @@ const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
 
 export const SetUser = (payload) => ({
     type: SET_USER,
+    payload,
+})
+
+export const SetConversation = (payload) => ({
+    type: SET_CONVERSATION,
+    payload,
+})
+
+export const Uncomplete = (payload) => ({
+    type: SET_UNCOMPLETE,
     payload,
 })
 
@@ -65,6 +79,18 @@ const AuthReducer = (state = initState, action) => {
             return {
                 ...state,
                 user: action.payload,
+            }
+
+        case SET_UNCOMPLETE:
+            return {
+                ...state,
+                uncomplete: action.payload,
+            }
+
+        case SET_CONVERSATION:
+            return {
+                ...state,
+                conversation: action.payload,
             }
 
         case SET_FRIENDS:

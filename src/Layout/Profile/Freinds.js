@@ -34,7 +34,6 @@ export default function Freinds() {
     const history = useHistory()
     const dispatch = useDispatch()
     const classes = useStyles()
-    const friends = useSelector((state) => state.AuthReducer.friends)
     const user = useSelector((state) => state.AuthReducer.user)
     const user_info = useSelector((state) => state.ProfileReducer.user_info)
     const profile_friends = useSelector((state) => state.ProfileReducer.friends)
@@ -117,8 +116,8 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
-                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
-                                                placeholder='Rechercher parmis les camarades .'
+                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                placeholder='Rechercher parmis les camarades.'
                                             />
                                         </Paper>
                                     </Grid>
@@ -138,8 +137,8 @@ export default function Freinds() {
                                                         <CardHeader
                                                             avatar={<Avatar src={elem.avatar} alt='Travis Howard' aria-label='recipe' className={classes.avatar} />}
                                                             align='left'
-                                                            title={elem.nom + ' ' + elem.prenom}
-                                                            subheader={elem.niveau_edu + ' ' + elem.domaine_edu}
+                                                            title={elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}
+                                                            subheader={elem.niveau_edu.capitalize() + ' ' + elem.domaine_edu.capitalize()}
                                                         />
                                                     </Card>
                                                 </div>
@@ -160,7 +159,7 @@ export default function Freinds() {
                                                 type='text'
                                                 required={true}
                                                 onChange={(e) => updateFilter(e.target.value)}
-                                                className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                                className='block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                                 placeholder={`Rechercher parmis les ${user.user_type === 'etudiant' ? 'camarades' : 'collégues'}.`}
                                             />
                                         </Paper>

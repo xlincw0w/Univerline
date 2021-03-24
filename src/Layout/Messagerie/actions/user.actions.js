@@ -4,6 +4,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import "firebase/firestore";
+import { SetConversation } from "../../../store/auth/auth";
 export const getRealtimeUsers = (uid) => {
 
     //console.log('uid', uid)
@@ -13,23 +14,23 @@ export const getRealtimeUsers = (uid) => {
         dispatch({ type: `${userConstants.GET_REALTIME_USERS}_REQUEST` });
 
         const db = firebase.firestore();
-       const unsubscribe =  db.collection("users")
-        //.where("uid", "!=", uid)
-        .onSnapshot((querySnapshot) => {
-            const users = [];
-            querySnapshot.forEach(function(doc) {
-              if(doc.data().uid !== uid){
-                    users.push(doc.data());
-               }
+        const unsubscribe = db.collection("users")
+            //.where("uid", "!=", uid)
+            .onSnapshot((querySnapshot) => {
+                const users = [];
+                querySnapshot.forEach(function (doc) {
+                    if (doc.data().uid !== uid) {
+                        users.push(doc.data());
+                    }
+                });
+                //console.log(users);
+
+                dispatch({
+                    type: `${userConstants.GET_REALTIME_USERS}_SUCCESS`,
+                    payload: { users }
+                });
+
             });
-            //console.log(users);
-
-           dispatch({ 
-               type: `${userConstants.GET_REALTIME_USERS}_SUCCESS`,
-                payload: { users }
-             });
-
-        });
 
         return unsubscribe;
 
@@ -41,23 +42,23 @@ export const updateMessage = (msgObj) => {
 
         const db = firebase.firestore();
         db.collection('conversations')
-        .add({
-            ...msgObj,
-            isView: false,
-            createdAt: new Date()
-        })
-        .then((data) => {
-            console.log(data)
-            //success
-            //   dispatch({
-            //     type: userConstants.GET_REALTIME_MESSAGES,
-            // })
+            .add({
+                ...msgObj,
+                isView: false,
+                createdAt: new Date()
+            })
+            .then((data) => {
+                console.log(data)
+                //success
+                //   dispatch({
+                //     type: userConstants.GET_REALTIME_MESSAGES,
+                // })
 
 
-        })
-        .catch(error => {
-            console.log(error)
-        });
+            })
+            .catch(error => {
+                console.log(error)
+            });
 
     }
 }
@@ -65,47 +66,44 @@ export const updateMessage = (msgObj) => {
 export const getRealtimeConversations = (user) => {
     return async dispatch => {
 
-        const db =  firebase.firestore();
+        const db = firebase.firestore();
         db.collection('conversations')
-        .where('user_uid_1', 'in', [user.uid_1, user.uid_2])
-        .orderBy('createdAt', 'asc')
-        .onSnapshot((querySnapshot) => {
+            .where('user_uid_1', 'in', [user.uid_1, user.uid_2])
+            .orderBy('createdAt', 'asc')
+            .onSnapshot((querySnapshot) => {
 
-            const conversations = [];
+                const conversations = [];
 
-            querySnapshot.forEach(doc => {
+                querySnapshot.forEach(doc => {
 
-                if(
-                  (doc.data().user_uid_1 == user.uid_1 && doc.data().user_uid_2 == user.uid_2)
-                 || 
-              (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)
-             ){
-                    conversations.push(doc.data())
-             }
-
-                
-
-               //  if(conversations.length > 0){
-                    
-                // }else{
-                //     dispatch({
-                //         type: `${userConstants.GET_REALTIME_MESSAGES}_FAILURE`,
-                //         payload: { conversations }
-                //     })
-                // }
+                    if (
+                        (doc.data().user_uid_1 == user.uid_1 && doc.data().user_uid_2 == user.uid_2)
+                        ||
+                        (doc.data().user_uid_1 == user.uid_2 && doc.data().user_uid_2 == user.uid_1)
+                    ) {
+                        conversations.push(doc.data())
+                    }
 
 
 
-                
-            });
+                    //  if(conversations.length > 0){
 
-            dispatch({
-               type: userConstants.GET_REALTIME_MESSAGES,
-             payload: { conversations }
-           })
+                    // }else{
+                    //     dispatch({
+                    //         type: `${userConstants.GET_REALTIME_MESSAGES}_FAILURE`,
+                    //         payload: { conversations }
+                    //     })
+                    // }
 
-            console.log(conversations);
-        })
+
+
+
+                });
+
+                dispatch(SetConversation(conversation))
+
+                console.log(conversations);
+            })
         //user_uid_1 == 'myid' and user_uid_2 = 'yourId' OR user_uid_1 = 'yourId' and user_uid_2 = 'myId'
 
 

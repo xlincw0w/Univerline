@@ -32,7 +32,7 @@ export default function Feature1() {
     }, [user.id])
 
     return (
-        <div className='bg-gray-50 h-2/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll'>
+        <div className='bg-gray-50 h-2/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll invisible md:visible'>
             <div className='text-gray-700 text-base'>
                 <div className='inline-block ml-4 mt-4'>
                     <FiUsers className='inline-block' size={25} />
@@ -43,7 +43,7 @@ export default function Feature1() {
             <div className='mt-5 ml-5'>
                 {classes.map((elem) => {
                     return (
-                        <div id={elem.id_classe} className='my-2'>
+                        <div key={elem.id_classe} className='my-2'>
                             <Button className='block' variant='outlined'>
                                 {elem.libelle_classe}
                             </Button>

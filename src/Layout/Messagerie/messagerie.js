@@ -7,8 +7,7 @@ import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedInUser } from './actions';
-import { constants } from '../../../constants'
-import { SetFriends } from '../../../store/auth/auth'
+
 
 
 

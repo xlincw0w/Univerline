@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import React, { useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SetFriend, SetPending, SetUserInfo } from '../../store/profile/profile'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,11 +52,7 @@ export default function ProfileNv() {
                 })
                     .then((res) => {
                         dispatch(SetFriend(res.data.friend))
-                        if (res.data.pending) {
-                            dispatch(SetPending(res.data.pending))
-                        } else {
-                            dispatch(SetPending(false))
-                        }
+                        if (res.data.pending) dispatch(SetPending(res.data.pending))
                     })
                     .catch((err) => {
                         dispatch(SetFriend(false))
@@ -69,11 +64,7 @@ export default function ProfileNv() {
                 })
                     .then((res) => {
                         dispatch(SetFriend(res.data.friend))
-                        if (res.data.pending) {
-                            dispatch(SetPending(res.data.pending))
-                        } else {
-                            dispatch(SetPending(false))
-                        }
+                        if (res.data.pending) dispatch(SetPending(res.data.pending))
                     })
                     .catch((err) => {
                         dispatch(SetFriend(false))
@@ -89,101 +80,52 @@ export default function ProfileNv() {
                     <Backdrop open={loader} style={{ zIndex: 10 }}>
                         <CircularProgress color='inherit' />
                     </Backdrop>
-                    <Container maxWidth='Lg' className={classes.root}>
+                    <Container maxWidth='lg' className={classes.root}>
                         {user.id === profile.id_user && (
-                            // <div className='bg-gray-100'>
-                            //     <Grid container spacing={3}>
-                            //         <Grid item lg={3}>
-                            //             <PhotoSquare avatar={profile.avatar} />
-                            //         </Grid>
-                            //         <Grid item lg={9}>
-                            //             <CarteHaut profile={profile} user={user} />
-                            //             <MenuModif />
-                            //         </Grid>
-                            //     </Grid>
-                            //     <div className=''>
-                            //         <Grid container spacing={3}>
-                            //             <Grid item lg={12}>
-                            //                 <Paper className={classes.paper}>
-                            //                     <MenuNv />
-                            //                 </Paper>
-                            //             </Grid>
-                            //         </Grid>
-                            //     </div>
-                            // </div>
-
                             <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <div className='mt-5 bg-gray-50'>
-                                        <Paper style={{ width: '100%' }} className={classes.paper}>
-                                            <Grid container direction='row'>
-                                                <Grid item sm={2} xs={12}>
+                                <Grid item sm={12}>
+                                    <Paper style={{ width: '100%' }} className={classes.paper}>
+                                        <Grid container>
+                                            <Grid item lg={2} md={2.5} xs={12} style={{ textAlign: 'center' }}>
+                                                <span style={{ display: 'inline-block' }}>
                                                     <PhotoSquare avatar={profile.avatar} />
-                                                </Grid>
-                                                <Grid item sm={10}>
-                                                    <CarteHaut profile={profile} user={user} />
-                                                    <MenuModif />
-                                                </Grid>
+                                                </span>
                                             </Grid>
-                                        </Paper>
+                                            <Grid item lg={10} md={10.5} xs={12}>
+                                                <CarteHaut profile={profile} user={user} />
+                                                <MenuModif />
+                                            </Grid>
+                                        </Grid>
+                                    </Paper>
 
-                                        <Paper className={classes.paper}>
-                                            <MenuNv />
-                                        </Paper>
-                                    </div>
+                                    <Paper className={classes.paper}>
+                                        <MenuNv />
+                                    </Paper>
                                 </Grid>
                             </Grid>
                         )}
                         {user.id !== profile.id_user && (
                             <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <div className='mt-5 bg-gray-50'>
-                                        <Paper style={{ width: '100%' }} className={classes.paper}>
-                                            <Grid container direction='row'>
-                                                <Grid item sm={2} xs={12}>
+                                <Grid item sm={12}>
+                                    <Paper style={{ width: '100%' }} className={classes.paper}>
+                                        <Grid container>
+                                            <Grid item lg={2} md={2.5} xs={12} style={{ textAlign: 'center' }}>
+                                                <span style={{ display: 'inline-block' }}>
                                                     <PhotoSquare avatar={profile.avatar} />
-                                                </Grid>
-                                                <Grid item sm={10}>
-                                                    <CarteHaut profile={profile} user={user} />
-                                                    <MenuModif />
-                                                </Grid>
+                                                </span>
                                             </Grid>
-                                        </Paper>
+                                            <Grid item lg={10} md={10.5} xs={12}>
+                                                <CarteHaut profile={profile} user={user} />
+                                                <MenuModif />
+                                            </Grid>
+                                        </Grid>
+                                    </Paper>
 
-                                        <Paper className={classes.paper}>
-                                            <MenuNv />
-                                        </Paper>
-                                    </div>
+                                    <Paper className={classes.paper}>
+                                        <MenuNv />
+                                    </Paper>
                                 </Grid>
                             </Grid>
-                            // <Grid container spacing={3}>
-                            //     <Grid item xs={12}>
-                            //         <div className='mt-5 bg-gray-50'>
-                            //             <Grid container spacing={3}>
-                            //                 <Grid item xs={3}>
-                            //                     <div className='w-full ml-3 mt-3'>
-                            //                         <Paper className={classes.paper}>
-                            //                             <Paper className={classes.paper}>
-                            //                                 <PhotoSquare avatar={profile.avatar} />
-                            //                             </Paper>
-                            //                         </Paper>
-                            //                     </div>
-                            //                 </Grid>
-                            //                 <Grid item xs={9}>
-                            //                     <div className='mb-3'>
-                            //                         <Paper className={classes.paper}>
-                            //                             <CarteHaut profile={profile} user={user} />
-                            //                             <MenuModif />
-                            //                         </Paper>
-                            //                     </div>
-                            //                 </Grid>
-                            //             </Grid>
-                            //             <Paper className={classes.paper}>
-                            //                 <MenuNv />
-                            //             </Paper>
-                            //         </div>
-                            //     </Grid>
-                            // </Grid>
                         )}
                     </Container>
                 </div>

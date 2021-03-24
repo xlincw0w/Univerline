@@ -90,11 +90,11 @@ export default function AmiCard(props) {
                             }}
                             variant="dot"
                         >
-                            <Avatar className={classes.avatar}>C</Avatar>
+                            <Avatar className={classes.avatar} src={user.avatar}>C</Avatar>
                         </StyledBadge>
                     }
 
-                    title={user.firstName}
+                    title={user.nom}
                     subheader="prof"
                 />
             </CardActionArea>

@@ -148,24 +148,24 @@ const HomePage = (props) => {
   //console.log(user);
 
   //componentWillUnmount
-  useEffect(() => {
-    { }
-    return () => {
-      //cleanup
-      unsubscribe.then(f => f()).catch(error => console.log(error));
-
-    }
-  }, []);
+  /* useEffect(() => {
+     { }
+     return () => {
+       //cleanup
+       unsubscribe.then(f => f()).catch(error => console.log(error));
+ 
+     }
+   }, []);*/
 
   const initChat = (user) => {
 
     setChatStarted(true)
-    setChatUser(`${user.firstName} ${user.lastName}`)
-    setUserUid(user.id);
+    setChatUser(`${user.nom} ${user.prenom}`)
+    setUserUid(user.id_user);
 
     console.log(user);
 
-    dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: user.id }));
+    dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: user.id_user }));
 
   }
   const submitMessage = (e) => {
@@ -283,7 +283,7 @@ const HomePage = (props) => {
               */}
               <div style={{ padding: '10px' }}>
 
-                {filter(profile_friends, (o) => {
+                {filter(friends, (o) => {
                   let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
                   return searchIn.includes(filterWord)
                 }).map((elem) => {
@@ -291,20 +291,14 @@ const HomePage = (props) => {
 
                     <AmiCard onClick={initChat}
 
-                      key={elem.id}
-                      user={u} />
+                      key={elem.id_user}
+                      user={elem} />
 
                   )
                 })}
 
                 {/*************** */}
-                {
-                  userS.users && userS.users.map(u => <AmiCard onClick={initChat}
 
-                    key={u.uid}
-                    user={u} />)
-
-                }
               </div>
             </div>
 
@@ -341,8 +335,8 @@ const HomePage = (props) => {
                   <div className="messageSections">
                     {
                       chatStarted ?
-                        user.conversations.map(con =>
-                          <div style={{ textAlign: con.user_uid_1 == userS.uid ? 'right' : 'left' }}>
+                        userS.conversations.map(con =>
+                          <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
                             <p className="messageStyle" >{con.message}</p>
                           </div>)
                         : userS.id
