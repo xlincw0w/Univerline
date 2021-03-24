@@ -51,7 +51,7 @@ export default function Publications() {
                 })
 
                 if (res.data.friend || user_info.id_user === user.id) {
-                    Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
+                    Axios.get(constants.url + '/api/post/get/post_ens/all/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetPublications(res.data))
                         })
@@ -156,7 +156,7 @@ export default function Publications() {
                     <div className='h-auto'>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
-                            <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
+                            <p className='text-gray-500 text-sm'>{elem.libelle_classe || 'Collégues'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
                             <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
