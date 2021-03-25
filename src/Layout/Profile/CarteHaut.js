@@ -11,7 +11,7 @@ import { Container, Grid } from '@material-ui/core'
 
 export default function CarteHaut({ profile }) {
     const dispatch = useDispatch()
-    const modify = useSelector(state => state.ProfileReducer.modify)
+    const modify = useSelector((state) => state.ProfileReducer.modify)
 
     return (
         <div className='mt-6'>
@@ -82,7 +82,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline'
                                                 value={profile.nom}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -95,7 +95,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline ml-2'
                                                 value={profile.prenom}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -118,7 +118,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.etablissement}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -137,7 +137,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_edu}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -156,7 +156,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.domaine_edu}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -173,19 +173,7 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-green-600 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <input
-                                                type='text'
-                                                className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
-                                                value={profile.email}
-                                                onChange={e =>
-                                                    dispatch(
-                                                        SetUserInfo({
-                                                            ...profile,
-                                                            email: e.target.value,
-                                                        })
-                                                    )
-                                                }
-                                            />
+                                            <p className='text-gray-600 text-base'>{profile.email}</p>
                                         </Grid>
                                         <Grid item md={4} xs={12}>
                                             <div className='mt-5'>
@@ -262,7 +250,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline'
                                                 value={profile.nom}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -275,7 +263,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline ml-2'
                                                 value={profile.prenom}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -297,7 +285,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.domaine_ens}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -317,7 +305,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_ens}
-                                                onChange={e =>
+                                                onChange={(e) =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -333,19 +321,7 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-purple-700 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <input
-                                                type='text'
-                                                className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
-                                                value={profile.email}
-                                                onChange={e =>
-                                                    dispatch(
-                                                        SetUserInfo({
-                                                            ...profile,
-                                                            email: e.target.value,
-                                                        })
-                                                    )
-                                                }
-                                            />
+                                            <p className='text-gray-600 text-base'>{profile.email}</p>
                                         </Grid>
                                     </Grid>
 
