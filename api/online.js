@@ -17,6 +17,8 @@ router.route('/update').post((req, res) => {
         id: data.uid,
         last_seen: moment().utc().format(),
     })
+
+    res.json({})
 })
 
 module.exports = router
