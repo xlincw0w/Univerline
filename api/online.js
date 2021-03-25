@@ -13,18 +13,10 @@ router.route('/get/:id').get(async (req, res) => {
 router.route('/update').post((req, res) => {
     const data = req.body
 
-    fire.collection('online')
-        .doc(data.uid)
-        .set({
-            id: data.uid,
-            last_seen: moment().utc().format(),
-        })
-        .then((resp) => {
-            res.json({ updated: true })
-        })
-        .catch((err) => {
-            res.json({ updated: false })
-        })
+    fire.collection('online').doc(data.uid).set({
+        id: data.uid,
+        last_seen: moment().utc().format(),
+    })
 })
 
 module.exports = router
