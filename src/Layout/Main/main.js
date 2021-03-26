@@ -54,9 +54,7 @@ const Main = () => {
                                         Axios.post(constants.url + '/api/online/update', {
                                             uid: user.uid,
                                         })
-                                            .then((res) => {})
-                                            .catch((err) => {})
-                                    }, 60000)
+                                    }, 300000)
                                     return (
                                         <React.Fragment>
                                             <Route path='/profile/:id'>
