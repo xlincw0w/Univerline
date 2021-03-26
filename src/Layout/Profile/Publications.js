@@ -393,7 +393,7 @@ export default function Publications() {
     }
 
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-2'>
+        <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
             <div>
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
