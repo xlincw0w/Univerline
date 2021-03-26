@@ -7,11 +7,10 @@ import Publications from './Publications'
 import Freinds from './Freinds'
 import Classes from './Classes'
 import { useSelector } from 'react-redux'
-import Grid from '@material-ui/core/Grid'
 
 export default function CustomizedTabs() {
-    const user_info = useSelector(state => state.ProfileReducer.user_info)
-    const user = useSelector(state => state.AuthReducer.user)
+    const user_info = useSelector((state) => state.ProfileReducer.user_info)
+    const user = useSelector((state) => state.AuthReducer.user)
     const [value, setValue] = useState(0)
 
     const AntTabs = withStyles({
@@ -23,7 +22,7 @@ export default function CustomizedTabs() {
         },
     })(Tabs)
 
-    const AntTab = withStyles(theme => ({
+    const AntTab = withStyles((theme) => ({
         root: {
             textTransform: 'none',
             minWidth: 72,
@@ -54,9 +53,9 @@ export default function CustomizedTabs() {
             },
         },
         selected: {},
-    }))(props => <Tab disableRipple {...props} />)
+    }))((props) => <Tab disableRipple {...props} />)
 
-    const useStyles = makeStyles(theme => ({
+    const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
         },
@@ -89,9 +88,7 @@ export default function CustomizedTabs() {
                             </AntTabs>
                             {value === 0 && (
                                 <div className='mt-4'>
-                                    <Grid item lg={12} md={12} xs={12}>
-                                        <Publications />
-                                    </Grid>
+                                    <Publications />
                                 </div>
                             )}
                             {value === 1 && (
