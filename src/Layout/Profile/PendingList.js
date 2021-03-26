@@ -133,30 +133,34 @@ const PendingUser = ({ elem, RefreshPending }) => {
     }
 
     const handleAdh = () => {
+        dispatch(SetLoader(true))
         Axios.post(constants.url + '/api/adherent/confirm/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
         })
             .then((res) => {
-                console.log(res)
                 RefreshPending()
+                dispatch(SetLoader(false))
             })
             .catch((err) => {
+                dispatch(SetLoader(false))
                 console.log(err)
             })
     }
 
     const removeAdh = () => {
+        dispatch(SetLoader(true))
         Axios.post(constants.url + '/api/adherent/delete/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
         })
             .then((res) => {
-                console.log(res)
                 RefreshPending()
+                dispatch(SetLoader(false))
             })
             .catch((err) => {
                 console.log(err)
+                dispatch(SetLoader(false))
             })
     }
 
