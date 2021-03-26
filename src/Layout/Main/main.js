@@ -16,6 +16,7 @@ import PendingList from '../Profile/PendingList'
 
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from 'react-loader-spinner'
 
 String.prototype.capitalize = function () {
     try {
@@ -53,9 +54,7 @@ const Main = () => {
                                         Axios.post(constants.url + '/api/online/update', {
                                             uid: user.uid,
                                         })
-                                            .then((res) => {})
-                                            .catch((err) => {})
-                                    }, 60000)
+                                    }, 300000)
                                     return (
                                         <React.Fragment>
                                             <Route path='/profile/:id'>
@@ -103,8 +102,16 @@ const Main = () => {
                                     )
                                 } else {
                                     return (
-                                        <Backdrop open={true} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                        <Backdrop open={true} style={{ zIndex: 10 }} className='bg-gray-800'>
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader
+                                                    type='Circles'
+                                                    color='#00BFFF'
+                                                    height={120}
+                                                    width={120}
+                                                    timeout={3000} //3 secs
+                                                />
+                                            </div>
                                         </Backdrop>
                                     )
                                 }

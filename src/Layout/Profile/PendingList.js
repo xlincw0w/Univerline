@@ -272,24 +272,24 @@ const PendingList = () => {
                 <Backdrop open={loader} style={{ zIndex: 10 }}>
                     <CircularProgress color='inherit' />
                 </Backdrop>
-                <div className='w-full h-full bg-gray-200 bg-opacity-60' style={{ minHeight: '100vh', height: 'auto' }}>
+                <div className='w-full h-full bg-gray-200 bg-opacity-60 flex justify-center' style={{ minHeight: '100vh', height: 'auto' }}>
                     <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
-                        <div>
+                        <div className='w-full block'>
                             <p className='text-center text-gray-900 text-2xl mt-3'>Demandes d'ajout</p>
                             <p className='text-center text-gray-500'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>
                             <hr />
-                        </div>
-                        <div className=''>
-                            {user.user_type === 'enseignant' && (
-                                <div>
-                                    {adherent.map((elem) => {
-                                        return <PendingUser elem={elem} RefreshPending={RefreshPending} />
-                                    })}
-                                </div>
-                            )}
-                            {pending.map((elem) => {
-                                return <PendingUser elem={elem} RefreshPending={RefreshPending} />
-                            })}
+                            <div className=''>
+                                {user.user_type === 'enseignant' && (
+                                    <div>
+                                        {adherent.map((elem) => {
+                                            return <PendingUser elem={elem} RefreshPending={RefreshPending} />
+                                        })}
+                                    </div>
+                                )}
+                                {pending.map((elem) => {
+                                    return <PendingUser elem={elem} RefreshPending={RefreshPending} />
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>

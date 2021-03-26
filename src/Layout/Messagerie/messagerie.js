@@ -1,41 +1,47 @@
-import React, { useState } from 'react'
-import Partie1 from './Partie1/partie1'
-import Partie2 from './Partie2/partie2'
-import Partie3 from './Partie3/partie3'
-import Grid from '@material-ui/core/Grid'
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import './App.css';
+import PrivateRoute from './componenents/PrivateRoute';
+import HomePage from './containers/HomePage';
+import LoginPage from './containers/LoginPage';
+import RegisterPage from './containers/RegisterPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedInUser } from './actions';
 
 
-export default function messagerie() {
-    
 
 
-    const [FirstName, setFirstName] = useState('Inconnu')
-    const [LastName, setLastName] = useState('Inconnu')
-    const [Statu, setStatu] = useState('Inconnu')
-    const [Image, setImage] = useState()
 
-    
+{/*const AppWrapper = () => {
+    window.store = store;
+    return (
+        <Provider store={store}> // Set context
+            <App2 /> // Now App has access to context
+        </Provider>
+    )
+    */}
 
-    const vava = (user) => {
- 
-        setFirstName(user.prenom)
-        setLastName(user.nom)
-        setImage(user.avatar)
-        setStatu(user.user_type)
+
+function Messagerie() {
+    //const auth = useSelector(state => state.auth);
+    const dispatch = useDispatch()
+    {
+        /**
+         *   useEffect(() => {
+        if (!auth.authenticated) {
+            console.log("not authenticated")
+            dispatch(isLoggedInUser())
+        }
+    }, []);
+         */
     }
 
+
     return (
-        <div style={{overflow:'hidden'}}>
-         
-            <Grid container style={{ height: '89vh' }}>
-
-                <Partie1 onclick2={vava} />
-                
-                <Partie2 FirstName={FirstName} LastName={LastName} Image={Image}/>
-
-                <Partie3  FirstName={FirstName} LastName={LastName} Image={Image} Statu={Statu}/>
-
-            </Grid>
+        <div className="App">
+            <HomePage />
         </div>
-    )
+    );
 }
+
+export default Messagerie;

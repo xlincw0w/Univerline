@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SetFriend, SetLoader, SetPending, SetUserInfo } from '../../store/profile/profile'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from 'react-loader-spinner'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,7 +91,13 @@ export default function ProfileNv() {
         <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>
             <div className='w-full h-full bg-gray-200 bg-opacity-60'>
                 <Backdrop open={loader} style={{ zIndex: 12 }}>
-                    <CircularProgress color='inherit' />
+                    <Loader
+                        type='Circles'
+                        color='#00BFFF'
+                        height={120}
+                        width={120}
+                        timeout={3000} //3 secs
+                    />
                 </Backdrop>
                 <div className='' style={{ minHeight: '100vh' }}>
                     <Container maxWidth='lg' className={classes.root}>
