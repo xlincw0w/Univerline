@@ -8,7 +8,7 @@ export default function Content() {
     const [change, setChange] = React.useState(false)
 
     return (
-        <div className='mx-auto center shadow-xl' style={{ width: '95%' }}>
+        <div className='mx-auto center shadow-xl w-6/6 md:w-11/12 '>
             <div className='relative visible md:hidden'>
                 <button onClick={() => setChange(!change)} className='relative p-2  bg-white rounded-md  focus:outline-none'>
                     <svg className='w-5 h-5 text-gray-800 dark:text-white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
