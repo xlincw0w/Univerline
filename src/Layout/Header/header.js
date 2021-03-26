@@ -8,6 +8,7 @@ import Axios from 'axios'
 import { constants } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { SetUser, SetFriends, Uncomplete } from '../../store/auth/auth'
+import univerlineLoge from './univerlineLoge.png'
 
 export default function Header() {
     const dispatch = useDispatch()
@@ -89,7 +90,7 @@ export default function Header() {
                                                 history.push('/')
                                             }}
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
-                                            <img src={plume1} className='w-14 h-12' />
+                                            <img src={univerlineLoge} className='w-14 h-12' />
                                         </p>
                                         <p className='text-gray-500 invisible lg:visible text-base flex justify-center items-center ml-4'>Univerline</p>
                                     </div>
@@ -129,7 +130,7 @@ export default function Header() {
                                                 history.push('/')
                                             }}
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
-                                            <img src={plume1} className='w-14 h-12' />
+                                            <img src={univerlineLoge} className='w-14 h-12' />
                                         </p>
                                         <p className='text-gray-500 invisible lg:visible text-base inline flex justify-center items-center ml-3'>Univerline</p>
                                     </div>
