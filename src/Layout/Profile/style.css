@@ -7,14 +7,14 @@
 /*Ceci est un PC*/
 @media(min-width:1200px){
     .containeur{
-        width: 81%;
+        width: 87%;
         margin: auto;
     }
 }
 /*Ceci est une tablette*/
 @media(min-width:700px) and (max-width:1200px){
     .containeur{
-        width: 85%;
+        width: 90%;
         margin: auto;
     }
 }
