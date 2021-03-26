@@ -144,7 +144,7 @@ const Post = () => {
     }
 
     return (
-        <div className='w-full mx-auto shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
+        <div className='w-full shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
             <div className=''>
                 <textarea
                     type='text'

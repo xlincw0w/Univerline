@@ -13,7 +13,7 @@ export default function Feature3() {
 
     return (
         <div className='overflow-x-scroll md:visible'>
-        <div className='flex flex-row space-x-6'>
+        <div className='flex flex-row space-x-4'>
             {user.user_type === 'etudiant' &&
                 friends.map((elem) => {
                     return <OnlineSm key={elem.id_user} id={elem.id_user} nom={elem.nom} prenom={elem.prenom} avatar={elem.avatar} user_type={elem.user_type} />

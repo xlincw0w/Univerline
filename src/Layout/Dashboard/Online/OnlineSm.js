@@ -73,7 +73,7 @@ const OnlineSm = ({ id, nom, prenom, avatar, user_type }) => {
                             vertical: 'bottom',
                             horizontal: 'right',
                         }}
-                        style={{ width: '3rem', height: '3rem', marginRight:'6rem' }}
+                        style={{ width: '3rem', height: '3rem'}}
                         variant='dot'>
                         <Avatar alt='Remy Sharp' src={avatar} />
                     </StyledBadge>
