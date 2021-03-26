@@ -160,6 +160,11 @@ export default function Auth() {
                                 Se connecter
                             </Button>
                         </div>
+                        <div className="text-center text-gray-800 cursor-pointer mt-5 md:hidden">
+                                                <p  onClick={() => {
+                                                            history.push('/inscription')
+                                                        }}>S'inscrire</p>
+                                            </div>
                     </form>
                 </div>
             </div>

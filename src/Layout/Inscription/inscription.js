@@ -276,7 +276,7 @@ const Inscription = (props) => {
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
                                             <CircularProgress color='inherit' />
                                         </Backdrop>
-                                        <p className='text-gray-800 text-4xl text-center mt-6 2xl:mt-16 font-sans font-black'>Créer un compte.</p>
+                                        <p className='text-gray-800 text-4xl text-center mt-0 md:mt-6 2xl:mt-16 font-sans font-black'>Créer un compte.</p>
                                         <div className='mt-5 2xl:mt-20 flex'>
                                             <div className='mx-auto'>
                                                 <FaGooglePlusSquare
@@ -421,6 +421,11 @@ const Inscription = (props) => {
                                                 <Button type='submit' className='shadow' variant='contained' color='secondary'>
                                                     Suivant
                                                 </Button>
+                                            </div>
+                                            <div className="text-center text-gray-800 cursor-pointer mt-5 md:hidden">
+                                                <p  onClick={() => {
+                                                            history.push('/auth')
+                                                        }}>Vous possedez déjà un compte ?</p>
                                             </div>
                                         </form>
                                     </div>
