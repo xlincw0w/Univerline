@@ -123,7 +123,7 @@ export default function Header() {
                     return (
                         <React.Fragment>
                             <div className='w-screen h-16 bg-gray-50 shadow-lg select-none fixed' style={{ zIndex: 100 }}>
-                                <div className='grid grid-cols-4 h-full'>
+                                <div className='grid grid-cols-2 h-full'>
                                     <div className='flex'>
                                         <p
                                             onClick={() => {
@@ -134,12 +134,7 @@ export default function Header() {
                                         </p>
                                         <p className='text-gray-500 invisible lg:visible text-base inline flex justify-center items-center ml-3'>Univerline</p>
                                     </div>
-                                    <div className=''>
-                                        <p></p>
-                                    </div>
-                                    <div className=''>
-                                        <p></p>
-                                    </div>
+
                                     <div className='flex flex-row-reverse'>
                                         <p
                                             onClick={() => {
