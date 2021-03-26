@@ -72,9 +72,9 @@ router.route('/get/pending/adh/:id').get((req, res) => {
     const id = req.params.id
     db('adherant')
         .select('*')
+        .where({ id_ens: id, confirm: false })
         .leftJoin('classe', 'classe.id_classe', ' adherant.id_classe')
         .leftJoin('users', 'users.id_user', 'adherant.id_etu')
-        .where({ id_ens: id, confirm: false })
         .then((rows) => {
             res.json(rows)
         })

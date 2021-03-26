@@ -64,8 +64,8 @@ router.route('/get/classe/:id?').get((req, res) => {
     const id = req.params.id
 
     db('classe')
-        .where({ id_ens: id })
         .select('*')
+        .where({ id_ens: id })
         .leftJoin('users', 'users.id_user', 'classe.id_ens')
         .then((resp) => {
             res.json(resp)
@@ -81,9 +81,9 @@ router.route('/get/classe/etu/:id?').get((req, res) => {
 
     db('adherant')
         .select('*')
+        .where({ id_etu: id, confirm: true })
         .leftJoin('classe', 'classe.id_classe', 'adherant.id_classe')
         .leftJoin('users', 'users.id_user', 'classe.id_ens')
-        .where({ id_etu: id, confirm: true })
         .then((rows) => {
             res.json(rows)
         })
@@ -98,9 +98,9 @@ router.route('/get/classe/etu/adh/').post((req, res) => {
 
     db('adherant')
         .select('*')
+        .where({ id_etu: data.id, id_ens: data.id_ens })
         .leftJoin('classe', 'classe.id_classe', 'adherant.id_classe')
         .leftJoin('users', 'users.id_user', 'classe.id_ens')
-        .where({ id_etu: data.id, id_ens: data.id_ens })
         .then((rows) => {
             res.json(rows)
         })
