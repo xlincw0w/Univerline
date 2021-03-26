@@ -31,7 +31,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
 
     const handleAdd = () => {
         dispatch(SetLoader(true))
-        console.log('kifach')
+
         if (user.user_type === 'etudiant') {
             Axios.all([
                 Axios.post(constants.url + '/api/amis/confirm/amis', {

@@ -250,13 +250,15 @@ export default function Dropdown(props) {
             )}
             {props.item === 'pendinglist' && (
                 <div className='mt-1 cursor-pointer'>
-                    <AiOutlineUsergroupAdd
-                        className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
-                        onClick={() => {
-                            history.push('/pending')
-                        }}
-                        size={30}
-                    />
+                    <Badge badgeContent={props.numpen} color='secondary'>
+                        <AiOutlineUsergroupAdd
+                            className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
+                            onClick={() => {
+                                history.push('/pending')
+                            }}
+                            size={30}
+                        />
+                    </Badge>
                 </div>
             )}
         </div>
