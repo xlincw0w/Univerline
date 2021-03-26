@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { SetLoader } from '../../store/profile/profile'
 import { BsPersonCheck } from 'react-icons/bs'
 import { MdRemoveCircleOutline } from 'react-icons/md'
+import Loader from 'react-loader-spinner'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -274,7 +275,13 @@ const PendingList = () => {
         <div>
             <div className='bg-gradient-to-r from-green-400 to-purple-700' style={{ minHeight: '100vh', height: 'auto' }}>
                 <Backdrop open={loader} style={{ zIndex: 10 }}>
-                    <CircularProgress color='inherit' />
+                    <Loader
+                        type='Circles'
+                        color='#00BFFF'
+                        height={120}
+                        width={120}
+                        timeout={3000} //3 secs
+                    />
                 </Backdrop>
                 <div className='w-full h-full bg-gray-200 bg-opacity-60 flex justify-center' style={{ minHeight: '100vh', height: 'auto' }}>
                     <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
