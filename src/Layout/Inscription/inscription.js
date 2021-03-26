@@ -479,7 +479,15 @@ const Inscription = (props) => {
                                 {step === 'whoyouare' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader
+                                                    type='Circles'
+                                                    color='#00BFFF'
+                                                    height={120}
+                                                    width={120}
+                                                    timeout={3000} //3 secs
+                                                />
+                                            </div>
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             Etes vous <span className='text-purple-800'>Enseignant</span> ou <span className='text-green-600'>Etudiant </span>?
@@ -525,7 +533,15 @@ const Inscription = (props) => {
                                 {step === 'formEns' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader
+                                                    type='Circles'
+                                                    color='#00BFFF'
+                                                    height={120}
+                                                    width={120}
+                                                    timeout={3000} //3 secs
+                                                />
+                                            </div>
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             Bienvenue cher <span className='text-purple-800'>Enseignant</span>!
@@ -619,7 +635,15 @@ const Inscription = (props) => {
                                 {step === 'formEtu' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader
+                                                    type='Circles'
+                                                    color='#00BFFF'
+                                                    height={120}
+                                                    width={120}
+                                                    timeout={3000} //3 secs
+                                                />
+                                            </div>
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             Bienvenue cher <span className='text-green-600'>Etudiant</span> !
