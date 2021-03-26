@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SetFriend, SetPending, SetUserInfo } from '../../store/profile/profile'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import './style.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,17 +75,17 @@ export default function ProfileNv() {
     }, [reset, user, routeParams.id])
 
     return (
-        <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>
-            <div className='w-full h-full bg-gray-200 bg-opacity-60'>
+        <div className='bg-gradient-to-r from-green-400 to-purple-700'>
+            <div className='bg-gray-200 bg-opacity-60'>
                 <div className='' style={{ minHeight: '100vh' }}>
                     <Backdrop open={loader} style={{ zIndex: 10 }}>
                         <CircularProgress color='inherit' />
                     </Backdrop>
-                    <Container maxWidth='lg' className={classes.root}>
+                    <div className='containeur'>
                         {user.id === profile.id_user && (
                             <Grid container spacing={3}>
                                 <Grid item sm={12}>
-                                    <Paper style={{ width: '100%' }} className={classes.paper}>
+                                    <Paper  className=''>
                                         <Grid container>
                                             <Grid item lg={2} md={2.5} xs={12} style={{ textAlign: 'center' }}>
                                                 <span style={{ display: 'inline-block' }}>
@@ -98,7 +99,7 @@ export default function ProfileNv() {
                                         </Grid>
                                     </Paper>
 
-                                    <Paper className={classes.paper}>
+                                    <Paper className=''>
                                         <MenuNv />
                                     </Paper>
                                 </Grid>
@@ -107,7 +108,7 @@ export default function ProfileNv() {
                         {user.id !== profile.id_user && (
                             <Grid container spacing={3}>
                                 <Grid item sm={12}>
-                                    <Paper style={{ width: '100%' }} className={classes.paper}>
+                                    <Paper className=''>
                                         <Grid container>
                                             <Grid item lg={2} md={2.5} xs={12} style={{ textAlign: 'center' }}>
                                                 <span style={{ display: 'inline-block' }}>
@@ -121,13 +122,13 @@ export default function ProfileNv() {
                                         </Grid>
                                     </Paper>
 
-                                    <Paper className={classes.paper}>
+                                    <Paper className=''>
                                         <MenuNv />
                                     </Paper>
                                 </Grid>
                             </Grid>
                         )}
-                    </Container>
+                    </div>
                 </div>
             </div>
         </div>
