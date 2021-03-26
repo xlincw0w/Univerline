@@ -10,6 +10,7 @@ import { ResetAuthState } from '../../store/auth/auth'
 import Footer from '../Footer/newFooter'
 import 'aos/dist/aos.css'
 import './Home.css'
+import univerlineLoge from './img/univerlineLoge.png'
 
 AOS.init({
     // Global settings:
@@ -45,7 +46,7 @@ export default function Home() {
         <div>
             <div>
                 <div className='bg-font md:bg-image h-screen  bg-cover bg-center bg-fixed'>
-                    <div className="invisible md:visible">
+                    <div className='invisible md:visible'>
                         <div className='custom-shape-divider-bottom-1614867478 '>
                             <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'>
                                 <path
@@ -64,18 +65,19 @@ export default function Home() {
                             Connexion
                         </button>
                     </div>
-                    <div className='md:py-10 '>
+                    <div>
                         <div className=' border-4 border-opacity-50 border-transparent shadow-xl rounded p-4 w-full md:w-2/5  '>
                             <ul className='font-medium font-openSans text-center '>
                                 <li className='text-2xl md:text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
                                     <div>
+                                        <img src={univerlineLoge} height='60px' width='60px' alt='univerlineLogo' className='mx-auto mb-5' />
                                         <span className='text-5xl font-bebasNeue'>R</span>EJOIGNEZ UNIVERLINE
                                     </div>
                                 </li>
                                 <li className='text-2xl md:text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
 
-                                <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
-                                <li className='text-2xl font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore</li>
+                                <li className=' text-xl md:text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
+                                <li className='text-xl md:text-2xl pb-3 font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore</li>
                             </ul>
 
                             <div className='  flex justify-end mx-auto md:pt-12'>
@@ -91,7 +93,7 @@ export default function Home() {
                     </div>
                 </div>
                 {/* deuxième partie*/}
-                <div className='hidden md:visible md:grid md:grid-cols-2 gap-2 font-openSans'>                    
+                <div className='hidden md:visible md:grid md:grid-cols-2 gap-2 font-openSans'>
                     <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                         <img src={img1} alt='img1' />
                     </div>
@@ -114,7 +116,7 @@ export default function Home() {
                                 Rejoignez-nous
                             </button>
                         </div>
-                    </div>   
+                    </div>
                     <div className='invisible md:visible flex flex-col items-center justify-center'>
                         <div className='pl-10'>
                             <div>
@@ -163,13 +165,13 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                 {/* Deuxieme partie pour SM*/}
-                <div className="">
-                     {/* Pour sm: imaage2*/}
-                     <div className='visible md:hidden flex justify-center mt-12 md:mt-0' data-aos='fade-left' data-aos-duration='1500'>
+                {/* Deuxieme partie pour SM*/}
+                <div className=''>
+                    {/* Pour sm: imaage2*/}
+                    <div className='visible md:hidden flex justify-center mt-12 md:mt-0' data-aos='fade-left' data-aos-duration='1500'>
                         <img src={img2} alt='img2' />
                     </div>
-                      {/* Pour sm: texte2*/}
+                    {/* Pour sm: texte2*/}
                     <div className='visible md:hidden flex flex-col items-center justify-center'>
                         <div className='pl-10'>
                             <div>
@@ -210,12 +212,11 @@ export default function Home() {
                                 onClick={() => {
                                     history.push('/inscription')
                                 }}
-                                className=' focus:outline-none mt-20 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                                className=' focus:outline-none mt-20 mb-12 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                                 Rejoignez-nous
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
 

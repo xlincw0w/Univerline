@@ -300,9 +300,6 @@ export default function Publications() {
         return (
             <div key={elem.id_poste} className='w-100 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    onClick={() => {
-                        console.log('kifach')
-                    }}
                     className='h-1/4 shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
                     <div className='grid grid-cols-5'>
@@ -396,7 +393,7 @@ export default function Publications() {
     }
 
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-2'>
+        <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
             <div>
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {

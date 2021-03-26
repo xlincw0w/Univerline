@@ -255,7 +255,7 @@ const Inscription = (props) => {
                                         {step === 'auth' && (
                                             <div>
                                                 <p className='pt-34 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
-                                                    Vous possedez déja un compte ?
+                                                    Vous possedez déjà un compte ?
                                                 </p>
                                                 <div className='mx-auto table mt-5'>
                                                     <Button
@@ -435,7 +435,7 @@ const Inscription = (props) => {
                                                 <FaFeatherAlt size={100} />
                                             </div>
                                             <div className='mt-12 px-5'>
-                                                Un e-mail de vérification a été envoyé a <span className='text-purple-800 text-xl'> {user.email} </span>
+                                                Un e-mail de vérification a été envoyé à <span className='text-purple-800 text-xl'> {user.email} </span>
                                             </div>
                                         </div>
                                         <div className='mt-20 2xl:mt-40 text-xl text-gray-500 text-center'>
