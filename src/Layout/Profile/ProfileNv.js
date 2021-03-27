@@ -94,13 +94,7 @@ export default function ProfileNv() {
                 <div className='' style={{ minHeight: '100vh' }}>
                     <Backdrop open={loader} style={{ zIndex: 10 }}>
                         <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
-                            <Loader
-                                type='Circles'
-                                color='#00BFFF'
-                                height={120}
-                                width={120}
-                                timeout={3000} //3 secs
-                            />
+                            <Loader type='Circles' color='#00BFFF' height={120} width={120} />
                         </div>
                     </Backdrop>
                     <div className='containeur'>

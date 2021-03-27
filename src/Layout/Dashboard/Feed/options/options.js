@@ -19,17 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Options({ elem }) {
     const dispatch = useDispatch()
-    const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null)
 
     const storageRef = firebase.storage().ref()
 
     const handleClick = (e) => {
-        dispatch(FeedLoading(true))
         Axios.delete(constants.url + '/api/post/delete/post/' + elem.id_poste)
             .then((res) => {
                 if (res.data.delete) {
-                    dispatch(FeedLoading(false))
                     dispatch(RefreshFeed())
 
                     if (elem.file) {
@@ -39,14 +36,9 @@ export default function Options({ elem }) {
                     if (elem.image) {
                         storageRef.child(elem.image).delete()
                     }
-                } else {
-                    dispatch(FeedLoading(false))
                 }
             })
-            .catch((err) => {
-                dispatch(FeedLoading(false))
-                console.log(err)
-            })
+            .catch((err) => {})
     }
 
     const open = Boolean(anchorEl)
