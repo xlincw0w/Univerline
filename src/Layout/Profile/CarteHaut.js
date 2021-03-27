@@ -11,7 +11,7 @@ import { Container, Grid } from '@material-ui/core'
 
 export default function CarteHaut({ profile }) {
     const dispatch = useDispatch()
-    const modify = useSelector((state) => state.ProfileReducer.modify)
+    const modify = useSelector(state => state.ProfileReducer.modify)
 
     return (
         <div className='mt-6'>
@@ -82,7 +82,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline'
                                                 value={profile.nom}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -95,7 +95,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline ml-2'
                                                 value={profile.prenom}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -118,7 +118,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.etablissement}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -137,7 +137,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_edu}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -156,7 +156,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.domaine_edu}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -177,7 +177,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.email}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -253,16 +253,16 @@ export default function CarteHaut({ profile }) {
                         </Container>
                     )}
                     {modify && (
-                        <Container maxWidth='lg'>
+                        <Container maxWidth='lg' className='centrerInformation'>
                             <Grid container>
-                                <Grid item sm={12}>
+                                <Grid item sm={12} className='rendreInline'>
                                     <Grid container spacing={2}>
                                         <Grid item md={12} xs={12}>
                                             <input
                                                 type='text'
                                                 className='pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline'
                                                 value={profile.nom}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -275,7 +275,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline ml-2'
                                                 value={profile.prenom}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -297,7 +297,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.domaine_ens}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -317,7 +317,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_ens}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -337,7 +337,7 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.email}
-                                                onChange={(e) =>
+                                                onChange={e =>
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
