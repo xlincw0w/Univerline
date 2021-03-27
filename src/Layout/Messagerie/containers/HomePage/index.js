@@ -170,7 +170,7 @@ const HomePage = (props) => {
     console.log("ici conversations", user);
 
 
-  }
+  } 
   const submitMessage = (e) => {
     e.preventDefault()
     console.log('ici envoie')
