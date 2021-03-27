@@ -164,10 +164,11 @@ export default function Dropdown(props) {
                             }}
                             className={classes.typography}>
                             <div>
-                                <CgProfile size={25} className='inline pr-2' />
+                                <CgProfile size={26} className='inline pr-2 pb-1' />
                                 <p className='cursor-pointer inline'>Profil</p>
                             </div>
                         </Typography>
+                        <hr className='w-2/3 mx-auto' />
                         <Typography onClick={props.disconnect} className={classes.typography}>
                             <div>
                                 <FiLogOut size={25} className='inline pr-2' />
@@ -250,13 +251,15 @@ export default function Dropdown(props) {
             )}
             {props.item === 'pendinglist' && (
                 <div className='mt-1 cursor-pointer'>
-                    <AiOutlineUsergroupAdd
-                        className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
-                        onClick={() => {
-                            history.push('/pending')
-                        }}
-                        size={30}
-                    />
+                    <Badge badgeContent={props.numpen} color='secondary'>
+                        <AiOutlineUsergroupAdd
+                            className='transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'
+                            onClick={() => {
+                                history.push('/pending')
+                            }}
+                            size={30}
+                        />
+                    </Badge>
                 </div>
             )}
         </div>

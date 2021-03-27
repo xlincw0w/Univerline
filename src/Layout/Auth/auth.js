@@ -17,6 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { FaFeatherAlt } from 'react-icons/fa'
 import { SetLoader, SetFailedAuth } from '../../store/auth/auth'
 import cx from 'classnames'
+import Loader from 'react-loader-spinner'
 
 export default function Auth() {
     const history = useHistory()
@@ -89,7 +90,15 @@ export default function Auth() {
                 </div>
                 <div className='bg-gray-50 h-full rounded-xl'>
                     <Backdrop open={loader} style={{ zIndex: 10 }}>
-                        <CircularProgress color='inherit' />
+                        <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                            <Loader
+                                type='Circles'
+                                color='#00BFFF'
+                                height={120}
+                                width={120}
+                                timeout={3000} //3 secs
+                            />
+                        </div>
                     </Backdrop>
                     <p className='text-gray-800 text-4xl text-center mt-12 font-sans font-black'>Authentifiez-vous</p>
                     <div className='mt-10 2xl:mt-16 flex'>

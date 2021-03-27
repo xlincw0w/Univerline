@@ -12,16 +12,16 @@ export default function Feature2() {
     const friends = useSelector((state) => state.AuthReducer.friends)
 
     return (
-        <div className='bg-gray-50 h-3/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll invisible md:visible'>
+        <div className='bg-white rounded-2xl h-4/6 w-5/6  mt-2 shadow-xl overflow-y-scroll md:visible'>
             <div className='text-gray-700 text-base'>
                 <div className='inline-block ml-4 mt-4'>
                     <div className='pl-6 inline-block md:pl-0'>
-                        <HiStatusOnline className='inline-block' size={25} />
+                        <HiStatusOnline className='inline-block text-green-400' size={25} />
                     </div>
-                    <p className=' hidden md:inline ml-3'>En ligne</p>
+                    <p className=' hidden md:inline ml-3 '>En ligne</p>
                 </div>
             </div>
-            <div className='border-b-2 mt-3 border-green-400 w-48'></div>
+            <div className='border-b-2 mt-3 border-green-400 w-full'></div>
             <div className='mt-5 ml-5'>
                 {user.user_type === 'etudiant' &&
                     friends.map((elem) => {

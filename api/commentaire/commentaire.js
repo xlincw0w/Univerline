@@ -22,10 +22,10 @@ router.route('/get/comments/:id?').get((req, res) => {
     const id_pos = req.params.id
     db('commentaire')
         .select('*')
+        .where({ id_poste: id_pos })
+        .limit(10)
         .leftJoin('users', 'commentaire.id_user', 'users.id_user')
         .orderBy('date_commentaire', 'desc')
-        .limit(10)
-        .where({ id_poste: id_pos })
         .then((rows) => {
             res.json(rows)
         })

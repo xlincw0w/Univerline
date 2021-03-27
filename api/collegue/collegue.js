@@ -115,6 +115,7 @@ router.route('/delete/collegue/').post((req, res) => {
 router.route('/update/collegue/:id?').put((req, res) => {
     const id_ens = req.params.id
     data = req.body.id_user
+
     db('collegue')
         .where({ id_collegue: id_ens, id_user: data })
         .update({

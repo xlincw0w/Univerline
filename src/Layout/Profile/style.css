@@ -1,0 +1,20 @@
+/*Ceci est un telephone*/
+@media(max-width:700px){
+    .containeur{
+        width: 100%;
+    }
+}
+/*Ceci est un PC*/
+@media(min-width:1200px){
+    .containeur{
+        width: 81%;
+        margin: auto;
+    }
+}
+/*Ceci est une tablette*/
+@media(min-width:700px) and (max-width:1200px){
+    .containeur{
+        width: 85%;
+        margin: auto;
+    }
+}

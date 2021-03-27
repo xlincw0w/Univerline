@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { SetLoader } from '../../store/profile/profile'
 import { BsPersonCheck } from 'react-icons/bs'
 import { MdRemoveCircleOutline } from 'react-icons/md'
+import Loader from 'react-loader-spinner'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,7 +32,7 @@ const PendingUser = ({ elem, RefreshPending }) => {
 
     const handleAdd = () => {
         dispatch(SetLoader(true))
-        console.log('kifach')
+
         if (user.user_type === 'etudiant') {
             Axios.all([
                 Axios.post(constants.url + '/api/amis/confirm/amis', {
@@ -133,36 +134,40 @@ const PendingUser = ({ elem, RefreshPending }) => {
     }
 
     const handleAdh = () => {
+        dispatch(SetLoader(true))
         Axios.post(constants.url + '/api/adherent/confirm/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
         })
             .then((res) => {
-                console.log(res)
                 RefreshPending()
+                dispatch(SetLoader(false))
             })
             .catch((err) => {
+                dispatch(SetLoader(false))
                 console.log(err)
             })
     }
 
     const removeAdh = () => {
+        dispatch(SetLoader(true))
         Axios.post(constants.url + '/api/adherent/delete/adherent/', {
             id_etu: elem.id_etu,
             id_classe: elem.id_classe,
         })
             .then((res) => {
-                console.log(res)
                 RefreshPending()
+                dispatch(SetLoader(false))
             })
             .catch((err) => {
                 console.log(err)
+                dispatch(SetLoader(false))
             })
     }
 
     return (
         <div id={elem.id_user} className='grid grid-rows grid-flow-col gap-2 shadow-xl w-full sm:w-2/3 mx-auto mt-8'>
-            <div className='rounded-xl bg-white shadow-xl '>
+            <div className='rounded-xl bg-white shadow-xl'>
                 {elem.id_classe && (
                     <div className='w-full mt-2'>
                         <p className='text-gray-600 text-sm text-center'>{elem.libelle_classe.capitalize()}</p>
@@ -270,13 +275,19 @@ const PendingList = () => {
         <div>
             <div className='bg-gradient-to-r from-green-400 to-purple-700' style={{ minHeight: '100vh', height: 'auto' }}>
                 <Backdrop open={loader} style={{ zIndex: 10 }}>
-                    <CircularProgress color='inherit' />
+                    <Loader
+                        type='Circles'
+                        color='#00BFFF'
+                        height={120}
+                        width={120}
+                        timeout={3000} //3 secs
+                    />
                 </Backdrop>
                 <div className='w-full h-full bg-gray-200 bg-opacity-60 flex justify-center' style={{ minHeight: '100vh', height: 'auto' }}>
-                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
+                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-6/6 md:w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
                         <div className='w-full block'>
-                            <p className='text-center text-gray-900 text-2xl mt-3'>Demandes d'ajout</p>
-                            <p className='text-center text-gray-500'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>
+                            <p className='text-center text-gray-900  text-lg md:text-2xl mt-3'>Demandes d'ajout</p>
+                            <p className='text-center text-gray-500 text-sm md:text-lg'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>
                             <hr />
                             <div className=''>
                                 {user.user_type === 'enseignant' && (
