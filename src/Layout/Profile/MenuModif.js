@@ -161,8 +161,8 @@ export default function MenuModif() {
                         </Button>
                     )}
                     {modify && (
-                        <Grid container spacing={2}>
-                            <Grid item xs={2.5}>
+                        <Grid container spacing={2} className='centrerInformation'>
+                            <Grid item xs={2.5} className='rendreInline'>
                                 <Button
                                     onClick={() => {
                                         handleUpdate()
@@ -174,7 +174,7 @@ export default function MenuModif() {
                                     </div>
                                 </Button>
                             </Grid>
-                            <Grid item xs={2.5}>
+                            <Grid item xs={2.5} className='rendreInline'>
                                 <Button
                                     onClick={() => {
                                         dispatch(SetModify(false))
