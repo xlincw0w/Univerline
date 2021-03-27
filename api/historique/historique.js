@@ -4,12 +4,12 @@ const db = require('../database')
 const moment = require('moment')
 
 
-router.route('/add/historique/:id?').post((req, res) => {
-        id_user= req.params.id
+router.route('/add/historique/').post((req, res) => {
+        //id_user= req.params.id
 
     db('historique')
         .insert({
-         id_user:id_user,
+         id_user:req.body.id_user,
          id_contact:req.body.id_contact,
          createAt:moment().format()
         })
