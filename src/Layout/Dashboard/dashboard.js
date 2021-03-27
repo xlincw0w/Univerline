@@ -5,8 +5,11 @@ import Feature2 from './Feature2'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { useSelector } from 'react-redux'
+import Inscription from '../Inscription/inscription'
 
 export default function Dashboard() {
+    const uncomplete = useSelector((state) => state.AuthReducer.uncomplete)
+    const user = useSelector((state) => state.AuthReducer.user)
     const loading = useSelector((state) => state.FeedReducer.loading)
 
     return (
@@ -15,19 +18,22 @@ export default function Dashboard() {
                 <CircularProgress color='inherit' />
             </Backdrop>
             <div className='w-full h-full bg-gray-200 bg-opacity-60'>
-                <div className='grid grid-cols-5 h-full'>
-                    <div className='col-span-4'>
-                        <Content />
-                    </div>
-                    <div className='h-screen h-full'>
-                        <div className='fixed h-full w-full'>
-                            <div className='h-full'>
-                                <Feature1 />
-                                <Feature2 />
+                {uncomplete && <Inscription complete='whoyouare' />}
+                {user.id && user.user_type && (
+                    <div className='grid grid-cols-5 h-full'>
+                        <div className='col-span-5 md:col-span-4'>
+                            <Content />
+                        </div>
+                        <div className=''>
+                            <div className='fixed h-full w-full'>
+                                <div className='h-full'>
+                                    <Feature1 />
+                                    <Feature2 />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     )

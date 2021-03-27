@@ -7,11 +7,13 @@ import Dropdown from './Popover/popover'
 import Axios from 'axios'
 import { constants } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { SetUser } from '../../store/auth/auth'
+import { SetUser, SetFriends, Uncomplete } from '../../store/auth/auth'
+import univerlineLoge from './univerlineLoge.png'
 
 export default function Header() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector((state) => state.AuthReducer.user)
 
     const disconnect = () => {
         firebase
@@ -31,6 +33,7 @@ export default function Header() {
         if (user) {
             Axios.get(constants.url + '/api/profile/' + user.uid)
                 .then((res) => {
+                    if (!res.data.id_user) dispatch(Uncomplete(true))
                     dispatch(
                         SetUser({
                             id: res.data.id_user,
@@ -53,33 +56,48 @@ export default function Header() {
         }
     }, [])
 
+    useEffect(() => {
+        if (user.user_type === 'etudiant') {
+            Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        } else if (user.user_type === 'enseignant') {
+            Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
+                .then((res) => {
+                    dispatch(SetFriends(res.data))
+                })
+                .catch((err) => {
+                    dispatch(SetFriends([]))
+                })
+        }
+    }, [user.id])
+
     return (
         <FirebaseAuthConsumer>
             {({ isSignedIn, user, providerId }) => {
                 if (isSignedIn) {
                     return (
                         <React.Fragment>
-                            <div className='w-screen h-16 bg-gray-50 shadow-lg select-none fixed' style={{ zIndex: 100 }}>
-                                <div className='grid grid-cols-4 h-full'>
+                            <div className='w-screen h-16 bg-white shadow-lg select-none fixed' style={{ zIndex: 100 }}>
+                                <div className='grid grid-cols-2 h-full'>
                                     <div className='flex'>
                                         <p
                                             onClick={() => {
                                                 history.push('/')
                                             }}
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
-                                            <img src={plume1} className='w-12 h-12 absolute -mt-6 -ml-4' />
+                                            <img src={univerlineLoge} className='w-14 h-12' />
                                         </p>
-                                        <p className='text-gray-500 invisible lg:visible text-base inline flex justify-center items-center ml-8'>Univerline</p>
+                                        <p className='text-gray-500 invisible lg:visible text-base flex justify-center items-center ml-4'>Univerline</p>
                                     </div>
-                                    <div className=''>
-                                        <p></p>
-                                    </div>
-                                    <div className=''>
-                                        <p></p>
-                                    </div>
+
                                     <div className='flex flex-row-reverse'>
                                         <div className='mr-10 mt-3 flex flex-cols'>
-                                            <div className='mr-8 flex justify-center invisible md:visible '>
+                                            <div className='mr-8 flex justify-center hidden md:block '>
                                                 <Dropdown item='profilesearch' />
                                             </div>
                                             <div className='mr-2'>
@@ -105,22 +123,18 @@ export default function Header() {
                     return (
                         <React.Fragment>
                             <div className='w-screen h-16 bg-gray-50 shadow-lg select-none fixed' style={{ zIndex: 100 }}>
-                                <div className='grid grid-cols-4 h-full'>
+                                <div className='grid grid-cols-2 h-full'>
                                     <div className='flex'>
                                         <p
                                             onClick={() => {
                                                 history.push('/')
                                             }}
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
-                                            Reseau Social
+                                            <img src={univerlineLoge} className='w-14 h-12' />
                                         </p>
+                                        <p className='text-gray-500 invisible lg:visible text-base inline flex justify-center items-center ml-3'>Univerline</p>
                                     </div>
-                                    <div className=''>
-                                        <p></p>
-                                    </div>
-                                    <div className=''>
-                                        <p></p>
-                                    </div>
+
                                     <div className='flex flex-row-reverse'>
                                         <p
                                             onClick={() => {

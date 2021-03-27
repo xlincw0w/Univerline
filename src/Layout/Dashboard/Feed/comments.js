@@ -2,11 +2,13 @@ import React from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import { HiOutlineTrash } from 'react-icons/hi'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { constants } from '../../../constants'
 
 const Comments = ({ elem, Reload }) => {
+    const history = useHistory()
     const user = useSelector((state) => state.AuthReducer.user)
 
     const deleteComment = () => {
@@ -26,7 +28,15 @@ const Comments = ({ elem, Reload }) => {
             <div className='text-left text-xs text-gray-400 bg-gray-200 shadow rounded-lg mx-auto my-1' style={{ width: '98%' }}>
                 <div className='py-1 grid grid-cols-6 w-full'>
                     <div className='col-span-5 flex'>
-                        <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2rem', height: '2rem' }} className='ml-2 shadow' />
+                        <Avatar
+                            onClick={() => {
+                                history.push('/profile/' + elem.id_user)
+                            }}
+                            alt='Remy Sharp'
+                            src={elem.avatar}
+                            style={{ width: '2rem', height: '2rem' }}
+                            className='ml-2 shadow cursor-pointer'
+                        />
                         <div className='inline'>
                             <p className='ml-2 text-gray-500'>{elem.nom + ' ' + elem.prenom}</p>
                             <p className='ml-2'>{moment(elem.date_commentaire).format('DD - MM - YYYY HH:mm') + ' h'}</p>

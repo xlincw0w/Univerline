@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const db = require('../database')
 const moment = require('moment')
-const { leftJoin } = require('../database')
 const { v4 } = require('uuid')
 
 //ajouter une classe avec id d'un enseignant
@@ -119,6 +118,11 @@ router.route('/delete/classe/:id?').delete((req, res) => {
         .where({ id_classe: id })
         .delete('*')
         .then((rows) => {
+            db('poste')
+                .where({ id_classe: id })
+                .then(() => {})
+                .catch(() => {})
+
             res.json(rows)
         })
         .catch((err) => {

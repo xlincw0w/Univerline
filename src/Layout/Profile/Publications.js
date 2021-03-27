@@ -6,13 +6,16 @@ import { SetPublications } from '../../store/profile/profile'
 import { FaComments } from 'react-icons/fa'
 import { HiShare } from 'react-icons/hi'
 import Comments from '../Dashboard/Feed/comments'
+import { useHistory } from 'react-router-dom'
 import Options from '../Dashboard/Feed/options/options'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import cx from 'classnames'
 import { useParams } from 'react-router-dom'
+import firebase from 'firebase'
+import { BsFileEarmarkCheck } from 'react-icons/bs'
+import { Container, Grid } from '@material-ui/core'
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -20,7 +23,8 @@ export default function Publications() {
     const publications = useSelector((state) => state.ProfileReducer.publications)
     const refresh = useSelector((state) => state.FeedReducer.refresh)
     const user = useSelector((state) => state.AuthReducer.user)
-    const routeParams = useParams()
+
+    const storageRef = firebase.storage().ref()
 
     useEffect(async () => {
         if (user_info.id_user && user.id) {
@@ -72,9 +76,33 @@ export default function Publications() {
         const [refresh, setRefresh] = useState(0)
         const [backdrop, setBackdrop] = useState(false)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -111,8 +139,8 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
-                <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
+            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
+                <div className='bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
@@ -125,14 +153,29 @@ export default function Publications() {
                         </div>
                     </div>
                 </div>
-                <div className='h-auto'>
-                    <div className='h-auto'>
+                <div>
+                    <div>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -152,18 +195,18 @@ export default function Publications() {
                         </div>
                     </div>
                     {loadComment && (
-                        <div className='w-full h-auto bg-gray-100 shadow rounded'>
+                        <div className=' bg-gray-100 shadow rounded'>
                             <form className='w-full' onSubmit={handleComment}>
                                 <input
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
                             </form>
-                            <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                            <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
@@ -173,7 +216,7 @@ export default function Publications() {
                                         </div>
                                     )}
                                 </Backdrop>
-                                <div className='w-full h-auto'>
+                                <div>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
                                     })}
@@ -194,9 +237,33 @@ export default function Publications() {
         const [backdrop, setBackdrop] = useState(false)
         const user = useSelector((state) => state.AuthReducer.user)
 
+        const [image, setImage] = useState(null)
+        const [file, setFile] = useState(null)
+
         const Reload = () => {
             setRefresh(refresh + 1)
         }
+
+        useEffect(() => {
+            if (elem.image) {
+                storageRef
+                    .child(elem.image)
+                    .getDownloadURL()
+                    .then((url) => setImage(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            if (elem.file) {
+                storageRef
+                    .child(elem.file)
+                    .getDownloadURL()
+                    .then((url) => setFile(url))
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }, [])
 
         useEffect(() => {
             setBackdrop(true)
@@ -232,12 +299,9 @@ export default function Publications() {
         }
 
         return (
-            <div id={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
                 <div
-                    onClick={() => {
-                        console.log('kifach')
-                    }}
-                    className='h-1/4 shadow-xl rounded-xl cursor-pointer
+                    className='shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -251,20 +315,35 @@ export default function Publications() {
                         </div>
                         {elem.id_user === user.id && (
                             <div className='flex flex-row-reverse'>
-                                <div className='mt-5 mr-4'>
+                                <div className='mt-5'>
                                     <Options elem={elem} />
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-                <div className='h-auto'>
-                    <div className='h-auto'>
+                <div>
+                    <div>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words'>{elem.payload}</p>
+                            {image && (
+                                <div className='my-2'>
+                                    <img className='w-62 h-62 mx-auto' src={image} />
+                                </div>
+                            )}
+                            {file && (
+                                <div className='mb-2 mt-4'>
+                                    <div className='ml-2 my-1 text-center'>
+                                        <a href={file} target='_blank' download>
+                                            <BsFileEarmarkCheck size={30} className='text-gray-800 inline cursor-pointer duration-300 hover:text-green-500' />
+                                            <p className='text-gray-500 inline ml-3'>.{file.split('?alt')[0].split('.')[5]}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
@@ -280,18 +359,18 @@ export default function Publications() {
                         </div>
                     </div>
                     {loadComment && (
-                        <div className='w-full h-auto bg-gray-100 shadow rounded'>
+                        <div className=' bg-gray-100 shadow rounded'>
                             <form className='w-full' onSubmit={handleComment}>
                                 <input
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='focus:ring-indigo-500focus:border-indigo-500 block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
                                 <button type='submit' className='hidden'></button>
                             </form>
-                            <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                            <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
@@ -301,7 +380,7 @@ export default function Publications() {
                                         </div>
                                     )}
                                 </Backdrop>
-                                <div className='w-full h-auto'>
+                                <div>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
                                     })}
@@ -315,15 +394,50 @@ export default function Publications() {
     }
 
     return (
-        <div>
-            {user_info.user_type === 'etudiant' &&
-                publications.map((elem) => {
-                    return <StudSkeleton elem={elem} />
-                })}
-            {user_info.user_type === 'enseignant' &&
-                publications.map((elem) => {
-                    return <ProfSkeleton elem={elem} />
-                })}
-        </div>
+        <Container maxWidth='md'>
+            <Grid container spacing={3}>
+                {user_info.user_type === 'etudiant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 0) {
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <StudSkeleton elem={elem} />
+                                </Grid>
+                            )
+                        }
+                    })}
+                {user_info.user_type === 'enseignant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 0) {
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <ProfSkeleton elem={elem} />
+                                </Grid>
+                            )
+                        }
+                    })}
+
+                {user_info.user_type === 'etudiant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 1) {
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <StudSkeleton elem={elem} />
+                                </Grid>
+                            )
+                        }
+                    })}
+                {user_info.user_type === 'enseignant' &&
+                    publications.map((elem, index) => {
+                        if (index % 2 === 1) {
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <ProfSkeleton elem={elem} />
+                                </Grid>
+                            )
+                        }
+                    })}
+            </Grid>
+        </Container>
     )
 }

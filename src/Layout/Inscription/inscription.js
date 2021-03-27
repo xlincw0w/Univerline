@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
@@ -8,23 +8,19 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FaGooglePlusSquare } from 'react-icons/fa'
-import { FaTwitterSquare } from 'react-icons/fa'
 
 import { FaFeatherAlt } from 'react-icons/fa'
 
 import firebase from 'firebase/app'
-import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
+import { FirebaseAuthConsumer } from '@react-firebase/auth'
 
 import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signup/signupReducer'
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Icon from '@material-ui/core/Icon'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
-
-import cx from 'classnames'
 
 const Inscription = (props) => {
     const history = useHistory()
@@ -33,7 +29,25 @@ const Inscription = (props) => {
     const step = useSelector((state) => state.SignUpReducer.step)
     const loader = useSelector((state) => state.SignUpReducer.loader)
 
-    React.useEffect(() => {
+    firebase.auth().languageCode = 'fr'
+
+    useEffect(() => {
+        if (props.complete) {
+            const userCred = firebase.auth().currentUser
+            dispatch(
+                UpdateSignupUser({
+                    ...user,
+                    id: userCred.uid,
+                    nom: userCred.displayName || '',
+                    email: userCred.email,
+                    isNewUser: false,
+                })
+            )
+            dispatch(UpdateSignupStep('whoyouare'))
+        }
+    }, [])
+
+    useEffect(() => {
         if (props.step === 'confirmemail') {
             dispatch(UpdateSignupStep('confirmemail'))
             let userCred = firebase.auth().currentUser
@@ -69,11 +83,11 @@ const Inscription = (props) => {
             <span className='text-red-800'>Oups </span>Un problème est survenu lors de la création de votre compte veuillez réssayer ultérieurment.
         </p>,
         <p>
-            Vous avez déja crée un <span className='text-red-800'>Compte </span>avec cet email.
+            Vous avez déjà crée un <span className='text-red-800'>Compte </span>avec cet email.
         </p>,
     ]
 
-    const [error_index, setErrorIndex] = React.useState(0)
+    const [error_index, setErrorIndex] = useState(0)
 
     const handleAuth = async (e) => {
         e.preventDefault()
@@ -177,7 +191,7 @@ const Inscription = (props) => {
             {(userCred) => {
                 if (userCred.isSignedIn && !user.isNewUser && userCred.emailVerified) {
                     return (
-                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
+                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl h-screen mt-5'>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -200,7 +214,7 @@ const Inscription = (props) => {
                                         </div>
                                         <div className='mt-12'>
                                             <p>
-                                                Vous êtes déja <span className='text-purple-800'> Connecté </span> ou vous vous êtes déja{' '}
+                                                Vous êtes déjà <span className='text-purple-800'> Connecté </span> ou vous vous êtes déjà{' '}
                                                 <span className='text-green-800'>Inscrit</span>
                                             </p>
                                             <div className='mt-20 text-gray-500 text-2xl'>
@@ -224,7 +238,7 @@ const Inscription = (props) => {
                     )
                 } else {
                     return (
-                        <div className='w-full lg:w-5/6 mx-auto shadow rounded-xl mt-5' style={{ height: '85vh' }}>
+                        <div className='w-full lg:w-5/6 mx-auto shadow h-screen rounded-xl mt-5'>
                             <div className='grid grid-cols-1 md:grid-cols-2 h-full rounded-xl'>
                                 <div className='bg-feather bg-center bg-cover h-full hidden md:block rounded-xl'>
                                     <div className='h-full bg-indigo-900 bg-opacity-80 rounded-xl select-none'>
@@ -235,13 +249,13 @@ const Inscription = (props) => {
                                             }}>
                                             UNIVERLINE
                                         </p>
-                                        <p className='pt-10 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
+                                        <p className='pt-8 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
                                             Restez connecté avec vos collègues et vos camarades à tout instant.
                                         </p>
                                         {step === 'auth' && (
                                             <div>
-                                                <p className='pt-40 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
-                                                    Vous possedez déja un compte ?
+                                                <p className='pt-34 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
+                                                    Vous possedez déjà un compte ?
                                                 </p>
                                                 <div className='mx-auto table mt-5'>
                                                     <Button
@@ -293,7 +307,7 @@ const Inscription = (props) => {
                                                             })
                                                     }}
                                                     className='inline mx-5 cursor-pointer duration-300 hover:text-green-700'
-                                                    size={60}
+                                                    size={50}
                                                 />
                                                 <FaFacebookSquare
                                                     onClick={() => {
@@ -303,6 +317,12 @@ const Inscription = (props) => {
                                                             .auth()
                                                             .signInWithPopup(facebookAuthProvider)
                                                             .then((userCred) => {
+                                                                firebase
+                                                                    .auth()
+                                                                    .currentUser.updateProfile({ emailVerified: true })
+                                                                    .then((res) => {
+                                                                        console.log(res)
+                                                                    })
                                                                 dispatch(
                                                                     UpdateSignupUser({
                                                                         ...user,
@@ -316,26 +336,19 @@ const Inscription = (props) => {
                                                                 dispatch(SetLoader(false))
                                                             })
                                                             .catch((err) => {
+                                                                console.log(err)
                                                                 dispatch(UpdateSignupStep('error'))
                                                                 dispatch(SetLoader(false))
                                                             })
                                                     }}
                                                     className='inline mx-5 cursor-pointer duration-300 hover:text-blue-700'
-                                                    size={60}
-                                                />
-                                                <FaTwitterSquare
-                                                    onClick={() => {
-                                                        const twitterAuthProvider = new firebase.auth.TwitterAuthProvider()
-                                                        firebase.auth().signInWithPopup(twitterAuthProvider)
-                                                    }}
-                                                    className='inline mx-5 cursor-pointer duration-300 hover:text-blue-400'
-                                                    size={60}
+                                                    size={50}
                                                 />
                                             </div>
                                         </div>
                                         <form className='w-full' onSubmit={handleAuth}>
                                             <div className='mt-5 2xl:mt-20 text-center'>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
@@ -347,7 +360,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
@@ -359,7 +372,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, email: e.target.value }))
@@ -371,7 +384,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, password: e.target.value }))
@@ -385,7 +398,7 @@ const Inscription = (props) => {
                                                         required
                                                     />
                                                 </div>
-                                                <div className='my-5'>
+                                                <div className='my-3'>
                                                     <TextField
                                                         onChange={(e) => {
                                                             dispatch(UpdateSignupUser({ ...user, confirmed_password: e.target.value }))
@@ -404,7 +417,7 @@ const Inscription = (props) => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className='mx-auto table mt-5 2xl:mt-10'>
+                                            <div className='mx-auto table mt-4 2xl:mt-10'>
                                                 <Button type='submit' className='shadow' variant='contained' color='secondary'>
                                                     Suivant
                                                 </Button>
@@ -422,7 +435,7 @@ const Inscription = (props) => {
                                                 <FaFeatherAlt size={100} />
                                             </div>
                                             <div className='mt-12 px-5'>
-                                                Un e-mail de vérification a été envoyé a <span className='text-purple-800 text-xl'> {user.email} </span>
+                                                Un e-mail de vérification a été envoyé à <span className='text-purple-800 text-xl'> {user.email} </span>
                                             </div>
                                         </div>
                                         <div className='mt-20 2xl:mt-40 text-xl text-gray-500 text-center'>
@@ -520,6 +533,34 @@ const Inscription = (props) => {
                                         <form onSubmit={handleForm}>
                                             <div className='mt-32 text-center'>
                                                 <div className='my-5'>
+                                                    {props.complete && (
+                                                        <div>
+                                                            <div className='my-5'>
+                                                                <TextField
+                                                                    onChange={(e) => {
+                                                                        dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
+                                                                    }}
+                                                                    className='w-3/6 shadow'
+                                                                    label='Nom'
+                                                                    variant='outlined'
+                                                                    type='text'
+                                                                    required
+                                                                />
+                                                            </div>
+                                                            <div className='my-5'>
+                                                                <TextField
+                                                                    onChange={(e) => {
+                                                                        dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
+                                                                    }}
+                                                                    className='w-3/6 shadow'
+                                                                    label='Prénom'
+                                                                    variant='outlined'
+                                                                    type='text'
+                                                                    required
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                     <Autocomplete
                                                         id='combo-box-demo'
                                                         className='w-3/6 mx-auto shadow'
@@ -585,6 +626,34 @@ const Inscription = (props) => {
                                         </p>
                                         <form onSubmit={handleForm}>
                                             <div className='mt-10 2xl:mt-32 text-center'>
+                                                {props.complete && (
+                                                    <div>
+                                                        <div className='my-5'>
+                                                            <TextField
+                                                                onChange={(e) => {
+                                                                    dispatch(UpdateSignupUser({ ...user, nom: e.target.value }))
+                                                                }}
+                                                                className='w-3/6 shadow'
+                                                                label='Nom'
+                                                                variant='outlined'
+                                                                type='text'
+                                                                required
+                                                            />
+                                                        </div>
+                                                        <div className='my-5'>
+                                                            <TextField
+                                                                onChange={(e) => {
+                                                                    dispatch(UpdateSignupUser({ ...user, prenom: e.target.value }))
+                                                                }}
+                                                                className='w-3/6 shadow'
+                                                                label='Prénom'
+                                                                variant='outlined'
+                                                                type='text'
+                                                                required
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )}
                                                 <div className='my-5'>
                                                     <TextField
                                                         onChange={(e) => {

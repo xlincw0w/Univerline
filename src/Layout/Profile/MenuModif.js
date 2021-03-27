@@ -9,9 +9,13 @@ import { constants } from '../../constants'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import { AiOutlineUserDelete } from 'react-icons/ai'
 import { BiMailSend } from 'react-icons/bi'
+<<<<<<< HEAD
 import { useHistory } from 'react-router-dom'
 import Partie2 from '../Messagerie/Partie2/partie2'
 import Partie3 from '../Messagerie/Partie3/partie3'
+=======
+import { Grid } from '@material-ui/core'
+>>>>>>> 186b59d1e2e12cf2336be5101c3a374f94ae4156
 
 export default function MenuModif() {
     const [controle, setControle] = useState([])
@@ -198,8 +202,8 @@ export default function MenuModif() {
                         </Button>
                     )}
                     {modify && (
-                        <div>
-                            <div className='inline'>
+                        <Grid container spacing={2}>
+                            <Grid item xs={2.5}>
                                 <Button
                                     onClick={() => {
                                         handleUpdate()
@@ -210,8 +214,8 @@ export default function MenuModif() {
                                         <BsPencilSquare size={20} className='inline ml-2 mb-1' />
                                     </div>
                                 </Button>
-                            </div>
-                            <div className='ml-3 inline'>
+                            </Grid>
+                            <Grid item xs={2.5}>
                                 <Button
                                     onClick={() => {
                                         dispatch(SetModify(false))
@@ -224,8 +228,8 @@ export default function MenuModif() {
                                         <BsTrash size={20} className='inline ml-2 mb-1' />
                                     </div>
                                 </Button>
-                            </div>
-                        </div>
+                            </Grid>
+                        </Grid>
                     )}
                 </div>
             )}

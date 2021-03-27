@@ -145,7 +145,7 @@ router.route('/get/post_ens/all/:id?').get(async (req, res) => {
 router.route('/get/post_ens/allfriends/:id?').get(async (req, res) => {
     const id = req.params.id
 
-    const friends = await db('collegue').select('id_user').where({ id_collegue: id })
+    const friends = await db('collegue').select('id_user').where({ id_collegue: id, confirm: true })
     const classes = await db('classe').select('*').where({ id_ens: id })
     const collegue = await db('poste')
         .select('*')
@@ -184,14 +184,15 @@ router.route('/get/post_ens/allfriends/:id?').get(async (req, res) => {
 //ajouter un post a une classe X
 router.route('/add/post/').post((req, res) => {
     const data = req.body
-    console.log(data)
     db('poste')
         .insert({
             id_poste: v4().split('-').join(''),
             id_user: data.id_classe === '#####' ? data.id_user : '&&&&&',
             id_classe: data.id_user === '&&&&&' ? data.id_classe : '#####',
             payload: data.payload,
-            date_poste: moment().format(),
+            image: data.image,
+            file: data.file,
+            date_poste: moment().utc().format(),
         })
         .then((resp) => {
             res.json({ AJOUT: true })
@@ -212,7 +213,6 @@ router.route('/update/post/:id?').post((req, res) => {
             payload,
         })
         .then((resp) => {
-            console.log(resp)
             res.json({ updated: true })
         })
         .catch((err) => {
@@ -224,11 +224,17 @@ router.route('/update/post/:id?').post((req, res) => {
 //supprimer un poste
 router.route('/delete/post/:id?').delete((req, res) => {
     const id_poste = req.params.id
+
     db('poste')
         .where('id_poste', id_poste)
         .delete('*')
         .then((resp) => {
-            console.log(resp)
+            db('commentaire')
+                .where({ id_poste: id_poste })
+                .del()
+                .then(() => {})
+                .catch(() => {})
+
             res.json({ delete: true })
         })
         .catch((err) => {

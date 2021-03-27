@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -6,11 +6,11 @@ import Typography from '@material-ui/core/Typography'
 import Publications from './Publications'
 import Freinds from './Freinds'
 import Classes from './Classes'
-import Support from './Support'
 import { useSelector } from 'react-redux'
 
 export default function CustomizedTabs() {
     const user_info = useSelector((state) => state.ProfileReducer.user_info)
+    const user = useSelector((state) => state.AuthReducer.user)
     const [value, setValue] = useState(0)
 
     const AntTabs = withStyles({
@@ -79,33 +79,44 @@ export default function CustomizedTabs() {
         <div style={{ minHeight: '50vh' }}>
             <div className={classes.root}>
                 <div className={classes.demo1}>
-                    <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
-                        <AntTab label='Publications' />
-                        <AntTab label={user_info.user_type === 'etudiant' ? 'Camarades' : 'Collégues'} />
-                        <AntTab label='Classes' />
-                        {/* <AntTab label='Ressources' /> */}
-                    </AntTabs>
-                    {value === 0 && (
-                        <div className='mt-4'>
-                            <Publications />
+                    {user.user_type === user_info.user_type && (
+                        <div>
+                            <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
+                                <AntTab label='Publications' />
+                                <AntTab label={user_info.user_type === 'etudiant' ? 'Camarades' : 'Collégues'} />
+                                <AntTab label='Classes' />
+                            </AntTabs>
+                            {value === 0 && (
+                                <div className='mt-4'>
+                                    <Publications />
+                                </div>
+                            )}
+                            {value === 1 && (
+                                <div className='mt-4'>
+                                    <Freinds />
+                                </div>
+                            )}
+                            {value === 2 && (
+                                <div className='mt-4'>
+                                    <Classes />
+                                </div>
+                            )}
+                            <Typography className={classes.padding} />
                         </div>
                     )}
-                    {value === 1 && (
-                        <div className='mt-4'>
-                            <Freinds />
+                    {user.user_type !== user_info.user_type && (
+                        <div>
+                            <AntTabs value={value} onChange={handleChange} aria-label='ant example'>
+                                <AntTab label='Classes' />
+                            </AntTabs>
+                            {value === 0 && (
+                                <div className='mt-4'>
+                                    <Classes />
+                                </div>
+                            )}
+                            <Typography className={classes.padding} />
                         </div>
                     )}
-                    {value === 2 && (
-                        <div className='mt-4'>
-                            <Classes />
-                        </div>
-                    )}
-                    {/* {value === 3 && (
-                        <div className='mt-4'>
-                            <Support />
-                        </div>
-                    )} */}
-                    <Typography className={classes.padding} />
                 </div>
             </div>
         </div>
