@@ -10,6 +10,7 @@ import { AiOutlineUserAdd } from 'react-icons/ai'
 import { AiOutlineUserDelete } from 'react-icons/ai'
 import { BiMailSend } from 'react-icons/bi'
 import { useHistory } from 'react-router-dom'
+import { Grid } from '@material-ui/core'
 
 export default function MenuModif() {
     const dispatch = useDispatch()
@@ -19,7 +20,6 @@ export default function MenuModif() {
     const friend = useSelector((state) => state.ProfileReducer.friend)
     const pending = useSelector((state) => state.ProfileReducer.pending)
     const history = useHistory()
-
 
     const handleUpdate = () => {
         Axios.post(constants.url + '/api/profile/update', { ...user_info })
@@ -115,26 +115,23 @@ export default function MenuModif() {
                 dispatch(RefreshProfile())
             })
     }
-    const handleContacter = ()=>{
+    const handleContacter = () => {
         Axios.post(constants.url + '/api/historique/add/historique', {
             id_user: user.id,
             id_contact: user_info.id_user,
-           
         })
-        .then(
-            Axios.spread((...res) => {
+            .then(
+                Axios.spread((...res) => {
+                    dispatch(SetLoader(false))
+                    dispatch(RefreshProfile())
+                })
+            )
+            .catch((err) => {
                 dispatch(SetLoader(false))
                 dispatch(RefreshProfile())
             })
-        )
-        .catch((err) => {
-            dispatch(SetLoader(false))
-            dispatch(RefreshProfile())
-        })
-        console.log('id:',user.id)
-        console.log('idC:',user_info.id_user)
-
-
+        console.log('id:', user.id)
+        console.log('idC:', user_info.id_user)
     }
 
     const handleRemoveEns = () => {
@@ -178,8 +175,8 @@ export default function MenuModif() {
                         </Button>
                     )}
                     {modify && (
-                        <div>
-                            <div className='inline'>
+                        <Grid container spacing={2} className='centrerInformation'>
+                            <Grid item xs={2.5} className='rendreInline'>
                                 <Button
                                     onClick={() => {
                                         handleUpdate()
@@ -190,8 +187,8 @@ export default function MenuModif() {
                                         <BsPencilSquare size={20} className='inline ml-2 mb-1' />
                                     </div>
                                 </Button>
-                            </div>
-                            <div className='ml-3 inline'>
+                            </Grid>
+                            <Grid item xs={2.5} className='rendreInline'>
                                 <Button
                                     onClick={() => {
                                         dispatch(SetModify(false))
@@ -204,8 +201,8 @@ export default function MenuModif() {
                                         <BsTrash size={20} className='inline ml-2 mb-1' />
                                     </div>
                                 </Button>
-                            </div>
-                        </div>
+                            </Grid>
+                        </Grid>
                     )}
                 </div>
             )}
@@ -222,7 +219,6 @@ export default function MenuModif() {
                                                 // dispatch(RefreshProfile())
                                                 handleContacter()
                                                 history.push('/messagerie')
-
                                             }}
                                             variant='outlined'
                                             color='default'>
@@ -366,7 +362,6 @@ export default function MenuModif() {
                                         handleContacter()
                                         history.push('/messagerie')
                                         //dispatch(RefreshProfile())
-
                                     }}
                                     variant='outlined'
                                     color='default'>

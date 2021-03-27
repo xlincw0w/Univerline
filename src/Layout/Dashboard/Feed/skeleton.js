@@ -122,20 +122,24 @@ const Skeleton = () => {
 
         const handleComment = (e) => {
             e.preventDefault()
-            setBackdrop(true)
-            Axios.post(constants.url + '/api/commentaire/add/comments/', {
-                id_user: user.id,
-                id_poste: elem.id_poste,
-                payload,
-            })
-                .then((res) => {
-                    Reload()
-                    setBackdrop(false)
+
+            if (payload.length !== 0) {
+                setBackdrop(true)
+                Axios.post(constants.url + '/api/commentaire/add/comments/', {
+                    id_user: user.id,
+                    id_poste: elem.id_poste,
+                    payload,
                 })
-                .catch((err) => {
-                    console.log(err)
-                    setBackdrop(false)
-                })
+                    .then((res) => {
+                        Reload()
+                        setBackdrop(false)
+                        setPayload('')
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        setBackdrop(false)
+                    })
+            }
         }
 
         return (
@@ -211,6 +215,7 @@ const Skeleton = () => {
                                 <input
                                     type='text'
                                     required={true}
+                                    value={payload}
                                     onChange={(e) => setPayload(e.target.value)}
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md mx-auto '
                                     placeholder='Ecrivez un commentaire !'
@@ -284,6 +289,7 @@ const Skeleton = () => {
                 Axios(constants.url + '/api/commentaire/get/comments/' + elem.id_poste)
                     .then((res) => {
                         setComments(res.data)
+                        setPayload('')
                         setBackdrop(false)
                     })
                     .catch((err) => {
@@ -376,6 +382,7 @@ const Skeleton = () => {
                                 <input
                                     type='text'
                                     required={true}
+                                    value={payload}
                                     onChange={(e) => setPayload(e.target.value)}
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5 '
                                     placeholder='Ecrivez un commentaire !'

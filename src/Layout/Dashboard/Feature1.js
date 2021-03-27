@@ -34,8 +34,8 @@ export default function Feature1() {
 
     return (
         <div className='bg-white rounded-2xl h-2/6 w-5/6  mt-3 shadow-lg overflow-y-scroll md:visible '>
-            <div className='text-gray-700 text-base '>
-                <div className='inline-block ml-4 mt-4 '>
+            <div className='text-gray-700 text-base'>
+                <div className='inline-block ml-4 mt-4'>
                     <BsBookmarksFill className='inline-block text-green-400 ' size={22} />
                     <p className='inline ml-3'>Vos classes</p>
                 </div>

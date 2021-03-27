@@ -14,6 +14,7 @@ import firebase from 'firebase'
 import { v4 } from 'uuid'
 import { AiOutlineSend } from 'react-icons/ai'
 import { BiImageAdd } from 'react-icons/bi'
+
 const Post = () => {
     const dispatch = useDispatch()
     const imageInput = useRef(null)
@@ -33,41 +34,29 @@ const Post = () => {
     const storageRef = firebase.storage().ref()
 
     const handlePost = () => {
-        dispatch(FeedLoading(true))
-
         if (payload.length !== 0) {
             const imagev4 = v4().split('-').join('')
             const filev4 = v4().split('-').join('')
-
             let imageExt = null
             let fileExt = null
-
             if (image) {
                 const imageArray = image.name.split('.')
                 imageExt = imageArray[imageArray.length - 1]
-
                 storageRef
                     .child(imagev4 + '.' + imageExt)
                     .put(image)
                     .then((snap) => {})
-                    .catch((err) => {
-                        console.log('upload failed')
-                    })
+                    .catch((err) => {})
             }
-
             if (file) {
                 const fileArray = file.name.split('.')
                 fileExt = fileArray[fileArray.length - 1]
-
                 storageRef
                     .child(filev4 + '.' + fileExt)
                     .put(file)
                     .then((snap) => {})
-                    .catch((err) => {
-                        console.log('upload failed')
-                    })
+                    .catch((err) => {})
             }
-
             if (user.user_type === 'etudiant') {
                 Axios.post(constants.url + '/api/post/add/post/', {
                     id_classe: '#####',
@@ -77,17 +66,14 @@ const Post = () => {
                     payload,
                 })
                     .then((res) => {
-                        dispatch(FeedLoading(false))
                         if (res.data.AJOUT) {
+                            setPayload('')
                             dispatch(RefreshFeed())
-
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
                             setFile(null)
                         } else {
-                            console.log('not added')
-
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
@@ -95,9 +81,6 @@ const Post = () => {
                         }
                     })
                     .catch((err) => {
-                        console.log(err)
-                        dispatch(FeedLoading(false))
-
                         setImgUploaded(false)
                         setFileUploaded(false)
                         setImage(null)
@@ -112,17 +95,14 @@ const Post = () => {
                     payload,
                 })
                     .then((res) => {
-                        dispatch(FeedLoading(false))
                         if (res.data.AJOUT) {
+                            setPayload('')
                             dispatch(RefreshFeed())
-
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
                             setFile(null)
                         } else {
-                            console.log('not added')
-
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
@@ -130,17 +110,14 @@ const Post = () => {
                         }
                     })
                     .catch((err) => {
-                        dispatch(FeedLoading(false))
-
                         setImgUploaded(false)
                         setFileUploaded(false)
                         setImage(null)
                         setFile(null)
-                        console.log(err)
                     })
             }
         } else {
-            dispatch(FeedLoading(false))
+            setPayload('')
         }
     }
 
@@ -151,6 +128,7 @@ const Post = () => {
                     type='text'
                     className='block w-full h-32 pt-4 pl-7 pr-12 sm:text-sm border-gray-300  mx-auto'
                     placeholder='Exprimez-vous !'
+                    value={payload}
                     onChange={(e) => {
                         setPayload(e.target.value)
                     }}
