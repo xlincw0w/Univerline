@@ -16,15 +16,13 @@ export default function Dashboard() {
     return (
         <div className='h-auto bg-gradient-to-r from-green-400 to-purple-700'>
             <Backdrop open={loading} style={{ zIndex: 10 }}>
-                <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
-                    <Loader
-                        type='Circles'
-                        color='#00BFFF'
-                        height={120}
-                        width={120}
-                        timeout={3000} //3 secs
-                    />
-                </div>
+                <Loader
+                    type='Circles'
+                    color='#00BFFF'
+                    height={120}
+                    width={120}
+                    timeout={3000} //3 secs
+                />
             </Backdrop>
             <div className='w-full h-full bg-gray-200 bg-opacity-60'>
                 {uncomplete && <Inscription complete='whoyouare' />}
