@@ -776,6 +776,7 @@ const Inscription = (props) => {
                                             <Button
                                                 onClick={() => {
                                                     history.push('/')
+                                                    location.reload()
                                                 }}
                                                 className='shadow'
                                                 variant='contained'
