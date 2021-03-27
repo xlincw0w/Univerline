@@ -15,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { useParams } from 'react-router-dom'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
+import { Container, Grid } from '@material-ui/core'
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -138,8 +139,8 @@ export default function Publications() {
         }
 
         return (
-            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
-                <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
+            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
+                <div className='bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
@@ -152,14 +153,14 @@ export default function Publications() {
                         </div>
                     </div>
                 </div>
-                <div className='h-auto'>
-                    <div className='h-auto'>
+                <div>
+                    <div>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                             <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -194,7 +195,7 @@ export default function Publications() {
                         </div>
                     </div>
                     {loadComment && (
-                        <div className='w-full h-auto bg-gray-100 shadow rounded'>
+                        <div className=' bg-gray-100 shadow rounded'>
                             <form className='w-full' onSubmit={handleComment}>
                                 <input
                                     type='text'
@@ -205,7 +206,7 @@ export default function Publications() {
                                 />
                                 <button type='submit' className='hidden'></button>
                             </form>
-                            <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                            <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
@@ -215,7 +216,7 @@ export default function Publications() {
                                         </div>
                                     )}
                                 </Backdrop>
-                                <div className='w-full h-auto'>
+                                <div>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
                                     })}
@@ -298,9 +299,9 @@ export default function Publications() {
         }
 
         return (
-            <div key={elem.id_poste} className='w-100 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
                 <div
-                    className='h-1/4 shadow-xl rounded-xl cursor-pointer
+                    className='shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -314,20 +315,20 @@ export default function Publications() {
                         </div>
                         {elem.id_user === user.id && (
                             <div className='flex flex-row-reverse'>
-                                <div className='mt-5 mr-4'>
+                                <div className='mt-5'>
                                     <Options elem={elem} />
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-                <div className='h-auto'>
-                    <div className='h-auto'>
+                <div>
+                    <div>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -358,7 +359,7 @@ export default function Publications() {
                         </div>
                     </div>
                     {loadComment && (
-                        <div className='w-full h-auto bg-gray-100 shadow rounded'>
+                        <div className=' bg-gray-100 shadow rounded'>
                             <form className='w-full' onSubmit={handleComment}>
                                 <input
                                     type='text'
@@ -369,7 +370,7 @@ export default function Publications() {
                                 />
                                 <button type='submit' className='hidden'></button>
                             </form>
-                            <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                            <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
@@ -379,7 +380,7 @@ export default function Publications() {
                                         </div>
                                     )}
                                 </Backdrop>
-                                <div className='w-full h-auto'>
+                                <div>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
                                     })}
@@ -393,35 +394,50 @@ export default function Publications() {
     }
 
     return (
-        <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
-            <div>
+        <Container maxWidth='md'>
+            <Grid container spacing={3}>
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return <StudSkeleton elem={elem} />
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <StudSkeleton elem={elem} />
+                                </Grid>
+                            )
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return <ProfSkeleton elem={elem} />
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <ProfSkeleton elem={elem} />
+                                </Grid>
+                            )
                         }
                     })}
-            </div>
-            <div>
+
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return <StudSkeleton elem={elem} />
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <StudSkeleton elem={elem} />
+                                </Grid>
+                            )
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return <ProfSkeleton elem={elem} />
+                            return (
+                                <Grid item lg={6} md={6} sm={12} xs={12}>
+                                    <ProfSkeleton elem={elem} />
+                                </Grid>
+                            )
                         }
                     })}
-            </div>
-        </div>
+            </Grid>
+        </Container>
     )
 }
