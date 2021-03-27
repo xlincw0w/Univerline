@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-<<<<<<< HEAD
-import { useSelector,useDispatch  } from 'react-redux'
-import  { constants } from '../../../constants'
-import { SetContact } from '../../../store/auth/auth'
-import { deepPurple } from '@material-ui/core/colors';
-=======
 import { useSelector, useDispatch } from 'react-redux'
 import { constants } from '../../../constants'
 import { SetFriends } from '../../../store/auth/auth'
 import { deepPurple } from '@material-ui/core/colors'
->>>>>>> 186b59d1e2e12cf2336be5101c3a374f94ae4156
 import Axios from 'axios'
 import img from '../img/1.jpg'
 import img2 from '../img/2.jpg'
@@ -34,63 +27,12 @@ const useStyles = makeStyles((theme) => ({
 export default function partie1(props) {
     const { onclick2 } = props
 
-<<<<<<< HEAD
-    const [searchUser, setsearchUser]= useState('')
-
-    const dispatch = useDispatch()
-    const user = useSelector((state) => state.AuthReducer.user)
-    const contact = useSelector((state) => state.AuthReducer.contact)
-    
-    
-
-//     useEffect(() => {
-//         if(user.user_type === 'etudiant'){
-//             Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
-//                 .then((res) => {
-//                     dispatch(SetFriends(res.data))
-//                 }).catch((err) => {
-//                     dispatch(SetFriends([]))
-//                 })
-                    
-//         }else if (user.user_type ==='professeur'){
-//             Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
-//                 .then((res) => {
-//                     dispatch(SetFriends(res.data))
-//                 }).catch((err) => {
-//                     dispatch(SetFriends([]))
-//                 })
-                  
-//         }
-            
-                
-        
-//     }, [user.id])
-// console.log(friends)
-
-
-        useEffect(() => {
-            Axios.get( constants.url + 'api/historique/get/historique' + user.id)
-            .then((resulta) =>{
-                dispatch(SetContact (resulta.data))
-            })
-            .catch((eror) => {
-                dispatch ( SetContact([]))
-            })
-
-         
-        }, [user.id])
-   
-   
-   
-const users = {
-=======
     const [searchUser, setsearchUser] = useState('')
     const dispatch = useDispatch()
     const user = useSelector((state) => state.AuthReducer.user)
     const friends = useSelector((state) => state.AuthReducer.friends)
 
     const users = {
->>>>>>> 186b59d1e2e12cf2336be5101c3a374f94ae4156
         utilisateurs: [
             {
                 id: 1,
@@ -159,16 +101,7 @@ const users = {
     }
 
     const classes = useStyles()
-<<<<<<< HEAD
-    const lent = contact.length
-    
-    
-  
-
-    
-=======
     const lent = friends.length
->>>>>>> 186b59d1e2e12cf2336be5101c3a374f94ae4156
 
     return (
         <Grid container xs={3} style={{ height: '89vh', borderRight: '1px solid rgb(202, 202, 202)' }}>
@@ -213,29 +146,5 @@ const users = {
                 )}
             </Grid>
         </Grid>
-<<<<<<< HEAD
-        <Grid xs={12} className='over' style={{ height: '77%' }}>
-            {  lent != 0 ?
-            contact.filter((user) => {
-                const rech = user.nom + ' ' + user.prenom + ' ' + user.nom
-                const rech2= user.nom+user.prenom
-                const rech3=user.prenom+user.nom
-                
-                if (searchUser === ''){
-                    return user
-                }else if (rech.toLowerCase().includes(searchUser.toLowerCase()) || rech2.toLowerCase().includes(searchUser.toLowerCase()) || rech3.toLowerCase().includes(searchUser.toLowerCase()) ){
-                    return user
-                }
-            }
-
-            ).map(user => (
-                
-                 <Users user={user} onclick={onclick2} />
-                
-                 )) : <h1 style={{textAlign:'center'}}>Aucun ami disponible</h1>}
-        </Grid>
-    </Grid>
-=======
->>>>>>> 186b59d1e2e12cf2336be5101c3a374f94ae4156
     )
 }

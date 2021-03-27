@@ -1,4 +1,4 @@
-import React , {useState}from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import { BsPencilSquare } from 'react-icons/bs'
 import { BsTrash } from 'react-icons/bs'
@@ -9,26 +9,15 @@ import { constants } from '../../constants'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import { AiOutlineUserDelete } from 'react-icons/ai'
 import { BiMailSend } from 'react-icons/bi'
-<<<<<<< HEAD
-import { useHistory } from 'react-router-dom'
-import Partie2 from '../Messagerie/Partie2/partie2'
-import Partie3 from '../Messagerie/Partie3/partie3'
-=======
 import { Grid } from '@material-ui/core'
->>>>>>> 186b59d1e2e12cf2336be5101c3a374f94ae4156
 
 export default function MenuModif() {
-    const [controle, setControle] = useState([])
     const dispatch = useDispatch()
     const modify = useSelector((state) => state.ProfileReducer.modify)
     const user_info = useSelector((state) => state.ProfileReducer.user_info)
     const user = useSelector((state) => state.AuthReducer.user)
     const friend = useSelector((state) => state.ProfileReducer.friend)
     const pending = useSelector((state) => state.ProfileReducer.pending)
-    const contact = useSelector((state)=> state.AuthReducer.contact)
-    const [nom, setnom] = useState('')
-    const [prenom, setprenom] = useState('')
-    const [avatar, setavatar] = useState()
 
     const handleUpdate = () => {
         Axios.post(constants.url + '/api/profile/update', { ...user_info })
@@ -154,41 +143,11 @@ export default function MenuModif() {
                 dispatch(RefreshProfile())
             })
     }
-    const history = useHistory()
-
-    const handleCntctBtn= () =>{
-        
-     
-
-        Axios.all([
-             Axios.post(constants.url + '/api/historique/add/historique', {
-            id_user : user.id,
-            id_contact : user_info.id_user, 
-            
-        }),
-            Axios.post(constants.url + '/api/historique/add/historique', {
-                id_user : user_info.id_user,
-                id_contact : user.id, 
-            })
-        ])
-
-        history.push('/messagerie')
-
-        setnom(user_info.nom)
-        setprenom(user_info.prenom)
-        setavatar(user_info.avatar)
-        
-
-        
-    }
-
-
 
     return (
         <div className='mt-8 ml-3'>
             {user_info.id_user === user.id && (
                 <div>
-
                     {!modify && (
                         <Button
                             onClick={() => {
@@ -244,7 +203,6 @@ export default function MenuModif() {
                                             onClick={() => {
                                                 // dispatch(SetModify(false))
                                                 // dispatch(RefreshProfile())
-                                                handleCntctBtn()
                                             }}
                                             variant='outlined'
                                             color='default'>
@@ -314,7 +272,6 @@ export default function MenuModif() {
                                             onClick={() => {
                                                 // dispatch(SetModify(false))
                                                 // dispatch(RefreshProfile())
-                                                handleCntctBtn()
                                             }}
                                             variant='outlined'
                                             color='default'>
@@ -386,7 +343,6 @@ export default function MenuModif() {
                                     onClick={() => {
                                         // dispatch(SetModify(false))
                                         // dispatch(RefreshProfile())
-                                        handleCntctBtn()
                                     }}
                                     variant='outlined'
                                     color='default'>
@@ -400,9 +356,6 @@ export default function MenuModif() {
                     </div>
                 </div>
             )}
-            <Partie2 FirstName={nom} LastName={prenom} Image={avatar}/>
-
-            <Partie3  FirstName={nom} LastName={prenom} Image={avatar}/>
         </div>
     )
 }
