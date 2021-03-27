@@ -315,7 +315,7 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
-                                                className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
+                                                className=' sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_ens}
                                                 onChange={e =>
                                                     dispatch(
@@ -335,7 +335,7 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
-                                                className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
+                                                className=' sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.email}
                                                 onChange={e =>
                                                     dispatch(
