@@ -12,7 +12,7 @@
 /*Ceci est un PC*/
 @media(min-width:1200px){
     .containeur{
-        width: 85%;
+        width: 81%;
         margin: auto;
     }
 }
