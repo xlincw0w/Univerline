@@ -18,6 +18,7 @@ import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signu
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from 'react-loader-spinner'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
@@ -274,7 +275,13 @@ const Inscription = (props) => {
                                 {step === 'auth' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <Loader
+                                                type='Circles'
+                                                color='#00BFFF'
+                                                height={120}
+                                                width={120}
+                                                timeout={3000} //3 secs
+                                            />
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-6 2xl:mt-16 font-sans font-black'>Créer un compte.</p>
                                         <div className='mt-5 2xl:mt-20 flex'>
@@ -428,7 +435,13 @@ const Inscription = (props) => {
                                 {step === 'confirmemail' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <Loader
+                                                type='Circles'
+                                                color='#00BFFF'
+                                                height={120}
+                                                width={120}
+                                                timeout={3000} //3 secs
+                                            />
                                         </Backdrop>
                                         <div className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             <div className='text-gray-900 flex justify-center'>
