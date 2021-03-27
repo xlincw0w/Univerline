@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector,useDispatch  } from 'react-redux'
 import  { constants } from '../../../constants'
-import { SetFriends } from '../../../store/auth/auth'
+import { SetContact } from '../../../store/auth/auth'
 import { deepPurple } from '@material-ui/core/colors';
 import Axios from 'axios'
 import img from '../img/1.jpg'
@@ -35,24 +35,49 @@ export default function partie1(props) {
      
 
     const [searchUser, setsearchUser]= useState('')
+
     const dispatch = useDispatch()
     const user = useSelector((state) => state.AuthReducer.user)
-    const friends = useSelector((state) => state.AuthReducer.friends)
+    const contact = useSelector((state) => state.AuthReducer.contact)
     
     
 
-    useEffect(() => {
-        
-            Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
-                .then((res) => {
-                    dispatch(SetFriends(res.data))
-                }).catch((err) => {
-                    dispatch(SetFriends([]))
-                })
+//     useEffect(() => {
+//         if(user.user_type === 'etudiant'){
+//             Axios.get(constants.url + '/api/amis/get/amis/' + user.id)
+//                 .then((res) => {
+//                     dispatch(SetFriends(res.data))
+//                 }).catch((err) => {
+//                     dispatch(SetFriends([]))
+//                 })
+                    
+//         }else if (user.user_type ==='professeur'){
+//             Axios.get(constants.url + '/api/collegue/get/collegue/ens/' + user.id)
+//                 .then((res) => {
+//                     dispatch(SetFriends(res.data))
+//                 }).catch((err) => {
+//                     dispatch(SetFriends([]))
+//                 })
+                  
+//         }
+            
                 
         
-    }, [user.id])
+//     }, [user.id])
+// console.log(friends)
 
+
+        useEffect(() => {
+            Axios.get( constants.url + 'api/historique/get/historique' + user.id)
+            .then((resulta) =>{
+                dispatch(SetContact (resulta.data))
+            })
+            .catch((eror) => {
+                dispatch ( SetContact([]))
+            })
+
+         
+        }, [user.id])
    
    
    
@@ -129,7 +154,7 @@ const users = {
     }
 
     const classes = useStyles()
-    const lent = friends.length
+    const lent = contact.length
     
     
   
@@ -155,7 +180,7 @@ const users = {
         </Grid>
         <Grid xs={12} className='over' style={{ height: '77%' }}>
             {  lent != 0 ?
-            friends.filter((user) => {
+            contact.filter((user) => {
                 const rech = user.nom + ' ' + user.prenom + ' ' + user.nom
                 const rech2= user.nom+user.prenom
                 const rech3=user.prenom+user.nom

@@ -18,6 +18,7 @@ const initState = {
 
     classes: [],
     friends: [],
+    contact: [],
 
     failedAuth: false,
     loader: false,
@@ -29,7 +30,12 @@ const SET_CLASSES = 'SET_CLASSES'
 const RESET_AUTH = 'RESET_STATE'
 const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
 const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
+const SET_CONTACT = 'SET_CONTACT'
 
+export const SetContact= (payload) =>({
+    type: SET_CONTACT,
+    payload,
+})
 export const SetUser = (payload) => ({
     type: SET_USER,
     payload,
@@ -61,6 +67,11 @@ export const ResetAuthState = () => ({
 
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
+        case SET_CONTACT:
+            return {
+                ...state,
+                contact:action.payload,
+            }
         case SET_USER:
             return {
                 ...state,

@@ -3,6 +3,7 @@ import Partie1 from './Partie1/partie1'
 import Partie2 from './Partie2/partie2'
 import Partie3 from './Partie3/partie3'
 import Grid from '@material-ui/core/Grid'
+import { useHistory } from 'react-router-dom'
 
 
 export default function messagerie() {
@@ -13,6 +14,7 @@ export default function messagerie() {
     const [LastName, setLastName] = useState('Inconnu')
     const [Statu, setStatu] = useState('Inconnu')
     const [Image, setImage] = useState()
+    const history = useHistory()
 
     
 
@@ -22,6 +24,7 @@ export default function messagerie() {
         setLastName(user.nom)
         setImage(user.avatar)
         setStatu(user.user_type)
+        
     }
 
     return (
