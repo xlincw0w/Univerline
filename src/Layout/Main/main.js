@@ -104,13 +104,7 @@ const Main = () => {
                                     return (
                                         <Backdrop open={true} style={{ zIndex: 10 }} className='bg-gray-800'>
                                             <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
-                                                <Loader
-                                                    type='Circles'
-                                                    color='#00BFFF'
-                                                    height={120}
-                                                    width={120}
-                                                    timeout={3000} //3 secs
-                                                />
+                                                <Loader type='Circles' color='#00BFFF' height={120} width={120} />
                                             </div>
                                         </Backdrop>
                                     )

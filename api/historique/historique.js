@@ -4,12 +4,12 @@ const db = require('../database')
 const moment = require('moment')
 
 
-router.route('/add/historique/:id?').post((req, res) => {
-        id_user= req.params.id
+router.route('/add/historique/').post((req, res) => {
+        //id_user= req.params.id
 
     db('historique')
         .insert({
-         id_user:id_user,
+         id_user:req.body.id_user,
          id_contact:req.body.id_contact,
          createAt:moment().format()
         })
@@ -22,11 +22,12 @@ router.route('/add/historique/:id?').post((req, res) => {
         })
 })
 router.route('/get/historique/:id?').get((req, res) => {
-    id_user= req.params.id
+    id_u= req.params.id
+    //console.logˇ('his:',id_u)
 
-db('historique')
-.select('*')
-.where('id_user', id_user)
+    db('users')
+    .whereIn('id_user', db('historique').where({ id_user: id_u }).select('id_contact'))
+    .select('*')
     .then((rows) => {
         res.json(rows)
     })

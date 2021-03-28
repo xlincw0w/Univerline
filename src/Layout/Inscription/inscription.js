@@ -18,6 +18,7 @@ import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signu
 import { Backdrop } from '@material-ui/core'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Loader from 'react-loader-spinner'
 
 import { constants } from '../../constants'
 import Axios from 'axios'
@@ -255,7 +256,7 @@ const Inscription = (props) => {
                                         {step === 'auth' && (
                                             <div>
                                                 <p className='pt-34 lg:pt-60 2xl:pt-96 px-10 lg:px-30 2xl:px-60 text-xl text-gray-300 text-center'>
-                                                    Vous possedez déja un compte ?
+                                                    Vous possedez déjà un compte ?
                                                 </p>
                                                 <div className='mx-auto table mt-5'>
                                                     <Button
@@ -274,7 +275,7 @@ const Inscription = (props) => {
                                 {step === 'auth' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <Loader type='Circles' color='#00BFFF' height={120} width={120} />
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-6 2xl:mt-16 font-sans font-black'>Créer un compte.</p>
                                         <div className='mt-5 2xl:mt-20 flex'>
@@ -428,14 +429,14 @@ const Inscription = (props) => {
                                 {step === 'confirmemail' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <Loader type='Circles' color='#00BFFF' height={120} width={120} />
                                         </Backdrop>
                                         <div className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             <div className='text-gray-900 flex justify-center'>
                                                 <FaFeatherAlt size={100} />
                                             </div>
                                             <div className='mt-12 px-5'>
-                                                Un e-mail de vérification a été envoyé a <span className='text-purple-800 text-xl'> {user.email} </span>
+                                                Un e-mail de vérification a été envoyé à <span className='text-purple-800 text-xl'> {user.email} </span>
                                             </div>
                                         </div>
                                         <div className='mt-20 2xl:mt-40 text-xl text-gray-500 text-center'>
@@ -479,7 +480,9 @@ const Inscription = (props) => {
                                 {step === 'whoyouare' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader type='Circles' color='#00BFFF' height={120} width={120} />
+                                            </div>
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             Etes vous <span className='text-purple-800'>Enseignant</span> ou <span className='text-green-600'>Etudiant </span>?
@@ -525,7 +528,15 @@ const Inscription = (props) => {
                                 {step === 'formEns' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader
+                                                    type='Circles'
+                                                    color='#00BFFF'
+                                                    height={120}
+                                                    width={120}
+                                                    timeout={3000} //3 secs
+                                                />
+                                            </div>
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             Bienvenue cher <span className='text-purple-800'>Enseignant</span>!
@@ -619,7 +630,9 @@ const Inscription = (props) => {
                                 {step === 'formEtu' && (
                                     <div className='bg-gray-50 h-full rounded-xl'>
                                         <Backdrop open={loader} style={{ zIndex: 10 }}>
-                                            <CircularProgress color='inherit' />
+                                            <div className='w-screen h-screen bg-gray-800 flex justify-center items-center'>
+                                                <Loader type='Circles' color='#00BFFF' height={120} width={120} />
+                                            </div>
                                         </Backdrop>
                                         <p className='text-gray-800 text-4xl text-center mt-16 font-sans font-black'>
                                             Bienvenue cher <span className='text-green-600'>Etudiant</span> !
@@ -739,6 +752,7 @@ const Inscription = (props) => {
                                             <Button
                                                 onClick={() => {
                                                     history.push('/')
+                                                    location.reload()
                                                 }}
                                                 className='shadow'
                                                 variant='contained'

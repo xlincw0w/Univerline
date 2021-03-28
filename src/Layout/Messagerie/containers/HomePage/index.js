@@ -192,7 +192,7 @@ const HomePage = (props) => {
     scrollToBottom()
 
 
-  }
+  } 
   const submitMessage = (e) => {
     e.preventDefault()
 

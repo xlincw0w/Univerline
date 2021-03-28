@@ -164,10 +164,11 @@ export default function Dropdown(props) {
                             }}
                             className={classes.typography}>
                             <div>
-                                <CgProfile size={25} className='inline pr-2' />
+                                <CgProfile size={26} className='inline pr-2 pb-1' />
                                 <p className='cursor-pointer inline'>Profil</p>
                             </div>
                         </Typography>
+                        <hr className='w-2/3 mx-auto' />
                         <Typography onClick={props.disconnect} className={classes.typography}>
                             <div>
                                 <FiLogOut size={25} className='inline pr-2' />
