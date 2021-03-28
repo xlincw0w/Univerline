@@ -15,7 +15,7 @@ import { deepPurple } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '300px',
+        maxWidth: '300px',
         margin: '5px'
     },
     media: {

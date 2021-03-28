@@ -81,6 +81,7 @@ module.exports = {
         extensions: ['.js', '.json', '.ts', '.tsx'],
     },
 
+
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html',
