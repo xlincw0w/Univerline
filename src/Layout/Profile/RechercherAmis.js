@@ -16,7 +16,7 @@ export default function RechercherAmis() {
 
     return (
         <div noValidate autoComplete='off'>
-            <TextField id='outlined-basic' label='Rechercher parmis les amis hhh' variant='outlined' />
+            <TextField id='outlined-basic' label='Rechercher parmis les amis' variant='outlined' />
         </div>
     )
 }
