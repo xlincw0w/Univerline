@@ -42,9 +42,11 @@ export default function ProfileNv() {
         Axios.get(constants.url + '/api/profile/' + routeParams.id)
             .then((res) => {
                 dispatch(SetUserInfo(res.data))
+                dispatch(SetLoader(false))
             })
             .catch((err) => {
                 dispatch(SetUserInfo([]))
+                dispatch(SetLoader(false))
             })
 
         if (user.id !== routeParams.id) {
@@ -83,8 +85,6 @@ export default function ProfileNv() {
                         dispatch(SetLoader(false))
                     })
             }
-        } else {
-            dispatch(SetLoader(false))
         }
     }, [reset, user, routeParams.id])
 

@@ -17,6 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
 import { BsReplyFill } from 'react-icons/bs'
+import Loader from 'react-loader-spinner'
 
 const Skeleton = () => {
     const dispatch = useDispatch()
@@ -229,7 +230,7 @@ const Skeleton = () => {
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
                                             <div className='mt-10'>
-                                                <CircularProgress color='inherit' />
+                                                <Loader type='Circles' color='#00BFFF' height={50} width={50} />
                                             </div>
                                         </div>
                                     )}
@@ -397,7 +398,7 @@ const Skeleton = () => {
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
                                             <div className='mt-10'>
-                                                <CircularProgress color='inherit' />
+                                                <Loader type='Circles' color='#00BFFF' height={50} width={50} />
                                             </div>
                                         </div>
                                     )}
