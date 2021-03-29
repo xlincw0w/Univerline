@@ -65,8 +65,8 @@ const OnlineSm = ({ id, nom, prenom, avatar, user_type }) => {
     return (
       
         <div key={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff <= 0 || diff > 630 ? true : false })}>
-            <div className='mx-auto mt-3 flex flex-row' >
-                <div>
+            <div className='mx-auto mt-3 grid grid-rows-2' >
+                <div className="ml-4">
                     <StyledBadge
                         overlap='circle'
                         anchorOrigin={{
@@ -78,9 +78,9 @@ const OnlineSm = ({ id, nom, prenom, avatar, user_type }) => {
                         <Avatar alt='Remy Sharp' src={avatar} />
                     </StyledBadge>
                 </div>
-                <div className=''>
-                    <p className='text-xm text-gray-500'>{nom.capitalize() + ' ' + prenom.capitalize()}</p>
-                    <p className={cx('text-sm', { 'text-green-600': user_type === 'etudiant', 'text-purple-700': user_type === 'enseignant' })}>{user_type.capitalize()}</p>
+                <div>
+                    <p style={{'fontSize':'0.75rem'}} className='text-gray-500'>{nom.capitalize() + ' ' + prenom.capitalize()}</p>
+                    <p style={{'fontSize':'0.75rem'}}  className={cx('text-xm', { 'text-green-600': user_type === 'etudiant', 'text-purple-700': user_type === 'enseignant' })}>{user_type.capitalize()}</p>
                 </div>
              
             </div>
