@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { getRealtimeUsers, updateMessage, getRealtimeConversations } from '../../actions';
 import Layout from '../../componenents/Layout';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Scroll from 'react-scroll';
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
+
+
 
 import Divider from '@material-ui/core/Divider';
 import AvatarUsers from '../../components/AvatarUsers'
@@ -15,6 +20,7 @@ import Typography from '@material-ui/core/Typography';
 import AmiCard from '../../components/AmiCard'
 import UserInfo from '../../components/UserInfo'
 import './style.css';
+import './MyStyle.css'
 
 import MonMessage from "../../components/MonMessage"
 import LeurMessage from "../../components/LeurMessage"
@@ -23,6 +29,7 @@ import { BsFillImageFill } from "react-icons/bs"
 import { IoSend } from "react-icons/io5"
 import { filter } from 'lodash'
 import Axios from 'axios'
+import FileModal from './FileModal'
 
 const User = (props) => {
 
@@ -58,7 +65,19 @@ const HomePage = (props) => {
   const user_info = useSelector((state) => state.ProfileReducer.user_info)
   const profile_friends = useSelector((state) => state.ProfileReducer.friends)
   const [filterWord, updateFilter] = useState('')
+  const [modal, setModal] = useState(false);
 
+  const scroll = Scroll.animateScroll;
+
+  const messagesEndRef = useRef(null)
+
+
+  const openModal = () => {
+    setModal(true);
+  }
+  const closeModal = () => {
+    setModal(false);
+  }
 
 
   {/*********** *
@@ -150,14 +169,16 @@ const HomePage = (props) => {
   //console.log(user);
 
   //componentWillUnmount
-  /* useEffect(() => {
+  /*
+   useEffect(() => {
      { }
      return () => {
        //cleanup
        unsubscribe.then(f => f()).catch(error => console.log(error));
  
      }
-   }, []);*/
+   }, []);
+   */
 
   const initChat = (user) => {
 
@@ -168,12 +189,13 @@ const HomePage = (props) => {
 
     dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: user.id_user }));
     console.log("ici conversations", user);
+    scrollToBottom()
 
 
   } 
   const submitMessage = (e) => {
     e.preventDefault()
-    console.log('ici envoie')
+
     console.log(friends)
     const msgObj = {
       user_uid_1: userS.id,
@@ -181,6 +203,7 @@ const HomePage = (props) => {
       user_uid_2: userUid,
       message
     }
+
 
 
     if (message !== "") {
@@ -191,208 +214,141 @@ const HomePage = (props) => {
       console.log(msgObj)
     }
 
+  }
 
 
+  const uploadFile = (file, metadata) => {
+    const fileF = []
   }
 
   return (
     <>
-      {/**
-       * 
-       <section className="container">
-        <div className="listOfUsers">
+      <Grid container direction="row" alignItems="stretch" style={{ height: '90vh' }} >
+        <Grid item sm={3} xs={!chatStarted ? 12 : 5}  >
+          {/*****Liste ami */}
+          <Card style={{ backgroundColor: '#f0f7f7', }}>
+            <Grid container direction="column">
+              <Grid item >
+                <Card style={{ backgroundColor: '#f0f7f7' }}>
+                  <Typography variant='h4' style={{ padding: '10px' }}>
+                    Messagerie
+                  </Typography>
+                  <TextField
+                    style={{ marginLeft: "15px", marginTop: '20px', marginBottom: '20px', width: '88%' }}
+                    variant="outlined"
+                    label="Chercher un ami"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <BsSearch color='action' />
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => updateFilter(e.target.value)}
+                    fullWidth
+                  />
+                </Card>
 
-          {
-            user.users.length > 0 ?
-              user.users.map(user => {
-                return (
-                  <User
-                    onClick={initChat}
+              </Grid>
+              <Grid item >
+                <Card style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '68vh' }} >
 
-                    key={user.uid}
-                    user={user} />
-                );
-              }) : null
-          }
+                  {filter(friends, (o) => {
+                    let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
+                    return searchIn.includes(filterWord)
+                  }).map((elem) => {
+                    return (
+                      <AmiCard onClick={initChat}
+                        key={elem.id_user}
+                        user={elem} />
+                    )
+                  })}
+                </Card>
 
+              </Grid>
 
+            </Grid>
 
-
-
-        </div>
-        <div className="chatArea">
-          <div className="chatHeader">
-            {
-              chatStarted ? chatUser : ''
-            }
-          </div>
-          <div className="messageSections">
-            {
-              chatStarted ?
-                user.conversations.map(con =>
-                  <div style={{ textAlign: con.user_uid_1 == auth.uid ? 'right' : 'left' }}>
-                    <p className="messageStyle" >{con.message}</p>
-                  </div>)
-                : null
-            }
-
-          </div>
-          {
-            chatStarted ?
-              <div className="chatControls">
-
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Write Message" />
-                <button onClick={submitMessage}>Send</button>
-              </div> : null
-
-          }
-
-        </div>
-      </section>
-       */}
-      <Grid container direction="row" style={{ height: '90vh' }} >
-
-
-        <Grid item sm={3} xs={5}  >
-          <Card style={{ backgroundColor: '#f0f7f7', minHeight: '100%', }}>
-            <Typography variant='h4' style={{ padding: '10px' }}>
-              Messagerie
-            </Typography>
-
-
-            <TextField
-              style={{ marginLeft: "15px", marginTop: '20px', marginBottom: '20px', width: '88%' }}
-              variant="outlined"
-              label="Chercher un ami"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <BsSearch color='action' />
-                  </InputAdornment>
-                ),
-              }}
-              onChange={(e) => updateFilter(e.target.value)}
-              fullWidth
-            />
-            <div className="mylistami">
-              {/**
-              * 
-              * <ListAmis initChat={initChat}
-                user={user}
-              />
-              */}
-              <div style={{ padding: '10px' }}>
-
-                {filter(friends, (o) => {
-                  let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
-                  return searchIn.includes(filterWord)
-                }).map((elem) => {
-                  return (
-
-                    <AmiCard onClick={initChat}
-
-                      key={elem.id_user}
-                      user={elem} />
-
-                  )
-                })}
-
-                {/*************** */}
-
-              </div>
-            </div>
 
           </Card>
         </Grid>
 
-        <Grid item sm={6} xs={7} >
-          <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }}>
+
+
+        <Grid item sm={6} xs={chatStarted ? 7 : null} >
+          <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }} >
             {/***************************************************************************
          * Le Chat Feed
          */}
-            <Grid container direction="column" alignItems="stretch">
-              <Grid item>
+
+            <Grid container direction="column" >
+              <Grid item  >
                 <div className="chat-feed">
-                  <div className="chat-title-container" >
-                    {
-                      chatStarted ?
-                        <Grid container justify="center" spacing={1}>
-                          <Grid item>
-                            <AvatarUsers user={chatUser} userAvatar={userAvatar} />
-                          </Grid>
-                          <Grid item>
-                            <div className="chat-title">
-                              {chatUser}
-                            </div>
-
-
-                          </Grid>
-
-                        </Grid> : ''
-
-                    }
-                  </div>
-                  <div className="messageSections">
+                  <div className="messageSections"  >
                     {
                       chatStarted ?
                         conversations.map(con => <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
-                          <p className="messageStyle" >{con.message}</p>
+                          <p className="messageStyle" style={{ backgroundColor: con.user_uid_1 == userS.id ? '#0277bd' : '#0097a7', maxWidth: '60%' }} >{con.message}
+                          </p>
+
                         </div>)
                         : null
                     }
 
+
                   </div>
-
-
-
                 </div>
+
 
               </Grid>
               <Grid item >
 
-
-
                 <form className="formulaire" onSubmit={submitMessage}>
+                  <Grid container direction="row">
+                    <Grid item sm={10} xs={8}>
+                      <input className="champEnvoi" onChange={(e) => setMessage(e.target.value)}
+                        value={message}
+                        placeholder='votre message...'
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item sm={1} xs={2}>
+                      <IconButton aria-label="img" >
+                        <BsFillImageFill onClick={openModal} />
+                      </IconButton>
+                      <FileModal
+                        modal={modal}
+                        closeModal={closeModal}
+                        uploadFile={uploadFile}
 
-                  <input className="champEnvoi" onChange={(e) => setMessage(e.target.value)}
-                    value={message}
-                    placeholder='votre message...'
-                  />
-                  <IconButton aria-label="img" style={{ marginLeft: '5px' }}>
-                    <BsFillImageFill />
-                  </IconButton>
-                  <IconButton aria-label="send" style={{ marginLeft: '10px' }}>
-                    <IoSend onClick={submitMessage} />
-                  </IconButton>
-
+                      />
+                    </Grid>
+                    <Grid item sm={1} xs={2}>
+                      <IconButton aria-label="send" >
+                        <IoSend onClick={submitMessage} />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
                 </form>
-
-
-
               </Grid>
             </Grid>
-            {/**************************************************************************
-          * fin chat feed
-          */}
           </Card>
-
-
         </Grid>
-
-
-
-
-        <Grid item sm={3}  >
-          <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }}>
+        {/**************************************************************************
+          * UserINFO
+          */}
+        <Grid item sm={3}   >
+          <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }} >
             {
               chatStarted ? <UserInfo user={chatUser} userAvatar={userAvatar} /> : null
             }
 
           </Card>
         </Grid>
+
+
+
+
 
       </Grid>
 

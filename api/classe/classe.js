@@ -130,5 +130,20 @@ router.route('/delete/classe/:id?').delete((req, res) => {
             res.json({ err: true })
         })
 })
+//les adherant d une classe 
+router.route('/get/classe/ad/:id?').get((req, res) => {
+    const id = req.params.id
+    db('users')
+    .select('*')
+    .whereIn('id_user', (db('adherant').select('id_etu').where({ id_classe: id })))
+   
+        .then((resp) => {
+            res.json(resp)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json(err)
+        })
+})
 
 module.exports = router

@@ -47,7 +47,15 @@ const useStyles = makeStyles((theme) => ({
     color: {
         color: theme.palette.getContrastText(deepPurple[500]),
         backgroundColor: deepPurple[500]
-    }
+    },
+    small: {
+        width: theme.spacing(3),
+        height: theme.spacing(3),
+    },
+    large: {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
+    },
 }));
 
 export default function AvatarUsers(props) {
@@ -66,7 +74,7 @@ export default function AvatarUsers(props) {
                 }}
                 variant="dot"
             >
-                <Avatar alt="Remy Sharp" className={classes.color} src={avatar} >C</Avatar>
+                <Avatar className={classes.small} alt="Remy Sharp" src={avatar} >C</Avatar>
             </StyledBadge>
 
         </div>

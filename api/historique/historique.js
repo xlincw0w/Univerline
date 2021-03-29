@@ -22,11 +22,12 @@ router.route('/add/historique/').post((req, res) => {
         })
 })
 router.route('/get/historique/:id?').get((req, res) => {
-    id_user= req.params.id
+    id_u= req.params.id
+    //console.logˇ('his:',id_u)
 
-db('historique')
-.select('*')
-.where('id_user', id_user)
+    db('users')
+    .whereIn('id_user', db('historique').where({ id_user: id_u }).select('id_contact'))
+    .select('*')
     .then((rows) => {
         res.json(rows)
     })
