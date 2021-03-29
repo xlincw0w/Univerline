@@ -2,6 +2,19 @@
 @media(max-width:700px){
     .containeur{
         width: 100%;
+        margin: auto;
+    }
+
+    .centrerInformation{
+        width: 80%;
+        /* border: 1px solid rgb(15, 11, 11); */
+        text-align: center;
+    }
+
+    .rendreInline{
+        display: inline-block;
+        width: 100%;
+        /* border: 1px solid rgb(15, 14, 14); */
     }
 }
 /*Ceci est un PC*/
@@ -14,7 +27,23 @@
 /*Ceci est une tablette*/
 @media(min-width:700px) and (max-width:1200px){
     .containeur{
-        width: 85%;
+        width: 90%;
         margin: auto;
+    }
+
+    .centrerInformation{
+        width: 80%;
+        /* border: 1px solid rgb(15, 11, 11); */
+        text-align: center;
+    }
+
+    .rendreInline{
+        display: inline-block;
+        width: 100%;
+        /* border: 1px solid rgb(15, 14, 14); */
+    }
+
+    .taille{
+        width: 10px;
     }
 }
