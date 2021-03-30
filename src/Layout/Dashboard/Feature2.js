@@ -12,7 +12,7 @@ export default function Feature2() {
     const friends = useSelector((state) => state.AuthReducer.friends)
 
     return (
-        <div className='bg-white rounded-2xl h-4/6 w-5/6  mt-2 shadow-xl overflow-y-scroll md:visible'>
+        <div className='bg-white rounded-xl h-3/6 w-5/6 mx-1 mt-5 shadow-2xl overflow-y-scroll md:visible'>
             <div className='text-gray-700 text-base'>
                 <div className='inline-block ml-4 mt-4'>
                     <div className='pl-6 inline-block md:pl-0'>

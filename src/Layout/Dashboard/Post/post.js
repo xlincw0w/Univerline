@@ -122,7 +122,7 @@ const Post = () => {
     }
 
     return (
-        <div className='w-full mx-auto shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
+        <div className='w-full shadow-xl bg-gray-100 rounded border-indigo-900 border-opacity-60 mt-6'>
             <div className=''>
                 <textarea
                     type='text'
@@ -174,7 +174,7 @@ const Post = () => {
                 <div className='grid grid-cols-4 rounded-xl  shadow-xl mx-auto'>
                     <div className='col-span-1 w-full flex'>
                         <div className='mt-3 ml-2'>
-                            <BiImageAdd onClick={() => imageInput.current.click()} size={30} className='m-auto mt-1 inline-block mr-1 ml-2 cursor-pointer text-blue-800' />
+                            <BiImageAdd onClick={() => imageInput.current.click()} size={30} className='m-auto inline-block mr-1 ml-2 cursor-pointer hover:text-blue-800' />
                             <input
                                 type='file'
                                 accept='image/png, image/jpeg'
@@ -185,7 +185,7 @@ const Post = () => {
                                     setImgUploaded(true)
                                 }}
                             />
-                            <FiFolderPlus onClick={() => fileInput.current.click()} size={26} className='m-auto mt-1 inline-block mx-4 cursor-pointer text-blue-800' />
+                            <FiFolderPlus onClick={() => fileInput.current.click()} size={26} className='m-auto  inline-block mx-2 cursor-pointer hover:text-blue-800' />
                             <input
                                 type='file'
                                 className='hidden'

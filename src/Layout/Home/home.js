@@ -212,7 +212,7 @@ export default function Home() {
                                 onClick={() => {
                                     history.push('/inscription')
                                 }}
-                                className=' focus:outline-none mt-20 mb-12 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
+                                className=' focus:outline-none mt-20 mb-10 bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white font-medium  py-4 px-6 border border-yellow-400 hover:border-transparent rounded-full'>
                                 Rejoignez-nous
                             </button>
                         </div>

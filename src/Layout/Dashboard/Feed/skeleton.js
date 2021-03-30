@@ -17,6 +17,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
 import { BsReplyFill } from 'react-icons/bs'
+import Loader from 'react-loader-spinner'
+import { BiSend } from 'react-icons/bi'
 
 const Skeleton = () => {
     const dispatch = useDispatch()
@@ -199,13 +201,13 @@ const Skeleton = () => {
                                 onClick={() => {
                                     setLoadComment(!loadComment)
                                 }}
-                                className='inline-block mx-4 cursor-pointer hover:bg-purple-200'>
+                                className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer hover:bg-purple-200'>
+                            <div className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Partager</p>
                             </div>
                         </div>
                     </div>
@@ -217,11 +219,11 @@ const Skeleton = () => {
                                     required={true}
                                     value={payload}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md mx-auto '
+                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5  '
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='mr-20 focus:outline-none rounded-full w-10 h-10 hover:bg-purple-100 '>
-                                    <BsReplyFill size={25} className='text-purple-400 mx-auto' />
+                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-purple-100 duration-300 '>
+                                    <BiSend size={25} className='text-purple-400 mx-auto' />
                                 </button>
                             </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
@@ -229,7 +231,7 @@ const Skeleton = () => {
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
                                             <div className='mt-10'>
-                                                <CircularProgress color='inherit' />
+                                                <Loader type='Circles' color='#00BFFF' height={50} width={50} />
                                             </div>
                                         </div>
                                     )}
@@ -366,13 +368,13 @@ const Skeleton = () => {
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
                         <div className='mt-4 flex justify-start h-10 '>
-                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer hover:bg-green-50'>
-                                <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 '>Commenter</p>
+                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer hover:text-green-600'>
+                                <FaComments className='inline ' />
+                                <p className='text-gray-500 text-sm inline ml-3  hover:text-green-600 '>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer  hover:bg-green-50'>
+                            <div className='inline-block mx-4 cursor-pointer hover:text-green-600 '>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Partager</p>
                             </div>
                         </div>
                     </div>
@@ -387,8 +389,8 @@ const Skeleton = () => {
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5 '
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='ml-4 focus:outline-none rounded-full w-10 h-10 hover:bg-green-100 '>
-                                    <BsReplyFill size={25} className='text-green-400 mx-auto' />
+                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-green-100 duration-300 '>
+                                    <BiSend size={25} className='text-green-400 mx-auto' />
                                 </button>
                             </form>
 
@@ -397,7 +399,7 @@ const Skeleton = () => {
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
                                             <div className='mt-10'>
-                                                <CircularProgress color='inherit' />
+                                                <Loader type='Circles' color='#00BFFF' height={50} width={50} />
                                             </div>
                                         </div>
                                     )}

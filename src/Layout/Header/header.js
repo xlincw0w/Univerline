@@ -36,7 +36,7 @@ export default function Header() {
         if (user) {
             Axios.get(constants.url + '/api/profile/' + user.uid)
                 .then((res) => {
-                    if (!res.data.id_user) dispatch(Uncomplete(true))
+                    if (res.data && !res.data.id_user) dispatch(Uncomplete(true))
                     dispatch(
                         SetUser({
                             id: res.data.id_user,
@@ -117,15 +117,15 @@ export default function Header() {
                                             className='text-lg text-gray-700 my-auto ml-5 cursor-pointer'>
                                             <img src={univerlineLoge} className='w-14 h-12' />
                                         </p>
-                                        <p className='text-gray-500 invisible lg:visible text-base flex justify-center items-center ml-4'>Univerline</p>
+                                        <p className='text-gray-500 invisible lg:visible text-base flex justify-center items-center ml-2'>Univerline</p>
                                     </div>
 
                                     <div className='flex flex-row-reverse'>
                                         <div className='mr-10 mt-3 flex flex-cols'>
-                                            <div className='mr-8 flex justify-center hidden md:block '>
+                                            <div className='mr-5 flex justify-center hidden md:block '>
                                                 <Dropdown item='profilesearch' />
                                             </div>
-                                            <div className='mr-2'>
+                                            <div className='mr-3'>
                                                 <Dropdown numpen={numpen} item='pendinglist' />
                                             </div>
                                             <div className='mr-2 cursor-pointer'>
