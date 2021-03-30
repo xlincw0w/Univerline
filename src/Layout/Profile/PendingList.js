@@ -272,19 +272,11 @@ const PendingList = () => {
                 <Backdrop open={loader} style={{ zIndex: 10 }}>
                     <CircularProgress color='inherit' />
                 </Backdrop>
-<<<<<<< HEAD
                 <div className='w-full h-full bg-gray-200 bg-opacity-60 flex justify-center' style={{ minHeight: '100vh', height: 'auto' }}>
                     <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
                         <div className='w-full block'>
                             <p className='text-center text-gray-900 text-2xl mt-3'>Demandes d'ajout</p>
                             <p className='text-center text-gray-500'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>
-=======
-                <div className='w-full h-full bg-gray-200 bg-opacity-60' style={{ minHeight: '100vh', height: 'auto' }}>
-                    <div className='container bg-gray-100 mx-auto px-34 shadow-2xl border-2 w-6/6 md:w-4/6' style={{ minHeight: '90vh', height: 'auto' }}>
-                        <div>
-                            <p className='text-center text-gray-900  text-lg md:text-2xl mt-3'>Demandes d'ajout</p>
-                            <p className='text-center text-gray-500 text-sm md:text-lg'>Confirmez les personnes que vous connaissez ou supprimez les invitations.</p>
->>>>>>> FETCH_HEAD
                             <hr />
                             <div className=''>
                                 {user.user_type === 'enseignant' && (

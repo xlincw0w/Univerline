@@ -299,11 +299,7 @@ export default function Publications() {
         }
 
         return (
-<<<<<<< HEAD
             <div key={elem.id_poste} className='w-100 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
-=======
-            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
->>>>>>> FETCH_HEAD
                 <div
                     className='shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
@@ -403,58 +399,26 @@ export default function Publications() {
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-<<<<<<< HEAD
                             return <StudSkeleton key={elem.id_poste} elem={elem} />
-=======
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <StudSkeleton elem={elem} />
-                                </Grid>
-                            )
->>>>>>> FETCH_HEAD
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-<<<<<<< HEAD
                             return <ProfSkeleton key={elem.id_poste} elem={elem} />
-=======
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <ProfSkeleton elem={elem} />
-                                </Grid>
-                            )
->>>>>>> FETCH_HEAD
                         }
                     })}
 
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-<<<<<<< HEAD
                             return <StudSkeleton key={elem.id_poste} elem={elem} />
-=======
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <StudSkeleton elem={elem} />
-                                </Grid>
-                            )
->>>>>>> FETCH_HEAD
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-<<<<<<< HEAD
                             return <ProfSkeleton key={elem.id_poste} elem={elem} />
-=======
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <ProfSkeleton elem={elem} />
-                                </Grid>
-                            )
->>>>>>> FETCH_HEAD
                         }
                     })}
             </Grid>

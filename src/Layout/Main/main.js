@@ -107,7 +107,7 @@ const Main = () => {
                                             <Route exact path='/'>
                                                 <Home />
                                             </Route>
-                                        </React.Fragment>
+                                        </React.Fragment> 
                                     )
                                 } else {
                                     return (
