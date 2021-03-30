@@ -15,11 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { useParams } from 'react-router-dom'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
-<<<<<<< HEAD
-import { BiSend } from 'react-icons/bi'
-=======
 import { Container, Grid } from '@material-ui/core'
->>>>>>> 119da64e4c7e8464168d25b82cfe2e343568acf3
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -59,7 +55,7 @@ export default function Publications() {
                     Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetPublications(res.data))
-                        })
+                       t  })
                         .catch((err) => {
                             dispatch(SetPublications([]))
                         })
@@ -188,34 +184,27 @@ export default function Publications() {
                                 onClick={() => {
                                     setLoadComment(!loadComment)
                                 }}
-                                className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
+                                className='inline-block mx-4 cursor-pointer'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
+                            <div className='inline-block mx-4 cursor-pointer'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
                             </div>
                         </div>
                     </div>
                     {loadComment && (
-<<<<<<< HEAD
-                        <div className='w-full h-auto bg-gray-100 shadow rounded'>
-                            <form className='w-full flex flex-row mx-auto ' onSubmit={handleComment}>
-=======
                         <div className=' bg-gray-100 shadow rounded'>
                             <form className='w-full' onSubmit={handleComment}>
->>>>>>> 119da64e4c7e8464168d25b82cfe2e343568acf3
                                 <input
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-purple-100 duration-300 '>
-                                    <BiSend size={25} className='text-purple-400 mx-auto' />
-                                </button>
+                                <button type='submit' className='hidden'></button>
                             </form>
                             <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
@@ -359,34 +348,27 @@ export default function Publications() {
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
                         <div className='mt-4 flex justify-start h-10'>
-                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer hover:text-green-600'>
+                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer hover:text-green-600'>
+                            <div className='inline-block mx-4 cursor-pointer'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
                             </div>
                         </div>
                     </div>
                     {loadComment && (
-<<<<<<< HEAD
-                        <div className='w-full h-auto bg-gray-100 shadow rounded'>
-                            <form className='w-full flex flex-row mx-auto' onSubmit={handleComment}>
-=======
                         <div className=' bg-gray-100 shadow rounded'>
                             <form className='w-full' onSubmit={handleComment}>
->>>>>>> 119da64e4c7e8464168d25b82cfe2e343568acf3
                                 <input
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-green-100 duration-300 '>
-                                    <BiSend size={25} className='text-green-400 mx-auto' />
-                                </button>
+                                <button type='submit' className='hidden'></button>
                             </form>
                             <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
