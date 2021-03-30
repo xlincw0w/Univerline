@@ -145,5 +145,20 @@ router.route('/get/classe/ad/:id?').get((req, res) => {
             res.json(err)
         })
 })
+//recuperer les post d une classe
+router.route('/get/classe/po/:id?').get((req, res) => {
+    const id = req.params.id
+    db('poste')
+    .select('*')
+    .where('id_classe', id)
+   
+        .then((resp) => {
+            res.json(resp)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json(err)
+        })
+})
 
 module.exports = router
