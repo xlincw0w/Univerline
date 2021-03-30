@@ -8,6 +8,7 @@ import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
 import Dashboard from '../Dashboard/dashboard'
 import Profile from '../Profile/IndexProfile'
+import Classe from '../Classe/Classe'
 
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import Axios from 'axios'
@@ -17,7 +18,7 @@ import PendingList from '../Profile/PendingList'
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-String.prototype.capitalize = function () {
+String.prototype.capitalize = function() {
     try {
         return this.charAt(0).toUpperCase() + this.slice(1)
     } catch (err) {
@@ -53,8 +54,8 @@ const Main = () => {
                                         Axios.post(constants.url + '/api/online/update', {
                                             uid: user.uid,
                                         })
-                                            .then((res) => {})
-                                            .catch((err) => {})
+                                            .then(res => {})
+                                            .catch(err => {})
                                     }, 60000)
                                     return (
                                         <React.Fragment>
@@ -73,6 +74,10 @@ const Main = () => {
                                             <Route path='/inscription'>
                                                 <Header />
                                                 <Inscription />
+                                            </Route>
+                                            <Route path='/classe'>
+                                                <Header />
+                                                <Classe />
                                             </Route>
                                             <Route exact path='/'>
                                                 <Header />
@@ -95,6 +100,10 @@ const Main = () => {
                                             <Route path='/messagerie'>
                                                 <Header />
                                                 <Messagerie />
+                                            </Route>
+                                            <Route path='/classe'>
+                                                <Header />
+                                                <Classe />
                                             </Route>
                                             <Route exact path='/'>
                                                 <Home />
