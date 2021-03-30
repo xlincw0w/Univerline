@@ -8,6 +8,7 @@ import AccordionFiles from './AccordionFiles'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete';
+import Card from '@material-ui/core/Card';
 
 import { CgCloseR } from "react-icons/cg"
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +38,6 @@ function UserInfo(props) {
         <>
             <Grid container direction="column" justify="center">
                 <Grid item>
-
                     <Grid container justify="center" direction="column">
                         <Grid item >
                             <div className="centrer" >
@@ -55,27 +55,29 @@ function UserInfo(props) {
                         </Grid>
 
                     </Grid>
-
                     <Divider />
-
-
                 </Grid>
                 <Grid item>
-                    <AccordionFiles />
+                    <div style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '100%' }}>
+                        <AccordionFiles />
+                        <Grid item justify="center" style={{ height: "100%" }}>
+                            <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth className='w-11/11 mt-8 mb-16'>
+                                Voir profil
+                                                    </Button>
+                            <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth startIcon={<DeleteIcon />}>
+                                Supprimer discussion
+                                                    </Button>
+                            <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%", marginBottom: "2%" }} fullWidth startIcon={<CgCloseR />}>
+                                Bloquer
+                                                    </Button>
+
+                        </Grid>
+
+                    </div>
+
 
                 </Grid>
-                <Grid item justify="center" style={{ height: "100%" }}>
-                    <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth className='w-11/11 mt-8 mb-16'>
-                        Voir profil
-                                                    </Button>
-                    <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth startIcon={<DeleteIcon />}>
-                        Supprimer discussion
-                                                    </Button>
-                    <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth startIcon={<CgCloseR />}>
-                        Bloquer
-                                                    </Button>
 
-                </Grid>
             </Grid>
         </>
     )

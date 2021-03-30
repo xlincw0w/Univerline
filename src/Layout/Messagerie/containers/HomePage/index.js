@@ -192,7 +192,7 @@ const HomePage = (props) => {
     scrollToBottom()
 
 
-  } 
+  }
   const submitMessage = (e) => {
     e.preventDefault()
 
@@ -222,137 +222,134 @@ const HomePage = (props) => {
   }
 
   return (
-    <>
-      <Grid container direction="row" alignItems="stretch" style={{ height: '90vh' }} >
-        <Grid item sm={3} xs={!chatStarted ? 12 : 5}  >
-          {/*****Liste ami */}
-          <Card style={{ backgroundColor: '#f0f7f7', }}>
-            <Grid container direction="column">
-              <Grid item >
-                <Card style={{ backgroundColor: '#f0f7f7' }}>
-                  <Typography variant='h4' style={{ padding: '10px' }}>
-                    Messagerie
+
+    <Grid container direction="row" alignItems="stretch" style={{ height: "max-h-screen" }}  >
+
+
+      <Grid item sm={3} xs={!chatStarted ? 12 : 5}  >
+        {/*****Liste ami */}
+        <Card style={{ backgroundColor: '#f0f7f7', maxHeight: "100%", minHeight: '100%' }}>
+          <Grid container direction="column">
+            <Grid item >
+              <Card style={{ backgroundColor: '#f0f7f7', }} >
+                <Typography variant='h4' style={{ padding: '10px' }}>
+                  Messagerie
                   </Typography>
-                  <TextField
-                    style={{ marginLeft: "15px", marginTop: '20px', marginBottom: '20px', width: '88%' }}
-                    variant="outlined"
-                    label="Chercher un ami"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <BsSearch color='action' />
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={(e) => updateFilter(e.target.value)}
-                    fullWidth
-                  />
-                </Card>
+                <TextField
+                  style={{ marginLeft: "15px", marginTop: '10px', marginBottom: '10px', width: '88%' }}
+                  variant="outlined"
+                  label="Chercher un ami"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BsSearch color='action' />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={(e) => updateFilter(e.target.value)}
+                  fullWidth
+                />
+              </Card>
 
-              </Grid>
-              <Grid item >
-                <Card style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '68vh' }} >
+            </Grid>
+            <Grid item >
+              <Card style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '68vh', marginBottom: '10px' }} >
 
-                  {filter(friends, (o) => {
-                    let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
-                    return searchIn.includes(filterWord)
-                  }).map((elem) => {
-                    return (
-                      <AmiCard onClick={initChat}
-                        key={elem.id_user}
-                        user={elem} />
-                    )
-                  })}
-                </Card>
-
-              </Grid>
+                {filter(friends, (o) => {
+                  let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
+                  return searchIn.includes(filterWord)
+                }).map((elem) => {
+                  return (
+                    <AmiCard onClick={initChat}
+                      key={elem.id_user}
+                      user={elem} />
+                  )
+                })}
+              </Card>
 
             </Grid>
 
-
-          </Card>
-        </Grid>
+          </Grid>
 
 
+        </Card>
+      </Grid>
 
-        <Grid item sm={6} xs={chatStarted ? 7 : null} >
-          <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }} >
-            {/***************************************************************************
+
+
+      <Grid item sm={6} xs={chatStarted ? 7 : null} >
+        <Card style={{ backgroundColor: '#f0f7f7', maxHeight: "100%", minHeight: '100%' }} >
+          {/***************************************************************************
          * Le Chat Feed
          */}
 
-            <Grid container direction="column" >
-              <Grid item  >
-                <div className="chat-feed">
-                  <div className="messageSections"  >
-                    {
-                      chatStarted ?
-                        conversations.map(con => <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
-                          <p className="messageStyle" style={{ backgroundColor: con.user_uid_1 == userS.id ? '#0277bd' : '#0097a7', maxWidth: '60%' }} >{con.message}
-                          </p>
+          <Grid container direction="column" >
+            <Grid item  >
+              <div className="chat-feed">
+                <div className="messageSections h-full"  >
+                  {
+                    chatStarted ?
+                      conversations.map(con => <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
+                        <p className="messageStyle" style={{ backgroundColor: con.user_uid_1 == userS.id ? '#0277bd' : '#0097a7', maxWidth: '60%' }} >{con.message}
+                        </p>
 
-                        </div>)
-                        : null
-                    }
+                      </div>)
+                      : null
+                  }
 
 
-                  </div>
                 </div>
+              </div>
 
 
-              </Grid>
-              <Grid item >
-
-                <form className="formulaire" onSubmit={submitMessage}>
-                  <Grid container direction="row">
-                    <Grid item sm={10} xs={8}>
-                      <input className="champEnvoi" onChange={(e) => setMessage(e.target.value)}
-                        value={message}
-                        placeholder='votre message...'
-                        autoFocus
-                      />
-                    </Grid>
-                    <Grid item sm={1} xs={2}>
-                      <IconButton aria-label="img" >
-                        <BsFillImageFill onClick={openModal} />
-                      </IconButton>
-                      <FileModal
-                        modal={modal}
-                        closeModal={closeModal}
-                        uploadFile={uploadFile}
-
-                      />
-                    </Grid>
-                    <Grid item sm={1} xs={2}>
-                      <IconButton aria-label="send" >
-                        <IoSend onClick={submitMessage} />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </form>
-              </Grid>
             </Grid>
-          </Card>
-        </Grid>
-        {/**************************************************************************
+            <Grid item >
+
+              <form className="formulaire" onSubmit={submitMessage}>
+                <Grid container direction="row">
+                  <Grid item sm={10} xs={8}>
+                    <input className="champEnvoi" onChange={(e) => setMessage(e.target.value)}
+                      value={message}
+                      placeholder='votre message...'
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item sm={1} xs={2}>
+                    <IconButton aria-label="img" >
+                      <BsFillImageFill onClick={openModal} />
+                    </IconButton>
+                    <FileModal
+                      modal={modal}
+                      closeModal={closeModal}
+                      uploadFile={uploadFile}
+
+                    />
+                  </Grid>
+                  <Grid item sm={1} xs={2}>
+                    <IconButton aria-label="send" >
+                      <IoSend onClick={submitMessage} />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+          </Grid>
+        </Card>
+      </Grid>
+      {/**************************************************************************
           * UserINFO
           */}
-        <Grid item sm={3}   >
-          <Card style={{ backgroundColor: '#f0f7f7', height: '100vh' }} >
-            {
-              chatStarted ? <UserInfo user={chatUser} userAvatar={userAvatar} /> : null
-            }
+      <Grid item sm={3}   >
+        <Card style={{ backgroundColor: '#f0f7f7', minHeight: '100%' }} className="max-h-full w-full" >
+          {
+            chatStarted ? <UserInfo user={chatUser} userAvatar={userAvatar} /> : null
+          }
 
-          </Card>
-        </Grid>
-
-
-
-
-
+        </Card>
       </Grid>
 
-    </>
+
+    </Grid>
   );
 }
 

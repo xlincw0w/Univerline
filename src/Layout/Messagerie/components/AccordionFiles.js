@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
     details: {
         alignItems: 'center',
-        overflow: 'scroll',
-        height: '200px'
+
+
     },
     column: {
         flexBasis: '33.33%',
