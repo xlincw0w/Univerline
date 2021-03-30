@@ -3,21 +3,20 @@ import Feature3 from './Feature3'
 import Feed from './Feed/feed'
 import Post from './Post/post'
 import { FiUsers } from 'react-icons/fi'
+import Dropdown from '../Header/Popover/popover'
 
 
 export default function Content() {
   return (
     <div className='mx-auto center shadow-xl' style={{ width: '95%' }}>
 
-      <div className="visible md:hidden">
-        <div className=" mt-6 mx-auto ">
-          <div className="flex justify-center content-center">
-              <div class="mr-6 my-2 col-span-3">
-                <input type="search" class="bg-purple-white shadow rounded border-0 p-3" placeholder="Rechercher Vos amis" />
-              </div>
-         </div>
+      <div className="block md:hidden">
+        <div className=" my-4 mx-auto ">
+        <div className='mr-8 flex justify-center'>
+          <Dropdown item='profilesearch' />
         </div>
-        <div className=" mt-2 p-2  bg-white rounded-md  focus:outline-none">
+        </div>
+        <div className=" my-4 p-2  bg-white rounded-md  focus:outline-none">
           <Feature3 />
         </div>
       </div>
