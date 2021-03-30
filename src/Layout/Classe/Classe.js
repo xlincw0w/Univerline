@@ -8,6 +8,8 @@ import useEffect from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import ex from './ex.jpg'
+import Avatar from '@material-ui/core/Avatar'
 
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -20,6 +22,12 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
         textAlign: '',
         color: theme.palette.text.secondary,
+    },
+    taille: {
+        /*color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: deepOrange[500],*/
+        width: theme.spacing(27),
+        height: theme.spacing(27),
     },
 }))
 
@@ -43,10 +51,12 @@ export default function Classe() {
                             <Grid item sm={12}>
                                 <Paper style={{ width: '100%' }} className={classes.paper}>
                                     <Grid container>
-                                        <Grid item lg={2} md={2.5} xs={12} style={{ textAlign: 'center' }}>
-                                            <span style={{ display: 'inline-block' }}></span>
+                                        <Grid item lg={12} md={12} xs={12} style={{ textAlign: 'center' }}>
+                                            <span style={{ display: 'inline-block' }}>
+                                                <Avatar variant='circle' src={ex} className={classes.taille}></Avatar>
+                                            </span>
                                         </Grid>
-                                        <Grid item lg={10} md={10.5} xs={12}>
+                                        <Grid item lg={12} md={12} xs={12}>
                                             <Haut />
                                         </Grid>
                                     </Grid>
