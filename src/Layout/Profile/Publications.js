@@ -394,7 +394,7 @@ export default function Publications() {
     }
 
     return (
-        <Container maxWidth='md'>
+        <Container maxWidth='lg'>
             <Grid container spacing={3}>
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
