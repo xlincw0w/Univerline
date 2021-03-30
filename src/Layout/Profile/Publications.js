@@ -15,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { useParams } from 'react-router-dom'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
+import { BiSend } from 'react-icons/bi'
 import { Container, Grid } from '@material-ui/core'
 
 export default function Publications() {
@@ -46,13 +47,13 @@ export default function Publications() {
                     dispatch(SetPublications([]))
                 }
             } else if (user_info.user_type === 'enseignant') {
-                const res = await Axios.post(constants.url + '/api/amis/isFriend/', {
+                const res = await Axios.post(constants.url + '/api/collegue/isFriend/ens', {
                     id_user: user.id,
-                    id_friend: user_info.id_user,
+                    id_collegue: user_info.id_user,
                 })
 
                 if (res.data.friend || user_info.id_user === user.id) {
-                    Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
+                    Axios.get(constants.url + '/api/post/get/post_collegue/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetPublications(res.data))
                         })
@@ -139,8 +140,8 @@ export default function Publications() {
         }
 
         return (
-            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
-                <div className='bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
+            <div key={elem.id_poste} className='w-120 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
+                <div className='h-1/4 bg-gradient-to-r from-purple-500 to-purple-700 shadow-xl rounded-xl'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
                             <Avatar alt='Remy Sharp' src={elem.avatar} style={{ width: '2.5rem', height: '2.5rem' }} />
@@ -153,14 +154,14 @@ export default function Publications() {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>
+                <div className='h-auto'>
+                    <div className='h-auto'>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
-                            <p className='text-gray-500 text-sm'>{elem.libelle_classe}</p>
+                            <p className='text-gray-500 text-sm'>{elem.libelle_classe || 'Collégues'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base break-words'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -184,13 +185,13 @@ export default function Publications() {
                                 onClick={() => {
                                     setLoadComment(!loadComment)
                                 }}
-                                className='inline-block mx-4 cursor-pointer'>
+                                className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer'>
+                            <div className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Partager</p>
                             </div>
                         </div>
                     </div>
@@ -201,12 +202,14 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='hidden'></button>
+                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-purple-100 duration-300 '>
+                                    <BiSend size={25} className='text-purple-400 mx-auto' />
+                                </button>
                             </form>
-                            <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                            <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
@@ -216,7 +219,7 @@ export default function Publications() {
                                         </div>
                                     )}
                                 </Backdrop>
-                                <div>
+                                <div className='w-full h-auto'>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
                                     })}
@@ -299,9 +302,9 @@ export default function Publications() {
         }
 
         return (
-            <div key={elem.id_poste} className='bg-gray-100 shadow-2xl rounded-lg mb-20'>
+            <div key={elem.id_poste} className='w-100 2xl:w-144 h-auto bg-gray-100 shadow-2xl mx-auto rounded-lg mb-20'>
                 <div
-                    className='shadow-xl rounded-xl cursor-pointer
+                    className='h-1/4 shadow-xl rounded-xl cursor-pointer
                         bg-gradient-to-r from-green-600 to-green-400'>
                     <div className='grid grid-cols-5'>
                         <div className='mx-auto my-3 border-2 border-gray-100 rounded-full shadow-xl'>
@@ -315,20 +318,20 @@ export default function Publications() {
                         </div>
                         {elem.id_user === user.id && (
                             <div className='flex flex-row-reverse'>
-                                <div className='mt-5'>
+                                <div className='mt-5 mr-4'>
                                     <Options elem={elem} />
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-                <div>
-                    <div>
+                <div className='h-auto'>
+                    <div className='h-auto'>
                         <div className='mt-2 text-center'>
                             <p className='text-gray-500 text-sm'>{moment(elem.date_poste).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                         <div className='mt-10 mb-10 px-10 text-left'>
-                            <p className='text-gray-600 text-base break-words'>{elem.payload}</p>
+                            <p className='text-gray-600 text-base break-words w-96'>{elem.payload}</p>
                             {image && (
                                 <div className='my-2'>
                                     <img className='w-62 h-62 mx-auto' src={image} />
@@ -348,13 +351,13 @@ export default function Publications() {
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
                         <div className='mt-4 flex justify-start h-10'>
-                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer'>
+                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer hover:text-green-600'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer'>
+                            <div className='inline-block mx-4 cursor-pointer hover:text-green-600'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Partager</p>
                             </div>
                         </div>
                     </div>
@@ -365,12 +368,14 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='hidden'></button>
+                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-green-100 duration-300 '>
+                                    <BiSend size={25} className='text-green-400 mx-auto' />
+                                </button>
                             </form>
-                            <div className=' mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
+                            <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
@@ -380,7 +385,7 @@ export default function Publications() {
                                         </div>
                                     )}
                                 </Backdrop>
-                                <div>
+                                <div className='w-full h-auto'>
                                     {comments.map((elem) => {
                                         return <Comments elem={elem} Reload={Reload} />
                                     })}
@@ -394,50 +399,35 @@ export default function Publications() {
     }
 
     return (
-        <Container maxWidth='md'>
-            <Grid container spacing={3}>
+        <div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+            <div>
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <StudSkeleton elem={elem} />
-                                </Grid>
-                            )
+                            return <StudSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 0) {
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <ProfSkeleton elem={elem} />
-                                </Grid>
-                            )
+                            return <ProfSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
-
+            </div>
+            <div>
                 {user_info.user_type === 'etudiant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <StudSkeleton elem={elem} />
-                                </Grid>
-                            )
+                            return <StudSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
                 {user_info.user_type === 'enseignant' &&
                     publications.map((elem, index) => {
                         if (index % 2 === 1) {
-                            return (
-                                <Grid item lg={6} md={6} sm={12} xs={12}>
-                                    <ProfSkeleton elem={elem} />
-                                </Grid>
-                            )
+                            return <ProfSkeleton key={elem.id_poste} elem={elem} />
                         }
                     })}
-            </Grid>
-        </Container>
+            </div>
+        </div>
     )
 }
