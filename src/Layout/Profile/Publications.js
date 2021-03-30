@@ -55,7 +55,7 @@ export default function Publications() {
                     Axios.get(constants.url + '/api/post/get/post/ens/' + user_info.id_user)
                         .then((res) => {
                             dispatch(SetPublications(res.data))
-                       t  })
+                        })
                         .catch((err) => {
                             dispatch(SetPublications([]))
                         })
