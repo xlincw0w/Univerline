@@ -16,6 +16,7 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
+import { BiSend } from 'react-icons/bi'
 
 const Skeleton = () => {
     const dispatch = useDispatch()
@@ -194,27 +195,29 @@ const Skeleton = () => {
                                 onClick={() => {
                                     setLoadComment(!loadComment)
                                 }}
-                                className='inline-block mx-4 cursor-pointer'>
+                                className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer'>
+                            <div className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Partager</p>
                             </div>
                         </div>
                     </div>
                     {loadComment && (
                         <div className='w-full h-auto bg-gray-100 shadow rounded'>
-                            <form className='w-full' onSubmit={handleComment}>
+                            <form className='w-full flex flex-row mx-auto ' onSubmit={handleComment}>
                                 <input
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5  '
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='hidden'></button>
+                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-purple-100 duration-300 '>
+                                    <BiSend size={25} className='text-purple-400 mx-auto' />
+                                </button>
                             </form>
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
@@ -356,29 +359,32 @@ const Skeleton = () => {
                         </div>
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
-                        <div className='mt-4 flex justify-start h-10'>
-                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer'>
-                                <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Commenter</p>
+                        <div className='mt-4 flex justify-start h-10 '>
+                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer hover:text-green-600'>
+                                <FaComments className='inline ' />
+                                <p className='text-gray-500 text-sm inline ml-3  hover:text-green-600 '>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer'>
+                            <div className='inline-block mx-4 cursor-pointer hover:text-green-600 '>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Partager</p>
                             </div>
                         </div>
                     </div>
                     {loadComment && (
                         <div className='w-full h-auto bg-gray-100 shadow rounded'>
-                            <form className='w-full' onSubmit={handleComment}>
+                            <form className='w-full flex flex-row mx-auto ' onSubmit={handleComment}>
                                 <input
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
-                                    className='block w-full lg:w-2/3 2xl:w-1/2 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                    className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5 '
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='hidden'></button>
+                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-green-100 duration-300 '>
+                                    <BiSend size={25} className='text-green-400 mx-auto' />
+                                </button>
                             </form>
+
                             <div className='h-auto mx-auto mt-2 border-2 border-gray-200 shadow rounded' style={{ width: '95%' }}>
                                 <Backdrop open={backdrop} style={{ display: 'contents' }}>
                                     {backdrop && (

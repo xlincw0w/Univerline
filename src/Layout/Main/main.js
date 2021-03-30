@@ -8,6 +8,7 @@ import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
 import Dashboard from '../Dashboard/dashboard'
 import Profile from '../Profile/IndexProfile'
+import Classe from '../Classe/Classe'
 
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import Axios from 'axios'
@@ -18,7 +19,7 @@ import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Loader from 'react-loader-spinner'
 
-String.prototype.capitalize = function () {
+String.prototype.capitalize = function() {
     try {
         return this.charAt(0).toUpperCase() + this.slice(1)
     } catch (err) {
@@ -73,6 +74,10 @@ const Main = () => {
                                                 <Header />
                                                 <Inscription />
                                             </Route>
+                                            <Route path='/classe'>
+                                                <Header />
+                                                <Classe />
+                                            </Route>
                                             <Route exact path='/'>
                                                 <Header />
                                                 <Dashboard />
@@ -94,6 +99,10 @@ const Main = () => {
                                             <Route path='/messagerie'>
                                                 <Header />
                                                 <Messagerie />
+                                            </Route>
+                                            <Route path='/classe'>
+                                                <Header />
+                                                <Classe />
                                             </Route>
                                             <Route exact path='/'>
                                                 <Home />

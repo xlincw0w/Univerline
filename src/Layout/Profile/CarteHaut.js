@@ -11,7 +11,7 @@ import { Container, Grid } from '@material-ui/core'
 
 export default function CarteHaut({ profile }) {
     const dispatch = useDispatch()
-    const modify = useSelector((state) => state.ProfileReducer.modify)
+    const modify = useSelector(state => state.ProfileReducer.modify)
 
     return (
         <div className='mt-6'>
@@ -53,7 +53,7 @@ export default function CarteHaut({ profile }) {
                                     </Grid>
 
                                     <Grid container spacing={3} style={{ marginTop: '15px' }}>
-                                        <Grid item md={4} xs={12}>
+                                        <Grid item lg={4} md={5} xs={12}>
                                             <div>
                                                 <p className='text-green-600 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
@@ -73,16 +73,26 @@ export default function CarteHaut({ profile }) {
                         </Container>
                     )}
                     {modify && (
+<<<<<<< HEAD
                         <Container maxWidth='lg'>
                             <Grid container>
                                 <Grid item sm={12}>
+=======
+                        <Container maxWidth='lg' className='centrerInformation'>
+                            <Grid container>
+                                <Grid item sm={12} className='rendreInline'>
+>>>>>>> FETCH_HEAD
                                     <Grid container spacing={2}>
                                         <Grid item md={12} xs={12}>
                                             <input
                                                 type='text'
                                                 className='block pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline'
                                                 value={profile.nom}
+<<<<<<< HEAD
                                                 onChange={(e) =>
+=======
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -95,7 +105,11 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='block pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline ml-2'
                                                 value={profile.prenom}
+<<<<<<< HEAD
                                                 onChange={(e) =>
+=======
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -116,9 +130,15 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
+<<<<<<< HEAD
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.etablissement}
                                                 onChange={(e) =>
+=======
+                                                className='sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.etablissement}
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -135,9 +155,15 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
+<<<<<<< HEAD
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_edu}
                                                 onChange={(e) =>
+=======
+                                                className='sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.niveau_edu}
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -154,9 +180,15 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
+<<<<<<< HEAD
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.domaine_edu}
                                                 onChange={(e) =>
+=======
+                                                className='sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.domaine_edu}
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -173,7 +205,23 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-green-600 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                             </div>
+<<<<<<< HEAD
                                             <p className='text-gray-600 text-base'>{profile.email}</p>
+=======
+                                            <input
+                                                type='text'
+                                                className='sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.email}
+                                                onChange={e =>
+                                                    dispatch(
+                                                        SetUserInfo({
+                                                            ...profile,
+                                                            email: e.target.value,
+                                                        })
+                                                    )
+                                                }
+                                            />
+>>>>>>> FETCH_HEAD
                                         </Grid>
                                         <Grid item md={4} xs={12}>
                                             <div className='mt-5'>
@@ -205,28 +253,28 @@ export default function CarteHaut({ profile }) {
                                     </Grid>
 
                                     <Grid container spacing={3} style={{ marginTop: '15px' }}>
-                                        <Grid item md={4} xs={6}>
+                                        <Grid item lg={4} md={4} xs={6}>
                                             <div>
                                                 <p className='text-purple-700 text-sm inline'>Domaine enseignement</p>
                                                 <GiArrowScope className='inline ml-2 mb-1' size={20} />
                                             </div>
                                             <p className='text-gray-600 text-base'>{profile.domaine_ens ? profile.domaine_ens.capitalize() : ''}</p>
                                         </Grid>
-                                        <Grid item md={4} xs={6}>
+                                        <Grid item lg={4} md={4} xs={6}>
                                             <div>
                                                 <p className='text-purple-700 text-sm inline'>Niveau enseignement</p>
                                                 <BsAward className='inline ml-2 mb-1' size={20} />
                                             </div>
                                             <p className='text-gray-600 text-base'>{profile.niveau_ens ? profile.niveau_ens.capitalize() : ''}</p>
                                         </Grid>
-                                        <Grid item md={4} xs={6}>
+                                        <Grid item lg={4} md={4} xs={6}>
                                             <div>
                                                 <p className='text-purple-700 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                             </div>
                                             <p className='text-gray-600 text-base'>{profile.email}</p>
                                         </Grid>
-                                        <Grid item md={4} xs={12}>
+                                        <Grid item lg={4} md={4} xs={7}>
                                             <div>
                                                 <p className='text-purple-700 text-sm inline'>Date de création</p>
                                                 <BsCalendar className='inline ml-2 mb-1' size={18} />
@@ -241,16 +289,26 @@ export default function CarteHaut({ profile }) {
                         </Container>
                     )}
                     {modify && (
+<<<<<<< HEAD
                         <Container maxWidth='lg'>
                             <Grid container>
                                 <Grid item sm={12}>
+=======
+                        <Container maxWidth='lg' className='centrerInformation'>
+                            <Grid container>
+                                <Grid item sm={12} className='rendreInline'>
+>>>>>>> FETCH_HEAD
                                     <Grid container spacing={2}>
                                         <Grid item md={12} xs={12}>
                                             <input
                                                 type='text'
                                                 className='pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline'
                                                 value={profile.nom}
+<<<<<<< HEAD
                                                 onChange={(e) =>
+=======
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -263,7 +321,11 @@ export default function CarteHaut({ profile }) {
                                                 type='text'
                                                 className='pl-3 pr-12 w-32 sm:text-sm border-gray-300 rounded-md inline ml-2'
                                                 value={profile.prenom}
+<<<<<<< HEAD
                                                 onChange={(e) =>
+=======
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -283,9 +345,15 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
+<<<<<<< HEAD
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.domaine_ens}
                                                 onChange={(e) =>
+=======
+                                                className='sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.domaine_ens}
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -303,9 +371,15 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
+<<<<<<< HEAD
                                                 className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_ens}
                                                 onChange={(e) =>
+=======
+                                                className=' sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.niveau_ens}
+                                                onChange={e =>
+>>>>>>> FETCH_HEAD
                                                     dispatch(
                                                         SetUserInfo({
                                                             ...profile,
@@ -321,7 +395,23 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-purple-700 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                             </div>
+<<<<<<< HEAD
                                             <p className='text-gray-600 text-base'>{profile.email}</p>
+=======
+                                            <input
+                                                type='text'
+                                                className=' sm:text-sm border-gray-300 rounded-md'
+                                                value={profile.email}
+                                                onChange={e =>
+                                                    dispatch(
+                                                        SetUserInfo({
+                                                            ...profile,
+                                                            email: e.target.value,
+                                                        })
+                                                    )
+                                                }
+                                            />
+>>>>>>> FETCH_HEAD
                                         </Grid>
                                     </Grid>
 

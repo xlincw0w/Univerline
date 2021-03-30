@@ -44,7 +44,7 @@ const Footer = () => {
                     <p className='text-gray-400 text-sm'>UMMTO dans un cadre pédagogique. </p>
                     <p className=' pt-5 text-xs text-gray-500  '>
                         {' '}
-                        <span className='italic'>© 2021</span> Univerline
+                        <span className='italic'>© 2021</span> Univerline{' '}
                     </p>
                 </div>
             </div>

@@ -9,6 +9,7 @@ import { constants } from '../../constants'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import { AiOutlineUserDelete } from 'react-icons/ai'
 import { BiMailSend } from 'react-icons/bi'
+import { Grid } from '@material-ui/core'
 
 export default function MenuModif() {
     const dispatch = useDispatch()
@@ -154,8 +155,8 @@ export default function MenuModif() {
                         </Button>
                     )}
                     {modify && (
-                        <div>
-                            <div className='inline'>
+                        <Grid container spacing={2} className='centrerInformation'>
+                            <Grid item xs={2.5} className='rendreInline'>
                                 <Button
                                     onClick={() => {
                                         handleUpdate()
@@ -166,8 +167,8 @@ export default function MenuModif() {
                                         <BsPencilSquare size={20} className='inline ml-2 mb-1' />
                                     </div>
                                 </Button>
-                            </div>
-                            <div className='ml-3 inline'>
+                            </Grid>
+                            <Grid item xs={2.5} className='rendreInline'>
                                 <Button
                                     onClick={() => {
                                         dispatch(SetModify(false))
@@ -180,8 +181,8 @@ export default function MenuModif() {
                                         <BsTrash size={20} className='inline ml-2 mb-1' />
                                     </div>
                                 </Button>
-                            </div>
-                        </div>
+                            </Grid>
+                        </Grid>
                     )}
                 </div>
             )}
