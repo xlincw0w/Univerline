@@ -197,7 +197,7 @@ export default function Publications() {
                     </div>
                     {loadComment && (
                         <div className=' bg-gray-100 shadow rounded'>
-                            <form className='w-full' onSubmit={handleComment}>
+                            <form className='w-full flex flex-row mx-auto' onSubmit={handleComment}>
                                 <input
                                     type='text'
                                     required={true}
@@ -205,7 +205,7 @@ export default function Publications() {
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-purple-100 duration-300 '>
+                                <button type='submit' className='focus:outline-none rounded-full w-9 h-9 hover:bg-purple-100 duration-300 '>
                                     <BiSend size={25} className='text-purple-400 mx-auto' />
                                 </button>
                             </form>
@@ -363,7 +363,7 @@ export default function Publications() {
                     </div>
                     {loadComment && (
                         <div className=' bg-gray-100 shadow rounded'>
-                            <form className='w-full' onSubmit={handleComment}>
+                            <form className='w-full flex flex-row mx-auto' onSubmit={handleComment}>
                                 <input
                                     type='text'
                                     required={true}
@@ -371,7 +371,7 @@ export default function Publications() {
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
                                     placeholder='Ecrivez un commentaire !'
                                 />
-                                <button type='submit' className='mb-2 focus:outline-none rounded-full w-9 h-9 hover:bg-green-100 duration-300 '>
+                                <button type='submit' className=' focus:outline-none rounded-full w-9 h-9 hover:bg-green-100 duration-300 '>
                                     <BiSend size={25} className='text-green-400 mx-auto' />
                                 </button>
                             </form>
