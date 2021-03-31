@@ -198,6 +198,8 @@ export default function Dropdown(props) {
                             vertical: 'top',
                             horizontal: 'center',
                         }}>
+                        {/* essayer l'affichage */}
+
                         <Typography className={classes.typography}>Notification numéro 1</Typography>
                         <Typography className={classes.typography}>Notification numéro 2</Typography>
                         <Typography className={classes.typography}>Notification numéro 3</Typography>
