@@ -39,6 +39,7 @@ router.route('/:id').get((req, res) => {
             row[0] ? res.json(row[0]) : res.json([])
         })
         .catch((err) => {
+            console.log(err)
             res.json([])
         })
 })
