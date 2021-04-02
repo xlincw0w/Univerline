@@ -17,10 +17,10 @@ import { BiTimeFive } from 'react-icons/bi'
 import { RiCloseFill } from 'react-icons/ri'
 import Backdrop from '@material-ui/core/Backdrop'
 import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { find } from 'lodash'
 import { Container } from '@material-ui/core'
 import Loader from 'react-loader-spinner'
+import { SetAlert } from '../../store/alert/alert'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -45,7 +45,6 @@ export default function Freinds() {
     const dispatch = useDispatch()
     const classes = useStyles()
     const user = useSelector((state) => state.AuthReducer.user)
-    // const user_classes = useSelector((state) => state.AuthReducer.classes)
     const user_info = useSelector((state) => state.ProfileReducer.user_info)
     const profile_classes = useSelector((state) => state.ProfileReducer.classes)
 
@@ -93,7 +92,6 @@ export default function Freinds() {
                             dispatch(SetProfileClasses(res.data))
                         })
                         .catch((err) => {
-                            console.log(err)
                             dispatch(SetProfileClasses([]))
                         })
                 } else {
@@ -108,7 +106,6 @@ export default function Freinds() {
                                 dispatch(SetProfileClasses(res.data))
                             })
                             .catch((err) => {
-                                console.log(err)
                                 dispatch(SetProfileClasses([]))
                             })
                     } else {
@@ -121,7 +118,6 @@ export default function Freinds() {
                         dispatch(SetProfileClasses(res.data))
                     })
                     .catch((err) => {
-                        console.log(err)
                         dispatch(SetProfileClasses([]))
                     })
             }
@@ -133,7 +129,9 @@ export default function Freinds() {
             newClasse.toLowerCase() !== 'collegue' &&
             newClasse.toLowerCase() !== 'collégue' &&
             newClasse.toLowerCase() !== 'collegues' &&
-            newClasse.toLowerCase() !== 'collégues'
+            newClasse.toLowerCase() !== 'collégues' &&
+            constants.alphanum_rg.test(newClasse) &&
+            newClasse.length > 1
         ) {
             if (find(profile_classes, { libelle_classe: newClasse }) === undefined) {
                 setLoader(true)
@@ -143,15 +141,29 @@ export default function Freinds() {
                         libelle_classe: newClasse,
                     })
                         .then((res) => {
+                            SetAlert('success', 'Information', "l'ajout de la classe réalisé avec succés.", dispatch)
+                            setNewClasse('')
                             setLoader(false)
                             reload()
                         })
                         .catch((err) => {
+                            SetAlert(
+                                'error',
+                                'Erreur',
+                                "Une erreur s'est produite, l'ajout n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.",
+                                dispatch
+                            )
                             setLoader(false)
-                            console.log(err)
                         })
                 }
             }
+        } else {
+            SetAlert(
+                'warning',
+                'Attention',
+                'Veuillez entrer un nom de classe valide. Vous pouvez créer des classes uniquement en combinaison des léttres ou des chiffres.',
+                dispatch
+            )
         }
     }
 
@@ -160,12 +172,13 @@ export default function Freinds() {
         if (user_info.id_user === user.id) {
             Axios.delete(constants.url + '/api/classe/delete/classe/' + id)
                 .then((res) => {
+                    SetAlert('info', 'Information', 'la suppression de la classe réalisé avec succés.', dispatch)
                     setLoader(false)
                     reload()
                 })
                 .catch((err) => {
+                    SetAlert('error', 'Erreur', "Une erreur s'est produite, la suppression n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                     setLoader(false)
-                    console.log(err)
                 })
         }
     }
@@ -178,12 +191,18 @@ export default function Freinds() {
                 id_etu: user.id,
             })
                 .then((res) => {
+                    SetAlert('success', 'Information', "Demande d'adhésion a la classe réalisé avec succés.", dispatch)
                     setLoader(false)
                     reload()
                 })
                 .catch((err) => {
+                    SetAlert(
+                        'error',
+                        'Erreur',
+                        "Une erreur s'est produite, la demande d'adhésion n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.",
+                        dispatch
+                    )
                     setLoader(false)
-                    console.log(err)
                 })
         }
     }
@@ -195,11 +214,17 @@ export default function Freinds() {
             id_classe,
         })
             .then((res) => {
+                SetAlert('info', 'Information', 'Sortie de la classe réalisé avec succés.', dispatch)
                 reload()
                 setLoader(false)
             })
             .catch((err) => {
-                console.log(err)
+                SetAlert(
+                    'error',
+                    'Erreur',
+                    "Une erreur s'est produite, la sortie de la classe n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.",
+                    dispatch
+                )
                 setLoader(false)
             })
     }
@@ -269,7 +294,8 @@ export default function Freinds() {
                                             type='text'
                                             required={true}
                                             onChange={(e) => setNewClasse(e.target.value)}
-                                            className='focus:ring-indigo-500 focus:border-indigo-500 block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                            value={newClasse}
+                                            className='block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
                                             placeholder='Nom de la classe'
                                         />
                                     </div>

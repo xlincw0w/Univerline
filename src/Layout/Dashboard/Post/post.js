@@ -2,18 +2,18 @@ import React, { useState, useRef } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
-import { HiOutlinePhotograph } from 'react-icons/hi'
 import { FiFolderPlus } from 'react-icons/fi'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
 import { RiCloseCircleLine } from 'react-icons/ri'
 import { useSelector, useDispatch } from 'react-redux'
 import Axios from 'axios'
 import { constants } from '../../../constants'
-import { FeedLoading, RefreshFeed } from '../../../store/feed/feed'
+import { RefreshFeed } from '../../../store/feed/feed'
 import firebase from 'firebase'
 import { v4 } from 'uuid'
 import { AiOutlineSend } from 'react-icons/ai'
 import { BiImageAdd } from 'react-icons/bi'
+import { SetAlert } from '../../../store/alert/alert'
 
 const Post = () => {
     const dispatch = useDispatch()
@@ -46,7 +46,9 @@ const Post = () => {
                     .child(imagev4 + '.' + imageExt)
                     .put(image)
                     .then((snap) => {})
-                    .catch((err) => {})
+                    .catch((err) => {
+                        SetAlert('error', 'Erreur', "Une erreur s'est produite, l'image n'a pas pu etre téléchargé", dispatch)
+                    })
             }
             if (file) {
                 const fileArray = file.name.split('.')
@@ -55,7 +57,9 @@ const Post = () => {
                     .child(filev4 + '.' + fileExt)
                     .put(file)
                     .then((snap) => {})
-                    .catch((err) => {})
+                    .catch((err) => {
+                        SetAlert('error', 'Erreur', "Une erreur s'est produite, le fichier n'a pas pu etre téléchargé.", dispatch)
+                    })
             }
             if (user.user_type === 'etudiant') {
                 Axios.post(constants.url + '/api/post/add/post/', {
@@ -69,11 +73,13 @@ const Post = () => {
                         if (res.data.AJOUT) {
                             setPayload('')
                             dispatch(RefreshFeed())
+                            SetAlert('success', 'Information', 'Publication partagée avec succées.', dispatch)
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
                             setFile(null)
                         } else {
+                            SetAlert('error', 'Erreur', "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
@@ -81,6 +87,7 @@ const Post = () => {
                         }
                     })
                     .catch((err) => {
+                        SetAlert('error', 'Erreur', "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                         setImgUploaded(false)
                         setFileUploaded(false)
                         setImage(null)
@@ -97,12 +104,14 @@ const Post = () => {
                     .then((res) => {
                         if (res.data.AJOUT) {
                             setPayload('')
+                            SetAlert('success', 'Information', 'Publication partagée avec succées.', dispatch)
                             dispatch(RefreshFeed())
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
                             setFile(null)
                         } else {
+                            SetAlert('error', 'Erreur', "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                             setImgUploaded(false)
                             setFileUploaded(false)
                             setImage(null)
@@ -110,6 +119,7 @@ const Post = () => {
                         }
                     })
                     .catch((err) => {
+                        SetAlert('error', 'Erreur', "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                         setImgUploaded(false)
                         setFileUploaded(false)
                         setImage(null)
@@ -117,6 +127,7 @@ const Post = () => {
                     })
             }
         } else {
+            SetAlert('warning', 'Attention', 'Les publications ne devrait pas étre vide.', dispatch)
             setPayload('')
         }
     }

@@ -11,6 +11,7 @@ import { AiOutlineUserDelete } from 'react-icons/ai'
 import { BiMailSend } from 'react-icons/bi'
 import { useHistory } from 'react-router-dom'
 import { Grid } from '@material-ui/core'
+import { SetAlert } from '../../store/alert/alert'
 
 export default function MenuModif() {
     const dispatch = useDispatch()
@@ -34,7 +35,6 @@ export default function MenuModif() {
     }
 
     const handleAdd = () => {
-        dispatch(SetLoader(true))
         Axios.all([
             Axios.post(constants.url + '/api/amis/add/amis', {
                 id_user: user.id,
@@ -52,18 +52,17 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((res) => {
-                    dispatch(SetLoader(false))
+                    SetAlert('success', 'Information', 'Ajout du camarade réalisé avec succés.', dispatch)
                     dispatch(RefreshProfile())
                 })
             )
             .catch((err) => {
-                dispatch(SetLoader(false))
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, l'ajout n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(RefreshProfile())
             })
     }
 
     const handleRemove = () => {
-        dispatch(SetLoader(true))
         Axios.all([
             Axios.post(constants.url + '/api/amis/delete/amis', {
                 id_user: user.id,
@@ -77,18 +76,17 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((...res) => {
-                    dispatch(SetLoader(false))
+                    SetAlert('info', 'Information', 'Suppression du profil réalisé avec succés.', dispatch)
                     dispatch(RefreshProfile())
                 })
             )
             .catch((err) => {
-                dispatch(SetLoader(false))
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, la suppression n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(RefreshProfile())
             })
     }
 
     const handleAddEns = () => {
-        dispatch(SetLoader(true))
         Axios.all([
             Axios.post(constants.url + '/api/collegue/add/collegue', {
                 id_user: user.id,
@@ -106,12 +104,12 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((res) => {
-                    dispatch(SetLoader(false))
+                    SetAlert('success', 'Information', "l'ajout du collégue réalisé avec succés.", dispatch)
                     dispatch(RefreshProfile())
                 })
             )
             .catch((err) => {
-                dispatch(SetLoader(false))
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, l'ajout n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(RefreshProfile())
             })
     }
@@ -130,12 +128,9 @@ export default function MenuModif() {
                 dispatch(SetLoader(false))
                 dispatch(RefreshProfile())
             })
-        console.log('id:', user.id)
-        console.log('idC:', user_info.id_user)
     }
 
     const handleRemoveEns = () => {
-        dispatch(SetLoader(true))
         Axios.all([
             Axios.post(constants.url + '/api/collegue/delete/collegue', {
                 id_user: user.id,
@@ -148,12 +143,12 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((...res) => {
-                    dispatch(SetLoader(false))
+                    SetAlert('info', 'Information', 'Suppression du profil réalisé avec succés.', dispatch)
                     dispatch(RefreshProfile())
                 })
             )
             .catch((err) => {
-                dispatch(SetLoader(false))
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, la suppression n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(RefreshProfile())
             })
     }

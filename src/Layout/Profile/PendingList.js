@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { constants } from '../../constants'
 import Axios from 'axios'
 import Backdrop from '@material-ui/core/Backdrop'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { SetLoader } from '../../store/profile/profile'
 import { BsPersonCheck } from 'react-icons/bs'
 import { MdRemoveCircleOutline } from 'react-icons/md'
 import Loader from 'react-loader-spinner'
+import { SetAlert } from '../../store/alert/alert'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,11 +47,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
             ])
                 .then(
                     Axios.spread((...res) => {
+                        SetAlert('success', 'Information', 'Utilisateur accepté avec succés.', dispatch)
                         RefreshPending()
                         dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
+                    SetAlert('error', 'Erreur', "Une erreur s'est produite, l'acceptation n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                     RefreshPending()
                     dispatch(SetLoader(false))
                 })
@@ -69,12 +71,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
             ])
                 .then(
                     Axios.spread((...res) => {
+                        SetAlert('success', 'Information', 'Utilisateur accepté avec succés.', dispatch)
                         RefreshPending()
                         dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
-                    console.log(err)
+                    SetAlert('error', 'Erreur', "Une erreur s'est produite, l'acceptation n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                     RefreshPending()
                     dispatch(SetLoader(false))
                 })
@@ -98,12 +101,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
             ])
                 .then(
                     Axios.spread((...res) => {
+                        SetAlert('info', 'Information', 'Utilisateur refusé.', dispatch)
                         RefreshPending()
                         dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
-                    console.log(err)
+                    SetAlert('error', 'Erreur', "Une erreur s'est produite, la suppression n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                     RefreshPending()
                     dispatch(SetLoader(false))
                 })
@@ -121,12 +125,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
             ])
                 .then(
                     Axios.spread((...res) => {
+                        SetAlert('success', 'Information', 'Utilisateur refusé.', dispatch)
                         RefreshPending()
                         dispatch(SetLoader(false))
                     })
                 )
                 .catch((err) => {
-                    console.log(err)
+                    SetAlert('error', 'Erreur', "Une erreur s'est produite, la suppression n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                     RefreshPending()
                     dispatch(SetLoader(false))
                 })
@@ -140,12 +145,13 @@ const PendingUser = ({ elem, RefreshPending }) => {
             id_classe: elem.id_classe,
         })
             .then((res) => {
+                SetAlert('success', 'Information', 'Utilisateur accepté avec succés.', dispatch)
                 RefreshPending()
                 dispatch(SetLoader(false))
             })
             .catch((err) => {
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, l'acceptation n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(SetLoader(false))
-                console.log(err)
             })
     }
 
@@ -156,11 +162,12 @@ const PendingUser = ({ elem, RefreshPending }) => {
             id_classe: elem.id_classe,
         })
             .then((res) => {
+                SetAlert('info', 'Information', 'Utilisateur refusé.', dispatch)
                 RefreshPending()
                 dispatch(SetLoader(false))
             })
             .catch((err) => {
-                console.log(err)
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, la suppression n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(SetLoader(false))
             })
     }

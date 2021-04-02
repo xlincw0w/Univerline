@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import firebase from 'firebase/app'
-import { FirebaseAuthProvider, FirebaseAuthConsumer, IfFirebaseAuthed, IfFirebaseAuthedAnd } from '@react-firebase/auth'
-import plume1 from '../../Assets/Images/plume1.jpg'
+import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import Dropdown from './Popover/popover'
 import Axios from 'axios'
 import { constants } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { SetUser, SetFriends, Uncomplete } from '../../store/auth/auth'
-import { SetPending } from '../../store/profile/profile'
 import univerlineLoge from './univerlineLoge.png'
+import Backdrop from '@material-ui/core/Backdrop'
+import { Alert, AlertTitle } from '@material-ui/lab'
 
 export default function Header() {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector((state) => state.AuthReducer.user)
+    const alert = useSelector((state) => state.AlertReducer.alert)
 
     const [numpen, SetPendingUsers] = useState(0)
 
@@ -142,6 +143,18 @@ export default function Header() {
                                 </div>
                             </div>
                             <div className='w-screen h-16'></div>
+                            <Backdrop open={alert.pop} style={{ display: 'contents', zIndex: 200 }}>
+                                <div className='absolute z-50'>
+                                    <div className='mt-5 ml-3 flex justify-center mx-auto'>
+                                        <div className='w-120 shadow-xl'>
+                                            <Alert variant='filled' severity={alert.severity}>
+                                                <AlertTitle>{alert.type.capitalize()}</AlertTitle>
+                                                <p>{alert.message}</p>
+                                            </Alert>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Backdrop>
                         </React.Fragment>
                     )
                 } else {
@@ -172,6 +185,18 @@ export default function Header() {
                                 </div>
                             </div>
                             <div className='w-screen h-16'></div>
+                            <Backdrop open={alert.pop} style={{ display: 'contents', zIndex: 200 }}>
+                                <div className='absolute'>
+                                    <div className='mt-5 ml-3 flex justify-center mx-auto'>
+                                        <div className='w-120 shadow-xl'>
+                                            <Alert variant='filled' severity={alert.severity}>
+                                                <AlertTitle>{alert.type.capitalize()}</AlertTitle>
+                                                <p>{alert.message}</p>
+                                            </Alert>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Backdrop>
                         </React.Fragment>
                     )
                 }

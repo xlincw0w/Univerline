@@ -6,17 +6,14 @@ import { SetPublications } from '../../store/profile/profile'
 import { FaComments } from 'react-icons/fa'
 import { HiShare } from 'react-icons/hi'
 import Comments from '../Dashboard/Feed/comments'
-import { useHistory } from 'react-router-dom'
 import Options from '../Dashboard/Feed/options/options'
 import Avatar from '@material-ui/core/Avatar'
 import moment from 'moment'
 import Backdrop from '@material-ui/core/Backdrop'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import { useParams } from 'react-router-dom'
 import firebase from 'firebase'
 import { BsFileEarmarkCheck } from 'react-icons/bs'
 import { BiSend } from 'react-icons/bi'
-import { Container, Grid } from '@material-ui/core'
+import Loader from 'react-loader-spinner'
 
 export default function Publications() {
     const dispatch = useDispatch()
@@ -132,6 +129,7 @@ export default function Publications() {
                 .then((res) => {
                     Reload()
                     setBackdrop(false)
+                    setPayload('')
                 })
                 .catch((err) => {
                     setBackdrop(false)
@@ -202,6 +200,7 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
+                                    value={payload}
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
                                     placeholder='Ecrivez un commentaire !'
                                 />
@@ -214,7 +213,7 @@ export default function Publications() {
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
                                             <div className='mt-10'>
-                                                <CircularProgress color='inherit' />
+                                                <Loader type='Circles' color='#00BFFF' height={50} width={50} />
                                             </div>
                                         </div>
                                     )}
@@ -294,6 +293,7 @@ export default function Publications() {
                 .then((res) => {
                     Reload()
                     setBackdrop(false)
+                    setPayload('')
                 })
                 .catch((err) => {
                     console.log(err)
@@ -368,6 +368,7 @@ export default function Publications() {
                                     type='text'
                                     required={true}
                                     onChange={(e) => setPayload(e.target.value)}
+                                    value={payload}
                                     className='block w-full lg:w-2/3 2xl:w-1/2  sm:text-sm border-gray-300 rounded-md ml-5'
                                     placeholder='Ecrivez un commentaire !'
                                 />
@@ -380,7 +381,7 @@ export default function Publications() {
                                     {backdrop && (
                                         <div className='h-32 flex justify-center'>
                                             <div className='mt-10'>
-                                                <CircularProgress color='inherit' />
+                                                <Loader type='Circles' color='#00BFFF' height={50} width={50} />
                                             </div>
                                         </div>
                                     )}
