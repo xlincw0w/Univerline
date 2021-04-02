@@ -7,13 +7,13 @@ const { data } = require('autoprefixer')
 
 
 router.route('/add/historique/').post((req, res) => {
-        //id_user= req.params.id
+    //id_user= req.params.id
 
     db('historique')
         .insert({
-         id_user:req.body.id_user,
-         id_contact:req.body.id_contact,
-         createAt:moment().format()
+            id_user: req.body.id_user,
+            id_contact: req.body.id_contact,
+            createAt: moment().utc().format()
         })
         .then((rows) => {
             res.json(rows)
@@ -41,50 +41,51 @@ router.route('/add/historique/').post((req, res) => {
     })
 })*/
 router.route('/get/historique/:id?').get((req, res) => {
-    id_u= req.params.id
+    id_u = req.params.id
     //console.logˇ('his:',id_u)
 
     db('users')
-   // .whereIn('id_user', db('historique').where({ id_user: id_u }).select('id_contact').orderBy('createAt','asc'))
+        // .whereIn('id_user', db('historique').where({ id_user: id_u }).select('id_contact').orderBy('createAt','asc'))
 
-   .join('historique', 'users.id_user','=', 'historique.id_contact') 
-   .where('historique.id_user',id_u)
-   .select('*')
-   .orderBy('createAt','desc')
+        .join('historique', 'users.id_user', '=', 'historique.id_contact')
+        .where('historique.id_user', id_u)
+        .select('*')
+        .orderBy('createAt', 'desc')
 
-    .then((rows) => {
-        console.log('cont',rows)
-        res.json(rows)
-    })
-    .catch((err) => {
-        console.log(err)
-        res.json({ err: true })
-    })
+        .then((rows) => {
+            console.log('cont', rows)
+            res.json(rows)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json({ err: true })
+        })
 })
 router.route('/get/historique1/:id?').get((req, res) => {
-    id_u= req.params.id
+    id_u = req.params.id
     //console.logˇ('his:',id_u)
 
     db('users')
- .whereIn('id_user', db('historique').where({ id_user: id_u }).select('id_contact'))
+        .whereIn('id_user', db('historique').where({ id_user: id_u }).select('id_contact'))
 
-   .select('*')
+        .select('*')
 
 
-    .then((rows) => {
-        console.log('cont',rows)
-        res.json(rows)
-    })
-    .catch((err) => {
-        console.log(err)
-        res.json({ err: true })
-    })
+        .then((rows) => {
+            console.log('cont', rows)
+            res.json(rows)
+        })
+        .catch((err) => {
+            console.log(err)
+            res.json({ err: true })
+        })
 })
-    router.route('/update/historique').post((req,res) =>{
-        
-        db('historique')
-        .where({id_user:req.body.id_user,id_contact:req.body.id_contact})
-        .update({createAt:req.body.createdAt})
+router.route('/update/historique').post((req, res) => {
+
+    db('historique')
+        .where({ id_user: req.body.id_user, id_contact: req.body.id_contact })
+        .update({ createAt: req.body.createdAt })
+    console.log("updaaaated msg", createAt)
         .then((rows) => {
             res.json(rows)
         })
@@ -92,5 +93,5 @@ router.route('/get/historique1/:id?').get((req, res) => {
             console.log(err)
             res.json({ err: true })
         })
-    })
+})
 module.exports = router
