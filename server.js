@@ -19,6 +19,7 @@ app.use('/api/commentaire', require('./api/commentaire/commentaire'))
 app.use('/api/classe', require('./api/classe/classe'))
 app.use('/api/amis', require('./api/amis/amis'))
 app.use('/api/post', require('./api/post/post'))
+app.use('/api/notif', require('./api/notif/notif'))
 app.use('/api/inscription', require('./api/Inscription/inscription'))
 app.use('/api/online', require('./api/online'))
 

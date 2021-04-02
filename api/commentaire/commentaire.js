@@ -17,7 +17,7 @@ router.route('/get/comments').get((req, res) => {
         })
 })
 
-//afficher tous les commentaires d'un poste précis
+//afficher tous les commentaires d'un poste précis kouciiiiiii
 router.route('/get/comments/:id?').get((req, res) => {
     const id_pos = req.params.id
     db('commentaire')
