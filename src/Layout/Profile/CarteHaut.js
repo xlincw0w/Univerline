@@ -303,7 +303,7 @@ export default function CarteHaut({ profile }) {
                                             </div>
                                             <input
                                                 type='text'
-                                                className='block pl-3 pr-12 w-62 sm:text-sm border-gray-300 rounded-md'
+                                                className=' sm:text-sm border-gray-300 rounded-md'
                                                 value={profile.niveau_ens}
                                                 onChange={(e) =>
                                                     dispatch(
@@ -321,7 +321,7 @@ export default function CarteHaut({ profile }) {
                                                 <p className='text-purple-700 text-sm inline'>Email</p>
                                                 <HiOutlineMailOpen className='inline ml-2 mb-1' size={20} />
                                             </div>
-                                            <p className='text-gray-600 text-base'>{profile.email}</p>
+                                            <p className='text-gray-600 sm:text-sm text-base'>{profile.email}</p>
                                         </Grid>
                                     </Grid>
 

@@ -8,6 +8,7 @@ import Inscription from '../Inscription/inscription'
 import Home from '../Home/home'
 import Dashboard from '../Dashboard/dashboard'
 import Profile from '../Profile/IndexProfile'
+import Classe from '../Classe/Classe'
 
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import Axios from 'axios'
@@ -73,6 +74,10 @@ const Main = () => {
                                                 <Header />
                                                 <Inscription />
                                             </Route>
+                                            <Route path='/classe'>
+                                                <Header />
+                                                <Classe />
+                                            </Route>
                                             <Route exact path='/'>
                                                 <Header />
                                                 <Dashboard />
@@ -94,6 +99,10 @@ const Main = () => {
                                             <Route path='/messagerie'>
                                                 <Header />
                                                 <Messagerie />
+                                            </Route>
+                                            <Route path='/classe'>
+                                                <Header />
+                                                <Classe />
                                             </Route>
                                             <Route exact path='/'>
                                                 <Home />

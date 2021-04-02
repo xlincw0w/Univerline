@@ -1,5 +1,8 @@
 import { userConstants } from "./constants";
 import firebase from "firebase/app";
+import Axios from 'axios'
+import { constants } from "../../../constants"
+import moment from 'moment'
 
 import "firebase/auth";
 
@@ -45,16 +48,32 @@ export const updateMessage = (msgObj) => {
             .add({
                 ...msgObj,
                 isView: false,
-                createdAt: new Date()
+                createdAt: moment().utc().format()
             })
             .then((data) => {
+
                 console.log(data)
+
                 //success
                 //   dispatch({
                 //     type: userConstants.GET_REALTIME_MESSAGES,
                 // })
+                Axios.all([
+                    Axios.post(constants.url + '/api/historique/update/historique',
+                        {
+                            id_user: msgObj.user_uid_1,
+                            id_contact: msgObj.user_uid_2,
+                            createdAt: moment().utc().format()
+                        }),
+                    Axios.post(constants.url + '/api/historique/update/historique',
+                        {
+                            id_user: msgObj.user_uid_2,
+                            id_contact: msgObj.user_uid_1,
+                            createdAt: moment().utc().format(),
 
+                        }),
 
+                ])
             })
             .catch(error => {
                 console.log(error)

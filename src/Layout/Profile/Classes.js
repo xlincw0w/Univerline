@@ -20,6 +20,7 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { find } from 'lodash'
 import { Container } from '@material-ui/core'
+import Loader from 'react-loader-spinner'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -62,6 +63,7 @@ export default function Freinds() {
     const [filterWord, updateFilter] = useState('')
 
     useEffect(() => {
+        setLoader(true)
         if (user.id && user_info.id_user) {
             if (user.user_type === 'etudiant') {
                 Axios.post(constants.url + '/api/classe/get/classe/etu/adh/', {
@@ -70,10 +72,14 @@ export default function Freinds() {
                 })
                     .then((res) => {
                         setProfileClasses(res.data)
+                        setLoader(false)
                     })
                     .catch((err) => {
                         setProfileClasses([])
+                        setLoader(false)
                     })
+            } else {
+                setLoader(false)
             }
         }
     }, [refresh, user.id, user_info.id_user])
@@ -201,7 +207,7 @@ export default function Freinds() {
     return (
         <Container maxWidth='md'>
             <Backdrop open={loader} style={{ zIndex: 10 }}>
-                <CircularProgress color='inherit' />
+                <Loader type='Circles' color='#00BFFF' height={120} width={120} />
             </Backdrop>
 
             {user_info.user_type === 'etudiant' && (
