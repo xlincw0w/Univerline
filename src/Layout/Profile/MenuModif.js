@@ -23,15 +23,41 @@ export default function MenuModif() {
     const history = useHistory()
 
     const handleUpdate = () => {
-        Axios.post(constants.url + '/api/profile/update', { ...user_info })
-            .then((res) => {
-                dispatch(SetModify(false))
-                dispatch(RefreshProfile())
-            })
-            .catch((err) => {
-                dispatch(SetModify(false))
-                dispatch(RefreshProfile())
-            })
+        let valid_data = true
+
+        if (user.user_type === 'etudiant') {
+            if (!constants.alph_rg.test(user_info.nom) || user_info.nom.length < 3) valid_data = false
+            if (!constants.alph_rg.test(user_info.prenom) || user_info.prenom.length < 3) valid_data = false
+            if (!constants.alph_rg.test(user_info.niveau_edu) || user_info.niveau_edu.length < 2) valid_data = false
+            if (!constants.alph_rg.test(user_info.domaine_edu) || user_info.domaine_edu.length < 3) valid_data = false
+            if (!constants.alph_rg.test(user_info.etablissement) || user_info.etablissement.length < 3) valid_data = false
+        } else {
+            if (!constants.alph_rg.test(user_info.nom) || user_info.nom.length < 3) valid_data = false
+            if (!constants.alph_rg.test(user_info.prenom) || user_info.prenom.length < 3) valid_data = false
+            if (!constants.alphanum_rg.test(user_info.niveau_ens) || user_info.niveau_ens.length < 2) valid_data = false
+            if (!constants.alphanum_rg.test(user_info.domaine_ens) || user_info.domaine_ens.length < 3) valid_data = false
+        }
+
+        if (valid_data) {
+            Axios.post(constants.url + '/api/profile/update', { ...user_info })
+                .then((res) => {
+                    SetAlert('success', 'Information', 'Modification du profil réalisé avec succés.', dispatch)
+                    dispatch(SetModify(false))
+                    dispatch(RefreshProfile())
+                })
+                .catch((err) => {
+                    SetAlert(
+                        'error',
+                        'Erreur',
+                        "Une erreur s'est produite, la modification n'a pas eu lieu vérifiez l'état de votre connexion sinon réessayer plus tard.",
+                        dispatch
+                    )
+                    dispatch(SetModify(false))
+                    dispatch(RefreshProfile())
+                })
+        } else {
+            SetAlert('warning', 'Attention', 'Veuillez introduire des informations correctes ! les caractéres autres que les léttres ne sont pas autorisé.', dispatch)
+        }
     }
 
     const handleAdd = () => {
