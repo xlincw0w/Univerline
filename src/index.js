@@ -12,7 +12,7 @@ import { Provider } from 'react-redux'
 import rootReducer from './store/rootReducer'
 import './Tailwind/index.css'
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 reactDOM.render(
     <Provider store={store}>
