@@ -183,13 +183,13 @@ export default function Publications() {
                                 onClick={() => {
                                     setLoadComment(!loadComment)
                                 }}
-                                className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
+                                className='inline-block mx-4 cursor-pointer duration-300 hover:text-purple-600'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3 duration-300 hover:text-purple-600'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer hover:text-purple-600'>
+                            <div className='inline-block mx-4 cursor-pointer duration-300 hover:text-purple-600'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-purple-600'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 duration-300 hover:text-purple-600'>Partager</p>
                             </div>
                         </div>
                     </div>
@@ -351,13 +351,13 @@ export default function Publications() {
                     </div>
                     <div className='text-gray-600 border-t-2 border-gray-400'>
                         <div className='mt-4 flex justify-start h-10'>
-                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer hover:text-green-600'>
+                            <div onClick={() => setLoadComment(!loadComment)} className='inline-block mx-4 cursor-pointer duration-300 hover:text-green-600'>
                                 <FaComments className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Commenter</p>
+                                <p className='text-gray-500 text-sm inline ml-3 duration-300 hover:text-green-600'>Commenter</p>
                             </div>
-                            <div className='inline-block mx-4 cursor-pointer hover:text-green-600'>
+                            <div className='inline-block mx-4 cursor-pointer duration-300 hover:text-green-600'>
                                 <HiShare className='inline' />
-                                <p className='text-gray-500 text-sm inline ml-3 hover:text-green-600'>Partager</p>
+                                <p className='text-gray-500 text-sm inline ml-3 duration-300 hover:text-green-600'>Partager</p>
                             </div>
                         </div>
                     </div>
