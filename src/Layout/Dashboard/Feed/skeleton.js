@@ -466,6 +466,21 @@ const Skeleton = () => {
                     </div>
                 </div>
             )}
+            {feed_prof.length + feed_friends.length === 0 && (
+                <div className='w-full text-center text-gray-700 text-xl'>
+                    <p>Votre fil d'actualité semble être vide !</p>
+                    {user.user_type === 'etudiant' && (
+                        <div className=''>
+                            <p className='text-lg text-gray-500'>Ajoutez des camarades ou adhérez aux classes de vos enseignants pour avoir accés a leur publications.</p>
+                        </div>
+                    )}
+                    {user.user_type === 'enseignant' && (
+                        <div className=''>
+                            <p className='text-lg text-gray-500'>Ajoutez vos collègues pour avoir accés a leur publications.</p>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     )
 }

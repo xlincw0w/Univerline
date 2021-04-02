@@ -16,10 +16,9 @@ import { FirebaseAuthConsumer } from '@react-firebase/auth'
 
 import { UpdateSignupUser, UpdateSignupStep, SetLoader } from '../../store/signup/signupReducer'
 import { Backdrop } from '@material-ui/core'
-
-import CircularProgress from '@material-ui/core/CircularProgress'
 import Loader from 'react-loader-spinner'
 
+import { SetAlert } from '../../store/alert/alert'
 import { constants } from '../../constants'
 import Axios from 'axios'
 
@@ -179,10 +178,12 @@ const Inscription = (props) => {
                     dispatch(UpdateSignupStep('whoyouare'))
                     dispatch(SetLoader(false))
                 } else {
+                    SetAlert('info', 'Information', 'Un mail de vérification a été envoyé dans votre boite email veuillez cliquer sur le lien reçu pour confirmer.', dispatch)
                     dispatch(SetLoader(false))
                 }
             })
             .catch((err) => {
+                SetAlert('error', 'Erreur', "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
                 dispatch(SetLoader(false))
             })
     }
@@ -302,7 +303,6 @@ const Inscription = (props) => {
                                                                 dispatch(SetLoader(false))
                                                             })
                                                             .catch((err) => {
-                                                                console.log(err)
                                                                 dispatch(UpdateSignupStep('error'))
                                                                 dispatch(SetLoader(false))
                                                             })
@@ -321,9 +321,7 @@ const Inscription = (props) => {
                                                                 firebase
                                                                     .auth()
                                                                     .currentUser.updateProfile({ emailVerified: true })
-                                                                    .then((res) => {
-                                                                        console.log(res)
-                                                                    })
+                                                                    .then((res) => {})
                                                                 dispatch(
                                                                     UpdateSignupUser({
                                                                         ...user,
@@ -337,7 +335,6 @@ const Inscription = (props) => {
                                                                 dispatch(SetLoader(false))
                                                             })
                                                             .catch((err) => {
-                                                                console.log(err)
                                                                 dispatch(UpdateSignupStep('error'))
                                                                 dispatch(SetLoader(false))
                                                             })
@@ -423,10 +420,13 @@ const Inscription = (props) => {
                                                     Suivant
                                                 </Button>
                                             </div>
-                                            <div className="text-center text-gray-800 cursor-pointer mt-5 md:hidden">
-                                                <p  onClick={() => {
-                                                            history.push('/auth')
-                                                        }}>Vous possedez déjà un compte ?</p>
+                                            <div className='text-center text-gray-800 cursor-pointer mt-5 md:hidden'>
+                                                <p
+                                                    onClick={() => {
+                                                        history.push('/auth')
+                                                    }}>
+                                                    Vous possedez déjà un compte ?
+                                                </p>
                                             </div>
                                         </form>
                                     </div>
@@ -456,9 +456,21 @@ const Inscription = (props) => {
                                                             .auth()
                                                             .currentUser.sendEmailVerification()
                                                             .then(() => {
+                                                                SetAlert(
+                                                                    'info',
+                                                                    'Information',
+                                                                    'Un mail de vérification a été envoyé dans votre boite email veuillez cliquer sur le lien reçu pour confirmer.',
+                                                                    dispatch
+                                                                )
                                                                 dispatch(SetLoader(false))
                                                             })
                                                             .catch((err) => {
+                                                                SetAlert(
+                                                                    'error',
+                                                                    'Erreur',
+                                                                    "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.",
+                                                                    dispatch
+                                                                )
                                                                 dispatch(SetLoader(false))
                                                             })
                                                     }}
