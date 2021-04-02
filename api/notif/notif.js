@@ -3,12 +3,12 @@ const router = express.Router()
 const db = require('../database')
 
 router.route('/get/notif/:id?').get((req, res) => {
-    const id_user=req.params.id
+    const id_u=req.params.id
     const type_not = req.body.type
-    db('notifications')
-        .select('*')
+    db('users')
+        .select('nom','prenom')
 
-        .where({ type: type_not,r_user_id:id_user})
+        .whereIn('id_user', (db('notifications').select('s_user_id').where({r_user_id : id_u }) ))
         .then((rows) => {
             res.json(rows)
         })
