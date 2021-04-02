@@ -143,18 +143,20 @@ export default function Header() {
                                 </div>
                             </div>
                             <div className='w-screen h-16'></div>
-                            <Backdrop open={alert.pop} style={{ display: 'contents', zIndex: 200 }}>
-                                <div className='absolute z-50'>
-                                    <div className='mt-5 ml-3 flex justify-center mx-auto'>
-                                        <div className='w-120 shadow-xl'>
-                                            <Alert variant='filled' severity={alert.severity}>
-                                                <AlertTitle>{alert.type.capitalize()}</AlertTitle>
-                                                <p>{alert.message}</p>
-                                            </Alert>
+                            <div className='fixed z-50'>
+                                <Backdrop open={alert.pop} style={{ display: 'contents', zIndex: 200 }}>
+                                    <div className='absolute'>
+                                        <div className='mt-5 ml-3 flex justify-center mx-auto'>
+                                            <div className='w-120 shadow-xl'>
+                                                <Alert variant='filled' severity={alert.severity}>
+                                                    <AlertTitle>{alert.type.capitalize()}</AlertTitle>
+                                                    <p>{alert.message}</p>
+                                                </Alert>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Backdrop>
+                                </Backdrop>
+                            </div>
                         </React.Fragment>
                     )
                 } else {
