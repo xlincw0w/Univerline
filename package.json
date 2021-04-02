@@ -32,6 +32,7 @@
         "aos": "^2.3.4",
         "axios": "^0.21.0",
         "classnames": "^2.2.6",
+        "connection-string": "^4.3.2",
         "firebase": "^8.2.9",
         "mime-types": "^2.1.29",
         "moment": "^2.29.1",
