@@ -4,8 +4,6 @@ const db = require('../database')
 const moment = require('moment')
 const { data } = require('autoprefixer')
 
-
-
 router.route('/add/historique/').post((req, res) => {
     //id_user= req.params.id
 
@@ -13,7 +11,7 @@ router.route('/add/historique/').post((req, res) => {
         .insert({
             id_user: req.body.id_user,
             id_contact: req.body.id_contact,
-            createAt: moment().utc().format()
+            createAt: moment().utc().format(),
         })
         .then((rows) => {
             res.json(rows)
@@ -53,7 +51,6 @@ router.route('/get/historique/:id?').get((req, res) => {
         .orderBy('createAt', 'desc')
 
         .then((rows) => {
-            console.log('cont', rows)
             res.json(rows)
         })
         .catch((err) => {
@@ -70,9 +67,7 @@ router.route('/get/historique1/:id?').get((req, res) => {
 
         .select('*')
 
-
         .then((rows) => {
-            console.log('cont', rows)
             res.json(rows)
         })
         .catch((err) => {
@@ -81,11 +76,9 @@ router.route('/get/historique1/:id?').get((req, res) => {
         })
 })
 router.route('/update/historique').post((req, res) => {
-
     db('historique')
         .where({ id_user: req.body.id_user, id_contact: req.body.id_contact })
         .update({ createAt: req.body.createdAt })
-    console.log("updaaaated msg", createAt)
         .then((rows) => {
             res.json(rows)
         })

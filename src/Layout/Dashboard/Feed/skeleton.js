@@ -270,18 +270,14 @@ const Skeleton = () => {
                     .child(elem.image)
                     .getDownloadURL()
                     .then((url) => setImage(url))
-                    .catch((err) => {
-                        console.log(err)
-                    })
+                    .catch((err) => {})
             }
             if (elem.file) {
                 storageRef
                     .child(elem.file)
                     .getDownloadURL()
                     .then((url) => setFile(url))
-                    .catch((err) => {
-                        console.log(err)
-                    })
+                    .catch((err) => {})
             }
         }, [])
 

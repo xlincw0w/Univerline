@@ -1,7 +1,7 @@
 const initState = {
     alert: {
         pop: false,
-        severity: '',
+        severity: 'info',
         type: '',
         message: '',
     },

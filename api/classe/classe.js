@@ -50,7 +50,6 @@ router.route('/update/classe/:id?').post((req, res) => {
             libelle_classe: libelle,
         })
         .then((resp) => {
-            console.log(resp)
             res.json({ updated: true })
         })
         .catch((err) => {
@@ -130,13 +129,13 @@ router.route('/delete/classe/:id?').delete((req, res) => {
             res.json({ err: true })
         })
 })
-//les adherant d une classe 
+//les adherant d une classe
 router.route('/get/classe/ad/:id?').get((req, res) => {
     const id = req.params.id
     db('users')
-    .select('*')
-    .whereIn('id_user', (db('adherant').select('id_etu').where({ id_classe: id })))
-   
+        .select('*')
+        .whereIn('id_user', db('adherant').select('id_etu').where({ id_classe: id }))
+
         .then((resp) => {
             res.json(resp)
         })
@@ -149,9 +148,9 @@ router.route('/get/classe/ad/:id?').get((req, res) => {
 router.route('/get/classe/po/:id?').get((req, res) => {
     const id = req.params.id
     db('poste')
-    .select('*')
-    .where('id_classe', id)
-   
+        .select('*')
+        .where('id_classe', id)
+
         .then((resp) => {
             res.json(resp)
         })

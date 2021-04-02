@@ -23,7 +23,6 @@ router.route('/save_user').post((req, res) => {
             date_inscription: moment().format(),
         })
         .then((resp) => {
-            console.log('Added')
             res.json({ updated: true })
         })
         .catch((err) => {

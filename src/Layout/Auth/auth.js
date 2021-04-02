@@ -1,20 +1,14 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
-
 import { useHistory } from 'react-router-dom'
 import firebase from 'firebase/app'
 
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FaGooglePlusSquare } from 'react-icons/fa'
-import { FaTwitterSquare } from 'react-icons/fa'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { Backdrop } from '@material-ui/core'
-import CircularProgress from '@material-ui/core/CircularProgress'
-
-import { FaFeatherAlt } from 'react-icons/fa'
 import { SetLoader, SetFailedAuth } from '../../store/auth/auth'
 import cx from 'classnames'
 import Loader from 'react-loader-spinner'
@@ -36,17 +30,6 @@ export default function Auth() {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((userCred) => {
-                console.log(userCred)
-                // firebase.auth().currentUser.sendEmailVerification()
-                // dispatch(
-                //     UpdateSignupUser({
-                //         ...user,
-                //         id: userCred.user.uid,
-                //         nom_complet: user.nom_complet,
-                //         email: userCred.user.email,
-                //         isNewUser: userCred.additionalUserInfo.isNewUser,
-                //     })
-                // )
                 dispatch(SetLoader(false))
                 history.push('/')
             })
@@ -169,11 +152,14 @@ export default function Auth() {
                                 Se connecter
                             </Button>
                         </div>
-                        <div className="text-center text-gray-800 cursor-pointer mt-5 md:hidden">
-                                                <p  onClick={() => {
-                                                            history.push('/inscription')
-                                                        }}>S'inscrire</p>
-                                            </div>
+                        <div className='text-center text-gray-800 cursor-pointer mt-5 md:hidden'>
+                            <p
+                                onClick={() => {
+                                    history.push('/inscription')
+                                }}>
+                                S'inscrire
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div>

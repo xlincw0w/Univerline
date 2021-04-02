@@ -1,4 +1,4 @@
-import { authConstanst } from "../../Layout/Messagerie/actions/constants"
+import { authConstanst } from '../../Layout/Messagerie/actions/constants'
 
 const initState = {
     firstName: '',
@@ -6,54 +6,48 @@ const initState = {
     email: '',
     authenticating: false,
     authenticated: false,
-    error: null
+    error: null,
 }
 
 const authReducer = (state = initState, action) => {
-
-    console.log(action);
-
     switch (action.type) {
-
         case `${authConstanst.USER_LOGIN}_REQUEST`:
             state = {
                 ...state,
-                authenticating: true
+                authenticating: true,
             }
-            break;
+            break
         case `${authConstanst.USER_LOGIN}_SUCCESS`:
             state = {
                 ...state,
                 ...action.payload.user,
                 authenticated: true,
-                authenticating: false
+                authenticating: false,
             }
-            break;
+            break
         case `${authConstanst.USER_LOGIN}_FAILURE`:
             state = {
                 ...state,
                 authenticated: false,
                 authenticating: false,
-                error: action.payload.error
+                error: action.payload.error,
             }
-            break;
+            break
         case `${authConstanst.USER_LOGOUT}_REQUEST`:
-            break;
+            break
         case `${authConstanst.USER_LOGOUT}_SUCCESS`:
             state = {
-                ...initState
+                ...initState,
             }
-            break;
+            break
         case `${authConstanst.USER_LOGOUT}_FAILURE`:
             state = {
                 ...state,
-                error: action.payload.error
+                error: action.payload.error,
             }
-            break;
-
+            break
     }
 
-
-    return state;
+    return state
 }
-export default authReducer;
+export default authReducer
