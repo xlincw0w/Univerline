@@ -96,6 +96,11 @@ export default function Dropdown(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
 
     const [reset, setReset] = useState(0)
+    const [resetAutoComplete, SetInput] = useState(false)
+
+    const ResetInput = () => {
+        SetInput(resetAutoComplete + 1)
+    }
 
     const RefreshPop = () => {
         setReset(reset + 1)
@@ -133,7 +138,7 @@ export default function Dropdown(props) {
 
     const profileGoto = (id) => {
         history.push('/profile/' + id)
-        handleInputChange('')
+        ResetInput()
     }
 
     const open = Boolean(anchorEl)
@@ -218,13 +223,14 @@ export default function Dropdown(props) {
             {props.item === 'profilesearch' && (
                 <div className='px-8'>
                     <Autocomplete
+                        key={resetAutoComplete}
                         options={users}
                         onInputChange={(e) => handleInputChange(e.target.value)}
                         getOptionLabel={(option) => option.searchIn}
                         renderInput={(params) => (
                             <div ref={params.InputProps.ref}>
                                 <input
-                                    className=' focus:border-light-blue-500 focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-24'
+                                    className='focus:ring-1 focus:ring-light-blue-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-24'
                                     type='text'
                                     className='block pl-7 pr-12 w-62 sm:text-sm border-gray-300 rounded-md mx-auto'
                                     placeholder='Rechercher profil'

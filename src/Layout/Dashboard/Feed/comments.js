@@ -38,7 +38,7 @@ const Comments = ({ elem, Reload }) => {
                             className='ml-2 shadow cursor-pointer'
                         />
                         <div className='inline'>
-                            <p className='ml-2 text-gray-500'>{elem.nom + ' ' + elem.prenom}</p>
+                            <p className='ml-2 text-gray-500'>{elem.nom.capitalize() + ' ' + elem.prenom.capitalize()}</p>
                             <p className='ml-2'>{moment(elem.date_commentaire).format('DD - MM - YYYY HH:mm') + ' h'}</p>
                         </div>
                     </div>
