@@ -2,13 +2,13 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import AvatarUserInfo from './AvatarUserInfo'
+import { useHistory } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AccordionFiles from './AccordionFiles'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 import DeleteIcon from '@material-ui/icons/Delete';
-import Card from '@material-ui/core/Card';
 
 import { CgCloseR } from "react-icons/cg"
 const useStyles = makeStyles((theme) => ({
@@ -30,14 +30,17 @@ const useStyles = makeStyles((theme) => ({
 function UserInfo(props) {
 
     const classes = useStyles()
+    const id = props.id
     const user = props.user
     const avatar = props.userAvatar
+    const history = useHistory()
 
     console.log("user info", user)
     return (
         <>
             <Grid container direction="column" justify="center">
                 <Grid item>
+
                     <Grid container justify="center" direction="column">
                         <Grid item >
                             <div className="centrer" >
@@ -55,29 +58,27 @@ function UserInfo(props) {
                         </Grid>
 
                     </Grid>
+
                     <Divider />
+
+
                 </Grid>
                 <Grid item>
-                    <div style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '100%' }}>
-                        <AccordionFiles />
-                        <Grid item justify="center" style={{ height: "100%" }}>
-                            <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth className='w-11/11 mt-8 mb-16'>
-                                Voir profil
-                                                    </Button>
-                            <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth startIcon={<DeleteIcon />}>
-                                Supprimer discussion
-                                                    </Button>
-                            <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%", marginBottom: "2%" }} fullWidth startIcon={<CgCloseR />}>
-                                Bloquer
-                                                    </Button>
-
-                        </Grid>
-
-                    </div>
-
+                    <AccordionFiles />
 
                 </Grid>
+                <Grid item justify="center" style={{ height: "100%" }}>
+                    <Button variant="contained" color="default" onClick={() => history.push('/profile/' + id)} style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth className='w-11/11 mt-8 mb-16'>
+                        Voir profil
+                                                    </Button>
+                    <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth startIcon={<DeleteIcon />}>
+                        Supprimer discussion
+                                                    </Button>
+                    <Button variant="contained" color="default" style={{ marginTop: '10px', marginLeft: '5%', width: "90%" }} fullWidth startIcon={<CgCloseR />}>
+                        Bloquer
+                                                    </Button>
 
+                </Grid>
             </Grid>
         </>
     )

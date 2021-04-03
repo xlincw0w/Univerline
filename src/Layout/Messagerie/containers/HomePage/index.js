@@ -224,6 +224,13 @@ if (user_info.user_type === 'etudiant') {
   const uploadFile = (file, metadata) => {
     const fileF = []
   }
+  const toDateTime = (secs) => {
+    //   var t = new Date(Date.UTC(1970, 0, 1)); // Epoch
+    //  t.setUTCSeconds(secs);
+    var d = new Date();
+    d.setTime(secs * 1000)
+    return d;
+  }
 
   return (
 
@@ -259,16 +266,26 @@ if (user_info.user_type === 'etudiant') {
             <Grid item >
               <Card style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '68vh', marginBottom: '10px' }} >
 
-                {filter(contacts, (o) => {
-                  let searchIn = o.nom + ' ' + o.prenom + ' ' + o.nom
-                  return searchIn.includes(filterWord)
+
+                {filter(contacts, (user) => {
+                  const rech = user.nom + ' ' + user.prenom + ' ' + user.nom
+                  const rech2 = user.nom + user.prenom
+                  const rech3 = user.prenom + user.nom
+
+                  if (filterWord === '') {
+                    return user
+                  } else if (
+                    rech.toLowerCase().includes(filterWord.toLowerCase()) ||
+                    rech2.toLowerCase().includes(filterWord.toLowerCase()) ||
+                    rech3.toLowerCase().includes(filterWord.toLowerCase())
+                  ) {
+                    return user
+                  }
                 }).map((elem) => {
-                  return (
-                    <AmiCard onClick={initChat}
-                      key={elem.id_user}
-                      user={elem} />
-                  )
+                  return <AmiCard onClick={initChat} key={elem.id_user} user={elem} />
                 })}
+
+
               </Card>
 
             </Grid>
@@ -296,6 +313,7 @@ if (user_info.user_type === 'etudiant') {
                       conversations.map(con => <div style={{ textAlign: con.user_uid_1 == userS.id ? 'right' : 'left' }}>
                         <p className="messageStyle" style={{ backgroundColor: con.user_uid_1 == userS.id ? '#0277bd' : '#0097a7', maxWidth: '60%' }} >{con.message}
                         </p>
+
 
                       </div>)
                       : null
@@ -349,7 +367,7 @@ if (user_info.user_type === 'etudiant') {
       <Grid item sm={3}   >
         <Card style={{ backgroundColor: '#f0f7f7', minHeight: '100%' }} className="max-h-full w-full" >
           {
-            chatStarted ? <UserInfo user={chatUser} userAvatar={userAvatar} /> : null
+            chatStarted ? <UserInfo id={userUid} user={chatUser} userAvatar={userAvatar} /> : null
           }
 
         </Card>
