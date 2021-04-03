@@ -263,7 +263,7 @@ if (user_info.user_type === 'etudiant') {
 
             </Grid>
             <Grid item >
-              <Card style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '68vh', marginBottom: '10px' }} >
+              <div style={{ backgroundColor: '#f0f7f7', paddingLeft: "10px", overflowY: "scroll", maxHeight: '68vh', marginBottom: '10px' }} >
 
 
                 {filter(contacts, (user) => {
@@ -285,7 +285,7 @@ if (user_info.user_type === 'etudiant') {
                 })}
 
 
-              </Card>
+              </div>
 
             </Grid>
 
@@ -297,7 +297,7 @@ if (user_info.user_type === 'etudiant') {
 
 
 
-      <Grid item sm={6} xs={chatStarted ? 7 : null} >
+      <Grid item sm={6} xs={chatStarted ? 7 : 0} >
         <Card style={{ backgroundColor: '#f0f7f7', maxHeight: "100%", minHeight: '100%' }} >
           {/***************************************************************************
          * Le Chat Feed
@@ -333,7 +333,9 @@ if (user_info.user_type === 'etudiant') {
                     <input className="champEnvoi" onChange={(e) => setMessage(e.target.value)}
                       value={message}
                       placeholder='votre message...'
-                      autoFocus
+                      autoFocus={chatStarted ? true : false}
+
+                      disabled={!chatStarted ? true : false}
                     />
                   </Grid>
                   <Grid item sm={1} xs={2}>
@@ -364,7 +366,7 @@ if (user_info.user_type === 'etudiant') {
       {/**************************************************************************
           * UserINFO
           */}
-      <Grid item sm={3}   >
+      <Grid item sm={3} xs={0} >
         <Card style={{ backgroundColor: '#f0f7f7', minHeight: '100%' }} className="max-h-full w-full" >
           {
             chatStarted ? <UserInfo id={userUid} user={chatUser} userAvatar={userAvatar} /> : null

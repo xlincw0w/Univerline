@@ -53,7 +53,7 @@ export default function DetailedAccordion() {
 
     return (
         <div className={classes.root}>
-            <Accordion defaultExpanded>
+            <Accordion >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1c-content"
@@ -65,14 +65,11 @@ export default function DetailedAccordion() {
 
                 </AccordionSummary>
                 <AccordionDetails className={classes.details}>
-
-
-
                 </AccordionDetails>
                 <Divider />
 
             </Accordion>
-            <Accordion defaultExpanded>
+            <Accordion defaultExpanded={false}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1c-content"

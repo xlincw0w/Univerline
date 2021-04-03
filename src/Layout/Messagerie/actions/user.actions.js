@@ -83,6 +83,7 @@ export const updateMessage = (msgObj) => {
 }
 
 export const getRealtimeConversations = (user) => {
+
     return async dispatch => {
 
         const db = firebase.firestore();

@@ -79,6 +79,7 @@ export default function AmiCard(props) {
 
     return (
         <Card className={classes.root} onClick={() => onClick(user)}>
+
             <CardActionArea>
                 <CardHeader
                     avatar={
@@ -95,7 +96,7 @@ export default function AmiCard(props) {
                     }
 
                     title={` ${user.nom} ${user.prenom}`}
-                    subheader='etudiant'
+                    subheader={`${user.user_type}`}
                 />
             </CardActionArea>
         </Card>
