@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { useHistory } from 'react-router-dom'
@@ -6,12 +6,13 @@ import firebase from 'firebase/app'
 
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FaGooglePlusSquare } from 'react-icons/fa'
-
+import Backdrop from '@material-ui/core/Backdrop'
 import { useSelector, useDispatch } from 'react-redux'
-import { Backdrop } from '@material-ui/core'
 import { SetLoader, SetFailedAuth } from '../../store/auth/auth'
 import cx from 'classnames'
 import Loader from 'react-loader-spinner'
+import { SetAlert } from '../../store/alert/alert'
+import { constants } from '../../constants'
 
 export default function Auth() {
     const history = useHistory()
@@ -19,8 +20,11 @@ export default function Auth() {
     const loader = useSelector((state) => state.AuthReducer.loader)
     const failedAuth = useSelector((state) => state.AuthReducer.failedAuth)
 
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [resetemail, setResetEmail] = useState(false)
+    const [toreset, setToReset] = useState(false)
 
     const handleAuth = (e) => {
         e.preventDefault()
@@ -40,6 +44,27 @@ export default function Auth() {
                     dispatch(SetFailedAuth(false))
                 }, 3000)
             })
+    }
+
+    const handlePasswordReset = () => {
+        let valid_data = true
+
+        if (!constants.email_rg.test(toreset)) valid_data = false
+
+        if (valid_data) {
+            firebase
+                .auth()
+                .sendPasswordResetEmail(toreset)
+                .then(function () {
+                    SetAlert('info', 'Information', 'Un mail vous a été envoyer avec succés veuillez vérifier votre boite.', dispatch)
+                    setResetEmail(false)
+                })
+                .catch(function (error) {
+                    SetAlert('error', 'Erreur', "Une erreur s'est produite, vérifiez l'état de votre connexion sinon réessayer plus tard.", dispatch)
+                })
+        } else {
+            SetAlert('warning', 'Attention', 'Veuillez introduire une adresse email valide.', dispatch)
+        }
     }
 
     return (
@@ -81,6 +106,47 @@ export default function Auth() {
                                 width={120}
                                 timeout={3000} //3 secs
                             />
+                        </div>
+                    </Backdrop>
+                    <Backdrop open={resetemail} style={{ zIndex: 11 }}>
+                        <div className='w-full lg:w-5/6 xl:w-4/6 2xl:3/6 h-40 bg-gray-100'>
+                            <div className='text-center mt-3'>
+                                <p className='text-gray-500 text-lg'>Récupération de mot de passe.</p>
+                            </div>
+                            <div className='mt-4'>
+                                <div>
+                                    <input
+                                        type='text'
+                                        required={true}
+                                        onChange={(e) => setToReset(e.target.value)}
+                                        // value={newClasse}
+                                        className='block w-5/6 lg:w-4/6 xl:w-3/6 2xl:w-2/6 pl-7 pr-12 sm:text-sm border-gray-300 rounded-md mx-auto'
+                                        placeholder='Tapez votre adresse email.'
+                                    />
+                                </div>
+                                <div className='w-full flex justify-center mt-3'>
+                                    <div className='mx-1'>
+                                        <Button
+                                            onClick={() => {
+                                                handlePasswordReset()
+                                            }}
+                                            variant='contained'
+                                            color='primary'>
+                                            Envoyer
+                                        </Button>
+                                    </div>
+                                    <div className='mx-1'>
+                                        <Button
+                                            onClick={() => {
+                                                setResetEmail(false)
+                                            }}
+                                            variant='contained'
+                                            color='secondary'>
+                                            Annuler
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </Backdrop>
                     <p className='text-gray-800 text-4xl text-center mt-12 font-sans font-black'>Authentifiez-vous</p>
@@ -146,6 +212,9 @@ export default function Auth() {
                             <div>
                                 <p className={cx('text-red-400 text-xl', { hidden: !failedAuth })}>Authentification echouée</p>
                             </div>
+                        </div>
+                        <div onClick={() => setResetEmail(true)} className='text-center duration-300 text-gray-800 cursor-pointer hover:text-yellow-500'>
+                            <p className=''>Mot de passe oublié ?</p>
                         </div>
                         <div className='mx-auto table mt-5 2xl:mt-10'>
                             <Button type='submit' className='shadow' variant='contained' color='secondary'>
