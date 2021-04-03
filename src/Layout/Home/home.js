@@ -44,7 +44,7 @@ export default function Home() {
 
     return (
         <div>
-            <div>
+            <div className='font-sans'>
                 <div className='bg-font md:bg-image h-screen  bg-cover bg-center bg-fixed'>
                     <div className='invisible md:visible'>
                         <div className='custom-shape-divider-bottom-1614867478 '>
@@ -71,13 +71,13 @@ export default function Home() {
                                 <li className='text-2xl md:text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto'>
                                     <div>
                                         <img src={univerlineLoge} height='60px' width='60px' alt='univerlineLogo' className='mx-auto mb-5' />
-                                        <span className='text-5xl font-bebasNeue'>R</span>EJOIGNEZ UNIVERLINE
+                                        <span className='text-5xl'>R</span>EJOIGNEZ UNIVERLINE
                                     </div>
                                 </li>
                                 <li className='text-2xl md:text-4xl text-blue-300 font-extrabold text-opacity-24 leading-normal mx-auto pb-12'> DES MAINTENANT</li>
 
-                                <li className=' text-xl md:text-2xl font-extrabold leading-loose mx-auto text-gray-300'>le réseau social où vous pouvez discuter,</li>
-                                <li className='text-xl md:text-2xl pb-3 font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore</li>
+                                <li className=' text-xl md:text-2xl font-extrabold leading-loose mx-auto text-gray-300'>Le réseau social où vous pouvez discuter,</li>
+                                <li className='text-xl md:text-2xl pb-3 font-extrabold leading-loose mx-auto text-gray-300'>avoir accès à vos cours, et bien plus encore.</li>
                             </ul>
 
                             <div className='  flex justify-end mx-auto md:pt-12'>
@@ -93,19 +93,19 @@ export default function Home() {
                     </div>
                 </div>
                 {/* deuxième partie*/}
-                <div className='hidden md:visible md:grid md:grid-cols-2 gap-2 font-openSans'>
+                <div className='hidden md:visible md:grid md:grid-cols-2 gap-2 font-openSans my-28'>
                     <div className='flex justify-center' data-aos='fade-right' data-aos-duration='1500'>
                         <img src={img1} alt='img1' />
                     </div>
-                    <div className='flex flex-col mt-20 items-center justify-center'>
-                        <div className=' p-4  text-xl md:text-3xl tracking-wider font-semibold font-bebasNeue'>
+                    <div className='flex flex-col mt-20 items-center justify-center my-22'>
+                        <div className='p-4  text-xl md:text-3xl tracking-wider font-semibold'>
                             <h1>Découvrez le monde Universitaire</h1>
                             <br />
                         </div>
                         <div className='tracking-wider text-base md:text-xl leading-loose'>
-                            <p className='pl-8 md:pl-0'>gardez contact avec vos amis de la faculté,</p>
+                            <p className='pl-8 md:pl-0'>Gardez contact avec vos amis de la faculté,</p>
                             <p className='pl-8'>conversez en temps réel, c'est plus </p>
-                            <p className='pl-8 md:text-center'>simple et plus rapide </p>
+                            <p className='pl-8 md:text-center'>simple et plus rapide.</p>
                         </div>
                         <div>
                             <button
@@ -117,15 +117,15 @@ export default function Home() {
                             </button>
                         </div>
                     </div>
-                    <div className='invisible md:visible flex flex-col items-center justify-center'>
+                    <div className='invisible md:visible flex flex-col items-center justify-center my-22'>
                         <div className='pl-10'>
                             <div>
-                                <h1 className='tracking-wider text-xl md:text-2xl md:text-3xl font-semibold font-bebasNeue p-4'>Ne ratez plus vos cours</h1> <br />
+                                <h1 className='tracking-wider text-xl md:text-2xl md:text-3xl font-semibold p-4'>Ne ratez plus vos cours</h1> <br />
                             </div>
                             <div className='tracking-wider text-base md:text-xl leading-loose'>
-                                <p>adherez aux classes où vous êtes inscris </p>
+                                <p>Adherez aux classes où vous êtes inscris </p>
                                 <p> ainsi vous aurez accès aux publications </p>
-                                <p className='pl-0 md:text-center'> de vos enseignant</p>
+                                <p className='pl-0 md:text-center'> de vos enseignant.</p>
                             </div>
                         </div>
                         <div>
@@ -147,12 +147,12 @@ export default function Home() {
                     </div>
                     <div className='invisible md:visible flex flex-col mt-18 items-center justify-center'>
                         <div>
-                            <h1 className='tracking-wider text-xl md:text-3xl font-semibold font-bebasNeue p-4'>Timeline</h1> <br />
+                            <h1 className='tracking-wider text-xl md:text-3xl font-semibold p-4'>Timeline</h1> <br />
                         </div>
                         <div className='tracking-wider text-base md:text-xl leading-loose'>
                             <p className='pl-8 md:pl-0'>UniverLine vous tient à la une ! accédez</p>
                             <p className='pl-8'> au fil d'actualité et aux ressources</p>
-                            <p className='pl-8 md:text-center'> dont vous avez besoin</p>
+                            <p className='pl-8 md:text-center'> dont vous avez besoin.</p>
                         </div>
                         <div>
                             <button
@@ -178,9 +178,9 @@ export default function Home() {
                                 <h1 className='tracking-wider text-xl md:text-2xl md:text-3xl font-semibold font-bebasNeue p-4'>Ne ratez plus vos cours</h1> <br />
                             </div>
                             <div className='tracking-wider text-base md:text-xl leading-loose'>
-                                <p>adherez aux classes où vous êtes inscris </p>
+                                <p>Adherez aux classes où vous êtes inscris </p>
                                 <p> ainsi vous aurez accès aux publications </p>
-                                <p className='pl-0 md:text-center'> de vos enseignant</p>
+                                <p className='pl-0 md:text-center'> de vos enseignant.</p>
                             </div>
                         </div>
                         <div>
@@ -200,12 +200,12 @@ export default function Home() {
                     {/* Pour sm: texte3*/}
                     <div className='visible md:hidden flex flex-col mt-18 items-center justify-center'>
                         <div>
-                            <h1 className='tracking-wider text-xl md:text-3xl font-semibold font-bebasNeue p-4'>Timeline</h1> <br />
+                            <h1 className='tracking-wider text-xl md:text-3xl font-semibold p-4'>Timeline</h1> <br />
                         </div>
                         <div className='tracking-wider text-base md:text-xl leading-loose'>
                             <p className='pl-8 md:pl-0'>UniverLine vous tient à la une ! accédez</p>
                             <p className='pl-8'> au fil d'actualité et aux ressources</p>
-                            <p className='pl-8 md:text-center'> dont vous avez besoin</p>
+                            <p className='pl-8 md:text-center'> dont vous avez besoin.</p>
                         </div>
                         <div>
                             <button
