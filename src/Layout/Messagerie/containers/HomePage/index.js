@@ -152,7 +152,7 @@ if (user_info.user_type === 'etudiant') {
     /**************************************Friends ******************************************* */
   }
 
-  let unsubscribe
+
 
 
 
@@ -212,6 +212,7 @@ if (user_info.user_type === 'etudiant') {
       })
       console.log(msgObj)
     }
+    dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: userUid }))
   }
 
   const scrollToBottom = () => {
