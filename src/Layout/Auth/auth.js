@@ -39,10 +39,11 @@ export default function Auth() {
             })
             .catch((err) => {
                 dispatch(SetLoader(false))
-                dispatch(SetFailedAuth(true))
-                setTimeout(() => {
-                    dispatch(SetFailedAuth(false))
-                }, 3000)
+                if (err.code === 'auth/too-many-requests') {
+                    SetAlert('warning', 'Authentification echouée.', 'Vous avez epuisé le nombre de tentative autorisé, Veuillez réessayer plus tard.', dispatch)
+                } else {
+                    SetAlert('warning', 'Authentification echouée.', 'Combinaison email et mot de passe incorrecte.', dispatch)
+                }
             })
     }
 
