@@ -71,9 +71,9 @@ const HomePage = (props) => {
   const [filterWord, updateFilter] = useState('')
   const [modal, setModal] = useState(false)
 
-  const scroll = Scroll.animateScroll
 
-  const messagesEndRef = useRef(null)
+
+  let messagesEndRef = []
 
   const openModal = () => {
     setModal(true)
@@ -154,21 +154,17 @@ if (user_info.user_type === 'etudiant') {
 
   let unsubscribe
 
-  {
-    /**
- * useEffect(() => {
-    unsubscribe = dispatch(getRealtimeUsers(auth.uid))
-      .then(unsubscribe => {
-        return unsubscribe;
-      })
-      .catch(error => {
-        console.log(error);
-      })
- 
- 
-  }, [])
- */
-  }
+
+
+  useEffect(() => {
+
+    if (messagesEndRef) {
+      scrollToBottom()
+    }
+
+  }, [conversations])
+
+
 
   //console.log(user);
 
@@ -218,7 +214,9 @@ if (user_info.user_type === 'etudiant') {
     }
   }
 
-
+  const scrollToBottom = () => {
+    messagesEndRef.scrollIntoView({ behavior: 'smooth' })
+  }
 
 
   const uploadFile = (file, metadata) => {
@@ -318,6 +316,7 @@ if (user_info.user_type === 'etudiant') {
                       </div>)
                       : null
                   }
+                  <div ref={node => (messagesEndRef = node)}></div>
 
 
                 </div>
