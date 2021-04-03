@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar'
 import Badge from '@material-ui/core/Badge'
 import { withStyles } from '@material-ui/core/styles'
@@ -8,6 +9,8 @@ import cx from 'classnames'
 import moment from 'moment'
 
 const Online = ({ id, nom, prenom, avatar, user_type }) => {
+    const history = useHistory()
+
     const StyledBadge = withStyles((theme) => ({
         badge: {
             backgroundColor: '#44b700',
@@ -63,7 +66,12 @@ const Online = ({ id, nom, prenom, avatar, user_type }) => {
     const diff = moment.duration(moment().utc().diff(moment(userData))).asSeconds()
 
     return (
-        <div key={id} className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff <= 0 || diff > 630 ? true : false })}>
+        <div
+            key={id}
+            onClick={() => {
+                history.push('/profile/' + id)
+            }}
+            className={cx('my-2 cursor-pointer duration-300 hover:bg-gray-100', { hidden: diff <= 0 || diff > 630 ? true : false })}>
             <div className='mx-auto mt-3 flex flex-cols'>
                 <div>
                     <StyledBadge
