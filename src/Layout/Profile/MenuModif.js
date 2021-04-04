@@ -14,6 +14,7 @@ import { Grid } from '@material-ui/core'
 import firebase from 'firebase/app'
 import { SetAlert } from '../../store/alert/alert'
 import { SetMassi } from '../../store/auth/auth'
+import { SetUserContact } from '../../store/messagerie/userReducer'
 import { getRealtimeConversations } from '../Messagerie/actions'
 
 export default function MenuModif() {
@@ -159,6 +160,7 @@ export default function MenuModif() {
         dispatch(SetMassi(user_info))
 
         dispatch(getRealtimeConversations({ uid_1: user.id, uid_2: user_info.id_user }))
+        dispatch(SetUserContact(user_info.id_user))
     }
 
     const handleRemoveEns = () => {

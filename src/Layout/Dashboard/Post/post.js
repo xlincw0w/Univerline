@@ -127,7 +127,7 @@ const Post = () => {
                     })
             }
         } else {
-            SetAlert('warning', 'Attention', 'Les publications ne devrait pas étre vide.', dispatch)
+            SetAlert('warning', 'Attention', 'Les publications ne devraient pas étre vide.', dispatch)
             setPayload('')
         }
     }

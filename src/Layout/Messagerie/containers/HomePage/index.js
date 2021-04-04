@@ -55,6 +55,7 @@ const HomePage = (props) => {
     const userS = useSelector((state) => state.AuthReducer.user)
     const conversations = useSelector((state) => state.AuthReducer.conversations)
     const massi = useSelector((state) => state.AuthReducer.massi)
+    const user_contact = useSelector((state) => state.userReducer.user_contact)
 
     const [chatStarted, setChatStarted] = useState(true)
     const [chatUser, setChatUser] = useState('')
@@ -190,7 +191,7 @@ if (user_info.user_type === 'etudiant') {
         console.log('submit')
         const msgObj = {
             user_uid_1: userS.id,
-            user_uid_2: userUid,
+            user_uid_2: userUid || user_contact,
             message,
         }
 
@@ -200,7 +201,7 @@ if (user_info.user_type === 'etudiant') {
             })
             console.log(msgObj)
         }
-        dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: userUid }))
+        dispatch(getRealtimeConversations({ uid_1: userS.id, uid_2: userUid || user_contact }))
     }
 
     const scrollToBottom = () => {
