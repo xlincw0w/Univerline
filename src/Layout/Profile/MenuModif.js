@@ -11,7 +11,10 @@ import { AiOutlineUserDelete } from 'react-icons/ai'
 import { BiMailSend } from 'react-icons/bi'
 import { useHistory } from 'react-router-dom'
 import { Grid } from '@material-ui/core'
+import firebase from 'firebase/app'
 import { SetAlert } from '../../store/alert/alert'
+import { SetMassi } from '../../store/auth/auth'
+import { getRealtimeConversations } from '../Messagerie/actions'
 
 export default function MenuModif() {
     const dispatch = useDispatch()
@@ -139,21 +142,23 @@ export default function MenuModif() {
                 dispatch(RefreshProfile())
             })
     }
+
     const handleContacter = () => {
-        Axios.post(constants.url + '/api/historique/add/historique', {
-            id_user: user.id,
-            id_contact: user_info.id_user,
-        })
+        Axios.all([
+            Axios.post(constants.url + '/api/historique/add/historique', { id_user: user.id, id_contact: user_info.id_user }),
+            Axios.post(constants.url + '/api/historique/add/historique', { id_user: user_info.id_user, id_contact: user.id }),
+        ])
             .then(
                 Axios.spread((...res) => {
-                    dispatch(SetLoader(false))
-                    dispatch(RefreshProfile())
+                    dispatch(RefreshMessagerie())
                 })
             )
             .catch((err) => {
-                dispatch(SetLoader(false))
-                dispatch(RefreshProfile())
+                dispatch(RefreshMessagerie())
             })
+        dispatch(SetMassi(user_info))
+
+        dispatch(getRealtimeConversations({ uid_1: user.id, uid_2: user_info.id_user }))
     }
 
     const handleRemoveEns = () => {

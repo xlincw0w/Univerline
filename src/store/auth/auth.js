@@ -21,11 +21,12 @@ const initState = {
     friends: [],
     conversations: [],
     contact: [],
+    massi: [],
 
     failedAuth: false,
     loader: false,
 }
-
+const SET_MASSI = 'SET_MASSI'
 const SET_USER = 'SET_USER'
 const SET_UNCOMPLETE = 'SET_UNCOMPLETE'
 const SET_CONVERSATION = 'SET_CONVERSATION'
@@ -35,6 +36,11 @@ const RESET_AUTH = 'RESET_STATE'
 const SET_LOADER_AUTH = 'SET_LOADER_AUTH'
 const SET_FAILED_AUTH = 'SET_FAILED_AUTH'
 const SET_CONTACT = 'SET_CONTACT'
+
+export const SetMassi = (payload) => ({
+    type: SET_MASSI,
+    payload,
+})
 
 export const SetContact = (payload) => ({
     type: SET_CONTACT,
@@ -81,6 +87,11 @@ export const ResetAuthState = () => ({
 
 const AuthReducer = (state = initState, action) => {
     switch (action.type) {
+        case SET_MASSI:
+            return {
+                ...state,
+                massi: action.payload,
+            }
         case SET_CONTACT:
             return {
                 ...state,
