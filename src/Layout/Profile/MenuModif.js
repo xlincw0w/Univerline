@@ -151,16 +151,15 @@ export default function MenuModif() {
         ])
             .then(
                 Axios.spread((...res) => {
-                    dispatch(RefreshMessagerie())
+                    // dispatch(RefreshMessagerie())
+                    dispatch(SetMassi(user_info))
+                    dispatch(getRealtimeConversations({ uid_1: user.id, uid_2: user_info.id_user }))
+                    dispatch(SetUserContact(user_info.id_user))
                 })
             )
             .catch((err) => {
                 dispatch(RefreshMessagerie())
             })
-        dispatch(SetMassi(user_info))
-
-        dispatch(getRealtimeConversations({ uid_1: user.id, uid_2: user_info.id_user }))
-        dispatch(SetUserContact(user_info.id_user))
     }
 
     const handleRemoveEns = () => {
